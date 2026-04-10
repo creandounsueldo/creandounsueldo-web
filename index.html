@@ -426,7 +426,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
 .lead-popup-body{padding:24px 28px 28px}
 
 /* ACTIVOS PAGE */
-.filter-pill{padding:7px 16px;border:1.5px solid var(--gray3);border-radius:100px;background:var(--white);color:var(--gray);font-size:12px;font-family:var(--font-body);cursor:pointer;transition:all .2s;font-weight:500}
+.filter-pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);font-size:12px;font-weight:600;padding:8px 16px;border-radius:7px;transition:all .2s;cursor:pointer;font-family:var(--font-body)}
 .filter-pill.active,.filter-pill:hover{border-color:var(--red);color:var(--red);background:var(--red-light)}
 </style>
 </head>
@@ -470,7 +470,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
         <h1>PISOS QUE<br>PAGAN<br>CADA MES.</h1>
         <p class="hero-sub" style="max-width:520px">Seleccionamos los activos, gestionamos la compra, ponemos el inquilino y garantizamos el alquiler estimado. Tú solo cobras.</p>
         <div class="hero-actions">
-          <button class="btn-white" onclick="showView('activos')">Ver activos disponibles →</button>
+          <button class="btn-white" onclick="abrirTodas('disponible')">Ver activos disponibles →</button>
           <button class="btn-white-ghost" onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</button>
         </div>
         <div class="hero-stats">
@@ -498,7 +498,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
   <section id="activos" style="padding:48px 52px 56px">
     <div class="section-header-row">
       <div><div class="section-eyebrow">Activos disponibles</div><h2>OPORTUNIDADES<br>ACTIVAS</h2></div>
-      <button class="ver-todas-btn" onclick="showView('activos')">Ver todas →</button>
+      <button class="ver-todas-btn" onclick="abrirTodas('disponible')">Ver todas →</button>
     </div>
     <div class="activos-grid" id="grid-activos">
       <div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">
@@ -554,7 +554,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
         <h2>RESULTADOS<br>REALES</h2>
         <p class="section-desc">Operaciones cerradas con sus rentabilidades finales. Sin editar. Sin redondear.</p>
       </div>
-      <button class="ver-todas-btn" onclick="showView('vendidos-all');scrollToTop()">Ver todas →</button>
+      <button class="ver-todas-btn" onclick="abrirTodas('finalizado')">Ver todas →</button>
     </div>
     <div class="vendidos-grid" id="grid-vendidos">
       <div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">
@@ -701,7 +701,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <h2>¿LISTO PARA<br>CREAR TU SUELDO?</h2>
     <p class="section-desc">Accede a las oportunidades antes de que lleguen a la web. Sin compromiso.</p>
     <div class="cta-actions">
-      <button class="btn-white" onclick="showView('activos')">Ver activos disponibles →</button>
+      <button class="btn-white" onclick="abrirTodas('disponible')">Ver activos disponibles →</button>
       <button class="btn-white-ghost" onclick="openContacto()">Hablar con un asesor</button>
     </div>
     <div class="social-links">
@@ -836,53 +836,31 @@ footer{background:var(--dark);padding:56px 52px 32px}
 <!-- ═══════════════════ MODAL RESERVA ═══════════════════ -->
 
 <!-- ═══════════════════ VIEW: TODOS LOS ACTIVOS ═══════════════════ -->
-<div class="view" id="view-activos">
+<div class="view" id="view-todas">
   <div style="padding-top:68px;min-height:100vh;background:var(--gray5)">
 
     <!-- Header -->
-    <div style="background:var(--red);padding:52px 52px 48px;position:relative;overflow:hidden">
-      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:60px 60px;pointer-events:none"></div>
+    <div style="background:var(--dark);padding:48px 52px 40px;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none"></div>
       <div style="position:relative;max-width:1200px">
-        <div style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px">Activos disponibles</div>
-        <h2 style="font-family:var(--font-display);font-size:clamp(40px,5vw,68px);line-height:.95;color:white;margin-bottom:12px;letter-spacing:.5px">TODAS LAS<br>OPORTUNIDADES</h2>
-        <p style="font-size:15px;color:rgba(255,255,255,.7);font-weight:300;max-width:480px">Activos analizados y seleccionados por nuestro equipo. Rentabilidad neta, cashflow real y alquiler garantizado en cada operación.</p>
-      </div>
-    </div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.5);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px" id="todas-eyebrow">Todas las oportunidades</div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(40px,5vw,64px);line-height:.95;color:white;margin-bottom:16px;letter-spacing:.5px" id="todas-titulo">OPORTUNIDADES<br>ACTIVAS</h2>
 
-    <!-- Filters bar -->
-    <div style="background:white;border-bottom:1px solid var(--gray3);padding:16px 52px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:68px;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.04)">
-      <span style="font-size:12px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-right:4px">Filtrar:</span>
-      <button class="filter-pill active" onclick="filterAll(this,'todos')">Todos</button>
-      <button class="filter-pill" onclick="filterAll(this,'disponible')">● Disponibles</button>
-      <button class="filter-pill" onclick="filterAll(this,'reservado')">◆ Reservados</button>
-      <div style="margin-left:auto;font-size:12px;color:var(--gray2)" id="activosCount">3 activos</div>
+        <!-- Filtros -->
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <button class="filter-pill active" id="fp-disponible" onclick="filtrarTodas('disponible')">● Disponibles</button>
+          <button class="filter-pill" id="fp-reservado" onclick="filtrarTodas('reservado')">◆ Reservados</button>
+          <button class="filter-pill" id="fp-finalizado" onclick="filtrarTodas('finalizado')">✓ Finalizados</button>
+          <div style="margin-left:auto;font-size:12px;color:rgba(255,255,255,.4)" id="todas-count"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Grid -->
-    <div style="padding:40px 52px;max-width:1400px">
-      <div class="activos-grid" id="allActivosGrid">
-        <div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">
-          <div style="width:32px;height:32px;border:3px solid rgba(0,0,0,.1);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>
-          Cargando activos...
-        </div>
-      </div>
-      <!-- Empty state -->
-      <div id="activosEmpty" style="display:none;text-align:center;padding:80px 20px">
-        <div style="font-size:48px;margin-bottom:16px">🔍</div>
-        <div style="font-family:var(--font-display);font-size:28px;color:var(--dark);margin-bottom:8px">SIN RESULTADOS</div>
-        <div style="font-size:14px;color:var(--gray)">No hay activos disponibles en esa zona ahora mismo.</div>
-        <button onclick="filterAll(document.querySelector('.filter-pill'),'todos')" style="margin-top:20px;padding:10px 24px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer">Ver todos</button>
-      </div>
-    </div>
-
-    <!-- CTA unirse -->
-    <div style="background:var(--dark);padding:52px;text-align:center;margin:0 52px 52px;border-radius:14px">
-      <div style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.5);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px">Acceso anticipado</div>
-      <div style="font-family:var(--font-display);font-size:36px;color:white;margin-bottom:10px;letter-spacing:.5px">LOS MEJORES PISOS<br>SE VAN EN HORAS</div>
-      <p style="font-size:14px;color:rgba(255,255,255,.6);margin-bottom:28px;max-width:400px;margin-left:auto;margin-right:auto">Únete a la comunidad y recibe los activos antes de que lleguen a la web pública.</p>
-      <div style="display:flex;gap:8px;max-width:400px;margin:0 auto">
-        <input type="email" placeholder="tu@email.com" style="flex:1;padding:12px 16px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:white;font-family:var(--font-body);font-size:14px;outline:none">
-        <button style="padding:12px 24px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">Unirme →</button>
+    <div style="padding:36px 52px;max-width:1400px" id="grid-todas">
+      <div style="text-align:center;padding:48px;color:#9ca3af">
+        <div style="width:32px;height:32px;border:3px solid rgba(0,0,0,.1);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>
+        Cargando...
       </div>
     </div>
 
@@ -947,7 +925,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
         <!-- Comparativa inversiones -->
         <div id="ficha-comparativa-wrap" style="display:none;margin-bottom:28px">
           <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">COMPARATIVA CON OTRAS INVERSIONES</div>
-          <div id="ficha-comparativa" style="background:#111318;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:20px"></div>
+          <div id="ficha-comparativa" style="background:white;border:1px solid var(--gray3);border-radius:10px;padding:20px"></div>
         </div>
 
         <!-- Análisis de zona -->
@@ -2043,6 +2021,101 @@ function buildCard(a) {
 }
 
 
+// ─── VISTA UNIFICADA ──────────────────────────────────────────────────────────
+var _filtroTodas = 'disponible'
+
+function abrirTodas(filtro) {
+  _filtroTodas = filtro || 'disponible'
+  showView('todas')
+  renderTodas()
+  scrollToTop()
+}
+
+function filtrarTodas(filtro) {
+  _filtroTodas = filtro
+  // Actualizar botones
+  ['disponible','reservado','finalizado'].forEach(function(f) {
+    var btn = document.getElementById('fp-'+f)
+    if (btn) {
+      if (f === filtro) {
+        btn.classList.add('active')
+      } else {
+        btn.classList.remove('active')
+      }
+    }
+  })
+  // Actualizar título/eyebrow
+  var titulo = document.getElementById('todas-titulo')
+  var eyebrow = document.getElementById('todas-eyebrow')
+  if (filtro === 'disponible') {
+    if (titulo) titulo.innerHTML = 'OPORTUNIDADES<br>ACTIVAS'
+    if (eyebrow) eyebrow.textContent = 'Activos disponibles ahora mismo'
+  } else if (filtro === 'reservado') {
+    if (titulo) titulo.innerHTML = 'ACTIVOS<br>RESERVADOS'
+    if (eyebrow) eyebrow.textContent = 'En proceso de compra'
+  } else if (filtro === 'finalizado') {
+    if (titulo) titulo.innerHTML = 'OPERACIONES<br>CERRADAS'
+    if (eyebrow) eyebrow.textContent = 'Track record · Resultados reales'
+  }
+  renderTodas()
+}
+
+function renderTodas() {
+  var grid = document.getElementById('grid-todas')
+  if (!grid) return
+  var filtro = _filtroTodas
+
+  var lista = todosActivos.filter(function(a) {
+    if (filtro === 'disponible') return a.status === 'disponible'
+    if (filtro === 'reservado')  return a.status === 'reservado' || a.status === 'en_proceso'
+    if (filtro === 'finalizado') return a.status === 'finalizado'
+    return false
+  })
+
+  var cnt = document.getElementById('todas-count')
+  if (cnt) cnt.textContent = lista.length + ' activo' + (lista.length !== 1 ? 's' : '')
+
+  if (!lista.length) {
+    grid.innerHTML = '<div style="text-align:center;padding:64px;color:#9ca3af;font-size:14px">No hay activos en esta categoría.</div>'
+    return
+  }
+
+  if (filtro === 'finalizado') {
+    // Cards de vendidos
+    grid.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px">'
+      + lista.map(function(a) {
+          var alqEst  = a.alquiler_estimado || 0
+          var alqReal = a.alquiler_conseguido
+          var rb      = calcRB(a.precio, alqEst)
+          var superado = alqReal && alqEst && +alqReal >= +alqEst
+          var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
+          var titulo = a.titulo_pagina || (a.habitaciones ? 'PISO '+a.habitaciones+' HAB.' : 'ACTIVO')
+          var fotos = Array.isArray(a.fotos) ? a.fotos : []
+          var foto  = fotos[0] || null
+          return '<div class="vendido-card">'
+            + (foto ? '<div style="height:140px;overflow:hidden;border-radius:8px 8px 0 0;margin:-1px -1px 12px"><img src="'+foto+'" style="width:100%;height:100%;object-fit:cover;opacity:.85" loading="lazy"/></div>' : '')
+            + '<span class="vendido-ribbon">Cerrado</span>'
+            + '<div class="vendido-location">'+loc+'</div>'
+            + '<div class="vendido-title">'+titulo+'</div>'
+            + '<div class="vendido-result">'
+            +   '<div><div class="result-val positive">'+(rb||'—')+'%</div><div class="result-key">Rent. bruta</div></div>'
+            +   '<div><div class="result-val">'+fmtE(a.precio)+'</div><div class="result-key">Precio compra</div></div>'
+            +   '<div><div class="result-val '+(alqReal?(superado?'positive':'negative'):'')+'">'
+            +     fmtE(alqReal||alqEst)+'/mes'+(alqReal?(superado?' ↑':' ↓'):'')
+            +   '</div><div class="result-key">Alquiler '+(alqReal?'conseguido':'estimado')+'</div></div>'
+            + '</div>'
+            + (a.fecha_primer_alquiler ? '<div style="font-size:11px;color:#9ca3af;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06)">Alquilado: '+fmtDate(a.fecha_primer_alquiler)+'</div>' : '')
+            + '</div>'
+        }).join('')
+      + '</div>'
+  } else {
+    // Cards de disponibles/reservados
+    grid.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px">'
+      + lista.map(function(a) { return buildCard(a) }).join('')
+      + '</div>'
+  }
+}
+
 function renderActivos(activos) {
   var grid = document.getElementById('grid-activos')
   if (!grid) return
@@ -2117,8 +2190,7 @@ function renderVendidos(activos) {
   // Home: 3 más recientes
   grid.innerHTML = cards.slice(0, 3).join('')
   // Vista "ver todas"
-  var allGrid = document.getElementById('grid-vendidos-all')
-  if (allGrid) allGrid.innerHTML = cards.join('')
+  renderTodas()
 }
 
 function abrirActivo(a) {
@@ -2434,14 +2506,14 @@ function abrirFicha(a) {
       alts.map(function(x) {
         return '<div style="margin-bottom:10px">'
           +'<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">'
-          +'<span style="color:'+(x.bold?'#fff':'#9CA3AF')+';font-weight:'+(x.bold?700:400)+'">'+x.label+'</span>'
+          +'<span style="color:'+(x.bold?'var(--dark)':'var(--gray)')+';font-weight:'+(x.bold?700:400)+'">'+x.label+'</span>'
           +'<span style="font-weight:700;color:'+x.color+'">'+x.val+'%</span>'
           +'</div>'
-          +'<div style="background:rgba(255,255,255,.05);border-radius:4px;height:7px;overflow:hidden">'
+          +'<div style="background:var(--gray5);border-radius:4px;height:7px;overflow:hidden">'
           +'<div style="width:'+(x.val/maxA*100).toFixed(1)+'%;height:100%;background:'+x.color+';border-radius:4px"></div>'
           +'</div></div>'
       }).join('')
-      +'<div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:8px;line-height:1.5">Rentabilidades históricas de referencia. Los resultados pasados no garantizan rendimientos futuros.</div>'
+      +'<div style="font-size:10px;color:var(--gray2);margin-top:8px;line-height:1.5">Rentabilidades históricas de referencia. Los resultados pasados no garantizan rendimientos futuros.</div>'
   } else { compWrap.style.display = 'none' }
 
   // ── Análisis de zona ──
@@ -2514,9 +2586,20 @@ function abrirFicha(a) {
     idealistaBtn.style.display = 'block'
   } else if (a.ciudad) {
     // Auto-generate search URL by city
-    var ciudad = a.ciudad.toLowerCase().replace(/\s+/g, '-').normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    // Normalizar nombre ciudad para URL Idealista
+    var ciudadNorm = a.ciudad.toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-z0-9\s-]/g,'')
+      .replace(/\s+/g,'-')
+      .replace(/-+/g,'-')
+      .replace(/^-|-$/g,'')
     var maxAlq = Math.round((alq || 500) * 1.3)
-    idealistaBtn.href = 'https://www.idealista.com/alquiler-viviendas/'+ciudad+'/con-precio-hasta_'+maxAlq+'/'
+    // Formato Idealista: /alquiler-viviendas/ciudad-provincia/
+    var provincia = (a.provincia||a.ciudad).toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-z0-9\s-]/g,'')
+      .replace(/\s+/g,'-')
+    idealistaBtn.href = 'https://www.idealista.com/alquiler-viviendas/'+ciudadNorm+'-'+provincia+'/con-precio-hasta_'+maxAlq+',precio-minimo_'+(Math.round(maxAlq*0.4))+'/'
     idealistaBtn.style.display = 'block'
   } else {
     idealistaBtn.style.display = 'none'
@@ -2564,6 +2647,23 @@ function abrirFicha(a) {
 function actualizarKPIsSidebar(cf, rb, alq, total, conHipoteca, cuota) {
   actualizarTodo(cf, rb, alq, total, conHipoteca, cuota, _fichaActivo)
 }
+var _hipTipo = 'fija'
+
+function setTipoHip(tipo) {
+  _hipTipo = tipo
+  var btnF = document.getElementById('hip-btn-fija')
+  var btnV = document.getElementById('hip-btn-variable')
+  if (!btnF || !btnV) return
+  if (tipo === 'fija') {
+    btnF.style.cssText = 'flex:1;padding:8px;border-radius:var(--radius);border:1.5px solid var(--red);background:rgba(227,30,36,.1);color:var(--red);font-family:var(--font-body);font-size:12px;font-weight:700;cursor:pointer'
+    btnV.style.cssText = 'flex:1;padding:8px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.4);font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer'
+  } else {
+    btnV.style.cssText = 'flex:1;padding:8px;border-radius:var(--radius);border:1.5px solid var(--red);background:rgba(227,30,36,.1);color:var(--red);font-family:var(--font-body);font-size:12px;font-weight:700;cursor:pointer'
+    btnF.style.cssText = 'flex:1;padding:8px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.4);font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer'
+  }
+  if (document.getElementById('hip-activa').checked) calcHipoteca()
+}
+
 function toggleHipoteca() {
   var activa = document.getElementById('hip-activa').checked
   document.getElementById('hip-controles').style.display = activa ? '' : 'none'
@@ -2654,17 +2754,48 @@ function actualizarTodo(cf, rb, alq, capitalBase, conHipoteca, cuota, a) {
   // ── Bloque retorno ──
   var retornoEl = document.getElementById('ficha-retorno')
   var retornoWrap = document.getElementById('ficha-retorno-wrap')
-  if (retornoEl && cashflowAnual > 0) {
+  if (retornoEl && cashflowAnual > 0 && capitalBase > 0) {
     retornoWrap.style.display = ''
+    // Gráfico acumulación: empieza en -capitalBase, sube cashflowAnual cada año
+    var anosMax = Math.min(anosRecup ? anosRecup + 3 : 20, 30)
+    var retPts = []
+    for (var ri=0; ri<=anosMax; ri++) retPts.push({ i:ri, v: -capitalBase + cashflowAnual*ri })
+    var rW=500, rH=100, rPL=68, rPR=12, rPT=12, rPB=20
+    var rw=rW-rPL-rPR, rh=rH-rPT-rPB
+    var rMinV = -capitalBase, rMaxV = retPts[retPts.length-1].v
+    var rRange = rMaxV - rMinV || 1
+    var rxP = function(i){ return (rPL+(i/anosMax)*rw).toFixed(1) }
+    var ryP = function(v){ return (rPT+rh-((v-rMinV)/rRange)*rh).toFixed(1) }
+    var rZeroY = ryP(0)
+    var rPath = retPts.map(function(p,idx){ return (idx===0?'M':'L')+rxP(p.i)+','+ryP(p.v) }).join(' ')
+    var rAreaPos = 'M'+rxP(0)+','+rZeroY+' '+retPts.filter(function(p){return p.v>=0}).map(function(p){ return 'L'+rxP(p.i)+','+ryP(p.v) }).join(' ')+' L'+rxP(retPts.filter(function(p){return p.v>=0}).slice(-1)[0]?.i||0)+','+rZeroY+' Z'
+    var rAreaNeg = 'M'+rxP(0)+','+rZeroY+' '+retPts.filter(function(p){return p.v<=0}).map(function(p){ return 'L'+rxP(p.i)+','+ryP(p.v) }).join(' ')+' L'+rxP(retPts.filter(function(p){return p.v<=0}).slice(-1)[0]?.i||0)+','+rZeroY+' Z'
+    // Punto de cruce (año recuperación)
+    var rCruceX = anosRecup ? rxP(anosRecup) : null
+    var rCruceY = anosRecup ? rZeroY : null
     retornoEl.innerHTML =
-      '<div style="display:flex;justify-content:space-around;margin-bottom:14px">'
-      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">'+(conHipoteca?'CAPITAL PROPIO':'INVERSIÓN TOTAL')+'</div><div style="font-family:var(--font-display);font-size:26px;color:#E31E24">'+fmtE(capitalBase)+'</div></div>'
-      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">AÑO RECUPERACIÓN</div><div style="font-family:var(--font-display);font-size:26px;color:#22C55E">Año '+(anosRecup||'—')+'</div></div>'
-      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">CASHFLOW ANUAL</div><div style="font-family:var(--font-display);font-size:26px;color:white">'+(cashflowAnual>0?'+':'')+fmtE(cashflowAnual)+'</div></div>'
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.06);border-radius:8px;overflow:hidden;margin-bottom:14px">'
+      +'<div style="background:rgba(255,255,255,.04);padding:12px;text-align:center"><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">'+(conHipoteca?'Capital propio':'Inversión total')+'</div><div style="font-family:var(--font-display);font-size:22px;color:#F87171">−'+fmtE(capitalBase)+'</div></div>'
+      +'<div style="background:rgba(255,255,255,.04);padding:12px;text-align:center"><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Año recuperación</div><div style="font-family:var(--font-display);font-size:22px;color:#22C55E">'+(anosRecup?'Año '+anosRecup:'—')+'</div></div>'
+      +'<div style="background:rgba(255,255,255,.04);padding:12px;text-align:center"><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Cashflow anual</div><div style="font-family:var(--font-display);font-size:22px;color:#22C55E">+'+ fmtE(cashflowAnual)+'</div></div>'
       +'</div>'
-      +'<div style="height:4px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden"><div style="height:100%;background:linear-gradient(90deg,#E31E24,#22C55E);border-radius:4px;width:100%"></div></div>'
-      +(anosRecup?'<div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:8px;text-align:center">A partir del año '+anosRecup+', +'+fmtE(cashflowAnual)+'/año es beneficio neto</div>':'')
-      +(conHipoteca?'<div style="font-size:11px;color:#F59E0B;margin-top:6px;text-align:center;font-weight:600">⚡ Calculado con hipoteca '+_hipTipo+' al '+document.getElementById("hip-int").value+'%</div>':'')
+      +'<svg viewBox="0 0 '+rW+' '+rH+'" style="width:100%;display:block;overflow:visible">'
+      +'<defs>'
+      +'<linearGradient id="rgn" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22C55E" stop-opacity=".3"/><stop offset="100%" stop-color="#22C55E" stop-opacity=".02"/></linearGradient>'
+      +'<linearGradient id="rrd" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#F87171" stop-opacity=".25"/><stop offset="100%" stop-color="#F87171" stop-opacity=".02"/></linearGradient>'
+      +'</defs>'
+      +'<path d="'+rAreaNeg+'" fill="url(#rrd)"/>'
+      +'<path d="'+rAreaPos+'" fill="url(#rgn)"/>'
+      +'<line x1="'+rPL+'" y1="'+rZeroY+'" x2="'+(rW-rPR)+'" y2="'+rZeroY+'" stroke="rgba(255,255,255,.15)" stroke-width="1" stroke-dasharray="4,3"/>'
+      +'<path d="'+rPath+'" fill="none" stroke="#fff" stroke-width="2"/>'
+      +(rCruceX ? '<circle cx="'+rCruceX+'" cy="'+rCruceY+'" r="5" fill="#22C55E" stroke="#111318" stroke-width="2"/><text x="'+rCruceX+'" y="'+(+rCruceY-10)+'" text-anchor="middle" font-size="9" fill="#22C55E" font-weight="bold">Año '+anosRecup+'</text>' : '')
+      +'<text x="'+(rPL-4)+'" y="'+(rPT+8)+'" text-anchor="end" font-size="8" fill="#22C55E">+'+fmtE(rMaxV)+'</text>'
+      +'<text x="'+(rPL-4)+'" y="'+(rPT+rh)+'" text-anchor="end" font-size="8" fill="#F87171">-'+fmtE(capitalBase)+'</text>'
+      +'<text x="'+rPL+'" y="'+(+rZeroY-4)+'" font-size="8" fill="rgba(255,255,255,.3)">0</text>'
+      // Year labels
+      +[Math.round(anosMax/4),Math.round(anosMax/2),Math.round(anosMax*3/4),anosMax].map(function(y){ return '<text x="'+rxP(y)+'" y="'+(rH-2)+'" text-anchor="middle" font-size="8" fill="#6B7280">'+y+'a</text>' }).join('')
+      +'</svg>'
+      +(conHipoteca?'<div style="font-size:11px;color:#F59E0B;margin-top:8px;text-align:center;font-weight:600">⚡ Calculado con hipoteca '+_hipTipo+' al '+document.getElementById("hip-int").value+'%</div>':'')
   }
 
   // ── Tabla economía sidebar — actualizar filas dinámicas ──
