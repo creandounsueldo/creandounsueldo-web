@@ -1832,7 +1832,12 @@ async function loadActivos() {
   }
 }
 
-function buildCard(a, onclick) {
+// Mapa global de activos por ID
+var _activosMap = {}
+
+function buildCard(a) {
+  // Guardar en mapa global para recuperar por ID
+  _activosMap[a.id] = a
   var fotos = Array.isArray(a.fotos) ? a.fotos : []
   var foto  = fotos[0] || null
   var alq   = a.alquiler_estimado || 0
@@ -1847,17 +1852,19 @@ function buildCard(a, onclick) {
   var titulo = a.titulo_pagina || ((a.habitaciones ? a.habitaciones+' HAB.' : '') + (a.zona ? '<br>'+a.zona.toUpperCase() : ''))
   var gastosAnual = (+com*12 + +ibi)
   var imgHtml = foto
-    ? '<img src="'+foto+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" /><div class="activo-img-ph" style="display:none">🏠</div>'
+    ? '<img src="'+foto+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" />'
     : '<div class="activo-img-ph">🏠</div>'
 
-  return '<div class="activo-card" onclick="'+(bloqueado?'':onclick)+'" style="'+(bloqueado?'opacity:.75;pointer-events:none':'cursor:pointer')+'" data-zona="'+(a.provincia||'').toLowerCase()+'" data-estado="'+a.status+'">'
+  var cardOnclick = bloqueado ? '' : 'onclick="abrirFicha(_activosMap[\'' + a.id + '\'])"'
+
+  return '<div class="activo-card" '+cardOnclick+' style="'+(bloqueado?'opacity:.75;pointer-events:none':'cursor:pointer')+'" data-zona="'+(a.provincia||'').toLowerCase()+'" data-estado="'+a.status+'">'
     + '<div class="activo-img">'+imgHtml+'<span class="activo-badge '+badgeClass+'">'+badgeLabel+'</span>'+(bloqueado?'':'<span class="garantia-tag">Alquiler garantizado</span>')+'</div>'
     + '<div class="activo-body">'
     + '<div class="activo-location">'+loc+'</div>'
     + '<div class="activo-title">'+titulo+'</div>'
     + '<div class="kpi-main">'
     +   '<div class="kpi-cell"><div class="kpi-val red">'+(rb||'—')+'%</div><div class="kpi-key">Rent. bruta</div></div>'
-    +   '<div class="kpi-cell"><div class="kpi-val '+(cf!=null&&cf>0?'green':'')+'">'+( cf!=null ? (cf>0?'+':'')+fmtNum(cf)+'€' : '—' )+'</div><div class="kpi-key">Cashflow/mes</div></div>'
+    +   '<div class="kpi-cell"><div class="kpi-val '+(cf!=null&&cf>0?'green':'')+'">'+(cf!=null?(cf>0?'+':'')+fmtNum(cf)+'€':'—')+'</div><div class="kpi-key">Cashflow/mes</div></div>'
     +   '<div class="kpi-cell"><div class="kpi-val">'+fmtE(a.precio)+'</div><div class="kpi-key">Precio</div></div>'
     + '</div>'
     + '<div class="kpi-grid">'
@@ -1867,9 +1874,10 @@ function buildCard(a, onclick) {
     + '</div>'
     + (bloqueado
         ? '<div class="activo-cta disabled">'+(a.status==='reservado'?'◆ Ya reservado':'◑ En proceso')+'</div>'
-        : '<button class="activo-cta" onclick="'+onclick+'">Ver activo completo →</button>')
+        : '<button class="activo-cta" onclick="abrirFicha(_activosMap[\'' + a.id + '\'])">Ver activo completo →</button>')
     + '</div></div>'
 }
+
 
 function renderActivos(activos) {
   var grid = document.getElementById('grid-activos')
@@ -1894,14 +1902,14 @@ function renderActivos(activos) {
 
   // Home: 3 disponibles
   grid.innerHTML = listaHome.map(function(a) {
-    return buildCard(a, 'abrirFicha('+JSON.stringify(a)+')')
+    return buildCard(a)
   }).join('')
 
   // Ver todas: todos
   var allGrid = document.getElementById('allActivosGrid')
   if (allGrid) {
     allGrid.innerHTML = todos.map(function(a) {
-      return buildCard(a, 'abrirFicha('+JSON.stringify(a)+')')
+      return buildCard(a)
     }).join('')
     var cnt = document.getElementById('activosCount')
     if (cnt) cnt.textContent = todos.length + ' activo' + (todos.length !== 1 ? 's' : '')
