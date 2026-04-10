@@ -206,7 +206,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
 .footer-links-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
 .footer-links-col a{font-size:13px;color:var(--gray2);text-decoration:none;transition:color .2s;cursor:pointer}
 .footer-links-col a:hover{color:var(--white)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:22px;border-top:1px solid rgba(255,255,255,.07);flex-wrap:wrap;gap:10px}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:22px;border-top:1px solid var(--gray3);flex-wrap:wrap;gap:10px}
 .footer-legal{font-size:12px;color:var(--gray)}
 .footer-legal a{color:var(--gray);text-decoration:none}
 .footer-legal a:hover{color:var(--white)}
@@ -872,134 +872,143 @@ footer{background:var(--dark);padding:56px 52px 32px}
   <div style="padding-top:68px;min-height:100vh;background:var(--gray5)">
 
     <!-- Galería -->
-    <div id="ficha-hero" style="height:400px;background:#111;position:relative;overflow:hidden">
+    <div id="ficha-hero" style="height:380px;background:#111;position:relative;overflow:hidden">
       <div id="ficha-gallery-main" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#555;font-size:14px">Sin fotos</div>
       <div id="ficha-thumbs" style="position:absolute;bottom:14px;left:40px;display:flex;gap:8px;z-index:2"></div>
       <div id="ficha-badges" style="position:absolute;top:16px;right:16px;display:flex;gap:8px"></div>
-      <!-- Links Maps / Street View -->
       <div id="ficha-map-links" style="position:absolute;bottom:14px;right:40px;display:flex;gap:8px"></div>
     </div>
 
-    <div style="max-width:1200px;margin:0 auto;padding:40px 52px;display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:start">
+    <div style="max-width:1200px;margin:0 auto;padding:36px 52px;display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start">
 
       <!-- ── COLUMNA PRINCIPAL ── -->
       <div>
 
-        <!-- Cabecera -->
+        <!-- 1. Título y ubicación -->
         <div id="ficha-eyebrow" style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px"></div>
-        <h1 id="ficha-titulo" style="font-family:var(--font-display);font-size:clamp(28px,4vw,48px);line-height:1;margin-bottom:6px;color:var(--dark)"></h1>
-        <div id="ficha-loc" style="font-size:14px;color:var(--gray);margin-bottom:24px"></div>
+        <h1 id="ficha-titulo" style="font-family:var(--font-display);font-size:clamp(28px,4vw,44px);line-height:1;margin-bottom:6px;color:var(--dark)"></h1>
+        <div id="ficha-loc" style="font-size:14px;color:var(--gray);margin-bottom:20px"></div>
 
-        <!-- KPIs principales -->
-        <div id="ficha-kpis-main" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px"></div>
+        <!-- 2. KPIs 4 bullets -->
+        <div id="ficha-kpis-main" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px"></div>
 
-        <!-- €/m² comparativa -->
-        <div id="ficha-m2-wrap" style="display:none;margin-bottom:24px">
-          <div id="ficha-m2"></div>
+        <!-- 3. Descripción -->
+        <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:24px;margin-bottom:20px">
+          <div style="font-family:var(--font-display);font-size:15px;color:var(--dark);margin-bottom:10px;letter-spacing:.3px">DESCRIPCIÓN</div>
+          <p id="ficha-desc" style="font-size:14px;color:var(--gray);line-height:1.8;margin:0"></p>
         </div>
 
-        <!-- Descripción -->
-        <div style="margin-bottom:28px">
-          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:10px;letter-spacing:.3px">DESCRIPCIÓN</div>
-          <p id="ficha-desc" style="font-size:14px;color:var(--gray);line-height:1.8"></p>
+        <!-- 4. Datos del inmueble -->
+        <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:24px;margin-bottom:20px">
+          <div style="font-family:var(--font-display);font-size:15px;color:var(--dark);margin-bottom:14px;letter-spacing:.3px">DATOS DEL INMUEBLE</div>
+          <div id="ficha-datos" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gray3);border-radius:8px;overflow:hidden"></div>
         </div>
 
-        <!-- Datos del inmueble -->
-        <div style="margin-bottom:28px">
-          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">DATOS DEL INMUEBLE</div>
-          <div id="ficha-datos" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gray3);border-radius:10px;overflow:hidden"></div>
+        <!-- 5. Números de la operación -->
+        <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:24px;margin-bottom:20px">
+          <div style="font-family:var(--font-display);font-size:15px;color:var(--dark);margin-bottom:14px;letter-spacing:.3px">NÚMEROS DE LA OPERACIÓN</div>
+          <div id="ficha-economia" style="display:flex;flex-direction:column;gap:0;border:1px solid var(--gray3);border-radius:8px;overflow:hidden"></div>
         </div>
 
-        <!-- Retorno de inversión -->
-        <div id="ficha-retorno-wrap" style="display:none;margin-bottom:28px">
-          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">RETORNO DE LA INVERSIÓN</div>
-          <div id="ficha-retorno" style="background:#111318;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:20px"></div>
-        </div>
-
-        <!-- Proyección patrimonial -->
-        <div id="ficha-proyeccion-wrap" style="display:none;margin-bottom:28px">
-          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">PROYECCIÓN PATRIMONIAL A 20 AÑOS</div>
-          <div id="ficha-proyeccion" style="background:#111318;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:20px"></div>
-        </div>
-
-        <!-- Comparativa inversiones -->
-        <div id="ficha-comparativa-wrap" style="display:none;margin-bottom:28px">
-          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">COMPARATIVA CON OTRAS INVERSIONES</div>
-          <div id="ficha-comparativa" style="background:white;border:1px solid var(--gray3);border-radius:10px;padding:20px"></div>
-        </div>
-
-        <!-- Análisis de zona -->
-        <div id="ficha-zona-wrap" style="display:none;margin-bottom:28px">
-          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">ANÁLISIS DE ZONA</div>
-          <div id="ficha-zona"></div>
-        </div>
-
-        <!-- Mapa -->
-        <div id="ficha-mapa-wrap" style="display:none;margin-bottom:28px">
-          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">UBICACIÓN</div>
-          <div style="border-radius:12px;overflow:hidden;border:1px solid var(--gray3)">
-            <iframe id="ficha-mapa" width="100%" height="280" frameborder="0" style="display:block;border:none" allowfullscreen loading="lazy" title="mapa"></iframe>
-          </div>
-          <div id="ficha-mapa-btns" style="display:flex;gap:10px;margin-top:10px"></div>
-        </div>
-
-        <!-- Simulador hipoteca -->
-        <div style="background:#111318;border-radius:12px;padding:24px;margin-bottom:28px">
+        <!-- 6. Simulador hipoteca — fondo blanco -->
+        <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:24px;margin-bottom:20px">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-            <div style="font-family:var(--font-display);font-size:18px;color:white;letter-spacing:.3px">SIMULADOR DE HIPOTECA</div>
-            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:rgba(255,255,255,.5)">
+            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark);letter-spacing:.3px">SIMULADOR DE HIPOTECA</div>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--gray)">
               <input type="checkbox" id="hip-activa" onchange="toggleHipoteca()" style="accent-color:var(--red);width:16px;height:16px"> Activar
             </label>
           </div>
-          <p style="font-size:12px;color:rgba(255,255,255,.35);margin-bottom:14px">Al activar, todos los dashboards se recalculan con financiación bancaria.</p>
-          <div id="hip-controles" style="display:none">
-
-            <!-- Tipo fija/variable -->
+          <p style="font-size:12px;color:var(--gray2);margin-bottom:0" id="hip-desc-off">Activa para ver el cashflow real con financiación bancaria.</p>
+          <div id="hip-controles" style="display:none;margin-top:16px">
             <div style="display:flex;gap:6px;margin-bottom:16px">
-              <button id="hip-btn-fija" onclick="setTipoHip('fija')" style="flex:1;padding:8px;border-radius:var(--radius);border:1.5px solid var(--red);background:rgba(227,30,36,.1);color:var(--red);font-family:var(--font-body);font-size:12px;font-weight:700;cursor:pointer">Tipo fijo</button>
-              <button id="hip-btn-variable" onclick="setTipoHip('variable')" style="flex:1;padding:8px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.4);font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer">Tipo variable</button>
+              <button id="hip-btn-fija" onclick="setTipoHip('fija')" style="flex:1;padding:8px;border-radius:var(--radius);border:1.5px solid var(--red);background:rgba(227,30,36,.06);color:var(--red);font-family:var(--font-body);font-size:12px;font-weight:700;cursor:pointer">Tipo fijo</button>
+              <button id="hip-btn-variable" onclick="setTipoHip('variable')" style="flex:1;padding:8px;border-radius:var(--radius);border:1.5px solid var(--gray3);background:transparent;color:var(--gray);font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer">Tipo variable</button>
             </div>
-
-            <!-- Sliders -->
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
               <div>
-                <label style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Financiación</label>
+                <label style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Financiación</label>
                 <input type="range" id="hip-pct" min="0" max="100" value="70" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
-                <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-pct-val">70%</div>
+                <div style="font-size:13px;color:var(--dark);margin-top:4px;font-weight:700" id="hip-pct-val">70%</div>
               </div>
               <div>
-                <label style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Interés anual</label>
+                <label style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Interés anual</label>
                 <input type="range" id="hip-int" min="0" max="8" step="0.1" value="2" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
-                <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-int-val">2%</div>
+                <div style="font-size:13px;color:var(--dark);margin-top:4px;font-weight:700" id="hip-int-val">2%</div>
               </div>
               <div>
-                <label style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Plazo</label>
+                <label style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Plazo</label>
                 <input type="range" id="hip-anos" min="5" max="30" value="25" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
-                <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-anos-val">25 años</div>
+                <div style="font-size:13px;color:var(--dark);margin-top:4px;font-weight:700" id="hip-anos-val">25 años</div>
               </div>
             </div>
-
-            <!-- Resultados hipoteca -->
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.06);border-radius:8px;overflow:hidden;margin-bottom:10px">
-              <div style="background:rgba(255,255,255,.04);padding:12px;text-align:center">
-                <div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Capital hipoteca</div>
-                <div style="font-family:var(--font-display);font-size:18px;color:white" id="hip-capital-val">—</div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--gray3);border-radius:8px;overflow:hidden">
+              <div style="background:white;padding:12px;text-align:center">
+                <div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Capital hipoteca</div>
+                <div style="font-family:var(--font-display);font-size:18px;color:var(--dark)" id="hip-capital-val">—</div>
               </div>
-              <div style="background:rgba(255,255,255,.04);padding:12px;text-align:center">
-                <div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Capital propio</div>
-                <div style="font-family:var(--font-display);font-size:18px;color:white" id="hip-capital">—</div>
+              <div style="background:white;padding:12px;text-align:center">
+                <div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Capital propio</div>
+                <div style="font-family:var(--font-display);font-size:18px;color:var(--dark)" id="hip-capital">—</div>
               </div>
-              <div style="background:rgba(255,255,255,.04);padding:12px;text-align:center">
-                <div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Cuota/mes</div>
-                <div style="font-family:var(--font-display);font-size:18px;color:#F87171" id="hip-cuota">—</div>
+              <div style="background:white;padding:12px;text-align:center">
+                <div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Cuota/mes</div>
+                <div style="font-family:var(--font-display);font-size:18px;color:#E31E24" id="hip-cuota">—</div>
               </div>
-              <div style="background:rgba(255,255,255,.04);padding:12px;text-align:center">
-                <div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Cashflow neto</div>
+              <div style="background:white;padding:12px;text-align:center">
+                <div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Cashflow neto</div>
                 <div style="font-family:var(--font-display);font-size:18px" id="hip-cf-result">—</div>
               </div>
             </div>
-            <div style="font-size:11px;color:rgba(255,255,255,.25);text-align:center">⚡ Los dashboards de inversión se actualizan en tiempo real</div>
+            <div style="font-size:11px;color:var(--gray2);text-align:center;margin-top:8px">⚡ Los dashboards de rentabilidad se actualizan en tiempo real</div>
           </div>
+        </div>
+
+        <!-- 7. Retorno inversión — fondo blanco -->
+        <div id="ficha-retorno-wrap" style="display:none;margin-bottom:20px">
+          <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:24px">
+            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark);margin-bottom:16px;letter-spacing:.3px">RETORNO DE LA INVERSIÓN</div>
+            <div id="ficha-retorno"></div>
+          </div>
+        </div>
+
+        <!-- 8. Proyección patrimonial — fondo blanco -->
+        <div id="ficha-proyeccion-wrap" style="display:none;margin-bottom:20px">
+          <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:24px">
+            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark);margin-bottom:16px;letter-spacing:.3px">PROYECCIÓN PATRIMONIAL A 20 AÑOS</div>
+            <div id="ficha-proyeccion"></div>
+          </div>
+        </div>
+
+        <!-- 9. Comparativa inversiones — fondo blanco -->
+        <div id="ficha-comparativa-wrap" style="display:none;margin-bottom:20px">
+          <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:24px">
+            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark);margin-bottom:16px;letter-spacing:.3px">COMPARATIVA CON OTRAS INVERSIONES</div>
+            <div id="ficha-comparativa"></div>
+          </div>
+        </div>
+
+        <!-- 10. Análisis zona -->
+        <div id="ficha-zona-wrap" style="display:none;margin-bottom:20px">
+          <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:24px">
+            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark);margin-bottom:14px;letter-spacing:.3px">ANÁLISIS DE ZONA</div>
+            <div id="ficha-zona"></div>
+          </div>
+        </div>
+
+        <!-- 11. Mapa — solo Google Maps, sin Street View -->
+        <div id="ficha-mapa-wrap" style="display:none;margin-bottom:20px">
+          <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:24px">
+            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark);margin-bottom:14px;letter-spacing:.3px">UBICACIÓN</div>
+            <div style="border-radius:10px;overflow:hidden;border:1px solid var(--gray3)">
+              <iframe id="ficha-mapa" width="100%" height="260" frameborder="0" style="display:block;border:none" allowfullscreen loading="lazy" title="mapa"></iframe>
+            </div>
+            <div id="ficha-mapa-btns" style="margin-top:10px"></div>
+          </div>
+        </div>
+
+        <!-- 12. €/m² comparativa mercado -->
+        <div id="ficha-m2-wrap" style="display:none;margin-bottom:20px">
+          <div id="ficha-m2"></div>
         </div>
 
       </div>
@@ -1012,20 +1021,15 @@ footer{background:var(--dark);padding:56px 52px 32px}
             <div id="ficha-precio-sidebar" style="font-family:var(--font-display);font-size:40px;color:white;line-height:1;margin-bottom:3px"></div>
             <div id="ficha-honor-sidebar" style="font-size:12px;color:rgba(255,255,255,.35);margin-bottom:16px"></div>
             <button id="ficha-reservar-btn" style="width:100%;padding:13px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-bottom:8px">Reservar este activo →</button>
-            <a id="ficha-idealista-btn" href="#" target="_blank" style="display:none;width:100%;padding:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);color:rgba(255,255,255,.6);font-family:var(--font-body);font-size:12px;font-weight:600;text-align:center;text-decoration:none;box-sizing:border-box;transition:all .2s">🔎 Ver alquileres similares en Idealista</a>
+            <a id="ficha-idealista-btn" href="#" target="_blank" style="display:none;width:100%;padding:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);color:rgba(255,255,255,.6);font-family:var(--font-body);font-size:12px;font-weight:600;text-align:center;text-decoration:none;box-sizing:border-box">🔎 Ver alquileres similares en Idealista</a>
           </div>
-          <!-- KPIs sidebar — se actualizan con hipoteca -->
+          <!-- KPIs sidebar -->
           <div id="ficha-kpis-sidebar" style="padding:18px 24px;display:grid;grid-template-columns:1fr 1fr;gap:14px"></div>
           <!-- Garantia -->
           <div style="padding:14px 24px;background:rgba(34,197,94,.06);border-top:1px solid rgba(34,197,94,.12)">
             <div style="font-size:12px;color:#22C55E;font-weight:700">✅ Alquiler garantizado</div>
             <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:3px;line-height:1.5">Si se alquila por debajo del estimado, compensamos la diferencia durante el primer año.</div>
           </div>
-        </div>
-        <!-- Economía detallada -->
-        <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:20px">
-          <div style="font-family:var(--font-display);font-size:14px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">NÚMEROS DE LA OPERACIÓN</div>
-          <div id="ficha-economia" style="display:flex;flex-direction:column;gap:0;border:1px solid var(--gray3);border-radius:8px;overflow:hidden"></div>
         </div>
       </div>
 
@@ -2371,7 +2375,7 @@ function abrirFicha(a) {
     var svUrl   = 'https://www.google.com/maps?q='+encodeURIComponent(direccion)+'&layer=c'
     document.getElementById('ficha-map-links').innerHTML =
       '<a href="'+mapsUrl+'" target="_blank" style="background:rgba(0,0,0,.6);backdrop-filter:blur(6px);color:white;font-size:11px;font-weight:700;padding:6px 12px;border-radius:7px;text-decoration:none;display:flex;align-items:center;gap:5px">🗺️ Google Maps</a>'
-      +'<a href="'+svUrl+'" target="_blank" style="background:rgba(0,0,0,.6);backdrop-filter:blur(6px);color:white;font-size:11px;font-weight:700;padding:6px 12px;border-radius:7px;text-decoration:none;display:flex;align-items:center;gap:5px">🚶 Street View</a>'
+      ''
   }
 
   // ── Título y loc ──
@@ -2480,7 +2484,7 @@ function abrirFicha(a) {
       +'<text x="'+(pL-3)+'" y="'+(pT+6)+'" text-anchor="end" font-size="9" fill="#22C55E">'+fmtE(fin.total)+'</text>'
       +'<text x="'+(pL-3)+'" y="'+(pT+h)+'" text-anchor="end" font-size="9" fill="#999">'+fmtE(+a.precio)+'</text>'
       +'</svg>'
-      +'<div style="display:flex;justify-content:space-around;font-size:11px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.07)">'
+      +'<div style="display:flex;justify-content:space-around;font-size:11px;margin-top:10px;padding-top:10px;border-top:1px solid var(--gray3)">'
       +'<span><span style="color:#E31E24">●</span> Valor piso: <strong style="color:#E31E24">'+fmtE(fin.vp)+'</strong></span>'
       +'<span>+ Alquiler acum.: <strong>'+fmtE(fin.alq)+'</strong></span>'
       +'<span><span style="color:#22C55E">●</span> Total: <strong style="color:#22C55E">'+fmtE(fin.total)+'</strong></span>'
@@ -2574,7 +2578,7 @@ function abrirFicha(a) {
     var svUrl   = 'https://www.google.com/maps?q='+encodeURIComponent(direccion)+'&layer=c'
     document.getElementById('ficha-mapa-btns').innerHTML =
       '<a href="'+mapsUrl+'" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--dark);color:white;font-size:12px;font-weight:600;padding:8px 16px;border-radius:var(--radius);text-decoration:none">🗺️ Abrir en Google Maps</a>'
-      +'<a href="'+svUrl+'" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--dark);color:white;font-size:12px;font-weight:600;padding:8px 16px;border-radius:var(--radius);text-decoration:none">🚶 Street View</a>'
+      ''
   } else { mapaWrap.style.display = 'none' }
 
   // ── Sidebar precio ──
@@ -2585,21 +2589,12 @@ function abrirFicha(a) {
     idealistaBtn.href = a.url_idealista
     idealistaBtn.style.display = 'block'
   } else if (a.ciudad) {
-    // Auto-generate search URL by city
-    // Normalizar nombre ciudad para URL Idealista
     var ciudadNorm = a.ciudad.toLowerCase()
       .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-      .replace(/[^a-z0-9\s-]/g,'')
-      .replace(/\s+/g,'-')
-      .replace(/-+/g,'-')
-      .replace(/^-|-$/g,'')
-    var maxAlq = Math.round((alq || 500) * 1.3)
-    // Formato Idealista: /alquiler-viviendas/ciudad-provincia/
-    var provincia = (a.provincia||a.ciudad).toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-      .replace(/[^a-z0-9\s-]/g,'')
-      .replace(/\s+/g,'-')
-    idealistaBtn.href = 'https://www.idealista.com/alquiler-viviendas/'+ciudadNorm+'-'+provincia+'/con-precio-hasta_'+maxAlq+',precio-minimo_'+(Math.round(maxAlq*0.4))+'/'
+      .replace(/ñ/g,'n')
+      .replace(/[^a-z0-9\s]/g,'')
+      .trim().replace(/\s+/g,'-')
+    idealistaBtn.href = 'https://www.idealista.com/alquiler-viviendas/' + ciudadNorm + '/'
     idealistaBtn.style.display = 'block'
   } else {
     idealistaBtn.style.display = 'none'
@@ -2774,10 +2769,10 @@ function actualizarTodo(cf, rb, alq, capitalBase, conHipoteca, cuota, a) {
     var rCruceX = anosRecup ? rxP(anosRecup) : null
     var rCruceY = anosRecup ? rZeroY : null
     retornoEl.innerHTML =
-      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.06);border-radius:8px;overflow:hidden;margin-bottom:14px">'
-      +'<div style="background:rgba(255,255,255,.04);padding:12px;text-align:center"><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">'+(conHipoteca?'Capital propio':'Inversión total')+'</div><div style="font-family:var(--font-display);font-size:22px;color:#F87171">−'+fmtE(capitalBase)+'</div></div>'
-      +'<div style="background:rgba(255,255,255,.04);padding:12px;text-align:center"><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Año recuperación</div><div style="font-family:var(--font-display);font-size:22px;color:#22C55E">'+(anosRecup?'Año '+anosRecup:'—')+'</div></div>'
-      +'<div style="background:rgba(255,255,255,.04);padding:12px;text-align:center"><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Cashflow anual</div><div style="font-family:var(--font-display);font-size:22px;color:#22C55E">+'+ fmtE(cashflowAnual)+'</div></div>'
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gray3);border-radius:8px;overflow:hidden;margin-bottom:14px">'
+      +'<div style="background:var(--gray5);padding:12px;text-align:center"><div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">'+(conHipoteca?'Capital propio':'Inversión total')+'</div><div style="font-family:var(--font-display);font-size:22px;color:#E31E24">−'+fmtE(capitalBase)+'</div></div>'
+      +'<div style="background:var(--gray5);padding:12px;text-align:center"><div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Año recuperación</div><div style="font-family:var(--font-display);font-size:22px;color:#22C55E">'+(anosRecup?'Año '+anosRecup:'—')+'</div></div>'
+      +'<div style="background:var(--gray5);padding:12px;text-align:center"><div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Cashflow anual</div><div style="font-family:var(--font-display);font-size:22px;color:#22C55E">+'+ fmtE(cashflowAnual)+'</div></div>'
       +'</div>'
       +'<svg viewBox="0 0 '+rW+' '+rH+'" style="width:100%;display:block;overflow:visible">'
       +'<defs>'
