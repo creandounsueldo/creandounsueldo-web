@@ -1867,7 +1867,7 @@ function buildCard(a, onclick) {
     + '</div>'
     + (bloqueado
         ? '<div class="activo-cta disabled">'+(a.status==='reservado'?'◆ Ya reservado':'◑ En proceso')+'</div>'
-        : '<div class="activo-cta">Ver activo completo →</div>')
+        : '<button class="activo-cta" onclick="'+onclick+'">Ver activo completo →</button>')
     + '</div></div>'
 }
 
