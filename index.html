@@ -1974,15 +1974,17 @@ function calcRB(precio,alq) { return precio&&alq ? ((alq*12)/precio*100).toFixed
 function calcCF(alq,com,ibi) { return (alq&&com!=null&&ibi!=null) ? Math.round(+alq - +com - +ibi/12) : null }
 function fmtDate(d) { return d ? new Date(d).toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'}) : null }
 
+var todosActivos = []
+
 async function loadActivos() {
   try {
     var res = await fetch(SUPA_URL + '/rest/v1/activos?select=*&order=created_at.desc', {
       headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
     })
     if (!res.ok) throw new Error('fetch error')
-    var activos = await res.json()
-    renderActivos(activos)
-    renderVendidos(activos)
+    todosActivos = await res.json()
+    renderActivos(todosActivos)
+    renderVendidos(todosActivos)
   } catch(e) {
     var g = document.getElementById('grid-activos')
     if (g) g.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#9ca3af">Error cargando activos. Recarga la página.</div>'
@@ -2045,9 +2047,25 @@ var _filtroTodas = 'disponible'
 
 function abrirTodas(filtro) {
   _filtroTodas = filtro || 'disponible'
+  // Actualizar filtros visuales inmediatamente
+  filtrarTodas(filtro || 'disponible')
   showView('todas')
-  renderTodas()
   scrollToTop()
+  // Si los datos aún no han cargado, mostrar spinner y esperar
+  if (!todosActivos || todosActivos.length === 0) {
+    var grid = document.getElementById('grid-todas')
+    if (grid) grid.innerHTML = '<div style="text-align:center;padding:64px;color:#9ca3af"><div style="width:32px;height:32px;border:3px solid rgba(0,0,0,.1);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>Cargando activos...</div>'
+    // Reintentar cada 300ms hasta que estén listos
+    var check = setInterval(function() {
+      if (todosActivos && todosActivos.length > 0) {
+        clearInterval(check)
+        renderTodas()
+      }
+    }, 300)
+    setTimeout(function() { clearInterval(check) }, 10000) // timeout 10s
+  } else {
+    renderTodas()
+  }
 }
 
 function filtrarTodas(filtro) {
