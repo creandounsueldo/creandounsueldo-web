@@ -2154,36 +2154,13 @@ function renderActivos(activos) {
   var grid = document.getElementById('grid-activos')
   if (!grid) return
 
-  // Todos los activos activos (para "ver todas")
-  var todos = activos.filter(function(a) {
-    return a.status === 'disponible' || a.status === 'reservado' || a.status === 'en_proceso'
-  })
-  // Home: solo 3 disponibles más recientes
-  var disponibles = todos.filter(function(a) { return a.status === 'disponible' })
-  var resto = todos.filter(function(a) { return a.status !== 'disponible' })
-  var listaHome = disponibles.slice(0, 3)
+  // Home: solo los 3 disponibles más recientes
+  var disponibles = activos.filter(function(a) { return a.status === 'disponible' })
 
-  if (!todos.length) {
-    var msg = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">No hay activos disponibles ahora mismo.<br>Únete a nuestro Telegram para recibir los próximos.</div>'
-    grid.innerHTML = msg
-    var g2 = document.getElementById('allActivosGrid')
-    if (g2) g2.innerHTML = msg
-    return
-  }
-
-  // Home: 3 disponibles
-  grid.innerHTML = listaHome.map(function(a) {
-    return buildCard(a)
-  }).join('')
-
-  // Ver todas: todos
-  var allGrid = document.getElementById('allActivosGrid')
-  if (allGrid) {
-    allGrid.innerHTML = todos.map(function(a) {
-      return buildCard(a)
-    }).join('')
-    var cnt = document.getElementById('activosCount')
-    if (cnt) cnt.textContent = todos.length + ' activo' + (todos.length !== 1 ? 's' : '')
+  if (!disponibles.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">No hay activos disponibles ahora mismo.<br>Únete a nuestro Telegram para recibir los próximos.</div>'
+  } else {
+    grid.innerHTML = disponibles.slice(0, 3).map(function(a) { return buildCard(a) }).join('')
   }
 }
 function renderVendidos(activos) {
