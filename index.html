@@ -452,7 +452,6 @@ footer{background:var(--dark);padding:56px 52px 32px}
   <button class="nav-back" id="navBack" style="display:none" onclick="showView('home', true);scrollToSection('activos')">← Volver a activos</button>
 
   <div class="nav-right">
-    <button class="btn-nav-ghost" onclick="openPerfil()">Mi perfil</button>
     <button class="nav-cta" id="navCtaHome" onclick="showView('home', true);scrollToSection('activos')">Ver oportunidades →</button>
     <button class="nav-cta" id="navCtaActivo" style="display:none" onclick="openModal('León', 4000)">Reservar este activo →</button>
   </div>
@@ -1021,7 +1020,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
             <div id="ficha-precio-sidebar" style="font-family:var(--font-display);font-size:40px;color:white;line-height:1;margin-bottom:3px"></div>
             <div id="ficha-honor-sidebar" style="font-size:12px;color:rgba(255,255,255,.35);margin-bottom:16px"></div>
             <button id="ficha-reservar-btn" style="width:100%;padding:13px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-bottom:8px">Reservar este activo →</button>
-            <a id="ficha-idealista-btn" href="#" target="_blank" style="display:none;width:100%;padding:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);color:rgba(255,255,255,.6);font-family:var(--font-body);font-size:12px;font-weight:600;text-align:center;text-decoration:none;box-sizing:border-box">🔎 Ver alquileres similares en Idealista</a>
+            <a id="ficha-idealista-btn" href="#" target="_blank" style="display:none;width:100%;padding:10px;background:#F5E642;border:1.5px solid #D4C800;border-radius:var(--radius);color:#1a1a00;font-family:var(--font-body);font-size:12px;font-weight:700;text-align:center;text-decoration:none;box-sizing:border-box">🔎 Ver alquileres similares en Idealista</a>
           </div>
           <!-- KPIs sidebar -->
           <div id="ficha-kpis-sidebar" style="padding:18px 24px;display:grid;grid-template-columns:1fr 1fr;gap:14px"></div>
@@ -2282,6 +2281,57 @@ function toggleFaqAll() {
 // ─── FICHA ACTIVO ─────────────────────────────────────────────────────────────
 var _fichaActivo = null
 
+// ─── PROYECCIÓN TOOLTIP ───────────────────────────────────────────────────────
+function proyTooltip(e, svg) {
+  var rect = svg.getBoundingClientRect()
+  var vbW = +svg.getAttribute('viewBox').split(' ')[2]
+  var scaleX = vbW / rect.width
+  var mx = (e.clientX - rect.left) * scaleX
+  var pl = +svg.dataset.pl, w = +svg.dataset.w
+  var pt = +svg.dataset.pt, h = +svg.dataset.h
+  var anos = +svg.dataset.anos
+  var minV = +svg.dataset.minv, range = +svg.dataset.range
+  if (mx < pl || mx > pl + w) { proyTooltipHide(); return }
+  var year = Math.round(((mx - pl) / w) * anos)
+  year = Math.max(0, Math.min(anos, year))
+  var pts
+  try { pts = JSON.parse(svg.dataset.pts) } catch(e) { return }
+  var p = pts[year]
+  if (!p) return
+  var xPos = pl + (year/anos)*w
+  var yTotal = pt + h - ((p.total - minV)/range)*h
+  var yPiso  = pt + h - ((p.vp - minV)/range)*h
+  // Cursor line
+  var cursor = document.getElementById('proy-cursor')
+  if (cursor) { cursor.setAttribute('x1',xPos); cursor.setAttribute('x2',xPos); cursor.style.display='' }
+  var dotT = document.getElementById('proy-dot-total')
+  var dotP = document.getElementById('proy-dot-piso')
+  if (dotT) { dotT.setAttribute('cx',xPos); dotT.setAttribute('cy',yTotal); dotT.style.display='' }
+  if (dotP) { dotP.setAttribute('cx',xPos); dotP.setAttribute('cy',yPiso);  dotP.style.display='' }
+  // Tooltip
+  var tt = document.getElementById('proy-tooltip')
+  if (!tt) return
+  document.getElementById('proy-tt-year').textContent  = 'Año ' + year
+  document.getElementById('proy-tt-vp').textContent    = fmtE(p.vp)
+  document.getElementById('proy-tt-alq').textContent   = fmtE(p.alq)
+  document.getElementById('proy-tt-total').textContent = fmtE(p.total)
+  var ttLeft = e.clientX - rect.left + 14
+  if (ttLeft + 200 > rect.width) ttLeft = e.clientX - rect.left - 210
+  tt.style.left = ttLeft + 'px'
+  tt.style.top  = Math.max(0, e.clientY - rect.top - 70) + 'px'
+  tt.style.display = 'block'
+}
+function proyTooltipHide() {
+  var cursor = document.getElementById('proy-cursor')
+  var dotT = document.getElementById('proy-dot-total')
+  var dotP = document.getElementById('proy-dot-piso')
+  var tt   = document.getElementById('proy-tooltip')
+  if (cursor) cursor.style.display='none'
+  if (dotT) dotT.style.display='none'
+  if (dotP) dotP.style.display='none'
+  if (tt) tt.style.display='none'
+}
+
 var _lightboxFotos = []
 var _lightboxIdx = 0
 
@@ -2483,23 +2533,39 @@ function abrirFicha(a) {
     var pathTotal = pts.map(function(p,idx){ return (idx===0?'M':'L')+xP(p.i)+','+yP(p.total) }).join(' ')
     var area = 'M'+pL+','+yP(+a.precio)+' '+pts.map(function(p){ return 'L'+xP(p.i)+','+yP(p.total) }).join(' ')+' L'+xP(anos)+','+yP(+a.precio)+' Z'
     var yearLabels = [5,10,15,20].map(function(y){ return '<text x="'+xP(y)+'" y="'+(H-4)+'" text-anchor="middle" font-size="9" fill="#6B7280">'+y+'a</text>' }).join('')
+    var ptsData = JSON.stringify(pts.map(function(p){ return {i:p.i,vp:p.vp,total:p.total,alq:p.alq} }))
     proyWrap.style.display = ''
     document.getElementById('ficha-proyeccion').innerHTML =
-      '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block;overflow:visible">'
-      +'<defs><linearGradient id="gp" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22C55E" stop-opacity=".25"/><stop offset="100%" stop-color="#22C55E" stop-opacity=".03"/></linearGradient></defs>'
+      '<div style="position:relative">'
+      +'<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block;overflow:visible;cursor:crosshair"'
+      +' data-pts="'+ptsData.replace(/"/g,'&quot;')+'"'
+      +' data-anos="'+anos+'" data-pl="'+pL+'" data-w="'+w+'" data-pt="'+pT+'" data-h="'+h+'" data-minv="'+minV+'" data-range="'+range+'"'
+      +' onmousemove="proyTooltip(event,this)" onmouseleave="proyTooltipHide()">'
+      +'<defs><linearGradient id="gp" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22C55E" stop-opacity=".2"/><stop offset="100%" stop-color="#22C55E" stop-opacity=".02"/></linearGradient></defs>'
       +'<path d="'+area+'" fill="url(#gp)"/>'
       +'<path d="'+pathPiso+'" fill="none" stroke="#E31E24" stroke-width="2" stroke-dasharray="5,3"/>'
-      +'<path d="'+pathTotal+'" fill="none" stroke="#22C55E" stroke-width="2.5"/>'
+      +'<path d="'+pathTotal+'" fill="none" stroke="#22C55E" stroke-width="2"/>'
       +yearLabels
       +'<text x="'+(pL-3)+'" y="'+(pT+6)+'" text-anchor="end" font-size="9" fill="#22C55E">'+fmtE(fin.total)+'</text>'
-      +'<text x="'+(pL-3)+'" y="'+(pT+h)+'" text-anchor="end" font-size="9" fill="#999">'+fmtE(+a.precio)+'</text>'
+      +'<text x="'+(pL-3)+'" y="'+(pT+h)+'" text-anchor="end" font-size="9" fill="#888">'+fmtE(+a.precio)+'</text>'
+      +'<line id="proy-cursor" x1="0" y1="'+pT+'" x2="0" y2="'+(pT+h)+'" stroke="rgba(0,0,0,.15)" stroke-width="1" stroke-dasharray="3,2" style="display:none"/>'
+      +'<circle id="proy-dot-total" r="4" fill="#22C55E" stroke="white" stroke-width="1.5" style="display:none"/>'
+      +'<circle id="proy-dot-piso" r="4" fill="#E31E24" stroke="white" stroke-width="1.5" style="display:none"/>'
       +'</svg>'
+      +'<div id="proy-tooltip" style="display:none;position:absolute;background:#111;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px 14px;font-size:12px;pointer-events:none;white-space:nowrap;z-index:10;box-shadow:0 4px 16px rgba(0,0,0,.15)">'
+      +'<div id="proy-tt-year" style="font-weight:700;color:white;margin-bottom:6px"></div>'
+      +'<div style="display:flex;flex-direction:column;gap:3px">'
+      +'<div><span style="color:#E31E24">● </span><span style="color:rgba(255,255,255,.5)">Valor piso: </span><span id="proy-tt-vp" style="font-weight:700;color:#E31E24"></span></div>'
+      +'<div><span style="color:rgba(255,255,255,.3)">+ </span><span style="color:rgba(255,255,255,.5)">Alquiler acum.: </span><span id="proy-tt-alq" style="font-weight:600;color:white"></span></div>'
+      +'<div style="border-top:1px solid rgba(255,255,255,.1);padding-top:3px;margin-top:2px"><span style="color:#22C55E">● </span><span style="color:rgba(255,255,255,.5)">Total: </span><span id="proy-tt-total" style="font-weight:700;color:#22C55E"></span></div>'
+      +'</div></div>'
+      +'</div>'
       +'<div style="display:flex;justify-content:space-around;font-size:11px;margin-top:10px;padding-top:10px;border-top:1px solid var(--gray3)">'
-      +'<span><span style="color:#E31E24">●</span> Valor piso: <strong style="color:#E31E24">'+fmtE(fin.vp)+'</strong></span>'
+      +'<span><span style="color:#E31E24">- -</span> Valor piso a 20a: <strong style="color:#E31E24">'+fmtE(fin.vp)+'</strong></span>'
       +'<span>+ Alquiler acum.: <strong>'+fmtE(fin.alq)+'</strong></span>'
       +'<span><span style="color:#22C55E">●</span> Total: <strong style="color:#22C55E">'+fmtE(fin.total)+'</strong></span>'
       +'</div>'
-      +'<div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:8px;line-height:1.5">Proyección estimada ('+tasa+'%/año histórico en '+a.comunidad+'). No garantiza rendimientos futuros.</div>'
+      +'<div style="font-size:10px;color:var(--gray2);margin-top:6px;line-height:1.5">Proyección estimada ('+tasa+'%/año histórico en '+a.comunidad+'). No garantiza rendimientos futuros.</div>'
   } else { proyWrap.style.display = 'none' }
 
   // ── Comparativa vs otras inversiones ──
@@ -2599,13 +2665,17 @@ function abrirFicha(a) {
     idealistaBtn.href = a.url_idealista
     idealistaBtn.style.display = 'block'
   } else if (a.ciudad) {
-    var ciudadNorm = a.ciudad.toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-      .replace(/ñ/g,'n')
-      .replace(/[^a-z0-9\s]/g,'')
-      .trim().replace(/\s+/g,'-')
-    idealistaBtn.href = 'https://www.idealista.com/alquiler-viviendas/' + ciudadNorm + '/'
-    idealistaBtn.style.display = 'block'
+    function slugify(s) {
+      return (s||'').toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+        .replace(/[^a-z0-9\s]/g,'').trim().replace(/\s+/g,'-')
+    }
+    var cSlug = slugify(a.ciudad)
+    var pSlug = slugify(a.provincia || a.ciudad)
+    // Capital: ciudad-real → ciudad-real-ciudad-real/
+    // Municipio: puertollano + ciudad-real → puertollano-ciudad-real/
+    idealistaBtn.href = 'https://www.idealista.com/alquiler-viviendas/' + cSlug + '-' + pSlug + '/'
+    idealistaBtn.style.cssText = 'display:block;width:100%;padding:10px;background:#F5E642;border:1.5px solid #D4C800;border-radius:var(--radius);color:#1a1a00;font-family:var(--font-body);font-size:12px;font-weight:700;text-align:center;text-decoration:none;box-sizing:border-box;margin-top:8px'
   } else {
     idealistaBtn.style.display = 'none'
   }
