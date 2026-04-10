@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CreandoUnSueldo — Inversión Inmobiliaria Inteligente</title>
+<meta name="description" content="Invertimos en pisos de alquiler con alta rentabilidad. Te acompañamos desde la búsqueda hasta el primer cobro.">
+<meta property="og:title" content="CreandoUnSueldo — Inversión Inmobiliaria Inteligente">
+<meta property="og:description" content="Rentabilidades del 7–13%. Alquiler garantizado. Invierte desde casa, cobra cada mes.">
+<meta property="og:url" content="https://creandounsueldo.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#E31E24;--red-dim:#C4181D;--red-light:#FEF2F2;
+  --dark:#111318;--gray:#6B7280;--gray2:#9CA3AF;
+  --gray3:#E5E7EB;--gray4:#F3F4F6;--gray5:#F9FAFB;
+  --white:#FFFFFF;--green:#16A34A;--green-light:#F0FDF4;
+  --font-display:'Bebas Neue',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'DM Mono',monospace;
+  --radius:8px;
+  --shadow:0 1px 4px rgba(0,0,0,.07),0 4px 16px rgba(0,0,0,.05);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--dark);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* ═══ VIEWS ═══ */
+.view{display:none}
+.view.active{display:block}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(255,255,255,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--gray3);display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:68px;transition:box-shadow .3s}
+nav.scrolled{box-shadow:var(--shadow)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
+.logo-icon{width:30px;height:30px;flex-shrink:0}
+.logo-text{font-family:var(--font-display);font-size:15px;letter-spacing:2px;color:var(--dark);line-height:1.15}
+.logo-text span{color:var(--red)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s;cursor:pointer}
+.nav-links a:hover{color:var(--dark)}
+.nav-right{display:flex;gap:10px;align-items:center}
+.btn-nav-ghost{padding:8px 18px;border:1.5px solid var(--gray3);border-radius:var(--radius);font-size:13px;font-weight:600;color:var(--dark);transition:all .2s;cursor:pointer;background:none;font-family:var(--font-body)}
+.btn-nav-ghost:hover{border-color:var(--gray2)}
+.nav-cta{background:var(--red);color:var(--white);padding:8px 20px;border-radius:var(--radius);font-size:13px;font-weight:700;text-decoration:none;transition:background .2s;white-space:nowrap;cursor:pointer;border:none;font-family:var(--font-body)}
+.nav-cta:hover{background:var(--red-dim)}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--gray);font-size:13px;font-weight:500;transition:color .2s;cursor:pointer;background:none;border:none;font-family:var(--font-body)}
+.nav-back:hover{color:var(--dark)}
+
+/* ═══ SHARED ═══ */
+section{padding:96px 52px}
+.section-eyebrow{font-family:var(--font-mono);font-size:11px;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.section-eyebrow::before{content:'';display:block;width:22px;height:2px;background:var(--red);border-radius:2px}
+h2{font-family:var(--font-display);font-size:clamp(40px,5vw,64px);line-height:.95;letter-spacing:.5px;margin-bottom:14px;color:var(--dark)}
+.section-desc{color:var(--gray);font-size:16px;max-width:500px;font-weight:300;line-height:1.75;margin-bottom:56px}
+.tag{padding:4px 10px;background:var(--gray4);border-radius:4px;font-size:11px;color:var(--gray);font-weight:500}
+
+/* ═══ HOME HERO ═══ */
+#hero{background:var(--red);padding:120px 52px 80px;position:relative;overflow:hidden;min-height:88vh;display:flex;align-items:center}
+.hero-pattern{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:64px 64px}
+.hero-deco{position:absolute;right:-40px;bottom:-60px;font-family:var(--font-display);font-size:480px;line-height:1;color:rgba(255,255,255,.04);letter-spacing:-20px;pointer-events:none;user-select:none}
+.hero-inner{position:relative;display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:center;max-width:1200px;width:100%}
+h1{font-family:var(--font-display);font-size:clamp(64px,8.5vw,116px);line-height:.9;letter-spacing:1px;color:var(--white);margin-bottom:24px}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.72);line-height:1.7;font-weight:300;margin-bottom:40px;max-width:460px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.btn-white{background:var(--white);color:var(--red);padding:14px 30px;border-radius:var(--radius);font-weight:700;font-size:13px;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:none;font-family:var(--font-body)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.18)}
+.btn-white-ghost{background:transparent;color:var(--white);padding:14px 28px;border:1.5px solid rgba(255,255,255,.35);border-radius:var(--radius);font-weight:500;font-size:13px;text-decoration:none;transition:all .2s;cursor:pointer;font-family:var(--font-body)}
+.btn-white-ghost:hover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.08)}
+.hero-stats{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.15);padding-top:32px;flex-wrap:wrap;margin-top:8px}
+.stat-item{padding-right:36px;margin-right:36px;border-right:1px solid rgba(255,255,255,.18)}
+.stat-item:last-child{border-right:none;margin-right:0;padding-right:0}
+.stat-num{font-family:var(--font-display);font-size:44px;line-height:1;color:var(--white)}
+.stat-label{font-size:11px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}
+.hero-steps-card{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:28px 24px;backdrop-filter:blur(8px)}
+.hero-steps{display:flex;flex-direction:column;gap:0}
+.hero-step{display:flex;gap:14px;align-items:flex-start;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.hero-step:last-child{border-bottom:none}
+.hero-step-num{width:28px;height:28px;background:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:14px;color:var(--red);flex-shrink:0;margin-top:1px;font-weight:700}
+.hero-step-title{font-size:13px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:2px;letter-spacing:.1px}
+.hero-step-desc{font-size:12px;color:rgba(255,255,255,.52);line-height:1.4}
+.hero-steps-cta{margin-top:18px;display:block;text-align:center;font-size:12px;color:rgba(255,255,255,.6);text-decoration:none;padding:10px;border:1px solid rgba(255,255,255,.2);border-radius:var(--radius);transition:all .2s;font-weight:500;cursor:pointer;background:none;width:100%;font-family:var(--font-body)}
+.hero-steps-cta:hover{background:rgba(255,255,255,.08);color:var(--white)}
+
+/* GARANTIA */
+#garantia{background:var(--green-light);border-top:1px solid #BBF7D0;border-bottom:1px solid #BBF7D0;padding:32px 52px}
+.garantia-inner{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.garantia-icon{width:48px;height:48px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:white;font-weight:700;box-shadow:0 4px 12px rgba(22,163,74,.3)}
+.garantia-text h3{font-family:var(--font-display);font-size:20px;color:var(--green);margin-bottom:2px}
+.garantia-text p{font-size:13px;color:#166534;line-height:1.5;max-width:560px}
+.garantia-btn{margin-left:auto;background:var(--green);color:var(--white);padding:10px 20px;border-radius:var(--radius);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s;border:none;font-family:var(--font-body)}
+.garantia-btn:hover{background:#15803d}
+
+/* INVIERTE LEJOS */
+#invierte-lejos{background:var(--dark);padding:80px 52px}
+.lejos-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1100px}
+.lejos-checklist{display:flex;flex-direction:column;gap:14px}
+.lejos-check{display:flex;gap:16px;align-items:flex-start;padding:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius)}
+.check-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.check-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:3px}
+.check-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.5}
+
+/* ACTIVOS HOME */
+#activos{background:var(--gray5)}
+.section-header-row{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:36px;flex-wrap:wrap;gap:16px}
+.ver-todas-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--red);border:1.5px solid var(--red);padding:9px 20px;border-radius:var(--radius);transition:all .2s;cursor:pointer;background:none;font-family:var(--font-body)}
+.ver-todas-btn:hover{background:var(--red);color:var(--white)}
+.activos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:20px}
+.activo-card{background:var(--white);border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.04);border:1px solid var(--gray3);transition:transform .25s,box-shadow .25s,border-color .25s;cursor:pointer}
+.activo-card:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,.12);border-color:var(--gray2)}
+.activo-img{width:100%;height:210px;background:var(--gray4);position:relative;overflow:hidden}
+.activo-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:52px;color:var(--gray3);background:linear-gradient(135deg,#f3f4f6,#e5e7eb)}
+.activo-badge{position:absolute;top:14px;left:14px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:var(--font-mono)}
+.badge-disponible{background:var(--white);color:var(--green);box-shadow:0 1px 8px rgba(0,0,0,.1)}
+.badge-reservado{background:var(--white);color:var(--red);box-shadow:0 1px 8px rgba(0,0,0,.1)}
+.garantia-tag{position:absolute;bottom:14px;right:14px;background:var(--green);color:var(--white);padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700}
+.activo-body{padding:22px}
+.activo-location{font-size:11px;color:var(--gray2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px;font-family:var(--font-mono)}
+.activo-title{font-family:var(--font-display);font-size:21px;color:var(--dark);margin-bottom:18px;line-height:1.1}
+.kpi-main{display:flex;gap:0;background:var(--gray5);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;border:1px solid var(--gray3)}
+.kpi-cell{flex:1;padding:13px 14px;border-right:1px solid var(--gray3)}
+.kpi-cell:last-child{border-right:none}
+.kpi-val{font-family:var(--font-display);font-size:24px;color:var(--dark);line-height:1}
+.kpi-val.red{color:var(--red)}.kpi-val.green{color:var(--green)}
+.kpi-key{font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;margin-top:3px}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray3);border:1px solid var(--gray3);border-radius:var(--radius);overflow:hidden;margin-bottom:18px}
+.kpi-grid-cell{background:var(--white);padding:11px 13px}
+.kpi-grid-val{font-size:13px;font-weight:600;color:var(--dark)}
+.kpi-grid-key{font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.activo-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.activo-cta{width:100%;padding:12px;background:var(--red);color:var(--white);border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center}
+.activo-cta:hover{background:var(--red-dim);transform:translateY(-1px);box-shadow:0 6px 20px rgba(227,30,36,.3)}
+.activo-cta.disabled{background:var(--gray4);color:var(--gray2);cursor:not-allowed;transform:none;box-shadow:none;pointer-events:none}
+
+/* PROCESO */
+#proceso{background:var(--white)}
+.proceso-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;background:var(--gray3);border:1px solid var(--gray3);border-radius:10px;overflow:hidden}
+.proceso-card{background:var(--white);padding:40px 28px;position:relative;overflow:hidden;transition:background .25s}
+.proceso-card:hover{background:var(--gray5)}
+.proceso-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.proceso-card:hover::after{transform:scaleX(1)}
+.proceso-num{font-family:var(--font-display);font-size:80px;color:rgba(227,30,36,.06);line-height:1;position:absolute;top:8px;right:14px;letter-spacing:-2px}
+.proceso-icon{font-size:26px;margin-bottom:18px;display:block}
+.proceso-title{font-family:var(--font-display);font-size:20px;letter-spacing:.5px;color:var(--dark);margin-bottom:10px}
+.proceso-desc{font-size:14px;color:var(--gray);line-height:1.7}
+
+/* VENDIDOS */
+#vendidos{background:var(--gray5)}
+.vendidos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.vendido-card{border:1.5px solid var(--gray3);border-radius:10px;padding:26px;position:relative;overflow:hidden;background:var(--white);transition:border-color .2s}
+.vendido-card:hover{border-color:var(--gray2)}
+.vendido-ribbon{position:absolute;top:18px;right:-30px;background:var(--gray3);color:var(--gray);font-family:var(--font-mono);font-size:9px;letter-spacing:2px;padding:5px 42px;transform:rotate(45deg);text-transform:uppercase;font-weight:600}
+.vendido-location{font-size:11px;color:var(--gray2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px;font-family:var(--font-mono)}
+.vendido-title{font-family:var(--font-display);font-size:18px;color:var(--dark);margin-bottom:18px;opacity:.7}
+.vendido-result{display:flex;gap:22px;flex-wrap:wrap}
+.result-val{font-family:var(--font-display);font-size:24px;line-height:1;color:var(--dark)}
+.result-val.positive{color:var(--green)}
+.result-key{font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;margin-top:3px}
+
+/* BLOG */
+#blog{background:var(--white)}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px}
+.blog-card{border-radius:10px;overflow:hidden;border:1.5px solid var(--gray3);background:var(--white);transition:transform .25s,box-shadow .25s;text-decoration:none;color:inherit;display:block;cursor:pointer}
+.blog-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--gray2)}
+.blog-img{height:170px;background:var(--gray4);display:flex;align-items:center;justify-content:center;font-size:44px;color:var(--gray3);position:relative}
+.blog-img.red-bg{background:var(--red)}.blog-img.dark-bg{background:var(--dark)}
+.blog-category{position:absolute;top:12px;left:12px;background:var(--white);color:var(--red);padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:var(--font-mono)}
+.blog-body{padding:22px}
+.blog-meta{font-size:11px;color:var(--gray2);font-family:var(--font-mono);margin-bottom:7px}
+.blog-title{font-family:var(--font-display);font-size:19px;color:var(--dark);line-height:1.15;margin-bottom:9px}
+.blog-excerpt{font-size:13px;color:var(--gray);line-height:1.65;margin-bottom:14px}
+.blog-readmore{font-size:12px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.5px}
+
+/* FAQ */
+#faq{background:var(--gray5)}
+.faq-list{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gray3);border-radius:10px;overflow:hidden;max-width:920px}
+.faq-item{background:var(--white)}
+.faq-q{width:100%;text-align:left;padding:22px 26px;background:none;border:none;border-left:3px solid transparent;color:var(--dark);font-family:var(--font-body);font-size:14px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:background .2s,border-color .2s;line-height:1.4}
+.faq-q:hover{background:var(--gray5)}.faq-q.open{color:var(--red);background:var(--red-light);border-left:3px solid var(--red)}
+.faq-icon{width:22px;height:22px;border:1.5px solid var(--gray3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;color:var(--gray2);transition:all .2s;line-height:1}
+.faq-q.open .faq-icon{border-color:var(--red);color:var(--red);background:var(--red-light)}
+.faq-a{padding:0 26px;max-height:0;overflow:hidden;font-size:14px;color:var(--gray);line-height:1.75;transition:max-height .35s ease,padding .35s ease}
+.faq-a.open{padding:0 26px 22px;max-height:400px}
+
+/* CTA FINAL */
+#cta-final{background:var(--red);padding:120px 52px;text-align:center;position:relative;overflow:hidden}
+.cta-pattern{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:60px 60px}
+#cta-final h2{color:var(--white);margin-bottom:14px;position:relative}
+#cta-final .section-eyebrow{justify-content:center;color:rgba(255,255,255,.65);position:relative}
+#cta-final .section-eyebrow::before{background:rgba(255,255,255,.4)}
+#cta-final .section-desc{margin:0 auto 44px;text-align:center;color:rgba(255,255,255,.72);position:relative}
+.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;position:relative}
+.social-links{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative}
+.social-link{display:flex;align-items:center;gap:8px;padding:10px 18px;border:1.5px solid rgba(255,255,255,.3);border-radius:var(--radius);color:rgba(255,255,255,.8);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s}
+.social-link:hover{border-color:var(--white);color:var(--white);background:rgba(255,255,255,.08)}
+
+/* FOOTER */
+footer{background:var(--dark);padding:56px 52px 32px}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:36px;margin-bottom:44px}
+.footer-tagline{font-size:13px;color:var(--gray2);margin-top:14px;line-height:1.6;max-width:220px}
+.footer-links-col h4{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--gray);margin-bottom:12px}
+.footer-links-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-links-col a{font-size:13px;color:var(--gray2);text-decoration:none;transition:color .2s;cursor:pointer}
+.footer-links-col a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:22px;border-top:1px solid rgba(255,255,255,.07);flex-wrap:wrap;gap:10px}
+.footer-legal{font-size:12px;color:var(--gray)}
+.footer-legal a{color:var(--gray);text-decoration:none}
+.footer-legal a:hover{color:var(--white)}
+
+/* ═══ FICHA ACTIVO ═══ */
+.activo-hero-wrap{padding:88px 0 0;background:var(--white)}
+.activo-hero-inner{max-width:1200px;margin:0 auto;padding:48px 52px 0;display:grid;grid-template-columns:1fr 440px;gap:64px;align-items:start}
+.gallery{position:relative}
+.gallery-main{width:100%;height:420px;background:linear-gradient(135deg,#e5e7eb,#d1d5db);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:80px;overflow:hidden;position:relative}
+.gallery-badge{position:absolute;top:20px;left:20px;padding:7px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:var(--font-mono);background:var(--white);color:var(--green);box-shadow:0 1px 8px rgba(0,0,0,.12)}
+.gallery-garantia{position:absolute;bottom:20px;right:20px;background:var(--green);color:var(--white);padding:6px 14px;border-radius:100px;font-size:11px;font-weight:700}
+.gallery-thumbs{display:flex;gap:10px;margin-top:12px}
+.gallery-thumb{width:80px;height:60px;background:var(--gray4);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;border:2px solid transparent;transition:border-color .2s;flex-shrink:0}
+.gallery-thumb.active,.gallery-thumb:hover{border-color:var(--red)}
+.activo-sidebar{position:sticky;top:80px}
+.sidebar-card{background:var(--white);border:1.5px solid var(--gray3);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.sidebar-header{background:linear-gradient(135deg,var(--red) 0%,var(--red-dim) 100%);padding:22px 24px}
+.sidebar-location{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.65);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.sidebar-title{font-family:var(--font-display);font-size:26px;color:var(--white);line-height:1;letter-spacing:.5px}
+.sidebar-body{padding:24px}
+.kpi-highlight{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray3);border-radius:var(--radius);overflow:hidden;margin-bottom:16px}
+.kpi-h-cell{background:var(--gray5);padding:14px 16px}
+.kpi-h-val{font-family:var(--font-display);font-size:30px;line-height:1;color:var(--dark)}
+.kpi-h-val.red{color:var(--red)}.kpi-h-val.green{color:var(--green)}
+.kpi-h-key{font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;margin-top:3px}
+.kpi-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--gray3);border-radius:var(--radius);overflow:hidden;margin-bottom:20px}
+.kpi-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--gray3);font-size:13px}
+.kpi-row:last-child{border-bottom:none}
+.kpi-row-label{color:var(--gray)}
+.kpi-row-val{font-weight:600;color:var(--dark)}
+.kpi-row-val.green{color:var(--green)}
+.btn-reservar{width:100%;padding:15px;background:var(--red);color:var(--white);border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-bottom:10px}
+.btn-reservar:hover{background:var(--red-dim);box-shadow:0 6px 20px rgba(227,30,36,.3)}
+.sidebar-note{font-size:11px;color:var(--gray2);text-align:center;line-height:1.5}
+.activo-content{padding:48px 52px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 440px;gap:64px}
+.content-main h3{font-family:var(--font-display);font-size:26px;letter-spacing:.5px;color:var(--dark);margin-bottom:14px;margin-top:40px}
+.content-main h3:first-child{margin-top:0}
+.content-main p{font-size:15px;color:var(--gray);line-height:1.8;margin-bottom:14px}
+.puntos-fuertes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.punto{display:flex;gap:12px;padding:14px;background:var(--gray5);border-radius:var(--radius);border:1px solid var(--gray3)}
+.punto-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.punto-text{font-size:13px;color:var(--dark);font-weight:500;line-height:1.4}
+.zona-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.zona-stat{text-align:center;padding:16px;background:var(--gray5);border-radius:var(--radius);border:1px solid var(--gray3)}
+.zona-stat-val{font-family:var(--font-display);font-size:26px;color:var(--dark);line-height:1}
+.zona-stat-key{font-size:11px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.ficha-tecnica{border:1.5px solid var(--gray3);border-radius:var(--radius);overflow:hidden;margin-top:18px}
+.ficha-row{display:flex;border-bottom:1px solid var(--gray3)}
+.ficha-row:last-child{border-bottom:none}
+.ficha-label{width:160px;padding:11px 16px;background:var(--gray5);font-size:13px;color:var(--gray);font-weight:500;flex-shrink:0;border-right:1px solid var(--gray3)}
+.ficha-val{padding:11px 16px;font-size:13px;color:var(--dark);font-weight:600}
+
+/* CALCULADORA */
+.calculadora{background:var(--white);border:1.5px solid var(--gray3);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.calc-header{background:var(--dark);padding:20px 24px}
+.calc-title{font-family:var(--font-display);font-size:22px;letter-spacing:.5px;color:var(--white);margin-bottom:4px}
+.calc-sub{font-size:12px;color:rgba(255,255,255,.55)}
+.calc-body{padding:24px}
+.calc-section-title{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--gray);font-weight:600;margin-bottom:10px;margin-top:18px}
+.calc-section-title:first-child{margin-top:0}
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;background:var(--gray5);border-radius:var(--radius);margin-bottom:6px;border:1px solid var(--gray3)}
+.calc-row-label{font-size:13px;color:var(--gray)}
+.calc-row-val{font-size:13px;font-weight:600;color:var(--dark)}
+.calc-input-row{margin-bottom:10px}
+.calc-label{font-size:12px;color:var(--gray);margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+.calc-label-val{font-family:var(--font-mono);font-weight:700;color:var(--red);font-size:13px}
+.calc-slider{width:100%;height:4px;border-radius:2px;background:var(--gray3);outline:none;cursor:pointer;-webkit-appearance:none;appearance:none}
+.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--red);cursor:pointer;border:2px solid var(--white);box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.calc-divider{height:1px;background:var(--gray3);margin:16px 0}
+.calc-results{background:var(--gray5);border-radius:var(--radius);padding:16px;border:1px solid var(--gray3)}
+.calc-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray3);border-radius:6px;overflow:hidden;margin-top:10px}
+.calc-result-cell{background:var(--white);padding:13px}
+.calc-result-label{font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.calc-result-val{font-family:var(--font-display);font-size:26px;line-height:1;color:var(--dark)}
+.calc-result-val.red{color:var(--red)}.calc-result-val.green{color:var(--green)}
+.calc-inversion-total{background:var(--dark);border-radius:var(--radius);padding:14px 16px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
+.calc-inv-label{font-size:11px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1px}
+.calc-inv-val{font-family:var(--font-display);font-size:30px;color:var(--white)}
+.calc-nota{font-size:11px;color:var(--gray2);margin-top:10px;line-height:1.5;text-align:center}
+
+/* ═══ MODAL ═══ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--white);border-radius:12px;max-width:580px;width:100%;max-height:92vh;overflow-y:auto;transform:translateY(16px);transition:transform .3s;box-shadow:0 24px 64px rgba(0,0,0,.18)}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-header{background:linear-gradient(135deg,var(--red) 0%,var(--red-dim) 100%);padding:22px 28px;border-radius:12px 12px 0 0;position:sticky;top:0;z-index:2}
+.modal-title{font-family:var(--font-display);font-size:24px;letter-spacing:1px;color:var(--white);margin-bottom:2px}
+.modal-subtitle{font-size:12px;color:rgba(255,255,255,.72)}
+.modal-header-close{position:absolute;top:16px;right:20px;background:rgba(255,255,255,.2);border:none;color:var(--white);width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-header-close:hover{background:rgba(255,255,255,.3)}
+.modal-progress{height:3px;background:rgba(255,255,255,.2);margin-top:14px;border-radius:2px;overflow:hidden}
+.modal-progress-fill{height:100%;background:var(--white);border-radius:2px;transition:width .4s ease}
+.modal-body{padding:24px 28px}
+.m-panel{display:none}.m-panel.active{display:block}
+.step-heading{font-family:var(--font-display);font-size:20px;letter-spacing:.5px;color:var(--dark);margin-bottom:4px}
+.step-sub{font-size:13px;color:var(--gray);margin-bottom:18px;line-height:1.5}
+.prop-pill{display:inline-flex;align-items:center;gap:8px;background:var(--gray5);border:1px solid var(--gray3);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--dark);margin-bottom:16px}
+.prop-pill-dot{width:8px;height:8px;background:var(--red);border-radius:50%}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--gray);margin-bottom:6px;font-weight:600}
+.form-input{width:100%;background:var(--white);border:1.5px solid var(--gray3);border-radius:var(--radius);padding:11px 14px;color:var(--dark);font-family:var(--font-body);font-size:14px;outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--red)}
+.form-input::placeholder{color:var(--gray2)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-select{width:100%;background:var(--white);border:1.5px solid var(--gray3);border-radius:var(--radius);padding:11px 14px;color:var(--dark);font-family:var(--font-body);font-size:14px;outline:none;transition:border-color .2s;cursor:pointer}
+.form-select:focus{border-color:var(--red)}
+.upload-area{border:2px dashed var(--gray3);border-radius:var(--radius);padding:16px;text-align:center;cursor:pointer;transition:all .2s;background:var(--gray5)}
+.upload-area:hover{border-color:var(--red);background:var(--red-light)}
+.upload-input{display:none}
+.upload-text{font-size:13px;color:var(--gray)}.upload-text span{color:var(--red);font-weight:600}
+.opt-cards{display:flex;flex-direction:column;gap:8px}
+.opt-card{border:1.5px solid var(--gray3);border-radius:var(--radius);padding:12px 14px;cursor:pointer;transition:all .2s;display:flex;align-items:flex-start;gap:12px}
+.opt-card:hover{border-color:var(--red);background:var(--red-light)}
+.opt-card.selected{border-color:var(--red);background:var(--red-light)}
+.opt-radio{width:18px;height:18px;border:2px solid var(--gray3);border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.opt-card.selected .opt-radio{border-color:var(--red);background:var(--red)}
+.opt-card.selected .opt-radio::after{content:'';width:6px;height:6px;background:var(--white);border-radius:50%;display:block}
+.opt-title{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:2px}
+.opt-desc{font-size:12px;color:var(--gray);line-height:1.4}
+.cond-fields{margin-top:10px;padding:14px;background:var(--gray5);border-radius:var(--radius);border:1px solid var(--gray3)}
+.cond-fields.hidden{display:none}
+.service-block{border:1.5px solid var(--gray3);border-radius:var(--radius);overflow:hidden;margin-bottom:10px}
+.service-label{padding:10px 14px;background:var(--gray5);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray)}
+.service-opts{padding:8px 14px;display:flex;flex-direction:column;gap:4px}
+.service-opt{display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;border-bottom:1px solid var(--gray3)}
+.service-opt:last-child{border-bottom:none}
+.service-opt input{accent-color:var(--red);width:15px;height:15px;cursor:pointer}
+.service-opt label{font-size:13px;color:var(--dark);cursor:pointer;line-height:1.4}
+.service-opt-desc{font-size:11px;color:var(--gray2)}
+.tooltip-wrap{position:relative;display:inline-flex;align-items:center}
+.tip-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;background:var(--gray3);border-radius:50%;font-size:10px;cursor:help;color:var(--gray);font-weight:700;margin-left:6px;flex-shrink:0}
+.tip-box{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--dark);color:var(--white);font-size:12px;line-height:1.5;padding:10px 14px;border-radius:6px;width:230px;z-index:100;font-weight:400;font-family:var(--font-body);white-space:normal}
+.tip-box::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--dark)}
+.tooltip-wrap:hover .tip-box{display:block}
+.modal-actions{display:flex;gap:10px;margin-top:20px;padding:14px 0 4px;background:var(--white)}
+.btn-back{flex:1;padding:12px;background:none;border:1.5px solid var(--gray3);border-radius:var(--radius);color:var(--gray);font-family:var(--font-body);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-back:hover{border-color:var(--gray2);color:var(--dark)}
+.btn-next{flex:2;padding:12px;background:var(--red);border:none;border-radius:var(--radius);color:var(--white);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-next:hover{background:var(--red-dim)}
+.btn-next.dark{background:var(--dark)}.btn-next.dark:hover{background:#1e2128}
+.modal-note{text-align:center;font-size:11px;color:var(--gray2);margin-top:10px;line-height:1.5}
+.contrato-box{border:1.5px solid var(--gray3);border-radius:var(--radius);padding:16px;text-align:center;margin-bottom:14px}
+.btn-preview{padding:7px 16px;border:1.5px solid var(--red);border-radius:var(--radius);background:none;color:var(--red);font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all .2s;margin-top:10px}
+.btn-preview:hover{background:var(--red-light)}
+.accept-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;cursor:pointer}
+.accept-row input{width:16px;height:16px;accent-color:var(--red);cursor:pointer;flex-shrink:0;margin-top:2px}
+.accept-row label{font-size:13px;color:var(--gray);line-height:1.4;cursor:pointer}
+.pago-summary{background:var(--gray5);border-radius:var(--radius);padding:14px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--gray3)}
+.pago-label{font-size:13px;color:var(--gray)}
+.pago-val{font-family:var(--font-display);font-size:28px;color:var(--red)}
+
+/* Perfil panel */
+.perfil-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);z-index:1000;display:flex;align-items:stretch;opacity:0;pointer-events:none;transition:opacity .3s}
+.perfil-overlay.open{opacity:1;pointer-events:all}
+.perfil-panel{background:var(--white);width:460px;max-width:100%;margin-left:auto;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);overflow-y:auto}
+.perfil-overlay.open .perfil-panel{transform:translateX(0)}
+.perfil-header{background:linear-gradient(135deg,var(--red) 0%,var(--red-dim) 100%);padding:28px 24px 22px;flex-shrink:0}
+.perfil-header-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.perfil-close{background:rgba(255,255,255,.18);border:none;color:var(--white);width:30px;height:30px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.perfil-close:hover{background:rgba(255,255,255,.28)}
+.perfil-nombre{font-family:var(--font-display);font-size:26px;letter-spacing:1px;color:var(--white);margin-bottom:3px}
+.perfil-email{font-size:13px;color:rgba(255,255,255,.65)}
+.perfil-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.12);border-radius:var(--radius);overflow:hidden}
+.perfil-stat{background:rgba(255,255,255,.08);padding:12px;text-align:center}
+.perfil-stat-val{font-family:var(--font-display);font-size:24px;color:var(--white);line-height:1}
+.perfil-stat-key{font-size:10px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1px;margin-top:3px}
+.perfil-body{padding:24px;flex:1}
+.perfil-section-title{font-family:var(--font-display);font-size:17px;color:var(--dark);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--gray3)}
+.inv-card{border:1.5px solid var(--gray3);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.inv-card-header{padding:14px 18px;background:var(--gray5);display:flex;justify-content:space-between;align-items:center}
+.inv-card-title{font-weight:600;font-size:14px;color:var(--dark)}
+.inv-card-loc{font-size:11px;color:var(--gray2);margin-top:2px}
+.inv-rentabilidad{font-family:var(--font-display);font-size:20px;color:var(--green)}
+.tracker{padding:14px 18px 18px}
+.tracker-steps{display:flex;flex-direction:column}
+.tracker-step{display:flex;gap:12px;align-items:flex-start;padding:9px 0;position:relative}
+.tracker-step::before{content:'';position:absolute;left:11px;top:30px;bottom:-9px;width:2px;background:var(--gray3)}
+.tracker-step:last-child::before{display:none}
+.tracker-dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--gray3);background:var(--white);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;z-index:1;transition:all .2s}
+.tracker-dot.done{background:var(--green);border-color:var(--green);color:var(--white)}
+.tracker-dot.active{background:var(--red);border-color:var(--red);color:var(--white)}
+.tracker-name{font-size:13px;font-weight:500;color:var(--dark);margin-top:3px}
+.tracker-name.muted{color:var(--gray2);font-weight:400}
+
+/* NOSOTROS responsive */
+@media(max-width:960px){#nosotros>div{grid-template-columns:1fr !important;gap:40px !important}}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--gray4)}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
+
+@media(max-width:1024px){.activo-hero-inner,.activo-content{grid-template-columns:1fr}.activo-sidebar{position:static}}
+@media(max-width:960px){.hero-inner{grid-template-columns:1fr;gap:40px}.lejos-inner{grid-template-columns:1fr;gap:40px}}
+@media(max-width:768px){nav{padding:0 20px}.nav-links{display:none}section,#hero,#invierte-lejos{padding:72px 20px}#garantia{padding:28px 20px}h1{font-size:56px}.faq-list{grid-template-columns:1fr}footer{padding:44px 20px 28px}.activos-grid{grid-template-columns:1fr}.garantia-btn{margin-left:0}.activo-hero-inner,.activo-content{padding:32px 20px;gap:32px}.gallery-main{height:280px}.puntos-fuertes{grid-template-columns:1fr}.zona-stats{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}}
+
+/* LEAD POPUP */
+.lead-popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
+.lead-popup-overlay.open{opacity:1;pointer-events:all}
+.lead-popup{background:var(--white);border-radius:14px;max-width:480px;width:100%;overflow:hidden;transform:scale(.95);transition:transform .3s;box-shadow:0 32px 80px rgba(0,0,0,.2)}
+.lead-popup-overlay.open .lead-popup{transform:scale(1)}
+.lead-popup-top{background:var(--red);padding:32px 32px 28px;position:relative}
+.lead-popup-close{position:absolute;top:14px;right:16px;background:rgba(255,255,255,.2);border:none;color:white;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lead-popup-close:hover{background:rgba(255,255,255,.3)}
+.lead-popup-body{padding:28px 32px 32px}
+
+/* LEAD POPUP */
+.lead-popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
+.lead-popup-overlay.open{opacity:1;pointer-events:all}
+.lead-popup{background:var(--white);border-radius:14px;max-width:480px;width:100%;overflow:hidden;transform:scale(.95);transition:transform .3s;box-shadow:0 32px 80px rgba(0,0,0,.2)}
+.lead-popup-overlay.open .lead-popup{transform:scale(1)}
+.lead-popup-top{background:linear-gradient(135deg,var(--red) 0%,var(--red-dim) 100%);padding:32px 32px 24px;position:relative}
+.lead-popup-close{position:absolute;top:14px;right:16px;background:rgba(255,255,255,.2);border:none;color:white;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer}
+.lead-popup-close:hover{background:rgba(255,255,255,.3)}
+.lead-popup-body{padding:24px 28px 28px}
+
+/* ACTIVOS PAGE */
+.filter-pill{padding:7px 16px;border:1.5px solid var(--gray3);border-radius:100px;background:var(--white);color:var(--gray);font-size:12px;font-family:var(--font-body);cursor:pointer;transition:all .2s;font-weight:500}
+.filter-pill.active,.filter-pill:hover{border-color:var(--red);color:var(--red);background:var(--red-light)}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav id="mainNav">
+  <div class="nav-logo" onclick="showView('home');scrollToTop()">
+    <svg class="logo-icon" viewBox="0 0 100 100" fill="none"><polyline points="10,72 10,18 62,18 82,8" stroke="#E31E24" stroke-width="9" stroke-linecap="square" stroke-linejoin="miter" fill="none"/><rect x="30" y="36" width="13" height="11" stroke="#E31E24" stroke-width="7" fill="none"/><polyline points="14,82 36,56 55,70 88,26" stroke="#E31E24" stroke-width="9" stroke-linecap="square" stroke-linejoin="miter" fill="none"/></svg>
+    <div class="logo-text">CREANDO<br><span>UN SUELDO</span></div>
+  </div>
+
+  <!-- Nav home -->
+  <ul class="nav-links" id="navHome">
+    <li><a onclick="showView('home', true);scrollToSection('nosotros')">Quiénes somos</a></li>
+    <li><a onclick="showView('home', true);scrollToSection('activos')">Activos</a></li>
+    <li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li>
+    <li><a onclick="showView('home', true);scrollToSection('vendidos')">Resultados</a></li>
+    <li><a onclick="showView('home', true);scrollToSection('blog')">Blog</a></li>
+    <li><a onclick="showView('home', true);scrollToSection('faq')">FAQ</a></li>
+  </ul>
+
+  <!-- Nav ficha -->
+  <button class="nav-back" id="navBack" style="display:none" onclick="showView('home', true);scrollToSection('activos')">← Volver a activos</button>
+
+  <div class="nav-right">
+    <button class="btn-nav-ghost" onclick="openPerfil()">Mi perfil</button>
+    <button class="nav-cta" id="navCtaHome" onclick="showView('home', true);scrollToSection('activos')">Ver oportunidades →</button>
+    <button class="nav-cta" id="navCtaActivo" style="display:none" onclick="openModal('León', 4000)">Reservar este activo →</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════ VIEW: HOME ═══════════════════ -->
+<div class="view active" id="view-home">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-deco">€</div>
+    <div class="hero-inner">
+      <div>
+        <h1>INVIERTE.<br>COBRA<br>CADA MES.</h1>
+        <p class="hero-sub">Seleccionamos pisos con alta rentabilidad, gestionamos todo el proceso y garantizamos el alquiler estimado. Tú solo firmas y cobras.</p>
+        <div class="hero-actions">
+          <button class="btn-white" onclick="showView('home', true);scrollToSection('activos')">Ver activos disponibles →</button>
+          <button class="btn-white-ghost" onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><div class="stat-num">+7%</div><div class="stat-label">Rentabilidad media neta</div></div>
+          <div class="stat-item"><div class="stat-num">72</div><div class="stat-label">Operaciones cerradas</div></div>
+          <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Alquiler garantizado</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="hero-steps-card">
+          <div class="hero-steps">
+            <div class="hero-step"><div class="hero-step-num">1</div><div><div class="hero-step-title">Reserva un activo online</div><div class="hero-step-desc">Señal online. Bloqueamos el piso para ti.</div></div></div>
+            <div class="hero-step"><div class="hero-step-num">2</div><div><div class="hero-step-title">Firma las arras digitalmente</div><div class="hero-step-desc">Sin papeles, sin desplazamientos.</div></div></div>
+            <div class="hero-step"><div class="hero-step-num">3</div><div><div class="hero-step-title">Firma ante notario</div><div class="hero-step-desc">Podemos representarte. No tienes que salir de casa.</div></div></div>
+            <div class="hero-step"><div class="hero-step-num">4</div><div><div class="hero-step-title">Alquilamos tu piso</div><div class="hero-step-desc">Inquilino solvente, contrato y suministros.</div></div></div>
+            <div class="hero-step"><div class="hero-step-num">5</div><div><div class="hero-step-title">Empieza a recibir tu sueldo</div><div class="hero-step-desc">Rentabilidad garantizada desde el primer mes.</div></div></div>
+          </div>
+          <button class="hero-steps-cta" onclick="showView('home', true);scrollToSection('proceso')">Ver el proceso completo →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GARANTIA -->
+  <div id="garantia">
+    <div class="garantia-inner">
+      <div class="garantia-icon">✓</div>
+      <div class="garantia-text">
+        <h3>GARANTIZAMOS EL ALQUILER ESTIMADO</h3>
+        <p>Si tu piso se alquila por debajo del precio estimado, nosotros compensamos la diferencia. El 100% de nuestras operaciones se han alquilado por encima.</p>
+      </div>
+      <button class="garantia-btn" onclick="showView('home', true);scrollToSection('vendidos')">Ver resultados →</button>
+    </div>
+  </div>
+
+  <!-- ACTIVOS -->
+  <section id="activos">
+    <div class="section-header-row">
+      <div><div class="section-eyebrow">Activos disponibles</div><h2>OPORTUNIDADES<br>ACTIVAS</h2></div>
+      <button class="ver-todas-btn" onclick="showView('activos')">Ver todas →</button>
+    </div>
+    <div class="activos-grid" id="grid-activos">
+      <div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">
+        <div style="width:32px;height:32px;border:3px solid rgba(255,255,255,.1);border-top-color:#E31E24;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>
+        Cargando activos...
+      </div>
+    </div>
+  </section>
+
+  <!-- INVIERTE LEJOS -->
+  <section id="invierte-lejos">
+    <div class="lejos-inner">
+      <div>
+        <div class="section-eyebrow" style="color:rgba(255,255,255,.5)"><span style="width:18px;height:2px;background:rgba(255,255,255,.3);display:block"></span>Sin barreras geográficas</div>
+        <h2 style="color:var(--white)">INVIERTE LEJOS<br>DESDE CASA.</h2>
+        <p style="color:rgba(255,255,255,.6);margin-top:14px;font-size:16px;line-height:1.75;font-weight:300">Muchos de nuestros inversores viven en Barcelona o Madrid e invierten en Asturias o León, donde la rentabilidad dobla a la de las grandes ciudades. Nunca han pisado el inmueble. Y cobran cada mes.</p>
+      </div>
+      <div class="lejos-checklist">
+        <div class="lejos-check"><span class="check-icon">🔍</span><div><div class="check-title">Nosotros buscamos el piso</div><div class="check-desc">Analizamos mercado, zona y demanda. Tú recibes oportunidades ya filtradas.</div></div></div>
+        <div class="lejos-check"><span class="check-icon">✍️</span><div><div class="check-title">Firma digital y representación notarial</div><div class="check-desc">Arras en digital. Escritura con poder notarial si lo prefieres. Sin viajar.</div></div></div>
+        <div class="lejos-check"><span class="check-icon">🔑</span><div><div class="check-title">Llaves, reforma y suministros</div><div class="check-desc">Gestionamos entrega, puesta a punto y alta de luz, agua y gas.</div></div></div>
+        <div class="lejos-check"><span class="check-icon">💰</span><div><div class="check-title">Inquilino seleccionado, contrato firmado</div><div class="check-desc">Análisis de solvencia y seguro de impago. Cobras desde el primer mes.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIEN SOY -->
+
+
+  <!-- PROCESO -->
+  <section id="proceso">
+    <div class="section-eyebrow">Cómo funciona</div>
+    <h2>EL PROCESO,<br>PASO A PASO</h2>
+    <p class="section-desc">Desde que reservas hasta que cobras el primer mes. Sin ambigüedades.</p>
+    <div class="proceso-grid">
+      <div class="proceso-card"><span class="proceso-num">1</span><span class="proceso-icon">🔒</span><div class="proceso-title">RESERVA UN ACTIVO</div><p class="proceso-desc">Elige el piso, paga la señal online y firma el contrato de honorarios digitalmente. Tu DNI queda registrado y el piso bloqueado para ti.</p></div>
+      <div class="proceso-card"><span class="proceso-num">2</span><span class="proceso-icon">✍️</span><div class="proceso-title">FIRMA LAS ARRAS</div><p class="proceso-desc">Contrato de arras 100% digital. En este momento se cobran los honorarios de intermediación. Sin desplazamientos ni burocracia física.</p></div>
+      <div class="proceso-card"><span class="proceso-num">3</span><span class="proceso-icon">🏛️</span><div class="proceso-title">FIRMA ANTE NOTARIO</div><p class="proceso-desc">Escritura de compraventa. Podemos firmar en tu representación con poder notarial. Muchos inversores nunca han pisado el inmueble que compraron.</p></div>
+      <div class="proceso-card"><span class="proceso-num">4</span><span class="proceso-icon">🔑</span><div class="proceso-title">ALQUILAMOS TU PISO</div><p class="proceso-desc">Gestionamos puesta a punto, suministros, seguro de hogar y búsqueda de inquilino con análisis de solvencia y seguro de impago.</p></div>
+      <div class="proceso-card"><span class="proceso-num">5</span><span class="proceso-icon">💶</span><div class="proceso-title">EMPIEZA TU SUELDO</div><p class="proceso-desc">Inquilino dentro, contrato firmado. Cobras cada mes. Garantizamos el alquiler estimado: si se alquila por debajo, compensamos la diferencia.</p></div>
+    </div>
+  </section>
+
+  <!-- VENDIDOS -->
+  <section id="vendidos">
+    <div class="section-eyebrow">Track record</div>
+    <h2>RESULTADOS<br>REALES</h2>
+    <p class="section-desc">Operaciones cerradas con sus rentabilidades finales. Sin editar. Sin redondear.</p>
+    <div class="vendidos-grid" id="grid-vendidos">
+      <div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">
+        <div style="width:32px;height:32px;border:3px solid rgba(255,255,255,.1);border-top-color:#E31E24;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>
+        Cargando...
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <div class="section-eyebrow">Blog · Formación e ideas</div>
+    <h2>APRENDE A<br>INVERTIR MEJOR</h2>
+    <p class="section-desc">Contenido práctico sobre rentabilidad, fiscalidad y mercado. Sin humo.</p>
+    <div class="blog-grid">
+      <div class="blog-card"><div class="blog-img red-bg"><span class="blog-category">Guía</span><span>📊</span></div><div class="blog-body"><div class="blog-meta">12 Mar 2025 · 8 min</div><div class="blog-title">RENTABILIDAD BRUTA VS NETA: QUÉ NÚMERO IMPORTA DE VERDAD</div><div class="blog-excerpt">La mayoría de portales muestran rentabilidad bruta. Aquí descontamos gastos reales y calculamos lo que entra en tu bolsillo.</div><div class="blog-readmore">Leer artículo →</div></div></div>
+      <div class="blog-card"><div class="blog-img dark-bg"><span class="blog-category">Mercado</span><span>🗺️</span></div><div class="blog-body"><div class="blog-meta">28 Feb 2025 · 6 min</div><div class="blog-title">POR QUÉ ASTURIAS Y LEÓN SON EL MEJOR MERCADO PARA INVERTIR EN 2025</div><div class="blog-excerpt">Precios bajos, alta demanda y rentabilidades del 8–13%. Analizamos por qué tantos inversores de Barcelona miran al norte.</div><div class="blog-readmore">Leer artículo →</div></div></div>
+      <div class="blog-card"><div class="blog-img"><span class="blog-category">Fiscal</span><span>🧾</span></div><div class="blog-body"><div class="blog-meta">10 Feb 2025 · 5 min</div><div class="blog-title">CÓMO TRIBUTA EL ALQUILER EN ESPAÑA: GUÍA PRÁCTICA 2025</div><div class="blog-excerpt">Reducción del 60% en IRPF, gastos deducibles, amortización. Todo lo que necesitas antes de comprar tu primer piso.</div><div class="blog-readmore">Leer artículo →</div></div></div>
+      <div class="blog-card"><div class="blog-img" style="background:var(--gray4)"><span class="blog-category">Inversión</span><span>🏠</span></div><div class="blog-body"><div class="blog-meta">22 Ene 2025 · 7 min</div><div class="blog-title">INVERTIR EN PISOS SIN SALIR DE CASA: TODO LO QUE NECESITAS SABER</div><div class="blog-excerpt">Poder notarial, firma digital, gestión remota del inquilino. Cómo funciona la inversión inmobiliaria 100% remota.</div><div class="blog-readmore">Leer artículo →</div></div></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="section-eyebrow">Preguntas frecuentes</div>
+    <h2>TODO LO QUE<br>NECESITAS SABER</h2>
+    <p class="section-desc">Si tienes más dudas, escríbenos. Respondemos en menos de 24h.</p>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto dinero necesito para empezar? <span class="faq-icon">+</span></button><div class="faq-a">Trabajamos operaciones desde 38.000 € de precio de compra. Con financiación, la entrada suele rondar el 20–30% más gastos. La calculadora de cada ficha te da la cifra exacta.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cómo garantizáis el alquiler estimado? <span class="faq-icon">+</span></button><div class="faq-a">Si el piso se alquila por debajo del precio estimado, compensamos la diferencia. El 100% de nuestras operaciones se han alquilado por encima.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué incluye el servicio? <span class="faq-icon">+</span></button><div class="faq-a">Selección del activo, acompañamiento en la compra, suministros, seguro de hogar, búsqueda de inquilino con análisis de solvencia y firma del contrato.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuándo y cuánto cobráis? <span class="faq-icon">+</span></button><div class="faq-a">Los honorarios se cobran en el momento de las arras. No hay cuotas mensuales ni comisiones ocultas. El importe aparece en cada ficha.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Tengo que ir a la notaría en persona? <span class="faq-icon">+</span></button><div class="faq-a">No. Podemos firmar en tu representación con poder notarial. Muchos inversores nunca han pisado el inmueble que compraron.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si el inquilino deja de pagar? <span class="faq-icon">+</span></button><div class="faq-a">Gestionamos el seguro de impago para que estés cubierto. Nos encargamos de los trámites.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Puedo comprar desde fuera de España? <span class="faq-icon">+</span></button><div class="faq-a">Sí. Trabajamos con residentes y no residentes. La firma puede hacerse por poder notarial.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Para qué sirve la señal de reserva? <span class="faq-icon">+</span></button><div class="faq-a">Bloquea el activo mientras gestionas la financiación. Se descuenta del precio final. Antes de pagar, firmas el contrato de honorarios digitalmente.</div></div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="cta-final">
+    <div class="cta-pattern"></div>
+    <div class="section-eyebrow">Únete a la comunidad</div>
+    <h2>¿LISTO PARA<br>CREAR TU SUELDO?</h2>
+    <p class="section-desc">Accede a las oportunidades antes de que lleguen a la web. Sin compromiso.</p>
+    <div class="cta-actions">
+      <button class="btn-white" onclick="showView('home', true);scrollToSection('activos')">Ver activos disponibles →</button>
+      <a href="/cdn-cgi/l/email-protection#452d2a292405263720242b212a302b36302029212a6b262a28" class="btn-white-ghost">Hablar con un asesor</a>
+    </div>
+    <div class="social-links">
+      <a href="#" class="social-link"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Canal Telegram</a>
+      <a href="#" class="social-link"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>Grupo WhatsApp</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="nav-logo" onclick="showView('home');scrollToTop()" style="cursor:pointer">
+          <svg class="logo-icon" viewBox="0 0 100 100" fill="none"><polyline points="10,72 10,18 62,18 82,8" stroke="#E31E24" stroke-width="9" stroke-linecap="square" stroke-linejoin="miter" fill="none"/><rect x="30" y="36" width="13" height="11" stroke="#E31E24" stroke-width="7" fill="none"/><polyline points="14,82 36,56 55,70 88,26" stroke="#E31E24" stroke-width="9" stroke-linecap="square" stroke-linejoin="miter" fill="none"/></svg>
+          <div class="logo-text" style="color:var(--white)">CREANDO<br><span>UN SUELDO</span></div>
+        </div>
+        <p class="footer-tagline">Intermediación inmobiliaria para inversores que quieren resultados reales, no promesas.</p>
+      </div>
+      <div class="footer-links-col"><h4>Navegar</h4><ul><li><a onclick="showView('home', true);scrollToSection('nosotros')">Quiénes somos</a></li>
+<li><a onclick="showView('home', true);scrollToSection('activos')">Activos disponibles</a></li><li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li><li><a onclick="showView('home', true);scrollToSection('vendidos')">Track record</a></li><li><a onclick="showView('home', true);scrollToSection('blog')">Blog</a></li><li><a onclick="showView('home', true);scrollToSection('faq')">FAQ</a></li></ul></div>
+      <div class="footer-links-col"><h4>Comunidad</h4><ul><li><a href="#">Canal Telegram</a></li><li><a href="#">Grupo WhatsApp</a></li></ul></div>
+      <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="/cdn-cgi/l/email-protection#85edeae9e4c5e6f7e0e4ebe1eaf0ebf6f0e0e9e1eaabe6eae8"><span class="__cf_email__" data-cfemail="0b6364676a4b68796e6a656f647e65787e6e676f6425686466">[email&#160;protected]</span></a></li><li><a>Barcelona, España</a></li><li><a>NOGA HOUSE S.L.</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-legal">© 2025 NOGA HOUSE S.L. — CreandoUnSueldo</span><span class="footer-legal"><a href="#" onclick="showPrivacidad()">Aviso legal</a> · <a href="#" onclick="showPrivacidad()">Privacidad</a> · <a href="#" onclick="showPrivacidad()">Cookies</a></span></div>
+  </footer>
+</div>
+
+<!-- ═══════════════════ VIEW: FICHA ACTIVO ═══════════════════ -->
+<div class="view" id="view-activo">
+  <div class="activo-hero-wrap">
+    <div class="activo-hero-inner">
+      <div class="gallery">
+        <div class="gallery-main">🏠<span class="gallery-badge">● Disponible</span><span class="gallery-garantia">Alquiler garantizado</span></div>
+        <div class="gallery-thumbs">
+          <div class="gallery-thumb active">🏠</div><div class="gallery-thumb">🛋️</div><div class="gallery-thumb">🛏️</div><div class="gallery-thumb">🚿</div><div class="gallery-thumb">🗺️</div>
+        </div>
+      </div>
+      <div class="activo-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-header"><div class="sidebar-location">León · Ponferrada</div><div class="sidebar-title">PISO 2 HAB.<br>AV. JOSE VALGOMA</div></div>
+          <div class="sidebar-body">
+            <div class="kpi-highlight"><div class="kpi-h-cell"><div class="kpi-h-val red">13,1%</div><div class="kpi-h-key">Rent. bruta</div></div><div class="kpi-h-cell"><div class="kpi-h-val green">+395€</div><div class="kpi-h-key">Cashflow/mes</div></div></div>
+            <div class="kpi-list">
+              <div class="kpi-row"><span class="kpi-row-label">Precio compra</span><span class="kpi-row-val">38.000 €</span></div>
+              <div class="kpi-row"><span class="kpi-row-label">Honorarios</span><span class="kpi-row-val">4.000 € + IVA</span></div>
+              <div class="kpi-row"><span class="kpi-row-label">Puesta a punto</span><span class="kpi-row-val">0 €</span></div>
+              <div class="kpi-row"><span class="kpi-row-label">Alquiler estimado</span><span class="kpi-row-val green">415 €/mes</span></div>
+              <div class="kpi-row"><span class="kpi-row-label">Gastos anuales</span><span class="kpi-row-val">386 €/año</span></div>
+              <div class="kpi-row"><span class="kpi-row-label">IBI</span><span class="kpi-row-val">170 €/año</span></div>
+              <div class="kpi-row"><span class="kpi-row-label">Comunidad</span><span class="kpi-row-val">18 €/mes</span></div>
+            </div>
+            <button class="btn-reservar" onclick="openModal('León', 4000)">Reservar este activo →</button>
+            <div class="sidebar-note">Señal de 500 € · Se descuenta del precio final<br>Contrato de honorarios digital antes del pago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="activo-content">
+    <div class="content-main">
+      <h3>POR QUÉ ESTE ACTIVO</h3>
+      <p>Este piso en Ponferrada es uno de los activos con mejor ratio rentabilidad/riesgo que hemos analizado en los últimos meses. Primera planta exterior en Avenida Jose Valgoma, una de las arterias principales de la ciudad, con alta visibilidad y fácil acceso al centro.</p>
+      <p>El inmueble se entrega <strong>amueblado y listo para entrar a vivir</strong>, con los suministros ya dados de alta. La puesta a punto necesaria es cero: puedes tenerlo alquilado en menos de dos semanas desde la firma.</p>
+      <div class="puntos-fuertes">
+        <div class="punto"><span class="punto-icon">💰</span><div class="punto-text">Rentabilidad bruta del 13,1% — muy por encima de la media nacional</div></div>
+        <div class="punto"><span class="punto-icon">🔑</span><div class="punto-text">Amueblado y listo. Sin obra ni esperas antes de alquilar</div></div>
+        <div class="punto"><span class="punto-icon">📍</span><div class="punto-text">Avenida principal con alta demanda de alquiler por trabajadores y familias</div></div>
+        <div class="punto"><span class="punto-icon">💡</span><div class="punto-text">Suministros dados de alta. Sin gestiones adicionales</div></div>
+        <div class="punto"><span class="punto-icon">🏛️</span><div class="punto-text">IBI de solo 170€/año — gastos anuales totales de 386€</div></div>
+        <div class="punto"><span class="punto-icon">✅</span><div class="punto-text">Alquiler garantizado. Si se alquila por debajo, compensamos</div></div>
+      </div>
+      <h3>ANÁLISIS DE LA ZONA</h3>
+      <p>Ponferrada es la segunda ciudad más grande de León con casi 60.000 habitantes. Su economía está diversificada entre industria, servicios y turismo. La demanda de alquiler residencial es constante y la oferta escasa en las zonas céntricas.</p>
+      <p>La Avenida Jose Valgoma conecta el centro histórico con los barrios residenciales del sur. Zona con alta demanda de perfiles laborales: enfermeros del Hospital del Bierzo (a 10 minutos), funcionarios y trabajadores de empresas locales.</p>
+      <div class="zona-stats">
+        <div class="zona-stat"><div class="zona-stat-val">59.000</div><div class="zona-stat-key">Habitantes</div></div>
+        <div class="zona-stat"><div class="zona-stat-val">&lt;2%</div><div class="zona-stat-key">Tasa vacío zona</div></div>
+        <div class="zona-stat"><div class="zona-stat-val">8,7%</div><div class="zona-stat-key">Rent. media León</div></div>
+      </div>
+      <h3>FICHA TÉCNICA</h3>
+      <div class="ficha-tecnica">
+        <div class="ficha-row"><div class="ficha-label">Dirección</div><div class="ficha-val">Av. Jose Valgoma, Ponferrada</div></div>
+        <div class="ficha-row"><div class="ficha-label">Superficie</div><div class="ficha-val">45 m² construidos</div></div>
+        <div class="ficha-row"><div class="ficha-label">Distribución</div><div class="ficha-val">2 habitaciones · 1 baño · Salón</div></div>
+        <div class="ficha-row"><div class="ficha-label">Planta</div><div class="ficha-val">Primera exterior (sin ascensor)</div></div>
+        <div class="ficha-row"><div class="ficha-label">Estado</div><div class="ficha-val">Amueblado · Listo para entrar</div></div>
+        <div class="ficha-row"><div class="ficha-label">Suministros</div><div class="ficha-val">Dados de alta</div></div>
+        <div class="ficha-row"><div class="ficha-label">IBI</div><div class="ficha-val">170 €/año</div></div>
+        <div class="ficha-row"><div class="ficha-label">Comunidad</div><div class="ficha-val">18 €/mes (216 €/año)</div></div>
+        <div class="ficha-row"><div class="ficha-label">Puesta a punto</div><div class="ficha-val">0 €</div></div>
+        <div class="ficha-row"><div class="ficha-label">ITP</div><div class="ficha-val">8% — Castilla y León</div></div>
+      </div>
+    </div>
+
+    <!-- CALCULADORA -->
+    <div>
+      <div class="calculadora">
+        <div class="calc-header"><div class="calc-title">CALCULADORA DE INVERSIÓN</div><div class="calc-sub">Ajusta el % financiado y ve cuánto necesitas</div></div>
+        <div class="calc-body">
+          <div class="calc-section-title">Costes fijos del activo</div>
+          <div class="calc-row"><span class="calc-row-label">Precio de compra</span><span class="calc-row-val">38.000 €</span></div>
+          <div class="calc-row"><span class="calc-row-label">Honorarios (IVA incl.)</span><span class="calc-row-val" id="calcHonorarios">4.840 €</span></div>
+          <div class="calc-row"><span class="calc-row-label">Puesta a punto</span><span class="calc-row-val">0 €</span></div>
+          <div class="calc-row"><span class="calc-row-label">Registro y notaría</span><span class="calc-row-val">1.100 €</span></div>
+          <div class="calc-row"><span class="calc-row-label">ITP 8% (Castilla y León)</span><span class="calc-row-val">3.040 €</span></div>
+          <div class="calc-divider"></div>
+          <div class="calc-section-title">Tu financiación</div>
+          <div class="calc-input-row">
+            <div class="calc-label"><span>% que financias con hipoteca</span><span class="calc-label-val" id="finPct">0%</span></div>
+            <input type="range" class="calc-slider" min="0" max="80" value="0" step="5" oninput="calcUpdate(this.value)">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--gray2);margin-top:4px"><span>0% (contado)</span><span>80%</span></div>
+          </div>
+          <div class="calc-row" id="hipRow" style="display:none"><span class="calc-row-label">Hipoteca (financiada)</span><span class="calc-row-val" id="hipVal">—</span></div>
+          <div class="calc-divider"></div>
+          <div class="calc-inversion-total"><div><div class="calc-inv-label">Inversión inicial necesaria</div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:2px">Entrada + todos los gastos</div></div><div class="calc-inv-val" id="invTotal">47.980 €</div></div>
+          <div class="calc-results" style="margin-top:14px">
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);font-weight:600">Métricas de rentabilidad</div>
+            <div class="calc-result-grid">
+              <div class="calc-result-cell"><div class="calc-result-label">Rent. Bruta</div><div class="calc-result-val red" id="rBruta">13,1%</div></div>
+              <div class="calc-result-cell"><div class="calc-result-label">Rent. Neta</div><div class="calc-result-val red" id="rNeta">12,1%</div></div>
+              <div class="calc-result-cell"><div class="calc-result-label">ROCE</div><div class="calc-result-val green" id="roce">10,4%</div></div>
+              <div class="calc-result-cell"><div class="calc-result-label">Cashflow/mes</div><div class="calc-result-val green" id="cf">+395 €</div></div>
+            </div>
+          </div>
+          <div class="calc-nota">Rent. bruta = ingresos anuales / precio compra · Rent. neta = (ingresos − gastos) / precio compra · ROCE = ingresos netos / inversión inicial</div>
+          <button class="btn-reservar" style="margin-top:18px;border-radius:var(--radius)" onclick="openModal('León', 4000)">Reservar este activo →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ MODAL RESERVA ═══════════════════ -->
+
+<!-- ═══════════════════ VIEW: TODOS LOS ACTIVOS ═══════════════════ -->
+<div class="view" id="view-activos">
+  <div style="padding-top:68px;min-height:100vh;background:var(--gray5)">
+
+    <!-- Header -->
+    <div style="background:var(--red);padding:52px 52px 48px;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:60px 60px;pointer-events:none"></div>
+      <div style="position:relative;max-width:1200px">
+        <div style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px">Activos disponibles</div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(40px,5vw,68px);line-height:.95;color:white;margin-bottom:12px;letter-spacing:.5px">TODAS LAS<br>OPORTUNIDADES</h2>
+        <p style="font-size:15px;color:rgba(255,255,255,.7);font-weight:300;max-width:480px">Activos analizados y seleccionados por nuestro equipo. Rentabilidad neta, cashflow real y alquiler garantizado en cada operación.</p>
+      </div>
+    </div>
+
+    <!-- Filters bar -->
+    <div style="background:white;border-bottom:1px solid var(--gray3);padding:16px 52px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:68px;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.04)">
+      <span style="font-size:12px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-right:4px">Filtrar:</span>
+      <button class="filter-pill active" onclick="filterAll(this,'todos')">Todos</button>
+      <button class="filter-pill" onclick="filterAll(this,'disponible')">&#9679; Disponibles</button>
+      <button class="filter-pill" onclick="filterAll(this,'leon')">León</button>
+      <button class="filter-pill" onclick="filterAll(this,'asturias')">Asturias</button>
+      <button class="filter-pill" onclick="filterAll(this,'barcelona')">Barcelona</button>
+      <button class="filter-pill" onclick="filterAll(this,'madrid')">Madrid</button>
+      <div style="margin-left:auto;font-size:12px;color:var(--gray2)" id="activosCount">3 activos</div>
+    </div>
+
+    <!-- Grid -->
+    <div style="padding:40px 52px;max-width:1400px" id="allActivosGrid">
+      <div class="activos-grid">
+
+        <!-- PONFERRADA -->
+        <div class="activo-card" data-zona="leon" data-estado="disponible" onclick="showView('activo')">
+          <div class="activo-img"><div class="activo-img-ph">&#127968;</div><span class="activo-badge badge-disponible">&#9679; Disponible</span><span class="garantia-tag">Alquiler garantizado</span></div>
+          <div class="activo-body">
+            <div class="activo-location">León · Ponferrada</div>
+            <div class="activo-title">PISO 2 HAB.<br>AV. JOSE VALGOMA</div>
+            <div class="kpi-main">
+              <div class="kpi-cell"><div class="kpi-val red">13,1%</div><div class="kpi-key">Rent. bruta</div></div>
+              <div class="kpi-cell"><div class="kpi-val green">+395€</div><div class="kpi-key">Cashflow/mes</div></div>
+              <div class="kpi-cell"><div class="kpi-val">38k€</div><div class="kpi-key">Precio</div></div>
+            </div>
+            <div class="kpi-grid">
+              <div class="kpi-grid-cell"><div class="kpi-grid-val">415€/mes</div><div class="kpi-grid-key">Alquiler (4.980€/año)</div></div>
+              <div class="kpi-grid-cell"><div class="kpi-grid-val">45 m²</div><div class="kpi-grid-key">Superficie</div></div>
+              <div class="kpi-grid-cell"><div class="kpi-grid-val">386€/año</div><div class="kpi-grid-key">Gastos totales</div></div>
+            </div>
+            <div class="activo-tags"><span class="tag">Amueblado</span><span class="tag">Lista para entrar</span><span class="tag">Suministros activos</span></div>
+            <div class="activo-cta">Ver activo completo →</div>
+          </div>
+        </div>
+
+        <!-- BARCELONA -->
+        <div class="activo-card" data-zona="barcelona" data-estado="disponible" onclick="showView('activo')">
+          <div class="activo-img"><div class="activo-img-ph">&#127962;</div><span class="activo-badge badge-disponible">&#9679; Disponible</span><span class="garantia-tag">Alquiler garantizado</span></div>
+          <div class="activo-body">
+            <div class="activo-location">Barcelona · Nou Barris</div>
+            <div class="activo-title">PISO 3 HAB.<br>CON TERRAZA</div>
+            <div class="kpi-main">
+              <div class="kpi-cell"><div class="kpi-val red">8,0%</div><div class="kpi-key">Rent. bruta</div></div>
+              <div class="kpi-cell"><div class="kpi-val green">+680€</div><div class="kpi-key">Cashflow/mes</div></div>
+              <div class="kpi-cell"><div class="kpi-val">165k€</div><div class="kpi-key">Precio</div></div>
+            </div>
+            <div class="kpi-grid">
+              <div class="kpi-grid-cell"><div class="kpi-grid-val">1.100€/mes</div><div class="kpi-grid-key">Alquiler (13.200€/año)</div></div>
+              <div class="kpi-grid-cell"><div class="kpi-grid-val">72 m²</div><div class="kpi-grid-key">Superficie</div></div>
+              <div class="kpi-grid-cell"><div class="kpi-grid-val">—</div><div class="kpi-grid-key">Gastos totales</div></div>
+            </div>
+            <div class="activo-tags"><span class="tag">Reformado</span><span class="tag">Ascensor</span><span class="tag">Terraza</span></div>
+            <div class="activo-cta">Ver activo completo →</div>
+          </div>
+        </div>
+
+        <!-- MADRID RESERVADO -->
+        <div class="activo-card" data-zona="madrid" data-estado="reservado" style="opacity:.7;pointer-events:none">
+          <div class="activo-img"><div class="activo-img-ph">&#127961;</div><span class="activo-badge badge-reservado">&#9670; Reservado</span></div>
+          <div class="activo-body">
+            <div class="activo-location">Madrid · Carabanchel</div>
+            <div class="activo-title">ESTUDIO<br>BIEN COMUNICADO</div>
+            <div class="kpi-main">
+              <div class="kpi-cell"><div class="kpi-val red">7,0%</div><div class="kpi-key">Rent. bruta</div></div>
+              <div class="kpi-cell"><div class="kpi-val green">+520€</div><div class="kpi-key">Cashflow/mes</div></div>
+              <div class="kpi-cell"><div class="kpi-val">112k€</div><div class="kpi-key">Precio</div></div>
+            </div>
+            <div class="kpi-grid">
+              <div class="kpi-grid-cell"><div class="kpi-grid-val">750€/mes</div><div class="kpi-grid-key">Alquiler (9.000€/año)</div></div>
+              <div class="kpi-grid-cell"><div class="kpi-grid-val">38 m²</div><div class="kpi-grid-key">Superficie</div></div>
+              <div class="kpi-grid-cell"><div class="kpi-grid-val">—</div><div class="kpi-grid-key">Gastos totales</div></div>
+            </div>
+            <div class="activo-tags"><span class="tag">Metro L5</span><span class="tag">Amueblado</span></div>
+            <div class="activo-cta disabled">Ya reservado</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Empty state -->
+      <div id="activosEmpty" style="display:none;text-align:center;padding:80px 20px">
+        <div style="font-size:48px;margin-bottom:16px">🔍</div>
+        <div style="font-family:var(--font-display);font-size:28px;color:var(--dark);margin-bottom:8px">SIN RESULTADOS</div>
+        <div style="font-size:14px;color:var(--gray)">No hay activos disponibles en esa zona ahora mismo.</div>
+        <button onclick="filterAll(document.querySelector('.filter-pill'),'todos')" style="margin-top:20px;padding:10px 24px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer">Ver todos</button>
+      </div>
+    </div>
+
+    <!-- CTA unirse -->
+    <div style="background:var(--dark);padding:52px;text-align:center;margin:0 52px 52px;border-radius:14px">
+      <div style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.5);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px">Acceso anticipado</div>
+      <div style="font-family:var(--font-display);font-size:36px;color:white;margin-bottom:10px;letter-spacing:.5px">LOS MEJORES PISOS<br>SE VAN EN HORAS</div>
+      <p style="font-size:14px;color:rgba(255,255,255,.6);margin-bottom:28px;max-width:400px;margin-left:auto;margin-right:auto">Únete a la comunidad y recibe los activos antes de que lleguen a la web pública.</p>
+      <div style="display:flex;gap:8px;max-width:400px;margin:0 auto">
+        <input type="email" placeholder="tu@email.com" style="flex:1;padding:12px 16px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:white;font-family:var(--font-body);font-size:14px;outline:none">
+        <button style="padding:12px 24px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">Unirme →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-header-close" onclick="closeModal()">×</button>
+      <div class="modal-title">RESERVAR ACTIVO</div>
+      <div class="modal-subtitle">Ponferrada · Av. Jose Valgoma — Señal: 500 €</div>
+      <div class="modal-progress"><div class="modal-progress-fill" id="progressFill" style="width:14%"></div></div>
+    </div>
+    <div class="modal-body">
+
+      <!-- P1: Datos -->
+      <div class="m-panel active" id="mp1">
+        <div class="step-heading">Tus datos</div>
+        <div class="step-sub">Necesitamos tus datos para generar el contrato de honorarios.</div>
+        <div class="prop-pill"><span class="prop-pill-dot"></span>Ponferrada · 38.000 €</div>
+        <div class="form-row"><div class="form-group"><label class="form-label">Nombre</label><input class="form-input" type="text" placeholder="Tu nombre"></div><div class="form-group"><label class="form-label">Apellidos</label><input class="form-input" type="text" placeholder="Tus apellidos"></div></div>
+        <div class="form-row"><div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="tu@email.com"></div><div class="form-group"><label class="form-label">Teléfono</label><input class="form-input" type="tel" placeholder="+34 6XX XXX XXX"></div></div>
+        <div class="form-group"><label class="form-label">DNI / NIE</label><div class="upload-area" onclick="document.getElementById('dniInput').click()"><div style="font-size:24px;margin-bottom:6px">📄</div><div class="upload-text">Sube tu DNI o NIE · <span>Seleccionar archivo</span></div><div style="font-size:11px;color:var(--gray2);margin-top:4px">JPG, PNG o PDF · Máx. 10MB</div></div><input type="file" id="dniInput" class="upload-input" accept=".jpg,.jpeg,.png,.pdf" onchange="dniUp(this)"></div>
+        <div class="modal-actions"><button class="btn-back" onclick="closeModal()">Cancelar</button><button class="btn-next" onclick="goStep(2)">Continuar →</button></div>
+      </div>
+
+      <!-- P2: Reforma -->
+      <div class="m-panel" id="mp2">
+        <div class="step-heading">La reforma</div>
+        <div class="step-sub">¿Quieres delegar la gestión de cualquier reforma o incidencia en nosotros?</div>
+        <div class="opt-cards" id="grReforma">
+          <div class="opt-card selected" onclick="selOpt(this,'grReforma')"><div class="opt-radio"></div><div><div class="opt-title">Me encargo yo</div><div class="opt-desc">Gestiono cualquier incidencia por mi cuenta.</div></div></div>
+          <div class="opt-card" onclick="selOpt(this,'grReforma')"><div class="opt-radio"></div><div><div class="opt-title">Delego en vosotros</div><div class="opt-desc">Si hay algo que hacer, lo gestionáis vosotros. Presupuesto abierto valorado en 1.500 € + IVA.</div></div></div>
+        </div>
+        <div class="modal-actions"><button class="btn-back" onclick="goStep(1)">← Volver</button><button class="btn-next" onclick="goStep(3)">Continuar →</button></div>
+      </div>
+
+      <!-- P3: Financiación -->
+      <div class="m-panel" id="mp3">
+        <div class="step-heading">Financiación</div>
+        <div class="step-sub">¿Necesitas ayuda para conseguir una hipoteca?</div>
+        <div class="opt-cards" id="grFin">
+          <div class="opt-card selected" onclick="selOpt(this,'grFin');showCond('condFin',false)"><div class="opt-radio"></div><div><div class="opt-title">No, compro sin financiación o ya tengo hipoteca</div></div></div>
+          <div class="opt-card" onclick="selOpt(this,'grFin');showCond('condFin',true)"><div class="opt-radio"></div><div><div class="opt-title">Sí, quiero que me ayudéis con la hipoteca</div><div class="opt-desc">Sin coste adicional.</div></div></div>
+        </div>
+        <div class="cond-fields hidden" id="condFin">
+          <div class="form-row" style="margin-bottom:10px"><div class="form-group" style="margin-bottom:0"><label class="form-label">Ingresos netos/mes</label><input class="form-input" type="number" placeholder="2.500 €"></div><div class="form-group" style="margin-bottom:0"><label class="form-label">Gastos mensuales</label><input class="form-input" type="number" placeholder="800 €"></div></div>
+          <div class="form-row"><div class="form-group" style="margin-bottom:0"><label class="form-label">Situación laboral</label><select class="form-select"><option>Asalariado</option><option>Autónomo</option><option>Funcionario</option><option>Otro</option></select></div><div class="form-group" style="margin-bottom:0"><label class="form-label">Edad</label><input class="form-input" type="number" placeholder="35"></div></div>
+        </div>
+        <div class="modal-actions"><button class="btn-back" onclick="goStep(2)">← Volver</button><button class="btn-next" onclick="goStep(4)">Continuar →</button></div>
+      </div>
+
+      <!-- P4: Visita -->
+      <div class="m-panel" id="mp4">
+        <div class="step-heading">¿Visita al inmueble?</div>
+        <div class="step-sub">Puedes reservar sin visitar el piso, pero si quieres verlo lo organizamos.</div>
+        <div class="opt-cards" id="grVisita">
+          <div class="opt-card selected" onclick="selOpt(this,'grVisita')"><div class="opt-radio"></div><div><div class="opt-title">No, no necesito visitar el inmueble</div><div class="opt-desc">Me basta con las fotos y el análisis de zona.</div></div></div>
+          <div class="opt-card" onclick="selOpt(this,'grVisita')"><div class="opt-radio"></div><div><div class="opt-title">Sí, quiero hacer una visita</div><div class="opt-desc">Nos pondremos en contacto para organizarla.</div></div></div>
+        </div>
+        <div class="modal-actions"><button class="btn-back" onclick="goStep(3)">← Volver</button><button class="btn-next" onclick="goStep(5)">Continuar →</button></div>
+        <div style="text-align:center;margin-top:8px"><button style="background:none;border:none;color:var(--gray2);font-size:12px;cursor:pointer;font-family:var(--font-body);text-decoration:underline" onclick="goStep(5)">Saltar este paso por ahora</button></div>
+      </div>
+
+      <!-- P5: Notaría -->
+      <div class="m-panel" id="mp5">
+        <div class="step-heading">Firma ante notario</div>
+        <div class="step-sub">¿Cómo quieres firmar la escritura de compraventa?</div>
+        <div class="opt-cards" id="grNotaria">
+          <div class="opt-card selected" onclick="selOpt(this,'grNotaria')"><div class="opt-radio"></div><div><div class="opt-title">Presencialmente en <span id="notariaProvincia">León</span></div><div class="opt-desc">Asisto en persona a la notaría donde está el inmueble.</div></div></div>
+          <div class="opt-card" onclick="selOpt(this,'grNotaria')"><div class="opt-radio"></div><div>
+            <div class="opt-title"><span class="tooltip-wrap">Poder notarial a vosotros<span class="tip-icon">?</span><span class="tip-box">Otorgas un poder notarial en tu ciudad para que firmemos en tu nombre. Tú no tienes que desplazarte.</span></span></div>
+            <div class="opt-desc">Vosotros firmáis en mi nombre. No me muevo de casa.</div>
+          </div></div>
+          <div class="opt-card" onclick="selOpt(this,'grNotaria')"><div class="opt-radio"></div><div>
+            <div class="opt-title"><span class="tooltip-wrap">Ratificación de firma<span class="tip-icon">?</span><span class="tip-box">Firmas en una notaría de tu ciudad y la firma se ratifica telemáticamente con la notaría del inmueble. Más ágil que el poder notarial.</span></span></div>
+            <div class="opt-desc">Firmo en una notaría de mi ciudad, se ratifica telemáticamente.</div>
+          </div></div>
+          <div class="opt-card" onclick="selOpt(this,'grNotaria')"><div class="opt-radio"></div><div><div class="opt-title">No lo tengo claro aún</div><div class="opt-desc">Me orientaréis vosotros según mi situación.</div></div></div>
+        </div>
+        <div class="modal-actions"><button class="btn-back" onclick="goStep(4)">← Volver</button><button class="btn-next" onclick="goStep(6)">Continuar →</button></div>
+        <div style="text-align:center;margin-top:8px"><button style="background:none;border:none;color:var(--gray2);font-size:12px;cursor:pointer;font-family:var(--font-body);text-decoration:underline" onclick="goStep(6)">Saltar este paso por ahora</button></div>
+      </div>
+
+      <!-- P6: Servicios -->
+      <div class="m-panel" id="mp6">
+        <div class="step-heading">Servicios adicionales</div>
+        <div class="step-sub">Dinos qué quieres que gestionemos por ti. Puedes cambiar esto después.</div>
+
+        <div style="display:flex;flex-direction:column;gap:14px">
+
+          <div>
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);margin-bottom:8px;font-family:var(--font-mono)">Cambio de suministros</div>
+            <div class="opt-cards" id="grSum">
+              <div class="opt-card" onclick="selOpt(this,'grSum')">
+                <div class="opt-radio"></div>
+                <div><div class="opt-title">Sí, gestionadlo vosotros</div><div class="opt-desc">Nos encargamos del alta de luz, agua y gas a tu nombre.</div></div>
+              </div>
+              <div class="opt-card" onclick="selOpt(this,'grSum')">
+                <div class="opt-radio"></div>
+                <div><div class="opt-title">No, lo hago yo</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);margin-bottom:8px;font-family:var(--font-mono)">Seguro de hogar</div>
+            <div class="opt-cards" id="grShogar">
+              <div class="opt-card" onclick="selOpt(this,'grShogar')">
+                <div class="opt-radio"></div>
+                <div><div class="opt-title">Sí, ayudadme a contratar uno</div><div class="opt-desc">Te recomendamos póliza adecuada para el inmueble.</div></div>
+              </div>
+              <div class="opt-card" onclick="selOpt(this,'grShogar')">
+                <div class="opt-radio"></div>
+                <div><div class="opt-title">No, ya tengo o lo gestiono yo</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);margin-bottom:8px;font-family:var(--font-mono)">Seguro de impago</div>
+            <div class="opt-cards" id="grImpago">
+              <div class="opt-card" onclick="selOpt(this,'grImpago')">
+                <div class="opt-radio"></div>
+                <div><div class="opt-title">Sí, quiero estar cubierto</div><div class="opt-desc">Cobras aunque el inquilino no pague. Te lo gestionamos nosotros.</div></div>
+              </div>
+              <div class="opt-card" onclick="selOpt(this,'grImpago')">
+                <div class="opt-radio"></div>
+                <div><div class="opt-title">No, asumo el riesgo</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);margin-bottom:8px;font-family:var(--font-mono)">Búsqueda de inquilinos</div>
+            <div class="opt-cards" id="grInq">
+              <div class="opt-card" onclick="selOpt(this,'grInq')">
+                <div class="opt-radio"></div>
+                <div><div class="opt-title">Sí, buscad vosotros</div><div class="opt-desc">Selección con análisis de solvencia. Coste: una mensualidad a la agencia local.</div></div>
+              </div>
+              <div class="opt-card" onclick="selOpt(this,'grInq')">
+                <div class="opt-radio"></div>
+                <div><div class="opt-title">No, me encargo yo</div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-back" onclick="goStep(5)">← Volver</button>
+          <button class="btn-next" onclick="goStep(7)">Continuar →</button>
+        </div>
+        <div style="text-align:center;margin-top:8px"><button style="background:none;border:none;color:var(--gray2);font-size:12px;cursor:pointer;font-family:var(--font-body);text-decoration:underline" onclick="goStep(7)">Saltar este paso por ahora</button></div>
+      </div>
+
+      <!-- P7: Contrato + pago -->
+      <div class="m-panel" id="mp7">
+        <div class="step-heading">Contrato y pago</div>
+        <div class="step-sub">Elige cómo quieres pagar los honorarios, revisa el contrato y paga la señal.</div>
+
+        <div class="contrato-box">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
+            <div style="font-size:32px">&#128196;</div>
+            <div>
+              <div style="font-weight:700;font-size:14px;color:var(--dark);margin-bottom:2px">Contrato de honorarios</div>
+              <div style="font-size:12px;color:var(--gray2)">Generado con tus datos · Honorarios: <span id="honorariosLabel">4.840 €</span> (IVA incl.)</div>
+            </div>
+          </div>
+          <div style="background:var(--gray5);border-radius:var(--radius);padding:12px 16px;border:1px solid var(--gray3);display:flex;justify-content:space-between;align-items:center;gap:12px">
+            <div style="font-size:12px;color:var(--gray)">Lee el contrato completo antes de firmar. Se genera con tus datos del formulario.</div>
+            <button class="btn-preview" onclick="previewContrato()" style="white-space:nowrap;flex-shrink:0">Leer contrato →</button>
+          </div>
+        </div>
+
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--gray);font-weight:600;margin-bottom:10px">Plan de pago de honorarios</div>
+        <div class="opt-cards" id="grPlan" style="margin-bottom:18px">
+
+          <div class="opt-card selected" onclick="selOpt(this,'grPlan');updatePlan('A')">
+            <div class="opt-radio"></div>
+            <div style="width:100%">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px">
+                <div>
+                  <div style="font-size:10px;font-family:var(--font-mono);color:var(--red);text-transform:uppercase;letter-spacing:2px;margin-bottom:3px">Opción A</div>
+                  <div class="opt-title" style="margin-bottom:0">En arras</div>
+                </div>
+                <div style="font-family:var(--font-display);font-size:20px;color:var(--dark);white-space:nowrap" id="planATotal">4.840 €</div>
+              </div>
+              <div class="opt-desc" style="margin-bottom:12px">Paga la señal hoy. El resto de los honorarios se abona íntegramente al firmar el contrato de arras.</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                <div style="flex:1;background:var(--gray5);border-radius:6px;padding:10px;border:1px solid var(--gray3);min-width:110px">
+                  <div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">Hoy · señal</div>
+                  <div style="font-family:var(--font-display);font-size:22px;color:var(--red)">500 €</div>
+                </div>
+                <div style="color:var(--gray3);font-size:16px;padding:0 2px">+</div>
+                <div style="flex:1;background:var(--gray5);border-radius:6px;padding:10px;border:1px solid var(--gray3);min-width:110px">
+                  <div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">En arras · resto</div>
+                  <div style="font-family:var(--font-display);font-size:22px;color:var(--dark)" id="planAResto">4.340 €</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="opt-card" onclick="selOpt(this,'grPlan');updatePlan('B')">
+            <div class="opt-radio"></div>
+            <div style="width:100%">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px">
+                <div>
+                  <div style="font-size:10px;font-family:var(--font-mono);color:var(--green);text-transform:uppercase;letter-spacing:2px;margin-bottom:3px">Opción B</div>
+                  <div class="opt-title" style="margin-bottom:0">Flex <span style="font-size:11px;font-weight:400;color:var(--gray);font-family:var(--font-body)">— desde que el piso está alquilado</span></div>
+                </div>
+                <div style="font-family:var(--font-display);font-size:20px;color:var(--dark);white-space:nowrap" id="planBTotal">5.808 €</div>
+              </div>
+              <div class="opt-desc" style="margin-bottom:12px">4 tramos. Las 12 cuotas mensuales arrancan solo cuando el piso ya tiene inquilino y tú estás cobrando.</div>
+              <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;align-items:center">
+                <div style="flex:1;background:var(--gray5);border-radius:6px;padding:9px 8px;border:1px solid var(--gray3);min-width:80px;text-align:center">
+                  <div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Hoy</div>
+                  <div style="font-family:var(--font-display);font-size:20px;color:var(--red)">500€</div>
+                  <div style="font-size:9px;color:var(--gray2)">señal</div>
+                </div>
+                <div style="color:var(--gray3);font-size:13px">+</div>
+                <div style="flex:1;background:var(--gray5);border-radius:6px;padding:9px 8px;border:1px solid var(--gray3);min-width:80px;text-align:center">
+                  <div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Arras</div>
+                  <div style="font-family:var(--font-display);font-size:20px;color:var(--dark)">500€</div>
+                </div>
+                <div style="color:var(--gray3);font-size:13px">+</div>
+                <div style="flex:1;background:var(--gray5);border-radius:6px;padding:9px 8px;border:1px solid var(--gray3);min-width:80px;text-align:center">
+                  <div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Notaría</div>
+                  <div style="font-family:var(--font-display);font-size:20px;color:var(--dark)">500€</div>
+                </div>
+                <div style="color:var(--gray3);font-size:13px">+</div>
+                <div style="flex:1;background:#F0FDF4;border-radius:6px;padding:9px 8px;border:1px solid #BBF7D0;min-width:80px;text-align:center">
+                  <div style="font-size:9px;color:#166534;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">×12 cuotas</div>
+                  <div style="font-family:var(--font-display);font-size:20px;color:var(--green)" id="planBCuota">324€</div>
+                  <div style="font-size:9px;color:#166534">desde alquiler</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+                <div style="flex:1;background:#FEF9C3;border-radius:6px;padding:8px 12px;border:1px solid #FDE047;display:flex;justify-content:space-between;align-items:center">
+                  <div style="font-size:11px;color:#854D0E;font-weight:600">Suplemento +20%</div>
+                  <div style="font-family:var(--font-display);font-size:18px;color:#B45309" id="planBSup">+968 €</div>
+                </div>
+                <div style="flex:1;background:var(--gray5);border-radius:6px;padding:8px 12px;border:1px solid var(--gray3);display:flex;justify-content:space-between;align-items:center">
+                  <div style="font-size:11px;color:var(--gray);font-weight:600">Total</div>
+                  <div style="font-family:var(--font-display);font-size:18px;color:var(--dark)" id="planBTotalFlex">5.808 €</div>
+                </div>
+              </div>
+              <div style="font-size:11px;color:#DC2626;font-weight:600;background:#FEF2F2;padding:8px 12px;border-radius:6px;border:1px solid #FECACA">⚠️ No cancelable antes de completar las 12 cuotas. Pago íntegro obligatorio.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);margin-bottom:8px;font-family:var(--font-mono)">🔒 Señal de reserva (500 € hoy)</div>
+        <div style="background:var(--gray5);border-radius:var(--radius);padding:14px 16px;border:1px solid var(--gray3);margin-bottom:20px;display:flex;align-items:center;gap:12px">
+          <div style="font-size:20px">💳</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--dark)">Tarjeta bancaria (Visa / Mastercard / Amex)</div>
+            <div style="font-size:12px;color:var(--gray);margin-top:2px">El pago de la señal es siempre por tarjeta. Cargo inmediato y seguro vía Stripe.</div>
+          </div>
+          <div style="margin-left:auto;background:var(--green);color:white;padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;white-space:nowrap">Requerido</div>
+        </div>
+
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);margin-bottom:8px;font-family:var(--font-mono)">Pagos posteriores (arras, notaria y cuotas)</div>
+        <div class="opt-cards" id="grPago" style="margin-bottom:20px">
+          <div class="opt-card selected" onclick="selOpt(this,'grPago');toggleIBAN(false)">
+            <div class="opt-radio"></div>
+            <div>
+              <div class="opt-title">💳 Tarjeta bancaria</div>
+              <div class="opt-desc">Visa, Mastercard, Amex. Cargo automático en cada vencimiento.</div>
+            </div>
+          </div>
+          <div class="opt-card" onclick="selOpt(this,'grPago');toggleIBAN(true)">
+            <div class="opt-radio"></div>
+            <div style="width:100%">
+              <div class="opt-title">🏦 Domiciliación bancaria (SEPA)</div>
+              <div class="opt-desc">El cargo se procesa en 2–3 días hábiles por vencimiento.</div>
+              <div class="cond-fields hidden" id="condIBAN" style="margin-top:10px">
+                <div class="form-group" style="margin-bottom:0">
+                  <label class="form-label">IBAN</label>
+                  <input class="form-input" type="text" placeholder="ES00 0000 0000 0000 0000 0000" style="font-family:var(--font-mono)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accept-row"><input type="checkbox" id="aceptaContrato"><label for="aceptaContrato">He leído y acepto el contrato de honorarios de intermediación inmobiliaria de NOGA HOUSE S.L.</label></div>
+
+        <div class="pago-summary">
+          <div><div class="pago-label">Señal de reserva (hoy)</div><div style="font-size:11px;color:var(--gray2);margin-top:2px">Se descuenta de los honorarios totales</div></div>
+          <div class="pago-val">500 €</div>
+        </div>
+        <div class="modal-actions"><button class="btn-back" onclick="goStep(6)">← Volver</button><button class="btn-next dark" onclick="pay()">🔒 Pagar 500 € ahora</button></div>
+        <p class="modal-note">Pago 100% seguro vía Stripe · La señal se descuenta de los honorarios totales</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ PERFIL INVERSOR ═══════════════════ -->
+<div class="perfil-overlay" id="perfilOverlay" onclick="closePerfilOut(event)">
+  <div class="perfil-panel">
+    <div class="perfil-header">
+      <div class="perfil-header-top">
+        <div><div style="font-size:11px;color:rgba(255,255,255,.55);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;font-family:var(--font-mono)">Perfil inversor</div><div class="perfil-nombre">DAVID NOGA</div><div class="perfil-email"><a href="/cdn-cgi/l/email-protection" ><span class="__cf_email__" data-cfemail="3850575459785b4a5d59565c574d564b4d5d545c57165b5755">[email&#160;protected]</span></a></div></div>
+        <button class="perfil-close" onclick="closePerfil()">×</button>
+      </div>
+      <div class="perfil-stats"><div class="perfil-stat"><div class="perfil-stat-val">2</div><div class="perfil-stat-key">Pisos</div></div><div class="perfil-stat"><div class="perfil-stat-val">730€</div><div class="perfil-stat-key">/mes</div></div><div class="perfil-stat"><div class="perfil-stat-val">9,3%</div><div class="perfil-stat-key">Rent. media</div></div></div>
+    </div>
+    <div class="perfil-body">
+      <div class="perfil-section-title">MIS INVERSIONES</div>
+      <div class="inv-card">
+        <div class="inv-card-header"><div><div class="inv-card-title">Asturias · Riaño</div><div class="inv-card-loc">Piso 2 hab. · 42.000 €</div></div><div class="inv-rentabilidad">8,4%</div></div>
+        <div class="tracker"><div class="tracker-steps">
+          <div class="tracker-step"><div class="tracker-dot done">✓</div><div class="tracker-name">Reserva realizada</div></div>
+          <div class="tracker-step"><div class="tracker-dot done">✓</div><div class="tracker-name">Arras firmadas</div></div>
+          <div class="tracker-step"><div class="tracker-dot done">✓</div><div class="tracker-name">Firma ante notario</div></div>
+          <div class="tracker-step"><div class="tracker-dot done">✓</div><div class="tracker-name">Piso alquilado</div></div>
+          <div class="tracker-step"><div class="tracker-dot done">✓</div><div class="tracker-name">Cobrando 350€/mes ✦</div></div>
+        </div></div>
+      </div>
+      <div class="inv-card">
+        <div class="inv-card-header"><div><div class="inv-card-title">León · Ponferrada</div><div class="inv-card-loc">Piso 2 hab. · 38.000 €</div></div><div class="inv-rentabilidad" style="color:var(--gray2)">En proceso</div></div>
+        <div class="tracker"><div class="tracker-steps">
+          <div class="tracker-step"><div class="tracker-dot done">✓</div><div class="tracker-name">Reserva realizada</div></div>
+          <div class="tracker-step"><div class="tracker-dot done">✓</div><div class="tracker-name">Arras firmadas</div></div>
+          <div class="tracker-step"><div class="tracker-dot active">3</div><div class="tracker-name">Pendiente: firma ante notario</div></div>
+          <div class="tracker-step"><div class="tracker-dot">4</div><div class="tracker-name muted">Alquiler del piso</div></div>
+          <div class="tracker-step"><div class="tracker-dot">5</div><div class="tracker-name muted">Cobro mensual</div></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CONTRATO PREVIEW MODAL -->
+<div id="contratoOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);z-index:4000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s">
+  <div style="background:var(--white);border-radius:12px;max-width:720px;width:100%;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.25)">
+    <!-- Header -->
+    <div style="background:var(--dark);padding:20px 28px;border-radius:12px 12px 0 0;display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
+      <div>
+        <div style="font-family:var(--font-display);font-size:20px;letter-spacing:1px;color:white">CONTRATO DE HONORARIOS</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:2px">HOUSE NOGA S.L. · Revisa antes de firmar</div>
+      </div>
+      <button onclick="closeContrato()" style="background:rgba(255,255,255,.12);border:none;color:white;width:30px;height:30px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">&#215;</button>
+    </div>
+    <!-- Progress indicator -->
+    <div style="background:var(--gray5);padding:10px 28px;border-bottom:1px solid var(--gray3);display:flex;align-items:center;gap:8px;flex-shrink:0">
+      <div id="contratoScrollProgress" style="height:3px;background:var(--gray3);flex:1;border-radius:2px;overflow:hidden"><div id="contratoScrollBar" style="height:100%;background:var(--red);width:0%;transition:width .1s"></div></div>
+      <div id="contratoScrollLabel" style="font-size:11px;color:var(--gray2);white-space:nowrap;font-family:var(--font-mono)">0% leído</div>
+    </div>
+    <!-- Contract body -->
+    <div id="contratoBody" style="overflow-y:auto;padding:36px 40px;flex:1;line-height:1.8;font-size:14px;color:var(--dark)" onscroll="updateContratoProgress(this)">
+      <!-- Generated by JS -->
+    </div>
+    <!-- Footer actions -->
+    <div style="padding:20px 28px;border-top:1px solid var(--gray3);background:var(--white);border-radius:0 0 12px 12px;flex-shrink:0">
+      <div id="contratoReadWarning" style="font-size:12px;color:var(--red);margin-bottom:12px;display:flex;align-items:center;gap:6px">
+        <span>&#9888;</span> Desplázate hasta el final para poder aceptar el contrato.
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <input type="checkbox" id="contratoCheckbox" disabled style="width:16px;height:16px;accent-color:var(--red);cursor:pointer;flex-shrink:0">
+        <label for="contratoCheckbox" style="font-size:13px;color:var(--dark);cursor:pointer;line-height:1.4">He leío y acepto el contrato de honorarios de intermediación inmobiliaria de HOUSE NOGA S.L.</label>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button onclick="closeContrato()" style="flex:1;padding:12px;border:1.5px solid var(--gray3);border-radius:var(--radius);background:none;color:var(--gray);font-family:var(--font-body);font-size:13px;font-weight:600;cursor:pointer">Cerrar</button>
+        <button id="contratoAceptarBtn" onclick="aceptarContrato()" disabled style="flex:2;padding:12px;background:var(--gray3);color:var(--gray2);border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:not-allowed;transition:all .3s">Firmar y volver al pago</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LEAD CAPTURE POPUP -->
+<div class="lead-popup-overlay" id="leadPopup">
+  <div class="lead-popup">
+    <div class="lead-popup-top">
+      <button class="lead-popup-close" onclick="closeLeadPopup()">&#215;</button>
+      <div style="font-size:32px;margin-bottom:12px">&#128242;</div>
+      <div style="font-family:var(--font-display);font-size:28px;letter-spacing:1px;color:white;margin-bottom:6px">ACCEDE ANTES<br>QUE NADIE</div>
+      <div style="font-size:14px;color:rgba(255,255,255,.75);line-height:1.5">Las mejores operaciones se reservan en horas. Recibe los activos antes que nadie.</div>
+    </div>
+    <div class="lead-popup-body" id="leadPopupBody">
+      <div style="display:flex;gap:10px;margin-bottom:14px">
+        <div style="flex:1;background:var(--gray5);border-radius:8px;padding:12px;border:1px solid var(--gray3);text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:var(--red)">72</div><div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px">Operaciones</div></div>
+        <div style="flex:1;background:var(--gray5);border-radius:8px;padding:12px;border:1px solid var(--gray3);text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:var(--red)">+7%</div><div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px">Rent. media</div></div>
+        <div style="flex:1;background:var(--gray5);border-radius:8px;padding:12px;border:1px solid var(--gray3);text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:var(--green)">100%</div><div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px">Alquilados</div></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <input id="leadEmail" class="form-input" type="email" placeholder="tu@email.com" style="flex:1">
+        <button id="leadSubmitBtn" style="background:var(--red);color:white;border:none;border-radius:var(--radius);padding:11px 20px;font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">Unirme &#8594;</button>
+      </div>
+      <div style="font-size:11px;color:var(--gray2);text-align:center;line-height:1.5">Sin spam. Solo oportunidades reales.</div>
+      <div style="text-align:center;margin-top:12px"><button onclick="closeLeadPopup()" style="background:none;border:none;color:var(--gray2);font-size:12px;cursor:pointer;font-family:var(--font-body);text-decoration:underline">Ahora no, gracias</button></div>
+    </div>
+  </div>
+</div>
+<!-- COOKIE BANNER -->
+<div id="cookieBanner" style="position:fixed;bottom:0;left:0;right:0;z-index:1999;background:var(--dark);border-top:1px solid rgba(255,255,255,.1);padding:16px 40px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;transform:translateY(100%);transition:transform .4s ease">
+  <div style="flex:1;min-width:240px;font-size:13px;color:rgba(255,255,255,.85);line-height:1.5">&#127850; Usamos cookies propias y de terceros. <a href="#" onclick="showPrivacidad();return false;" style="color:var(--red);text-decoration:none;font-weight:600">Pol&iacute;tica de privacidad</a></div>
+  <div style="display:flex;gap:10px;flex-shrink:0">
+    <button id="cookieRejectBtn" style="padding:9px 18px;border:1.5px solid rgba(255,255,255,.2);border-radius:var(--radius);background:none;color:rgba(255,255,255,.7);font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer">Solo necesarias</button>
+    <button id="cookieAcceptBtn" style="padding:9px 18px;background:var(--red);border:none;border-radius:var(--radius);color:white;font-family:var(--font-body);font-size:12px;font-weight:700;cursor:pointer">Aceptar todas</button>
+  </div>
+</div>
+<!-- PRIVACIDAD MODAL -->
+<div id="privacidadOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);z-index:3000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s">
+  <div style="background:var(--white);border-radius:12px;max-width:660px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,.2)">
+    <div style="background:var(--dark);padding:22px 28px;border-radius:12px 12px 0 0;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0">
+      <div style="font-family:var(--font-display);font-size:18px;letter-spacing:1px;color:white">POL&Iacute;TICA DE PRIVACIDAD</div>
+      <button onclick="closePrivacidad()" style="background:rgba(255,255,255,.15);border:none;color:white;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer">&#215;</button>
+    </div>
+    <div style="padding:28px;font-size:14px;color:var(--gray);line-height:1.8">
+      <p><strong style="color:var(--dark)">Responsable:</strong> NOGA HOUSE S.L. &middot; <a href="/cdn-cgi/l/email-protection" ><span class="__cf_email__" data-cfemail="3f5750535e7f5c4d5a5e515b504a514c4a5a535b50115c5052">[email&#160;protected]</span></a> &middot; Barcelona</p>
+      <h4 style="font-family:var(--font-display);font-size:17px;color:var(--dark);margin:18px 0 8px">DATOS QUE RECOGEMOS</h4>
+      <p>Nombre, email, tel&eacute;fono y DNI/NIE para gestionar tu reserva y prestarte el servicio de intermediaci&oacute;n inmobiliaria.</p>
+      <h4 style="font-family:var(--font-display);font-size:17px;color:var(--dark);margin:18px 0 8px">FINALIDAD</h4>
+      <p>Gesti&oacute;n contractual, env&iacute;o de informaci&oacute;n sobre activos (con tu consentimiento) y cumplimiento de obligaciones legales.</p>
+      <h4 style="font-family:var(--font-display);font-size:17px;color:var(--dark);margin:18px 0 8px">COOKIES</h4>
+      <p>Cookies propias de sesi&oacute;n (necesarias) y anal&iacute;ticas de terceros. Puedes gestionar tus preferencias en el banner.</p>
+      <h4 style="font-family:var(--font-display);font-size:17px;color:var(--dark);margin:18px 0 8px">TUS DERECHOS</h4>
+      <p>Acceso, rectificaci&oacute;n, supresi&oacute;n y oposici&oacute;n en <a href="/cdn-cgi/l/email-protection" ><span class="__cf_email__" data-cfemail="076f686b66476475626669636872697472626b63682964686a">[email&#160;protected]</span></a>. Puedes reclamar ante la AEPD (www.aepd.es).</p>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--gray3);font-size:12px;color:var(--gray2)">&Uacute;ltima actualizaci&oacute;n: Enero 2025</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function goBack() {
+  // If on activo or activos view, go back to home
+  if (document.getElementById('view-activo').classList.contains('active')) {
+    showView('home', true); scrollToSection('activos');
+  } else {
+    showView('home', true); scrollToSection('activos');
+  }
+}
+
+function filterAll(btn, filter) {
+  document.querySelectorAll('.filter-pill').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var cards = document.querySelectorAll('#allActivosGrid .activo-card');
+  var visible = 0;
+  cards.forEach(function(card) {
+    var show = filter === 'todos' ||
+               card.dataset.zona === filter ||
+               card.dataset.estado === filter;
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  var countEl = document.getElementById('activosCount');
+  if (countEl) countEl.textContent = visible + ' activo' + (visible !== 1 ? 's' : '');
+  var emptyEl = document.getElementById('activosEmpty');
+  if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+}
+
+function scrollToTop() { window.scrollTo(0, 0); }
+function scrollToSection(id) {
+  setTimeout(function() {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 60);
+}
+function showView(id, noScroll) {
+  document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
+  document.getElementById('view-' + id).classList.add('active');
+  var isActivo = id === 'activo';
+  var isActivos = id === 'activos';
+  var onHome = !isActivo && !isActivos;
+  document.getElementById('navHome').style.display = onHome ? 'flex' : 'none';
+  document.getElementById('navBack').style.display = (isActivo || isActivos) ? 'flex' : 'none';
+  document.getElementById('navCtaHome').style.display = onHome ? 'block' : 'none';
+  document.getElementById('navCtaActivo').style.display = isActivo ? 'block' : 'none';
+  if (!noScroll) window.scrollTo(0, 0);
+}
+window.addEventListener('scroll', function() {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40);
+});
+function toggleFaq(btn) {
+  var ans = btn.nextElementSibling, was = btn.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(function(b) {
+    b.classList.remove('open');
+    b.querySelector('.faq-icon').textContent = '+';
+    b.nextElementSibling.classList.remove('open');
+  });
+  if (!was) { btn.classList.add('open'); btn.querySelector('.faq-icon').textContent = 'x'; ans.classList.add('open'); }
+}
+var C = {precio:38000,honorarios:4840,reforma:0,notaria:1100,itp:0.08,alqAnual:4980,gastos:386};
+var _ITP = C.precio * C.itp;
+var _gNP = C.honorarios + C.reforma + C.notaria + _ITP;
+function calcUpdate(pct) {
+  pct = parseInt(pct);
+  document.getElementById('finPct').textContent = pct + '%';
+  var hip = C.precio * pct / 100, ent = C.precio - hip, inv = ent + _gNP;
+  var hr = document.getElementById('hipRow');
+  if (pct > 0) { hr.style.display = 'flex'; document.getElementById('hipVal').textContent = fmt(hip) + ' €'; }
+  else { hr.style.display = 'none'; }
+  document.getElementById('invTotal').textContent = fmt(inv) + ' €';
+  document.getElementById('rBruta').textContent = (C.alqAnual / C.precio * 100).toFixed(1) + '%';
+  document.getElementById('rNeta').textContent = ((C.alqAnual - C.gastos) / C.precio * 100).toFixed(1) + '%';
+  document.getElementById('roce').textContent = ((C.alqAnual - C.gastos) / inv * 100).toFixed(1) + '%';
+  document.getElementById('cf').textContent = '+' + Math.round((C.alqAnual - C.gastos) / 12) + ' €';
+}
+function fmt(n) { return Math.round(n).toLocaleString('es-ES'); }
+calcUpdate(0);
+var STEPS = 7;
+function openModal(provincia, hon) {
+  var p = provincia || 'la provincia';
+  var h = Math.round((hon || 4000) * 1.21);
+  document.getElementById('notariaProvincia').textContent = p;
+  document.getElementById('honorariosLabel').textContent = fmt(h) + ' €';
+  document.getElementById('planATotal').textContent = fmt(h) + ' €';
+  document.getElementById('planAResto').textContent = fmt(h - 500) + ' €';
+  var tB = Math.round(h * 1.2);
+  // Plan B Flex: 500 today + 500 arras + 500 notaria + 12 cuotas desde alquiler (+20%)
+  var bRemaining = Math.round((h - 1500) * 1.20); // remaining after 3x500, with surcharge
+  var bCuota = Math.round(bRemaining / 12);
+  var bTotal = 1500 + bRemaining;
+  document.getElementById('planBTotal').textContent = fmt(bTotal) + ' €';
+  document.getElementById('planBCuota').textContent = fmt(bCuota) + ' €';
+  document.getElementById('planBSup').textContent = '+' + fmt(bRemaining - (h - 1500)) + ' €';
+  if (document.getElementById('planBTotalFlex')) document.getElementById('planBTotalFlex').textContent = fmt(bTotal) + ' €';
+  var cH = document.getElementById('calcHonorarios');
+  if (cH) cH.textContent = fmt(h) + ' €';
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  goStep(1);
+}
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+function closeModalOutside(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
+function goStep(n) {
+  for (var i = 1; i <= STEPS; i++) document.getElementById('mp' + i).classList.toggle('active', i === n);
+  document.getElementById('progressFill').style.width = (n / STEPS * 100) + '%';
+}
+function selOpt(el, grp) {
+  el.closest('#' + grp).querySelectorAll('.opt-card').forEach(function(c) { c.classList.remove('selected'); });
+  el.classList.add('selected');
+}
+function showCond(id, show) { document.getElementById(id).classList.toggle('hidden', !show); }
+function toggleIBAN(show) { document.getElementById('condIBAN').classList.toggle('hidden', !show); }
+function updatePlan(plan) {}
+
+// ── CONTRATO PREVIEW ──
+var _contratoFullyRead = false;
+
+function previewContrato() {
+  var nombre = (document.querySelector('input[placeholder="Tu nombre"]') || {}).value || '[Nombre]';
+  var apellidos = (document.querySelector('input[placeholder="Tus apellidos"]') || {}).value || '[Apellidos]';
+  var dniEl = document.querySelector('.upload-text span');
+  var dni = dniEl ? dniEl.textContent : '';
+  var propNombre = (document.getElementById('modalPropName') || {}).textContent || '[Inmueble]';
+  var honLabel = (document.getElementById('honorariosLabel') || {}).textContent || '4.840';
+  var honConIVA = parseInt(honLabel.replace(/[^0-9]/g,'')) || 4840;
+  var honSinIVA = Math.round(honConIVA / 1.21);
+  var iva = honConIVA - honSinIVA;
+
+  // Renta garantizada — read from sidebar if available
+  var rentaEl = document.querySelector('.kpi-row-val.green');
+  var rentaGarantizada = rentaEl ? rentaEl.textContent.trim() : '415 \u20ac/mes';
+
+  // Payment plan
+  var planEl = document.querySelector('#grPlan .opt-card.selected .opt-title');
+  var planText = planEl ? planEl.textContent.trim() : '';
+  var isFlexPlan = planText.toLowerCase().indexOf('flex') >= 0 || planText.toLowerCase().indexOf('b') >= 0;
+
+  // Payment method
+  var pagoEl = document.querySelector('#grPago .opt-card.selected .opt-title');
+  var metodoPago = pagoEl ? pagoEl.textContent.trim() : 'Tarjeta bancaria';
+  if (metodoPago.indexOf('Tarjeta') >= 0 || metodoPago.indexOf('tarjeta') >= 0) {
+    metodoPago = 'Tarjeta bancaria (Visa / Mastercard / American Express)';
+  } else {
+    var iban = (document.querySelector('#condIBAN input') || {}).value || '[IBAN pendiente]';
+    metodoPago = 'Domiciliaci\u00f3n bancaria SEPA \u00b7 IBAN: ' + iban;
+  }
+
+  // Payment schedule
+  var scheduleHtml = '';
+  if (isFlexPlan) {
+    var bCuotaEl = document.getElementById('planBCuota');
+    var bCuota = bCuotaEl ? bCuotaEl.textContent : '334 \u20ac';
+    var bTotalEl = document.getElementById('planBTotalFlex');
+    var bTotal = bTotalEl ? bTotalEl.textContent : '';
+    scheduleHtml =
+      '<li>500 \u20ac en concepto de se\u00f1al de reserva, en el momento de la firma del presente contrato.</li>' +
+      '<li>500 \u20ac en el momento de la firma del contrato de arras.</li>' +
+      '<li>500 \u20ac en el momento de la firma de escritura ante notario.</li>' +
+      '<li>12 cuotas mensuales de ' + bCuota + ' cada una, desde el mes siguiente a la formalizaci\u00f3n del contrato de arrendamiento del inmueble, con un suplemento del 20% por aplazamiento' + (bTotal ? '. Importe total aplazado: ' + bTotal : '') + '. El Cliente se compromete al pago \u00edntegro de las 12 cuotas, no siendo cancelable el aplazamiento antes de su finalizaci\u00f3n.</li>';
+  } else {
+    var restoEl = document.getElementById('planAResto');
+    var resto = restoEl ? restoEl.textContent : '[importe restante]';
+    scheduleHtml =
+      '<li>500 \u20ac en concepto de se\u00f1al de reserva, en el momento de la firma del presente contrato.</li>' +
+      '<li>' + resto + ' en el momento de la firma del contrato de arras.</li>';
+  }
+
+  var today = new Date();
+  var meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var fecha = today.getDate() + ' de ' + meses[today.getMonth()] + ' de ' + today.getFullYear();
+
+  var h3style = 'font-family:var(--font-display);font-size:16px;letter-spacing:1px;margin:28px 0 10px;color:var(--dark);border-bottom:2px solid var(--red);padding-bottom:8px;display:block';
+
+  var html =
+    '<div style="max-width:620px;margin:0 auto;font-family:Georgia,serif;font-size:14px;line-height:1.85;color:#1a1a1a">' +
+    '<div style="text-align:center;margin-bottom:40px;padding-bottom:28px;border-bottom:2px solid var(--dark)">' +
+    '<div style="font-family:var(--font-display);font-size:26px;letter-spacing:3px;color:var(--dark);margin-bottom:6px">RECONOCIMIENTO DE HONORARIOS</div>' +
+    '<div style="font-size:11px;color:var(--gray2);font-family:var(--font-mono);letter-spacing:1.5px;text-transform:uppercase">HOUSE NOGA S.L. \u00b7 ' + fecha + '</div>' +
+    '</div>' +
+    '<p style="margin-bottom:12px">De una parte, <strong>HOUSE NOGA S.L.</strong>, con CIF B75385070, constituida en Barcelona, en adelante \u201cla Sociedad\u201d,</p>' +
+    '<p style="margin-bottom:20px">y de otra parte, <strong>' + nombre + ' ' + apellidos + '</strong>' + (dni ? ', con DNI/NIE <strong>' + dni + '</strong>' : '') + ', en adelante \u201cel Cliente\u201d, reconocen lo siguiente:</p>' +
+
+    '<span style="' + h3style + '">PRIMERO: OBJETO</span>' +
+    '<p style="margin-bottom:12px">La Sociedad ha prestado al Cliente los servicios de intermediaci\u00f3n inmobiliaria consistentes en la b\u00fasqueda, asesoramiento y gesti\u00f3n de la compra de un inmueble sito en <strong>' + propNombre + '</strong>.</p>' +
+    '<p style="margin-bottom:20px">Los servicios se limitan a la intermediaci\u00f3n en la operaci\u00f3n de compraventa, coordinaci\u00f3n entre las partes y apoyo en el proceso de adquisici\u00f3n, no incluyendo evaluaci\u00f3n de aspectos personales o subjetivos sobre el entorno, zona o idoneidad del inmueble.</p>' +
+
+    '<span style="' + h3style + '">SEGUNDO: HONORARIOS</span>' +
+    '<p style="margin-bottom:14px">Como contraprestaci\u00f3n por los servicios prestados, los honorarios ascienden a <strong>' + fmt(honSinIVA) + ' \u20ac</strong>, m\u00e1s el IVA correspondiente:</p>' +
+    '<table style="width:100%;border-collapse:collapse;margin:16px 0 20px;font-size:13px;font-family:var(--font-body)">' +
+    '<tr style="background:#f9fafb"><td style="padding:10px 14px;border:1px solid #e5e7eb">Honorarios (base imponible)</td><td style="padding:10px 14px;border:1px solid #e5e7eb;text-align:right;font-weight:700">' + fmt(honSinIVA) + ' \u20ac</td></tr>' +
+    '<tr><td style="padding:10px 14px;border:1px solid #e5e7eb">IVA (21%)</td><td style="padding:10px 14px;border:1px solid #e5e7eb;text-align:right;font-weight:700">' + fmt(iva) + ' \u20ac</td></tr>' +
+    '<tr style="background:#111318;color:white"><td style="padding:12px 14px;border:1px solid #111318;font-weight:700">IMPORTE TOTAL A PAGAR</td><td style="padding:12px 14px;border:1px solid #111318;text-align:right;font-weight:700;font-size:16px">' + fmt(honConIVA) + ' \u20ac</td></tr>' +
+    '</table>' +
+
+    '<span style="' + h3style + '">TERCERO: FORMA DE PAGO</span>' +
+    '<p style="margin-bottom:10px">El Cliente se compromete a abonar los honorarios de la siguiente forma:</p>' +
+    '<ul style="margin:12px 0 12px 18px;display:flex;flex-direction:column;gap:10px">' + scheduleHtml + '</ul>' +
+    '<p style="margin-bottom:20px"><strong>Forma de pago:</strong> ' + metodoPago + '</p>' +
+
+    '<span style="' + h3style + '">CUARTO: RECONOCIMIENTO DE LA DEUDA</span>' +
+    '<p style="margin-bottom:12px">El Cliente reconoce y acepta que adeuda a la Sociedad los honorarios indicados, comprometi\u00e9ndose a su pago conforme a lo establecido.</p>' +
+    '<p style="margin-bottom:20px">El Cliente reconoce que su decisi\u00f3n de compra se adopta bajo su propio criterio y responsabilidad, exonerando a la Sociedad de reclamaciones derivadas de valoraciones subjetivas sobre el entorno, zona, convivencia vecinal, ruidos u otras circunstancias que no constituyan carga o defecto legal del inmueble. La Sociedad responde exclusivamente de la correcta intermediaci\u00f3n y de la transmisi\u00f3n del inmueble libre de cargas y deudas.</p>' +
+
+    '<span style="' + h3style + '">QUINTO: DEVOLUCI\u00d3N EN CASO DE NO FORMALIZACI\u00d3N</span>' +
+    '<p style="margin-bottom:12px">Si por motivo ajeno a la voluntad del Cliente no puede formalizarse el contrato de arras, la Sociedad devolver\u00e1 la totalidad del importe entregado en concepto de se\u00f1al en un plazo m\u00e1ximo de 7 d\u00edas h\u00e1biles. Esta devoluci\u00f3n no ser\u00e1 aplicable en caso de desistimiento voluntario del Cliente.</p>' +
+    '<p style="margin-bottom:20px">En caso de cancelaci\u00f3n unilateral por el vendedor tras la firma de arras: si el Cliente recibe una compensaci\u00f3n del vendedor igual o superior al 50% de los honorarios, la Sociedad devolver\u00e1 el 50% de los honorarios abonados. Si la compensaci\u00f3n recibida es inferior, la Sociedad devolver\u00e1 la diferencia necesaria para que la suma iguale el total de honorarios abonados. La devoluci\u00f3n se realizar\u00e1 en un plazo m\u00e1ximo de 7 d\u00edas h\u00e1biles.</p>' +
+
+    '<span style="' + h3style + '">SEXTO: GARANT\u00cdA DE RENTA</span>' +
+    '<p style="margin-bottom:12px">La Sociedad garantiza que el inmueble adquirir\u00e1 una renta mensual de <strong>' + rentaGarantizada + '</strong> durante el primer a\u00f1o de arrendamiento.</p>' +
+    '<p style="margin-bottom:12px"><strong>Alcance:</strong> La garant\u00eda consiste \u00fanicamente en compensar la diferencia entre la renta garantizada y la renta efectivamente pactada, durante un m\u00e1ximo de 12 mensualidades. No cubre meses sin inquilino, impagos del arrendatario ni ning\u00fan otro concepto.</p>' +
+    '<p style="margin-bottom:12px"><strong>Publicaci\u00f3n:</strong> El inmueble deber\u00e1 publicarse al precio garantizado durante un m\u00ednimo de 30 d\u00edas naturales. Transcurrido dicho plazo, podr\u00e1 ajustarse el precio conforme a mercado.</p>' +
+    '<p style="margin-bottom:12px"><strong>Filtro de inquilinos:</strong> El \u00fanico criterio objetivo de idoneidad del inquilino ser\u00e1 la aprobaci\u00f3n del seguro de impago de rentas. Si el Cliente rechaza a un candidato aprobado por dicho seguro, la garant\u00eda quedar\u00e1 autom\u00e1ticamente sin efecto.</p>' +
+    '<p style="margin-bottom:20px"><strong>Condiciones:</strong> Para que la garant\u00eda sea aplicable, el Cliente deber\u00e1: (a) realizar la puesta a punto del inmueble conforme a las indicaciones de la Sociedad, y (b) gestionar el alquiler exclusivamente a trav\u00e9s de los servicios ofrecidos por la Sociedad.</p>' +
+
+    '<span style="' + h3style + '">S\u00c9PTIMO: ACEPTACI\u00d3N Y FIRMA</span>' +
+    '<p style="margin-bottom:32px">Ambas partes, habiendo le\u00eddo el presente documento, lo aceptan en se\u00f1al de conformidad. La firma digital del Cliente queda registrada mediante el proceso de aceptaci\u00f3n electr\u00f3nica en la plataforma de HOUSE NOGA S.L., con fecha ' + fecha + '.</p>' +
+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;padding-top:24px;border-top:1px solid #e5e7eb;font-family:var(--font-body)">' +
+    '<div><div style="font-size:11px;color:#9ca3af;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Por parte de la Sociedad</div>' +
+    '<div style="font-weight:700;font-size:14px">HOUSE NOGA S.L.</div><div style="font-size:12px;color:#6b7280;margin-top:4px">CIF B75385070 \u00b7 Barcelona</div></div>' +
+    '<div><div style="font-size:11px;color:#9ca3af;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Por parte del Cliente</div>' +
+    '<div style="font-weight:700;font-size:14px">' + nombre + ' ' + apellidos + '</div>' +
+    '<div style="font-size:12px;color:#6b7280;margin-top:4px">Firma digital \u00b7 ' + fecha + '</div></div>' +
+    '</div>' +
+    '</div>';
+
+  document.getElementById('contratoBody').innerHTML = html;
+  _contratoFullyRead = false;
+  document.getElementById('contratoCheckbox').disabled = true;
+  document.getElementById('contratoCheckbox').checked = false;
+  var btn = document.getElementById('contratoAceptarBtn');
+  btn.disabled = true; btn.style.background = 'var(--gray3)'; btn.style.color = 'var(--gray2)'; btn.style.cursor = 'not-allowed';
+  document.getElementById('contratoReadWarning').style.display = 'flex';
+  document.getElementById('contratoScrollBar').style.width = '0%';
+  document.getElementById('contratoScrollLabel').textContent = '0% le\u00eddo';
+  var o = document.getElementById('contratoOverlay');
+  o.style.opacity = '1'; o.style.pointerEvents = 'all';
+  // Reset scroll
+  setTimeout(function() { document.getElementById('contratoBody').scrollTop = 0; }, 50);
+}
+
+function closeContrato() {
+  var o = document.getElementById('contratoOverlay');
+  o.style.opacity = '0'; o.style.pointerEvents = 'none';
+}
+
+function updateContratoProgress(el) {
+  var scrolled = el.scrollTop;
+  var total = el.scrollHeight - el.clientHeight;
+  var pct = total > 0 ? Math.round((scrolled / total) * 100) : 100;
+  document.getElementById('contratoScrollBar').style.width = pct + '%';
+  document.getElementById('contratoScrollLabel').textContent = pct + '% le\u00eddo';
+  if (pct >= 90 && !_contratoFullyRead) {
+    _contratoFullyRead = true;
+    document.getElementById('contratoCheckbox').disabled = false;
+    document.getElementById('contratoReadWarning').style.display = 'none';
+  }
+}
+
+function aceptarContrato() {
+  if (!document.getElementById('contratoCheckbox').checked) {
+    document.getElementById('contratoCheckbox').focus();
+    return;
+  }
+  var mainCb = document.getElementById('aceptaContrato');
+  if (mainCb) mainCb.checked = true;
+  // Enable pay button visual feedback
+  var acceptRow = document.querySelector('.accept-row label');
+  if (acceptRow) acceptRow.style.color = 'var(--green)';
+  closeContrato();
+}
+
+function dniUp(inp) {
+  if (inp.files[0]) document.querySelector('.upload-text').innerHTML = '✅ <span>' + inp.files[0].name + '</span>';
+}
+function pay() {
+  if (!document.getElementById('aceptaContrato').checked) { alert('Por favor, acepta el contrato de honorarios antes de continuar.'); return; }
+  alert('Integracion con Stripe proximamente.\nEscribenos a hola@creandounsueldo.com para reservar.');
+  closeModal();
+}
+function openPerfil() { document.getElementById('perfilOverlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closePerfil() { document.getElementById('perfilOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+function closePerfilOut(e) { if (e.target === document.getElementById('perfilOverlay')) closePerfil(); }
+function closeLeadPopup() {
+  document.getElementById('leadPopup').classList.remove('open');
+  document.body.style.overflow = '';
+  try { localStorage.setItem('leadSeen', '1'); } catch(e) {}
+}
+function submitLead() {
+  var email = document.getElementById('leadEmail').value.trim();
+  if (!email || !email.includes('@')) { alert('Introduce un email valido'); return; }
+  document.getElementById('leadPopupBody').innerHTML = '<div style="text-align:center;padding:24px 0"><div style="font-size:48px;margin-bottom:12px">&#127881;</div><div style="font-family:var(--font-display);font-size:24px;color:var(--dark);margin-bottom:8px">YA ESTAS DENTRO</div><div style="font-size:14px;color:var(--gray)">Te avisaremos en cuanto haya nuevas oportunidades.</div></div>';
+  setTimeout(closeLeadPopup, 3000);
+}
+function acceptCookies() {
+  try { localStorage.setItem('cookiesAccepted', 'all'); } catch(e) {}
+  document.getElementById('cookieBanner').style.transform = 'translateY(100%)';
+}
+function rejectCookies() {
+  try { localStorage.setItem('cookiesAccepted', 'necessary'); } catch(e) {}
+  document.getElementById('cookieBanner').style.transform = 'translateY(100%)';
+}
+function showPrivacidad() { var o = document.getElementById('privacidadOverlay'); o.style.opacity = '1'; o.style.pointerEvents = 'all'; }
+function closePrivacidad() { var o = document.getElementById('privacidadOverlay'); o.style.opacity = '0'; o.style.pointerEvents = 'none'; }
+document.addEventListener('DOMContentLoaded', function() {
+  var lb = document.getElementById('leadSubmitBtn'); if (lb) lb.addEventListener('click', submitLead);
+  var ca = document.getElementById('cookieAcceptBtn'); if (ca) ca.addEventListener('click', acceptCookies);
+  var cr = document.getElementById('cookieRejectBtn'); if (cr) cr.addEventListener('click', rejectCookies);
+  try {
+    if (!localStorage.getItem('leadSeen')) {
+      var t = setTimeout(function() { var lp = document.getElementById('leadPopup'); if (lp) lp.classList.add('open'); }, 18000);
+      window.addEventListener('scroll', function LS() {
+        if (window.scrollY > document.body.scrollHeight * 0.4) {
+   
+          window.removeEventListener('scroll', LS);
+        }
+      });
+    }
+    if (!localStorage.getItem('cookiesAccepted')) {
+      setTimeout(function() { var cb = document.getElementById('cookieBanner'); if (cb) cb.style.transform = 'translateY(0)'; }, 1500);
+    }
+  } catch(e) {}
+});
+
+// ═══ SUPABASE — ACTIVOS EN TIEMPO REAL ═══════════════════════════════════════
+var SUPA_URL  = 'https://vblyzzhixeoamcstnsqk.supabase.co'
+var SUPA_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZibHl6emhpeGVvYW1jc3Ruc3FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NTk5MzUsImV4cCI6MjA5MTIzNTkzNX0.wRTF5dEeI2TkNfUm_xnWJCglE6SWfW_0kri0avfOVRI'
+
+var _activoSeleccionado = null
+
+function fmtNum(n) { return new Intl.NumberFormat('es-ES').format(Math.round(Number(n)||0)) }
+function fmtE(n) { return (n!=null&&n!=='') ? fmtNum(n)+'€' : '—' }
+function calcRB(precio,alq) { return precio&&alq ? ((alq*12)/precio*100).toFixed(1) : null }
+function calcCF(alq,com,ibi) { return (alq&&com!=null&&ibi!=null) ? Math.round(+alq - +com - +ibi/12) : null }
+function fmtDate(d) { return d ? new Date(d).toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'}) : null }
+
+async function loadActivos() {
+  try {
+    var res = await fetch(SUPA_URL + '/rest/v1/activos?select=*&order=created_at.desc', {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    })
+    if (!res.ok) throw new Error('fetch error')
+    var activos = await res.json()
+    renderActivos(activos)
+    renderVendidos(activos)
+  } catch(e) {
+    var g = document.getElementById('grid-activos')
+    if (g) g.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#9ca3af">Error cargando activos. Recarga la página.</div>'
+  }
+}
+
+function renderActivos(activos) {
+  var grid = document.getElementById('grid-activos')
+  if (!grid) return
+  var lista = activos.filter(function(a) {
+    return a.status === 'disponible' || a.status === 'reservado' || a.status === 'en_proceso'
+  })
+  if (!lista.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">No hay activos disponibles en este momento.<br>Únete a nuestro Telegram para recibir los próximos.</div>'
+    return
+  }
+  grid.innerHTML = lista.map(function(a) {
+    var fotos = Array.isArray(a.fotos) ? a.fotos : []
+    var foto  = fotos[0] || null
+    var alq   = a.alquiler_estimado || 0
+    var com   = a.gastos_comunidad  || 0
+    var ibi   = a.ibi || 0
+    var rb    = calcRB(a.precio, alq)
+    var cf    = calcCF(alq, com, ibi)
+    var bloqueado = a.status !== 'disponible'
+    var badgeLabel = a.status === 'reservado' ? '◆ Reservado' : a.status === 'en_proceso' ? '◑ En proceso' : '● Disponible'
+    var badgeClass = a.status === 'reservado' ? 'badge-reservado' : a.status === 'en_proceso' ? 'badge-reservado' : 'badge-disponible'
+    var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
+    var titulo = a.titulo_pagina || ((a.habitaciones ? a.habitaciones+' HAB.' : '') + (a.zona ? '<br>'+a.zona.toUpperCase() : ''))
+    var gastosAnual = (+com*12 + +ibi)
+    var imgHtml = foto
+      ? '<img src="'+foto+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display=\x27none\x27;this.nextElementSibling.style.display=\x27flex\x27" /><div class="activo-img-ph" style="display:none">🏠</div>'
+      : '<div class="activo-img-ph">🏠</div>'
+
+    return '<div class="activo-card'+(bloqueado?' activo-bloqueado':'')+'" onclick="'+(bloqueado?'':('abrirActivo('+JSON.stringify(a)+');scrollToTop()'))+'" style="'+(bloqueado?'opacity:.75;':'cursor:pointer')+'">'
+      + '<div class="activo-img">'+imgHtml+'<span class="activo-badge '+badgeClass+'">'+badgeLabel+'</span>'+(bloqueado?'':'<span class="garantia-tag">Alquiler garantizado</span>')+'</div>'
+      + '<div class="activo-body">'
+      + '<div class="activo-location">'+loc+'</div>'
+      + '<div class="activo-title">'+titulo+'</div>'
+      + '<div class="kpi-main">'
+      +   '<div class="kpi-cell"><div class="kpi-val red">'+(rb||'—')+'%</div><div class="kpi-key">Rent. bruta</div></div>'
+      +   '<div class="kpi-cell"><div class="kpi-val '+(cf!=null&&cf>0?'green':'')+'">'+( cf!=null ? (cf>0?'+':'')+fmtNum(cf)+'€' : '—' )+'</div><div class="kpi-key">Cashflow/mes</div></div>'
+      +   '<div class="kpi-cell"><div class="kpi-val">'+fmtE(a.precio)+'</div><div class="kpi-key">Precio</div></div>'
+      + '</div>'
+      + '<div class="kpi-grid">'
+      +   '<div class="kpi-grid-cell"><div class="kpi-grid-val">'+fmtE(alq)+'/mes</div><div class="kpi-grid-key">Alquiler ('+fmtE(alq*12)+'/año)</div></div>'
+      +   (a.m2 ? '<div class="kpi-grid-cell"><div class="kpi-grid-val">'+a.m2+' m²</div><div class="kpi-grid-key">Superficie</div></div>' : '')
+      +   '<div class="kpi-grid-cell"><div class="kpi-grid-val">'+(gastosAnual>0?fmtE(gastosAnual)+'/año':'—')+'</div><div class="kpi-grid-key">Gastos fijos</div></div>'
+      + '</div>'
+      + (bloqueado
+          ? '<div class="activo-cta disabled">'+(a.status==='reservado'?'Ya reservado':'En proceso')+'</div>'
+          : '<div class="activo-cta">Ver activo completo →</div>')
+      + '</div></div>'
+  }).join('')
+}
+
+function renderVendidos(activos) {
+  var grid = document.getElementById('grid-vendidos')
+  if (!grid) return
+  var lista = activos.filter(function(a) { return a.status === 'finalizado' })
+  if (!lista.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">Las operaciones cerradas aparecerán aquí con todos sus resultados.</div>'
+    return
+  }
+  grid.innerHTML = lista.map(function(a) {
+    var alqEst  = a.alquiler_estimado || 0
+    var alqReal = a.alquiler_conseguido
+    var rb      = calcRB(a.precio, alqEst)
+    var superado = alqReal && alqEst && +alqReal >= +alqEst
+    var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
+    var titulo = a.titulo_pagina || (a.habitaciones ? 'PISO '+a.habitaciones+' HAB.' : 'ACTIVO')
+    var fotos = Array.isArray(a.fotos) ? a.fotos : []
+    var foto  = fotos[0] || null
+    return '<div class="vendido-card">'
+      + (foto ? '<div style="height:120px;overflow:hidden;border-radius:8px 8px 0 0;margin:-1px -1px 12px"><img src="'+foto+'" style="width:100%;height:100%;object-fit:cover;opacity:.8" loading="lazy"/></div>' : '')
+      + '<span class="vendido-ribbon">Cerrado</span>'
+      + '<div class="vendido-location">'+loc+'</div>'
+      + '<div class="vendido-title">'+titulo+'</div>'
+      + '<div class="vendido-result">'
+      +   '<div><div class="result-val positive">'+(rb||'—')+'%</div><div class="result-key">Rent. bruta</div></div>'
+      +   '<div><div class="result-val">'+fmtE(a.precio)+'</div><div class="result-key">Precio compra</div></div>'
+      +   '<div><div class="result-val '+(alqReal?(superado?'positive':'negative'):'')+'">'+fmtE(alqReal||alqEst)+'/mes'+(alqReal?(superado?' ↑':' ↓'):'')+'</div><div class="result-key">Alquiler '+(alqReal?'conseguido':'estimado')+'</div></div>'
+      + '</div>'
+      + (a.fecha_primer_alquiler ? '<div style="font-size:11px;color:#9ca3af;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06)">Alquilado: '+fmtDate(a.fecha_primer_alquiler)+'</div>' : '')
+      + '</div>'
+  }).join('')
+}
+
+function abrirActivo(a) {
+  _activoSeleccionado = a
+  // Actualizar la ficha existente con datos reales
+  var fotos = Array.isArray(a.fotos) ? a.fotos : []
+  var alq = a.alquiler_estimado || 0
+  var com = a.gastos_comunidad || 0
+  var ibi = a.ibi || 0
+  var rb  = calcRB(a.precio, alq)
+  var cf  = calcCF(alq, com, ibi)
+  var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
+
+  // Gallery
+  var gMain = document.querySelector('.gallery-main')
+  if (gMain && fotos.length) {
+    gMain.innerHTML = '<img src="'+fotos[0]+'" style="width:100%;height:100%;object-fit:cover" />'
+  }
+  var gThumb = document.querySelector('.gallery-thumbs')
+  if (gThumb && fotos.length > 1) {
+    gThumb.innerHTML = fotos.slice(1,5).map(function(f){
+      return '<div class="gallery-thumb" style="background-image:url(''+f+'')" onclick="document.querySelector('.gallery-main img').src=''+f+''"></div>'
+    }).join('')
+  }
+
+  // Sidebar
+  var sLoc = document.querySelector('.sidebar-location')
+  if (sLoc) sLoc.textContent = loc
+  var sTitle = document.querySelector('.sidebar-title')
+  if (sTitle) sTitle.innerHTML = (a.titulo_pagina || (a.habitaciones ? a.habitaciones+' HAB.' : 'ACTIVO')).toUpperCase()
+
+  // KPIs sidebar
+  var kpiCells = document.querySelectorAll('.sidebar-kpi-val')
+  if (kpiCells.length >= 3) {
+    kpiCells[0].textContent = fmtE(a.precio)
+    kpiCells[1].textContent = (rb||'—')+'%'
+    kpiCells[2].textContent = cf!=null ? (cf>0?'+':'')+fmtNum(cf)+'€' : '—'
+  }
+
+  // Ficha rows
+  var fichaRows = document.querySelectorAll('.ficha-row .ficha-val')
+  if (fichaRows.length) {
+    var vals = [
+      loc,
+      a.m2 ? a.m2+' m²' : '—',
+      a.habitaciones || '—',
+      a.planta || '—',
+      a.ascensor || '—',
+      fmtE(a.precio),
+      fmtE(alq)+'/mes',
+      fmtE(com)+'/mes',
+      fmtE(ibi)+'/año',
+    ]
+    fichaRows.forEach(function(r,i){ if(vals[i]) r.textContent = vals[i] })
+  }
+
+  // Descripcion
+  var desc = document.querySelector('.activo-desc p')
+  if (desc && a.descripcion) desc.textContent = a.descripcion
+
+  // Modal info
+  var mSub = document.querySelector('.modal-subtitle')
+  if (mSub) mSub.textContent = loc + ' — Señal: 500€'
+  var propPill = document.querySelector('.prop-pill')
+  if (propPill) propPill.innerHTML = '<span class="prop-pill-dot"></span>'+loc+' · '+fmtE(a.precio)
+
+  showView('activo')
+  scrollToTop()
+}
+
+// Cargar al iniciar
+document.addEventListener('DOMContentLoaded', function() {
+  loadActivos()
+})
+// También cargar si DOMContentLoaded ya pasó
+if (document.readyState !== 'loading') {
+  loadActivos()
+}
+
+</script>
+</body>
+</html>
