@@ -1730,7 +1730,7 @@ function abrirActivo(a) {
   var gThumb = document.querySelector('.gallery-thumbs')
   if (gThumb && fotos.length > 1) {
     gThumb.innerHTML = fotos.slice(1,5).map(function(f){
-      return '<div class="gallery-thumb" style="background-image:url(''+f+'')" onclick="document.querySelector('.gallery-main img').src=''+f+''"></div>'
+      return '<div class="gallery-thumb" style="background-image:url(\'' + f + '\')" onclick="document.querySelector(\'.gallery-main img\').src=\'' + f + '\'"></div>'
     }).join('')
   }
 
