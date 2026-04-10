@@ -409,7 +409,70 @@ footer{background:var(--dark);padding:56px 52px 32px}
 .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-@media(max-width:768px){nav{padding:0 20px}.nav-links{display:none}section,#hero{padding:48px 20px}.proceso-grid{grid-template-columns:1fr}#garantia{padding:28px 20px}h1{font-size:56px}.faq-list{grid-template-columns:1fr}footer{padding:44px 20px 28px}.activos-grid{grid-template-columns:1fr}.garantia-btn{margin-left:0}.activo-hero-inner,.activo-content{padding:32px 20px;gap:32px}.gallery-main{height:280px}.puntos-fuertes{grid-template-columns:1fr}.zona-stats{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}}
+@media(max-width:768px){
+  /* Nav */
+  nav{padding:0 14px}
+  .nav-links{display:none!important}
+  .nav-hamburger{display:flex!important}
+  .nav-cta{display:none!important}
+  /* Hero */
+  section,#hero{padding:32px 16px}
+  #activos,#proceso,#vendidos,#blog,#faq,#cta-final,#nosotros,#reviews{padding:32px 16px}
+  h1{font-size:40px;line-height:.95}
+  .hero-sub{font-size:14px!important;max-width:100%!important}
+  .hero-actions{flex-direction:column;gap:10px;margin-bottom:28px}
+  .hero-actions button{width:100%!important;text-align:center}
+  /* Stats hero: 2x2 */
+  .hero-stats{flex-wrap:wrap;padding-top:16px}
+  .stat-item{flex:1 1 46%;min-width:0;padding:8px 4px!important;margin:0!important;border-right:none!important;border-bottom:1px solid rgba(255,255,255,.12)}
+  .stat-item:nth-child(odd){border-right:1px solid rgba(255,255,255,.12)!important}
+  .stat-item:nth-last-child(-n+2){border-bottom:none!important}
+  /* Acceso anticipado */
+  #acceso-bloque{flex-direction:column!important;padding:20px 16px!important}
+  #acceso-bloque>div{min-width:unset!important;width:100%}
+  #acceso-form{max-width:100%!important}
+  #acceso-form>div{flex-direction:column!important}
+  #acceso-email{width:100%!important;box-sizing:border-box}
+  #acceso-form button{width:100%!important}
+  /* Activos home: 2 columnas */
+  .activos-grid{display:grid!important;grid-template-columns:1fr 1fr!important;overflow-x:unset!important;scroll-snap-type:unset!important;gap:10px!important;padding-bottom:0!important}
+  .activos-grid .activo-card{flex:unset!important;scroll-snap-align:unset!important}
+  .mobile-ver-todas-wrap{display:block!important}
+  /* Proceso: scroll horizontal */
+  .proceso-grid{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:12px!important;padding-bottom:8px!important;-webkit-overflow-scrolling:touch}
+  .proceso-grid::-webkit-scrollbar{height:3px}
+  .proceso-grid::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
+  .proceso-card{flex:0 0 72vw!important;scroll-snap-align:start!important;min-width:0}
+  /* Vendidos: scroll horizontal */
+  .vendidos-grid{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:12px!important;padding-bottom:8px!important;-webkit-overflow-scrolling:touch}
+  .vendidos-grid::-webkit-scrollbar{height:3px}
+  .vendidos-grid::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
+  .vendido-card{flex:0 0 76vw!important;scroll-snap-align:start!important;min-width:0}
+  /* Blog */
+  .blog-grid .blog-card{flex:0 0 78vw!important}
+  /* Reviews */
+  .review-card{flex:0 0 82vw!important}
+  /* Quiénes somos: texto colapsable */
+  .nosotros-full-text{max-height:220px;overflow:hidden;position:relative}
+  .nosotros-full-text.expanded{max-height:none}
+  /* CTA estás listo */
+  #cta-final .cta-actions{flex-direction:column;gap:10px}
+  #cta-final .cta-actions button{width:100%!important}
+  #nosotros>div>div:last-of-type{flex-direction:column!important;padding:20px!important}
+  #nosotros>div>div:last-of-type button{width:100%!important}
+  /* FAQ */
+  .faq-list{grid-template-columns:1fr}
+  /* Footer */
+  footer{padding:32px 16px 20px}
+  .footer-top{flex-direction:column;gap:24px}
+  /* Ficha */
+  .gallery-main{height:220px}
+  .form-row{grid-template-columns:1fr}
+  .zona-stats{grid-template-columns:1fr 1fr}
+  #garantia{padding:18px 16px}
+  .garantia-btn{margin-left:0;margin-top:10px;width:100%}
+  .section-header-row{flex-direction:column;align-items:flex-start;gap:10px}
+}
 
 /* LEAD POPUP */
 .lead-popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
@@ -716,7 +779,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <div style="max-width:900px;margin:0 auto">
       <div class="section-eyebrow">Quiénes somos</div>
       <h2>A VECES PENSAMOS<br>QUE ESTAMOS LOCOS.</h2>
-      <div style="font-size:15px;color:var(--gray);line-height:1.85;margin-top:24px;display:flex;flex-direction:column;gap:18px">
+      <div class="nosotros-full-text" style="font-size:15px;color:var(--gray);line-height:1.85;margin-top:24px;display:flex;flex-direction:column;gap:18px">
         <p>A veces pensamos que estamos un poco locos… pero la realidad es que nos lo pasamos muy bien con lo que hacemos, brindándonos la oportunidad de vivir muchas experiencias junto a gente que vamos conociendo por el camino, de la que aprendemos constantemente y nos enriquecemos mutuamente.</p>
         <p>Todo empezó a raíz de intentar alcanzar la mayor escalabilidad posible a nuestro "hobby favorito", que no era otro que buscar oportunidades inmobiliarias para invertir en ellas y obtener rentas de manera pasiva. Lamentablemente no hemos nacido ricos y ese "techo de cristal" que muchas veces teníamos al querer entrar en una operación y no poder, hizo que empezásemos a valorar que todas aquellas oportunidades que nos llegaban Off Market no acabasen en el cubo de la basura y al menos nuestros amigos empezasen a aprovecharse de ello.</p>
         <p>Viendo la acogida por nuestro entorno más cercano y los buenos resultados que obteníamos, años después hemos dado forma a todo esto, creando una comunidad de inversores a la cual estamos muy unidos diariamente. Todo este volumen de activos que nos van llegando los compartimos con vosotros ofreciendo nuestro acompañamiento y experiencia en toda la parte del proceso.</p>
@@ -724,6 +787,9 @@ footer{background:var(--dark);padding:56px 52px 32px}
         <p style="font-weight:600;color:var(--dark)">Os esperamos para seguir creciendo juntos y poder seguir aprendiendo día a día por el camino.</p>
       </div>
 
+      <div id="nosotros-leer-mas" style="display:none;text-align:center;margin-top:-8px">
+        <button onclick="expandNosotros()" style="background:none;border:1px solid var(--gray3);color:var(--gray);font-family:var(--font-body);font-size:13px;font-weight:600;padding:8px 20px;border-radius:var(--radius);cursor:pointer">Leer más ↓</button>
+      </div>
       <!-- CTA final quiénes somos -->
       <div style="margin-top:36px;background:var(--dark);border-radius:12px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px">
         <div>
@@ -749,50 +815,62 @@ footer{background:var(--dark);padding:56px 52px 32px}
       <style>.review-card{flex:0 0 min(320px,80vw);scroll-snap-align:start}</style>
 
       <div class="review-card" style="background:white;border:1px solid var(--gray3);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
-        <div style="display:flex;gap:2px">★★★★★</div>
-        <p style="font-size:14px;color:var(--gray);line-height:1.7;flex:1">"Me acompañaron en todo momento, desde buscar el piso hasta firmar el contrato de alquiler. Nunca pisé el inmueble y ya cobro cada mes. Repetiré sin duda."</p>
-        <div style="border-top:1px solid var(--gray3);padding-top:14px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark)">Raúl M.</div>
-            <div style="font-size:11px;color:var(--green);font-weight:700;background:rgba(34,197,94,.08);padding:3px 8px;border-radius:99px">+8,4% bruta</div>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;gap:2px;color:#F59E0B">★★★★★</div>
+          <img src="https://www.google.com/favicon.ico" width="16" height="16" style="opacity:.5">
+        </div>
+        <p style="font-size:14px;color:var(--gray);line-height:1.75;flex:1">"Siempre había pensado que invertir en pisos era algo complicado y solo para gente con mucha experiencia, pero desde que estoy en Creando un Sueldo me he dado cuenta de que con una buena guía y ayuda es posible."</p>
+        <div style="border-top:1px solid var(--gray3);padding-top:12px;display:flex;align-items:center;gap:10px">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#E31E24,#ff6b6b);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:15px;flex-shrink:0">A</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:var(--dark)">Alex S.</div>
+            <div style="font-size:11px;color:var(--gray2)">Hace 4 meses · Google</div>
           </div>
-          <div style="font-size:12px;color:var(--gray2)">📍 Ciudad Real · Piso 2 hab. · 42.000€</div>
         </div>
       </div>
 
       <div class="review-card" style="background:white;border:1px solid var(--gray3);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
-        <div style="display:flex;gap:2px">★★★★★</div>
-        <p style="font-size:14px;color:var(--gray);line-height:1.7;flex:1">"Vivo en Barcelona y mi piso está en Asturias. Nunca lo he visto en persona. CreandoUnSueldo gestionó todo: reforma, suministros, inquilino. Llevo 8 meses cobrando."</p>
-        <div style="border-top:1px solid var(--gray3);padding-top:14px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark)">Marta L.</div>
-            <div style="font-size:11px;color:var(--green);font-weight:700;background:rgba(34,197,94,.08);padding:3px 8px;border-radius:99px">+10,2% bruta</div>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;gap:2px;color:#F59E0B">★★★★★</div>
+          <img src="https://www.google.com/favicon.ico" width="16" height="16" style="opacity:.5">
+        </div>
+        <p style="font-size:14px;color:var(--gray);line-height:1.75;flex:1">"Entré en Creando un Sueldo sin tener ni idea de por dónde empezar con el tema de invertir en inmuebles, y la verdad… ha sido un cambio enorme. Aquí he aprendido cuándo tiene sentido comprar, qué tipo de piso buscar, cómo analizar una zona…"</p>
+        <div style="border-top:1px solid var(--gray3);padding-top:12px;display:flex;align-items:center;gap:10px">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:15px;flex-shrink:0">O</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:var(--dark)">Oriol C.</div>
+            <div style="font-size:11px;color:var(--gray2)">Hace 4 meses · Google</div>
           </div>
-          <div style="font-size:12px;color:var(--gray2)">📍 Asturias · Piso reformado · 38.000€</div>
         </div>
       </div>
 
       <div class="review-card" style="background:white;border:1px solid var(--gray3);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
-        <div style="display:flex;gap:2px">★★★★★</div>
-        <p style="font-size:14px;color:var(--gray);line-height:1.7;flex:1">"Era mi primera inversión y tenía muchas dudas. Me explicaron todo con mucha paciencia, me enseñaron los números reales y me ayudaron a decidir. Ahora estoy buscando el segundo."</p>
-        <div style="border-top:1px solid var(--gray3);padding-top:14px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark)">Carlos P.</div>
-            <div style="font-size:11px;color:var(--green);font-weight:700;background:rgba(34,197,94,.08);padding:3px 8px;border-radius:99px">+9,1% bruta</div>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;gap:2px;color:#F59E0B">★★★★★</div>
+          <img src="https://www.google.com/favicon.ico" width="16" height="16" style="opacity:.5">
+        </div>
+        <p style="font-size:14px;color:var(--gray);line-height:1.75;flex:1">"Nunca había entendido demasiado bien cómo funcionaba esto de invertir en inmuebles, pero desde que estoy en Creando un Sueldo me ha cambiado completamente la forma de verlo. Explican las cosas de manera súper sencilla, con ejemplos reales."</p>
+        <div style="border-top:1px solid var(--gray3);padding-top:12px;display:flex;align-items:center;gap:10px">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:15px;flex-shrink:0">J</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:var(--dark)">Júlia M.</div>
+            <div style="font-size:11px;color:var(--gray2)">Hace 4 meses · Google</div>
           </div>
-          <div style="font-size:12px;color:var(--gray2)">📍 León · Estudio reformado · 32.000€</div>
         </div>
       </div>
 
       <div class="review-card" style="background:white;border:1px solid var(--gray3);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
-        <div style="display:flex;gap:2px">★★★★★</div>
-        <p style="font-size:14px;color:var(--gray);line-height:1.7;flex:1">"Lo que más valoro es la transparencia. Te dan los números reales, no los bonitos. Y cuando la reforma salió algo más cara de lo esperado, lo asumieron ellos. Eso dice mucho."</p>
-        <div style="border-top:1px solid var(--gray3);padding-top:14px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark)">Ana G.</div>
-            <div style="font-size:11px;color:var(--green);font-weight:700;background:rgba(34,197,94,.08);padding:3px 8px;border-radius:99px">+7,8% bruta</div>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;gap:2px;color:#F59E0B">★★★★★</div>
+          <img src="https://www.google.com/favicon.ico" width="16" height="16" style="opacity:.5">
+        </div>
+        <p style="font-size:14px;color:var(--gray);line-height:1.75;flex:1">"Hace mucho tiempo que quería invertir en inmuebles y no sabía por dónde empezar. Gracias al equipo de Creando un Sueldo me han ayudado, asesorado y acompañado en todo el proceso. Estoy encantado, sin duda repetiré pronto."</p>
+        <div style="border-top:1px solid var(--gray3);padding-top:12px;display:flex;align-items:center;gap:10px">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#22C55E,#16A34A);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:15px;flex-shrink:0">R</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:var(--dark)">Ricard B.</div>
+            <div style="font-size:11px;color:var(--gray2)">Hace 4 meses · Google</div>
           </div>
-          <div style="font-size:12px;color:var(--gray2)">📍 Ponferrada · Piso 3 hab. · 55.000€</div>
         </div>
       </div>
 
@@ -1819,6 +1897,17 @@ function toggleMobileMenu() {
   menu.style.display = open ? 'none' : 'block'
   document.body.style.overflow = open ? '' : 'hidden'
   btn.classList.toggle('open', !open)
+}
+function expandNosotros() {
+  var el = document.querySelector('.nosotros-full-text')
+  var btn = document.getElementById('nosotros-leer-mas')
+  if (el) el.classList.add('expanded')
+  if (btn) btn.style.display = 'none'
+}
+// Show leer más only on mobile
+if (window.innerWidth <= 768) {
+  var lm = document.getElementById('nosotros-leer-mas')
+  if (lm) lm.style.display = 'block'
 }
 function closeMobileMenu() {
   var menu = document.getElementById('mobileMenu')
