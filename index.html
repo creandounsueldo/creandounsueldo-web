@@ -2047,58 +2047,45 @@ var _filtroTodas = 'disponible'
 
 function abrirTodas(filtro) {
   _filtroTodas = filtro || 'disponible'
+  // Actualizar UI de filtros y título
+  ;['disponible','reservado','finalizado'].forEach(function(f) {
+    var btn = document.getElementById('fp-'+f)
+    if (btn) btn.classList.toggle('active', f === _filtroTodas)
+  })
+  var titulo = document.getElementById('todas-titulo')
+  var eyebrow = document.getElementById('todas-eyebrow')
+  if (_filtroTodas === 'disponible') {
+    if (titulo) titulo.innerHTML = 'OPORTUNIDADES<br>ACTIVAS'
+    if (eyebrow) eyebrow.textContent = 'Activos disponibles ahora mismo'
+  } else if (_filtroTodas === 'reservado') {
+    if (titulo) titulo.innerHTML = 'ACTIVOS<br>RESERVADOS'
+    if (eyebrow) eyebrow.textContent = 'En proceso de compra'
+  } else if (_filtroTodas === 'finalizado') {
+    if (titulo) titulo.innerHTML = 'OPERACIONES<br>CERRADAS'
+    if (eyebrow) eyebrow.textContent = 'Track record · Resultados reales'
+  }
   showView('todas')
   scrollToTop()
-  // Actualizar botones y título sin renderizar
-  filtrarTodas(_filtroTodas)
-  // Renderizar (con espera si datos no cargados aún)
-  if (todosActivos && todosActivos.length > 0) {
-    renderTodas()
-  } else {
-    var grid = document.getElementById('grid-todas')
-    if (grid) grid.innerHTML = '<div style="text-align:center;padding:64px;color:#9ca3af"><div style="width:32px;height:32px;border:3px solid rgba(0,0,0,.1);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>Cargando...</div>'
-    var check = setInterval(function() {
-      if (todosActivos && todosActivos.length > 0) {
-        clearInterval(check)
-        renderTodas()
-      }
-    }, 200)
-    setTimeout(function() { clearInterval(check) }, 8000)
-  }
+  renderTodas()
 }
 
 function filtrarTodas(filtro) {
   _filtroTodas = filtro
-  // Actualizar botones
-  ['disponible','reservado','finalizado'].forEach(function(f) {
-    var btn = document.getElementById('fp-'+f)
-    if (btn) {
-      if (f === filtro) { btn.classList.add('active') }
-      else { btn.classList.remove('active') }
-    }
-  })
-  // Actualizar título/eyebrow
-  var titulo = document.getElementById('todas-titulo')
-  var eyebrow = document.getElementById('todas-eyebrow')
-  if (filtro === 'disponible') {
-    if (titulo) titulo.innerHTML = 'OPORTUNIDADES<br>ACTIVAS'
-    if (eyebrow) eyebrow.textContent = 'Activos disponibles ahora mismo'
-  } else if (filtro === 'reservado') {
-    if (titulo) titulo.innerHTML = 'ACTIVOS<br>RESERVADOS'
-    if (eyebrow) eyebrow.textContent = 'En proceso de compra'
-  } else if (filtro === 'finalizado') {
-    if (titulo) titulo.innerHTML = 'OPERACIONES<br>CERRADAS'
-    if (eyebrow) eyebrow.textContent = 'Track record · Resultados reales'
-  }
-  // Solo renderizar si hay datos — si no, abrirTodas se encargará
-  if (todosActivos && todosActivos.length > 0) renderTodas()
+  abrirTodas(filtro)
 }
 
 function renderTodas() {
   var grid = document.getElementById('grid-todas')
   if (!grid) return
-  var filtro = _filtroTodas
 
+  // Si no hay datos aún, cargarlos y volver a llamar
+  if (!todosActivos || todosActivos.length === 0) {
+    grid.innerHTML = '<div style="text-align:center;padding:64px;color:#9ca3af"><div style="width:32px;height:32px;border:3px solid rgba(0,0,0,.1);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>Cargando...</div>'
+    loadActivos().then(function() { renderTodas() })
+    return
+  }
+
+  var filtro = _filtroTodas
   var lista = todosActivos.filter(function(a) {
     if (filtro === 'disponible') return a.status === 'disponible'
     if (filtro === 'reservado')  return a.status === 'reservado' || a.status === 'en_proceso'
@@ -2110,7 +2097,11 @@ function renderTodas() {
   if (cnt) cnt.textContent = lista.length + ' activo' + (lista.length !== 1 ? 's' : '')
 
   if (!lista.length) {
-    grid.innerHTML = '<div style="text-align:center;padding:64px;color:#9ca3af;font-size:14px">No hay activos en esta categoría.</div>'
+    var statuses = todosActivos.map(function(a){return a.status}).join(', ') || 'ninguno'
+    grid.innerHTML = '<div style="text-align:center;padding:64px;color:#9ca3af;font-size:14px">'
+      + 'No hay activos con estado <strong>' + filtro + '</strong> en este momento.<br><br>'
+      + '<span style="font-size:11px;opacity:.5">Total activos cargados: ' + todosActivos.length + ' · Estados: ' + statuses + '</span>'
+      + '</div>'
     return
   }
 
