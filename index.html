@@ -403,6 +403,12 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
 @media(max-width:1024px){.activo-hero-inner,.activo-content{grid-template-columns:1fr}.activo-sidebar{position:static}}
 @media(max-width:960px){.hero-inner{grid-template-columns:1fr;gap:40px}.lejos-inner{grid-template-columns:1fr;gap:40px}}
+.mobile-ver-todas-wrap{display:none}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;border-radius:6px}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--dark);border-radius:2px;transition:all .25s}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 @media(max-width:768px){nav{padding:0 20px}.nav-links{display:none}section,#hero{padding:48px 20px}.proceso-grid{grid-template-columns:1fr}#garantia{padding:28px 20px}h1{font-size:56px}.faq-list{grid-template-columns:1fr}footer{padding:44px 20px 28px}.activos-grid{grid-template-columns:1fr}.garantia-btn{margin-left:0}.activo-hero-inner,.activo-content{padding:32px 20px;gap:32px}.gallery-main{height:280px}.puntos-fuertes{grid-template-columns:1fr}.zona-stats{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}}
 
 /* LEAD POPUP */
@@ -454,8 +460,25 @@ footer{background:var(--dark);padding:56px 52px 32px}
   <div class="nav-right">
     <button class="nav-cta" id="navCtaHome" onclick="showView('home', true);scrollToSection('activos')">Ver oportunidades →</button>
     <button class="nav-cta" id="navCtaActivo" style="display:none" onclick="openModal('León', 4000)">Reservar este activo →</button>
+    <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileMenu()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- Menú móvil -->
+<div id="mobileMenu" style="display:none;position:fixed;inset:0;top:64px;background:white;z-index:998;padding:24px 24px;overflow-y:auto;border-top:1px solid var(--gray3)">
+  <ul style="list-style:none;display:flex;flex-direction:column;gap:0">
+    <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('nosotros')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Quiénes somos</a></li>
+    <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('activos')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Activos</a></li>
+    <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('proceso')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Cómo funciona</a></li>
+    <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('vendidos')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Resultados</a></li>
+    <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('blog')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Blog</a></li>
+    <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('faq')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">FAQ</a></li>
+  </ul>
+  <button onclick="closeMobileMenu();openAgente()" style="width:100%;margin-top:24px;padding:14px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:15px;font-weight:700;cursor:pointer">💬 Hablar con un agente</button>
+  <button onclick="closeMobileMenu();abrirTodas('disponible')" style="width:100%;margin-top:10px;padding:14px;background:var(--dark);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:15px;font-weight:700;cursor:pointer">Ver activos disponibles →</button>
+</div>
 
 <!-- ═══════════════════ VIEW: HOME ═══════════════════ -->
 <div class="view active" id="view-home">
@@ -467,13 +490,14 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <div class="hero-inner">
         <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:20px">✅ Alquiler garantizado en todas las operaciones</div>
         <h1>PISOS QUE<br>PAGAN<br>CADA MES.</h1>
-        <p class="hero-sub" style="max-width:520px">Seleccionamos los activos, gestionamos la compra, ponemos el inquilino y garantizamos el alquiler estimado. Tú solo cobras.</p>
+        <p class="hero-sub" style="max-width:560px">Seleccionamos el activo, gestionamos la compra, coordinamos la reforma, ponemos el inquilino y garantizamos el alquiler estimado. Tú solo cobras.</p>
         <div class="hero-actions">
           <button class="btn-white" onclick="abrirTodas('disponible')">Ver activos disponibles →</button>
           <button class="btn-white-ghost" onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</button>
+          <button class="btn-white-ghost" onclick="openAgente()" style="border-color:rgba(255,255,255,.5)">💬 Hablar con un agente</button>
         </div>
         <div class="hero-stats">
-          <div class="stat-item"><div class="stat-num">+7%</div><div class="stat-label">Rent. media neta</div></div>
+          <div class="stat-item"><div class="stat-num">+10%</div><div class="stat-label">Rent. media bruta</div></div>
           <div class="stat-item"><div class="stat-num">72</div><div class="stat-label">Operaciones cerradas</div></div>
           <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Alquilados al precio estimado</div></div>
           <div class="stat-item"><div class="stat-num">60%</div><div class="stat-label">Clientes que repiten</div></div>
@@ -687,6 +711,100 @@ footer{background:var(--dark);padding:56px 52px 32px}
     </div>
   </section>
 
+  <!-- QUIÉNES SOMOS -->
+  <section id="nosotros" style="padding:56px 52px;background:white">
+    <div style="max-width:900px;margin:0 auto">
+      <div class="section-eyebrow">Quiénes somos</div>
+      <h2>A VECES PENSAMOS<br>QUE ESTAMOS LOCOS.</h2>
+      <div style="font-size:15px;color:var(--gray);line-height:1.85;margin-top:24px;display:flex;flex-direction:column;gap:18px">
+        <p>A veces pensamos que estamos un poco locos… pero la realidad es que nos lo pasamos muy bien con lo que hacemos, brindándonos la oportunidad de vivir muchas experiencias junto a gente que vamos conociendo por el camino, de la que aprendemos constantemente y nos enriquecemos mutuamente.</p>
+        <p>Todo empezó a raíz de intentar alcanzar la mayor escalabilidad posible a nuestro "hobby favorito", que no era otro que buscar oportunidades inmobiliarias para invertir en ellas y obtener rentas de manera pasiva. Lamentablemente no hemos nacido ricos y ese "techo de cristal" que muchas veces teníamos al querer entrar en una operación y no poder, hizo que empezásemos a valorar que todas aquellas oportunidades que nos llegaban Off Market no acabasen en el cubo de la basura y al menos nuestros amigos empezasen a aprovecharse de ello.</p>
+        <p>Viendo la acogida por nuestro entorno más cercano y los buenos resultados que obteníamos, años después hemos dado forma a todo esto, creando una comunidad de inversores a la cual estamos muy unidos diariamente. Todo este volumen de activos que nos van llegando los compartimos con vosotros ofreciendo nuestro acompañamiento y experiencia en toda la parte del proceso.</p>
+        <p>Somos especialistas en muchas regiones de España y contamos con una red de contactos comerciales que nos hacen llegar las mejores oportunidades antes de tiempo, y con una gran comunidad de inversores con los que llevamos tiempo trabajando y obtenemos la mejor satisfacción del mundo: cliente contento y capaz de repetir con nosotros como han hecho muchos de ellos.</p>
+        <p style="font-weight:600;color:var(--dark)">Os esperamos para seguir creciendo juntos y poder seguir aprendiendo día a día por el camino.</p>
+      </div>
+
+      <!-- CTA final quiénes somos -->
+      <div style="margin-top:36px;background:var(--dark);border-radius:12px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px">
+        <div>
+          <div style="font-family:var(--font-display);font-size:20px;color:white;margin-bottom:6px">¿ESTÁS LISTO PARA EMPEZAR?</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.55);margin:0">Si buscas una forma diferente de invertir, rodeado de gente real, estás en el lugar adecuado.</p>
+        </div>
+        <button class="btn-white" onclick="openAgente()">💬 Únete y hablamos →</button>
+      </div>
+
+      <!-- Placeholder foto/video -->
+      <div id="nosotros-media" style="margin-top:32px;display:none;border-radius:12px;overflow:hidden;background:var(--gray5);min-height:300px"></div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" style="padding:56px 52px;background:var(--gray5)">
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="section-eyebrow" style="justify-content:center;display:flex">Opiniones reales</div>
+      <h2>LO QUE DICEN<br>NUESTROS INVERSORES</h2>
+      <p class="section-desc">Personas reales, operaciones reales, resultados reales.</p>
+    </div>
+    <div style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:8px;max-width:1200px;margin:0 auto">
+      <style>.review-card{flex:0 0 min(320px,80vw);scroll-snap-align:start}</style>
+
+      <div class="review-card" style="background:white;border:1px solid var(--gray3);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:2px">★★★★★</div>
+        <p style="font-size:14px;color:var(--gray);line-height:1.7;flex:1">"Me acompañaron en todo momento, desde buscar el piso hasta firmar el contrato de alquiler. Nunca pisé el inmueble y ya cobro cada mes. Repetiré sin duda."</p>
+        <div style="border-top:1px solid var(--gray3);padding-top:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark)">Raúl M.</div>
+            <div style="font-size:11px;color:var(--green);font-weight:700;background:rgba(34,197,94,.08);padding:3px 8px;border-radius:99px">+8,4% bruta</div>
+          </div>
+          <div style="font-size:12px;color:var(--gray2)">📍 Ciudad Real · Piso 2 hab. · 42.000€</div>
+        </div>
+      </div>
+
+      <div class="review-card" style="background:white;border:1px solid var(--gray3);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:2px">★★★★★</div>
+        <p style="font-size:14px;color:var(--gray);line-height:1.7;flex:1">"Vivo en Barcelona y mi piso está en Asturias. Nunca lo he visto en persona. CreandoUnSueldo gestionó todo: reforma, suministros, inquilino. Llevo 8 meses cobrando."</p>
+        <div style="border-top:1px solid var(--gray3);padding-top:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark)">Marta L.</div>
+            <div style="font-size:11px;color:var(--green);font-weight:700;background:rgba(34,197,94,.08);padding:3px 8px;border-radius:99px">+10,2% bruta</div>
+          </div>
+          <div style="font-size:12px;color:var(--gray2)">📍 Asturias · Piso reformado · 38.000€</div>
+        </div>
+      </div>
+
+      <div class="review-card" style="background:white;border:1px solid var(--gray3);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:2px">★★★★★</div>
+        <p style="font-size:14px;color:var(--gray);line-height:1.7;flex:1">"Era mi primera inversión y tenía muchas dudas. Me explicaron todo con mucha paciencia, me enseñaron los números reales y me ayudaron a decidir. Ahora estoy buscando el segundo."</p>
+        <div style="border-top:1px solid var(--gray3);padding-top:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark)">Carlos P.</div>
+            <div style="font-size:11px;color:var(--green);font-weight:700;background:rgba(34,197,94,.08);padding:3px 8px;border-radius:99px">+9,1% bruta</div>
+          </div>
+          <div style="font-size:12px;color:var(--gray2)">📍 León · Estudio reformado · 32.000€</div>
+        </div>
+      </div>
+
+      <div class="review-card" style="background:white;border:1px solid var(--gray3);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:2px">★★★★★</div>
+        <p style="font-size:14px;color:var(--gray);line-height:1.7;flex:1">"Lo que más valoro es la transparencia. Te dan los números reales, no los bonitos. Y cuando la reforma salió algo más cara de lo esperado, lo asumieron ellos. Eso dice mucho."</p>
+        <div style="border-top:1px solid var(--gray3);padding-top:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="font-family:var(--font-display);font-size:15px;color:var(--dark)">Ana G.</div>
+            <div style="font-size:11px;color:var(--green);font-weight:700;background:rgba(34,197,94,.08);padding:3px 8px;border-radius:99px">+7,8% bruta</div>
+          </div>
+          <div style="font-size:12px;color:var(--gray2)">📍 Ponferrada · Piso 3 hab. · 55.000€</div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:32px">
+      <a href="https://maps.app.goo.gl/xxZ3a5whG4SMtPV5A" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--dark);color:white;font-size:13px;font-weight:600;padding:12px 24px;border-radius:var(--radius);text-decoration:none">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Ver nuestro perfil en Google Maps
+      </a>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section id="faq" style="padding:56px 52px;text-align:center">
     <div class="section-eyebrow" style="justify-content:center">Preguntas frecuentes</div>
@@ -715,7 +833,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <p class="section-desc">Accede a las oportunidades antes de que lleguen a la web. Sin compromiso.</p>
     <div class="cta-actions">
       <button class="btn-white" onclick="abrirTodas('disponible')">Ver activos disponibles →</button>
-      <button class="btn-white-ghost" onclick="openContacto()">Hablar con un asesor</button>
+      <button class="btn-white-ghost" onclick="openAgente()">💬 Hablar con un agente</button>
     </div>
     <div class="social-links">
       <a href="#" class="social-link"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Canal Telegram</a>
@@ -732,7 +850,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
         </div>
         <p class="footer-tagline">Intermediación inmobiliaria para inversores que quieren resultados reales, no promesas.</p>
       </div>
-      <div class="footer-links-col"><h4>Navegar</h4><ul><li><a onclick="showView('home', true);scrollToSection('activos')">Activos disponibles</a></li><li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li><li><a onclick="showView('home', true);scrollToSection('vendidos')">Track record</a></li><li><a onclick="showView('home', true);scrollToSection('blog')">Blog</a></li><li><a onclick="showView('home', true);scrollToSection('faq')">FAQ</a></li></ul></div>
+      <div class="footer-links-col"><h4>Navegar</h4><ul><li><a onclick="showView('home', true);scrollToSection('nosotros')">Quiénes somos</a></li><li><a onclick="showView('home', true);scrollToSection('activos')">Activos disponibles</a></li><li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li><li><a onclick="showView('home', true);scrollToSection('vendidos')">Track record</a></li><li><a onclick="showView('home', true);scrollToSection('blog')">Blog</a></li><li><a onclick="showView('home', true);scrollToSection('faq')">FAQ</a></li></ul></div>
       
       <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="mailto:info@creandounsueldo.com">info@creandounsueldo.com</a></li><li><a href="https://t.me/creandounsueldo" target="_blank">Canal Telegram</a></li><li><a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank">Grupo WhatsApp</a></li></ul></div>
     </div>
@@ -1046,6 +1164,82 @@ footer{background:var(--dark);padding:56px 52px 32px}
         </div>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<!-- MODAL AGENTE -->
+<div class="modal-overlay" id="agenteOverlay" onclick="closeAgenteOutside(event)">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-header">
+      <button class="modal-header-close" onclick="closeAgente()">×</button>
+      <div class="modal-title">HABLAR CON UN AGENTE</div>
+      <div class="modal-subtitle">Te contactamos en menos de 24h · Sin compromiso</div>
+    </div>
+    <div class="modal-body" id="agente-form-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px">
+        <div class="form-group">
+          <label class="form-label">Nombre *</label>
+          <input class="form-input" id="ag-nombre" type="text" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Teléfono *</label>
+          <input class="form-input" id="ag-tel" type="tel" placeholder="+34 6XX XXX XXX">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" id="ag-email" type="email" placeholder="tu@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">¿Cómo prefieres que te contactemos?</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;background:var(--gray5);border:1.5px solid var(--gray3);padding:8px 14px;border-radius:var(--radius);transition:all .15s" id="pref-llamada-label">
+            <input type="radio" name="ag-preferencia" value="llamada" id="pref-llamada" style="accent-color:var(--red)" checked> 📞 Llamada
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;background:var(--gray5);border:1.5px solid var(--gray3);padding:8px 14px;border-radius:var(--radius);transition:all .15s" id="pref-video-label">
+            <input type="radio" name="ag-preferencia" value="videollamada" id="pref-video" style="accent-color:var(--red)"> 🎥 Videollamada
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;background:var(--gray5);border:1.5px solid var(--gray3);padding:8px 14px;border-radius:var(--radius);transition:all .15s" id="pref-whatsapp-label">
+            <input type="radio" name="ag-preferencia" value="whatsapp" id="pref-whatsapp" style="accent-color:var(--red)"> 💬 WhatsApp
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">¿En qué situación estás?</label>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px">
+            <input type="checkbox" id="ag-capital" style="accent-color:var(--red)"> Ya tengo capital disponible para invertir
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px">
+            <input type="checkbox" id="ag-financiacion" style="accent-color:var(--red)"> Necesito información sobre financiación
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px">
+            <input type="checkbox" id="ag-primera" style="accent-color:var(--red)"> Es mi primera inversión inmobiliaria
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px">
+            <input type="checkbox" id="ag-dudas" style="accent-color:var(--red)"> Tengo dudas sobre cómo funciona
+          </label>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">¿Algo más que quieras contarnos?</label>
+        <textarea class="form-input" id="ag-msg" rows="3" placeholder="Cuéntanos tu situación..."></textarea>
+      </div>
+      <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;margin-top:12px">
+        <input type="checkbox" id="ag-consent" style="margin-top:2px;accent-color:var(--red);flex-shrink:0">
+        <span style="font-size:11px;color:var(--gray2);line-height:1.5">Acepto que me contactéis. <a href="#" onclick="showPrivacidad('privacidad');return false" style="color:var(--red)">Política de privacidad</a>.</span>
+      </label>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeAgente()">Cancelar</button>
+        <button class="btn-primary-form" onclick="enviarAgente()">Quiero que me contactéis →</button>
+      </div>
+    </div>
+    <div id="agente-success" style="display:none;text-align:center;padding:40px 28px">
+      <div style="font-size:52px;margin-bottom:14px">✅</div>
+      <div style="font-family:var(--font-display);font-size:28px;color:var(--dark);margin-bottom:8px">¡RECIBIDO!</div>
+      <p style="font-size:14px;color:var(--gray);line-height:1.6">Te contactamos en menos de 24h en el canal que prefieres.</p>
+      <button class="btn-primary-form" style="margin:20px auto 0" onclick="closeAgente()">Cerrar</button>
     </div>
   </div>
 </div>
@@ -1496,7 +1690,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <div id="leadPopupBody" style="padding:24px 28px">
       <div style="display:flex;gap:8px;margin-bottom:16px">
         <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:var(--red)">72</div><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">Operaciones</div></div>
-        <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:var(--red)">+7%</div><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">Rent. media</div></div>
+        <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:var(--red)">+10%</div><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">Rent. bruta</div></div>
         <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:#22C55E">100%</div><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">Alquilados</div></div>
       </div>
       <div style="display:flex;gap:8px;margin-bottom:10px">
@@ -1618,6 +1812,21 @@ function filterAll(btn, filter) {
 }
 
 function scrollToTop() { window.scrollTo(0, 0); }
+function toggleMobileMenu() {
+  var menu = document.getElementById('mobileMenu')
+  var btn  = document.getElementById('navHamburger')
+  var open = menu.style.display === 'block'
+  menu.style.display = open ? 'none' : 'block'
+  document.body.style.overflow = open ? '' : 'hidden'
+  btn.classList.toggle('open', !open)
+}
+function closeMobileMenu() {
+  var menu = document.getElementById('mobileMenu')
+  var btn  = document.getElementById('navHamburger')
+  menu.style.display = 'none'
+  document.body.style.overflow = ''
+  btn.classList.remove('open')
+}
 function scrollToSection(id) {
   setTimeout(function() {
     var el = document.getElementById(id);
@@ -2921,6 +3130,53 @@ function openContactoActivo(a) {
   if (title) title.textContent = 'RESERVAR ACTIVO'
   var sub = document.querySelector('#contactoOverlay .modal-subtitle')
   if (sub) sub.textContent = [a.zona, a.ciudad].filter(Boolean).join(', ') + ' — ' + fmtE(a.precio)
+}
+
+function openAgente() {
+  document.getElementById('agente-form-body').style.display = ''
+  document.getElementById('agente-success').style.display = 'none'
+  ;['ag-nombre','ag-tel','ag-email','ag-msg'].forEach(function(id){
+    var el = document.getElementById(id); if (el) el.value = ''
+  })
+  ;['ag-capital','ag-financiacion','ag-primera','ag-dudas','ag-consent'].forEach(function(id){
+    var el = document.getElementById(id); if (el) el.checked = false
+  })
+  document.getElementById('agenteOverlay').classList.add('open')
+  document.body.style.overflow = 'hidden'
+}
+function closeAgente() {
+  document.getElementById('agenteOverlay').classList.remove('open')
+  document.body.style.overflow = ''
+}
+function closeAgenteOutside(e) {
+  if (e.target === document.getElementById('agenteOverlay')) closeAgente()
+}
+function enviarAgente() {
+  var nombre = document.getElementById('ag-nombre').value.trim()
+  var tel    = document.getElementById('ag-tel').value.trim()
+  if (!nombre || !tel) { alert('Por favor rellena nombre y teléfono.'); return }
+  if (!document.getElementById('ag-consent').checked) { alert('Debes aceptar la política de privacidad.'); return }
+  var pref = document.querySelector('input[name="ag-preferencia"]:checked')
+  var preferencia = pref ? pref.value : 'llamada'
+  var situacion = []
+  if (document.getElementById('ag-capital').checked)     situacion.push('Capital disponible')
+  if (document.getElementById('ag-financiacion').checked) situacion.push('Necesita financiación')
+  if (document.getElementById('ag-primera').checked)     situacion.push('Primera inversión')
+  if (document.getElementById('ag-dudas').checked)       situacion.push('Tiene dudas')
+  var email  = document.getElementById('ag-email').value.trim()
+  var msg    = document.getElementById('ag-msg').value.trim()
+  var subject = encodeURIComponent('Contacto agente — ' + nombre)
+  var body = encodeURIComponent(
+    'Nombre: ' + nombre + '\n'
+    + 'Teléfono: ' + tel + '\n'
+    + (email ? 'Email: ' + email + '\n' : '')
+    + 'Preferencia de contacto: ' + preferencia + '\n'
+    + (situacion.length ? 'Situación: ' + situacion.join(', ') + '\n' : '')
+    + (msg ? '\nMensaje: ' + msg : '')
+  )
+  window.open('mailto:info@creandounsueldo.com?subject=' + subject + '&body=' + body)
+  document.getElementById('agente-form-body').style.display = 'none'
+  document.getElementById('agente-success').style.display = ''
 }
 
 function openContacto() {
