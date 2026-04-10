@@ -526,9 +526,14 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
   <!-- VENDIDOS -->
   <section id="vendidos" style="padding:56px 52px;color:var(--dark)">
-    <div class="section-eyebrow">Track record</div>
-    <h2>RESULTADOS<br>REALES</h2>
-    <p class="section-desc">Operaciones cerradas con sus rentabilidades finales. Sin editar. Sin redondear.</p>
+    <div class="section-header-row">
+      <div>
+        <div class="section-eyebrow">Track record</div>
+        <h2>RESULTADOS<br>REALES</h2>
+        <p class="section-desc">Operaciones cerradas con sus rentabilidades finales. Sin editar. Sin redondear.</p>
+      </div>
+      <button class="ver-todas-btn" onclick="showView('vendidos-all');scrollToTop()">Ver todas →</button>
+    </div>
     <div class="vendidos-grid" id="grid-vendidos">
       <div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">
         <div style="width:32px;height:32px;border:3px solid rgba(255,255,255,.1);border-top-color:#E31E24;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>
@@ -802,7 +807,141 @@ footer{background:var(--dark);padding:56px 52px 32px}
   </div>
 </div>
 
+<!-- FICHA ACTIVO -->
+<div class="view" id="view-ficha">
+  <div style="padding-top:68px;min-height:100vh;background:var(--gray5)">
+
+    <!-- Hero imagen -->
+    <div id="ficha-hero" style="height:420px;background:#111;position:relative;overflow:hidden">
+      <div id="ficha-gallery-main" style="width:100%;height:100%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;color:#444;font-size:14px">Sin fotos</div>
+      <div id="ficha-thumbs" style="position:absolute;bottom:16px;left:52px;display:flex;gap:8px"></div>
+      <div id="ficha-badge-hero" style="position:absolute;top:20px;right:20px"></div>
+    </div>
+
+    <div style="max-width:1200px;margin:0 auto;padding:48px 52px;display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start">
+
+      <!-- COLUMNA IZQUIERDA -->
+      <div>
+        <!-- Título y ubicación -->
+        <div id="ficha-eyebrow" style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px"></div>
+        <h1 id="ficha-titulo" style="font-family:var(--font-display);font-size:clamp(32px,4vw,52px);line-height:1;margin-bottom:6px;color:var(--dark)"></h1>
+        <div id="ficha-loc" style="font-size:15px;color:var(--gray);margin-bottom:32px">📍</div>
+
+        <!-- KPIs principales -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px" id="ficha-kpis-main"></div>
+
+        <!-- Descripción -->
+        <div style="margin-bottom:32px">
+          <div style="font-family:var(--font-display);font-size:18px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">DESCRIPCIÓN</div>
+          <p id="ficha-desc" style="font-size:15px;color:var(--gray);line-height:1.75"></p>
+        </div>
+
+        <!-- Datos del inmueble -->
+        <div style="margin-bottom:32px">
+          <div style="font-family:var(--font-display);font-size:18px;color:var(--dark);margin-bottom:16px;letter-spacing:.3px">DATOS DEL INMUEBLE</div>
+          <div id="ficha-datos" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gray3);border-radius:10px;overflow:hidden"></div>
+        </div>
+
+        <!-- Economía detallada -->
+        <div style="margin-bottom:32px">
+          <div style="font-family:var(--font-display);font-size:18px;color:var(--dark);margin-bottom:16px;letter-spacing:.3px">NÚMEROS DE LA OPERACIÓN</div>
+          <div id="ficha-economia" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gray3);border-radius:10px;overflow:hidden"></div>
+        </div>
+
+        <!-- Simulador hipoteca -->
+        <div style="background:var(--dark);border-radius:12px;padding:28px;margin-bottom:32px">
+          <div style="font-family:var(--font-display);font-size:18px;color:white;margin-bottom:6px;letter-spacing:.3px">SIMULADOR DE HIPOTECA</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px">Calcula tu cashflow real con financiación bancaria.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+            <div>
+              <label style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Financiación (%)</label>
+              <input type="range" id="hip-pct" min="50" max="80" value="80" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
+              <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-pct-val">80%</div>
+            </div>
+            <div>
+              <label style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Interés anual (%)</label>
+              <input type="range" id="hip-int" min="2" max="6" step="0.1" value="3.5" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
+              <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-int-val">3.5%</div>
+            </div>
+            <div>
+              <label style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Años</label>
+              <input type="range" id="hip-anos" min="10" max="30" value="25" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
+              <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-anos-val">25 años</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.07);border-radius:8px;overflow:hidden">
+            <div style="background:rgba(255,255,255,.05);padding:16px;text-align:center">
+              <div style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Cuota hipoteca</div>
+              <div style="font-family:var(--font-display);font-size:24px;color:white" id="hip-cuota">—</div>
+            </div>
+            <div style="background:rgba(255,255,255,.05);padding:16px;text-align:center">
+              <div style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Cashflow con hipoteca</div>
+              <div style="font-family:var(--font-display);font-size:24px" id="hip-cf">—</div>
+            </div>
+            <div style="background:rgba(255,255,255,.05);padding:16px;text-align:center">
+              <div style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Capital propio</div>
+              <div style="font-family:var(--font-display);font-size:24px;color:white" id="hip-capital">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Análisis de zona -->
+        <div id="ficha-zona-wrap" style="display:none;margin-bottom:32px">
+          <div style="font-family:var(--font-display);font-size:18px;color:var(--dark);margin-bottom:16px;letter-spacing:.3px">ANÁLISIS DE ZONA</div>
+          <div id="ficha-zona"></div>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA — Sidebar sticky -->
+      <div style="position:sticky;top:80px">
+        <div style="background:var(--dark);border-radius:14px;overflow:hidden">
+          <!-- Precio y CTA -->
+          <div style="padding:28px 28px 24px;border-bottom:1px solid rgba(255,255,255,.08)">
+            <div style="font-size:12px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Precio de compra</div>
+            <div id="ficha-precio-sidebar" style="font-family:var(--font-display);font-size:44px;color:white;line-height:1;margin-bottom:4px"></div>
+            <div id="ficha-honor-sidebar" style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:20px"></div>
+            <button id="ficha-reservar-btn" onclick="" style="width:100%;padding:14px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;margin-bottom:12px">Reservar este activo →</button>
+            <div style="display:flex;gap:8px">
+              <a href="https://t.me/creandounsueldo" target="_blank" style="flex:1;padding:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);color:rgba(255,255,255,.7);font-size:12px;font-weight:600;text-align:center;text-decoration:none;transition:all .2s">✈️ Telegram</a>
+              <a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank" style="flex:1;padding:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);color:rgba(255,255,255,.7);font-size:12px;font-weight:600;text-align:center;text-decoration:none;transition:all .2s">💬 WhatsApp</a>
+            </div>
+          </div>
+          <!-- KPIs sidebar -->
+          <div id="ficha-kpis-sidebar" style="padding:20px 28px;display:grid;grid-template-columns:1fr 1fr;gap:16px"></div>
+          <!-- Garantia -->
+          <div style="padding:16px 28px;background:rgba(34,197,94,.06);border-top:1px solid rgba(34,197,94,.12)">
+            <div style="font-size:12px;color:var(--green);font-weight:700">✅ Alquiler garantizado</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:3px;line-height:1.5">Si se alquila por debajo del estimado, compensamos la diferencia.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- MODAL CONTACTO -->
+<div class="view" id="view-vendidos-all">
+  <div style="padding-top:68px;min-height:100vh;background:var(--gray5)">
+    <div style="background:var(--dark);padding:52px 52px 48px;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none"></div>
+      <div style="position:relative;max-width:1200px">
+        <div style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.5);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px">Track record</div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(40px,5vw,68px);line-height:.95;color:white;margin-bottom:12px;letter-spacing:.5px">TODAS LAS<br>OPERACIONES</h2>
+        <p style="font-size:15px;color:rgba(255,255,255,.6);font-weight:300;max-width:480px">Resultados reales de todas las operaciones cerradas. Sin editar. Sin redondear.</p>
+      </div>
+    </div>
+    <div style="padding:40px 52px;max-width:1400px">
+      <div class="vendidos-grid" id="grid-vendidos-all">
+        <div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">
+          <div style="width:32px;height:32px;border:3px solid rgba(0,0,0,.1);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>
+          Cargando...
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="contactoOverlay" onclick="closeContactoOutside(event)">
   <div class="modal" style="max-width:480px">
     <div class="modal-header" style="border-radius:12px 12px 0 0">
@@ -1361,13 +1500,13 @@ function scrollToSection(id) {
 function showView(id, noScroll) {
   document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
   document.getElementById('view-' + id).classList.add('active');
-  var isActivo = id === 'activo';
-  var isActivos = id === 'activos';
-  var onHome = !isActivo && !isActivos;
+  var isOff = id !== 'home';
+  var onHome = !isOff;
   document.getElementById('navHome').style.display = onHome ? 'flex' : 'none';
-  document.getElementById('navBack').style.display = (isActivo || isActivos) ? 'flex' : 'none';
+  document.getElementById('navBack').style.display = isOff ? 'flex' : 'none';
   document.getElementById('navCtaHome').style.display = onHome ? 'block' : 'none';
-  document.getElementById('navCtaActivo').style.display = isActivo ? 'block' : 'none';
+  var navCtaActivo = document.getElementById('navCtaActivo');
+  if (navCtaActivo) navCtaActivo.style.display = id === 'activo' ? 'block' : 'none';
   if (!noScroll) window.scrollTo(0, 0);
 }
 window.addEventListener('scroll', function() {
@@ -1727,7 +1866,7 @@ function buildCard(a, onclick) {
     +   '<div class="kpi-grid-cell"><div class="kpi-grid-val">'+(gastosAnual>0?fmtE(gastosAnual)+'/año':'—')+'</div><div class="kpi-grid-key">Gastos fijos</div></div>'
     + '</div>'
     + (bloqueado
-        ? '<div class="activo-cta disabled">'+(a.status==='reservado'?'Ya reservado':'En proceso')+'</div>'
+        ? '<div class="activo-cta disabled">'+(a.status==='reservado'?'◆ Ya reservado':'◑ En proceso')+'</div>'
         : '<div class="activo-cta">Ver activo completo →</div>')
     + '</div></div>'
 }
@@ -1735,26 +1874,37 @@ function buildCard(a, onclick) {
 function renderActivos(activos) {
   var grid = document.getElementById('grid-activos')
   if (!grid) return
-  var lista = activos.filter(function(a) {
+
+  // Todos los activos activos (para "ver todas")
+  var todos = activos.filter(function(a) {
     return a.status === 'disponible' || a.status === 'reservado' || a.status === 'en_proceso'
   })
-  if (!lista.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">No hay activos disponibles ahora mismo.<br>Únete a nuestro Telegram para recibir los próximos.</div>'
+  // Home: solo 3 disponibles más recientes
+  var disponibles = todos.filter(function(a) { return a.status === 'disponible' })
+  var resto = todos.filter(function(a) { return a.status !== 'disponible' })
+  var listaHome = disponibles.slice(0, 3)
+
+  if (!todos.length) {
+    var msg = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">No hay activos disponibles ahora mismo.<br>Únete a nuestro Telegram para recibir los próximos.</div>'
+    grid.innerHTML = msg
     var g2 = document.getElementById('allActivosGrid')
-    if (g2) g2.innerHTML = grid.innerHTML
+    if (g2) g2.innerHTML = msg
     return
   }
-  var html = lista.map(function(a) {
-    return buildCard(a, 'abrirActivo('+JSON.stringify(a)+');scrollToTop()')
-  }).join('')
-  grid.innerHTML = html
 
-  // También llenar la vista "Ver todas"
+  // Home: 3 disponibles
+  grid.innerHTML = listaHome.map(function(a) {
+    return buildCard(a, 'abrirFicha('+JSON.stringify(a)+')')
+  }).join('')
+
+  // Ver todas: todos
   var allGrid = document.getElementById('allActivosGrid')
   if (allGrid) {
-    allGrid.innerHTML = html
+    allGrid.innerHTML = todos.map(function(a) {
+      return buildCard(a, 'abrirFicha('+JSON.stringify(a)+')')
+    }).join('')
     var cnt = document.getElementById('activosCount')
-    if (cnt) cnt.textContent = lista.length + ' activo' + (lista.length !== 1 ? 's' : '')
+    if (cnt) cnt.textContent = todos.length + ' activo' + (todos.length !== 1 ? 's' : '')
   }
 }
 function renderVendidos(activos) {
@@ -1762,10 +1912,13 @@ function renderVendidos(activos) {
   if (!grid) return
   var lista = activos.filter(function(a) { return a.status === 'finalizado' })
   if (!lista.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">Las operaciones cerradas aparecerán aquí con todos sus resultados.</div>'
+    var msg = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">Las operaciones cerradas aparecerán aquí con todos sus resultados.</div>'
+    grid.innerHTML = msg
+    var g2 = document.getElementById('grid-vendidos-all')
+    if (g2) g2.innerHTML = msg
     return
   }
-  grid.innerHTML = lista.map(function(a) {
+  var cards = lista.map(function(a) {
     var alqEst  = a.alquiler_estimado || 0
     var alqReal = a.alquiler_conseguido
     var rb      = calcRB(a.precio, alqEst)
@@ -1782,11 +1935,18 @@ function renderVendidos(activos) {
       + '<div class="vendido-result">'
       +   '<div><div class="result-val positive">'+(rb||'—')+'%</div><div class="result-key">Rent. bruta</div></div>'
       +   '<div><div class="result-val">'+fmtE(a.precio)+'</div><div class="result-key">Precio compra</div></div>'
-      +   '<div><div class="result-val '+(alqReal?(superado?'positive':'negative'):'')+'">'+fmtE(alqReal||alqEst)+'/mes'+(alqReal?(superado?' ↑':' ↓'):'')+'</div><div class="result-key">Alquiler '+(alqReal?'conseguido':'estimado')+'</div></div>'
+      +   '<div><div class="result-val '+(alqReal?(superado?'positive':'negative'):'')+'">'
+      +     fmtE(alqReal||alqEst)+'/mes'+(alqReal?(superado?' ↑':' ↓'):'')
+      +   '</div><div class="result-key">Alquiler '+(alqReal?'conseguido':'estimado')+'</div></div>'
       + '</div>'
       + (a.fecha_primer_alquiler ? '<div style="font-size:11px;color:#9ca3af;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06)">Alquilado: '+fmtDate(a.fecha_primer_alquiler)+'</div>' : '')
       + '</div>'
-  }).join('')
+  })
+  // Home: 3 más recientes
+  grid.innerHTML = cards.slice(0, 3).join('')
+  // Vista "ver todas"
+  var allGrid = document.getElementById('grid-vendidos-all')
+  if (allGrid) allGrid.innerHTML = cards.join('')
 }
 
 function abrirActivo(a) {
@@ -1867,6 +2027,177 @@ function toggleFaqAll() {
 }
 
 // ─── MODAL CONTACTO ───────────────────────────────────────────────────────────
+// ─── FICHA ACTIVO ─────────────────────────────────────────────────────────────
+var _fichaActivo = null
+function fichaSetFoto(el) { var m = document.getElementById("ficha-gallery-main"); if(m) m.innerHTML = "<img src=\""+el.dataset.src+"\" style=\"width:100%;height:100%;object-fit:cover\"\/>"; }
+
+function abrirFicha(a) {
+  _fichaActivo = a
+  var fotos = Array.isArray(a.fotos) ? a.fotos : []
+  var alq = +(a.alquiler_estimado || 0)
+  var com = +(a.gastos_comunidad  || 0)
+  var ibi = +(a.ibi || 0)
+  var rb  = calcRB(a.precio, alq)
+  var cf  = calcCF(alq, com, ibi)
+  var itp = +(a.itp || 8)
+  var itpAmt = Math.round(+a.precio * itp / 100)
+  var total = Math.round(+a.precio + itpAmt + 800 + 400 + 300)
+  var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(', ')
+
+  // Gallery
+  var gallery = document.getElementById('ficha-gallery-main')
+  if (fotos.length) {
+    gallery.innerHTML = '<img src="'+fotos[0]+'" style="width:100%;height:100%;object-fit:cover" />'
+  } else {
+    gallery.innerHTML = '<div style="color:#444;font-size:13px">Sin fotos</div>'
+  }
+  var thumbs = document.getElementById('ficha-thumbs')
+  if (fotos.length > 1) {
+    thumbs.innerHTML = fotos.slice(1,5).map(function(f) {
+      return '<div onclick="fichaSetFoto(this)" data-src="'+f+'" style="width:72px;height:50px;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid rgba(255,255,255,.3)"><img src="'+f+'" style="width:100%;height:100%;object-fit:cover"/></div>'
+    }).join('')
+  } else { thumbs.innerHTML = '' }
+
+  // Badge estado
+  var badgeEl = document.getElementById('ficha-badge-hero')
+  var badgeLabel = a.status === 'reservado' ? '◆ Reservado' : a.status === 'en_proceso' ? '◑ En proceso' : '● Disponible'
+  var badgeBg = a.status === 'disponible' ? 'rgba(34,197,94,.9)' : 'rgba(245,158,11,.9)'
+  badgeEl.innerHTML = '<span style="background:'+badgeBg+';color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:99px">'+badgeLabel+'</span>'
+
+  // Título y loc
+  document.getElementById('ficha-eyebrow').textContent = a.provincia || a.ciudad || ''
+  document.getElementById('ficha-titulo').textContent = a.titulo_pagina || (a.habitaciones ? 'PISO '+a.habitaciones+' HAB.' : 'ACTIVO')
+  document.getElementById('ficha-loc').textContent = '📍 '+loc
+
+  // Descripción
+  document.getElementById('ficha-desc').textContent = a.descripcion || 'Activo de inversión seleccionado por CreandoUnSueldo. Rentabilidad garantizada desde el primer mes.'
+
+  // KPIs principales
+  document.getElementById('ficha-kpis-main').innerHTML = [
+    ['Rent. bruta', (rb||'—')+'%', rb&&+rb>=8?'#22C55E':'var(--red)'],
+    ['Cashflow/mes', cf!=null?(cf>0?'+':'')+fmtE(cf):'—', cf&&cf>0?'#22C55E':'#F87171'],
+    ['Alquiler/mes', fmtE(alq), 'var(--dark)'],
+  ].map(function(k) {
+    return '<div style="background:white;border:1px solid var(--gray3);border-radius:10px;padding:20px;text-align:center">'
+      +'<div style="font-family:var(--font-display);font-size:32px;color:'+k[2]+';line-height:1">'+k[1]+'</div>'
+      +'<div style="font-size:11px;color:var(--gray2);text-transform:uppercase;letter-spacing:.8px;margin-top:4px">'+k[0]+'</div>'
+      +'</div>'
+  }).join('')
+
+  // Datos del inmueble
+  var datos = []
+  if (a.m2) datos.push(['Superficie', a.m2+' m²'])
+  if (a.habitaciones) datos.push(['Habitaciones', a.habitaciones])
+  if (a.banos) datos.push(['Baños', a.banos])
+  if (a.planta) datos.push(['Planta', a.planta])
+  datos.push(['Ascensor', a.ascensor||'—'])
+  if (a.puesta_a_punto) datos.push(['Reforma / puesta a punto', fmtE(a.puesta_a_punto)])
+  document.getElementById('ficha-datos').innerHTML = datos.map(function(d) {
+    return '<div style="background:white;padding:14px 18px;display:flex;justify-content:space-between;align-items:center">'
+      +'<span style="font-size:13px;color:var(--gray)">'+d[0]+'</span>'
+      +'<span style="font-size:13px;font-weight:700;color:var(--dark)">'+d[1]+'</span>'
+      +'</div>'
+  }).join('')
+
+  // Economía
+  var econ = [
+    ['Precio de compra', fmtE(a.precio)],
+    ['ITP ('+itp+'%)', fmtE(itpAmt)],
+    ['Notaría + Registro', '~1.500€'],
+    ['Total inversión', fmtE(total)],
+    ['Alquiler estimado', fmtE(alq)+'/mes'],
+    ['Gastos comunidad', fmtE(com)+'/mes'],
+    ['IBI', fmtE(ibi)+'/año'],
+    ['Cashflow neto', cf!=null?(cf>0?'+':'')+fmtE(cf)+'/mes':'—'],
+  ]
+  if (a.honorarios) econ.splice(2, 0, ['Honorarios intermediación', fmtE(a.honorarios)+' + IVA'])
+  document.getElementById('ficha-economia').innerHTML = econ.map(function(d) {
+    return '<div style="background:white;padding:14px 18px;display:flex;justify-content:space-between;align-items:center">'
+      +'<span style="font-size:13px;color:var(--gray)">'+d[0]+'</span>'
+      +'<span style="font-size:13px;font-weight:700;color:var(--dark)">'+d[1]+'</span>'
+      +'</div>'
+  }).join('')
+
+  // Sidebar
+  document.getElementById('ficha-precio-sidebar').textContent = fmtE(a.precio)
+  document.getElementById('ficha-honor-sidebar').textContent = a.honorarios ? '+ '+fmtE(a.honorarios)+' honorarios + IVA' : ''
+  document.getElementById('ficha-kpis-sidebar').innerHTML = [
+    ['Rent. bruta', (rb||'—')+'%'],
+    ['Cashflow', cf!=null?(cf>0?'+':'')+fmtE(cf)+'/mes':'—'],
+    ['Alquiler', fmtE(alq)+'/mes'],
+    ['Total inversión', fmtE(total)],
+  ].map(function(k) {
+    return '<div><div style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">'+k[0]+'</div>'
+      +'<div style="font-family:var(--font-display);font-size:20px;color:white">'+k[1]+'</div></div>'
+  }).join('')
+
+  // Botón reservar
+  var btn = document.getElementById('ficha-reservar-btn')
+  btn.onclick = function() { openContactoActivo(a) }
+  btn.style.display = a.status === 'disponible' ? '' : 'none'
+
+  // Análisis zona
+  var zonaData = null
+  if (a.analisisZona) zonaData = a.analisisZona
+  else if (a.analisis_zona) { try { zonaData = JSON.parse(a.analisis_zona) } catch(e) {} }
+  var zonaWrap = document.getElementById('ficha-zona-wrap')
+  if (zonaData && zonaData.resumen) {
+    zonaWrap.style.display = ''
+    document.getElementById('ficha-zona').innerHTML = '<p style="font-size:14px;color:var(--gray);line-height:1.75">'+zonaData.resumen+'</p>'
+  } else { zonaWrap.style.display = 'none' }
+
+  // Reset simulador
+  document.getElementById('hip-pct').value = 80
+  document.getElementById('hip-int').value = 3.5
+  document.getElementById('hip-anos').value = 25
+  calcHipoteca()
+
+  showView('ficha')
+  scrollToTop()
+}
+
+function calcHipoteca() {
+  var a = _fichaActivo
+  if (!a) return
+  var pct  = +document.getElementById('hip-pct').value
+  var int  = +document.getElementById('hip-int').value
+  var anos = +document.getElementById('hip-anos').value
+  document.getElementById('hip-pct-val').textContent  = pct+'%'
+  document.getElementById('hip-int-val').textContent  = int+'%'
+  document.getElementById('hip-anos-val').textContent = anos+' años'
+
+  var precio = +a.precio
+  var alq = +(a.alquiler_estimado||0)
+  var com = +(a.gastos_comunidad||0)
+  var ibi = +(a.ibi||0)
+  var cf  = calcCF(alq, com, ibi) || 0
+  var capital = Math.round(precio * pct / 100)
+  var total = Math.round(precio + precio*(+(a.itp||8)/100) + 1500)
+  var propio = total - capital
+  var r = int / 100 / 12
+  var n = anos * 12
+  var cuota = r > 0 ? Math.round(capital * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1)) : Math.round(capital/n)
+  var cfHip = cf - cuota
+
+  document.getElementById('hip-cuota').textContent = fmtE(cuota)+'/mes'
+  var cfEl = document.getElementById('hip-cf')
+  cfEl.textContent = (cfHip>0?'+':'')+fmtE(cfHip)+'/mes'
+  cfEl.style.color = cfHip > 0 ? '#22C55E' : '#F87171'
+  document.getElementById('hip-capital').textContent = fmtE(propio)
+}
+
+function openContactoActivo(a) {
+  // Pre-rellenar el mensaje con info del activo
+  openContacto()
+  var msg = document.getElementById('c-msg')
+  if (msg) msg.value = 'Hola, me interesa el activo ' + a.id + ' en ' + [a.zona, a.ciudad].filter(Boolean).join(', ') + ' (' + fmtE(a.precio) + '). ¿Podéis contactarme?'
+  // Actualizar título del modal
+  var title = document.querySelector('#contactoOverlay .modal-title')
+  if (title) title.textContent = 'RESERVAR ACTIVO'
+  var sub = document.querySelector('#contactoOverlay .modal-subtitle')
+  if (sub) sub.textContent = [a.zona, a.ciudad].filter(Boolean).join(', ') + ' — ' + fmtE(a.precio)
+}
+
 function openContacto() {
   document.getElementById('contacto-form-body').style.display = ''
   document.getElementById('contacto-success').style.display = 'none'
