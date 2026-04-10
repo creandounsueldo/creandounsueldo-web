@@ -2047,24 +2047,23 @@ var _filtroTodas = 'disponible'
 
 function abrirTodas(filtro) {
   _filtroTodas = filtro || 'disponible'
-  // Actualizar filtros visuales inmediatamente
-  filtrarTodas(filtro || 'disponible')
   showView('todas')
   scrollToTop()
-  // Si los datos aún no han cargado, mostrar spinner y esperar
-  if (!todosActivos || todosActivos.length === 0) {
+  // Actualizar botones y título sin renderizar
+  filtrarTodas(_filtroTodas)
+  // Renderizar (con espera si datos no cargados aún)
+  if (todosActivos && todosActivos.length > 0) {
+    renderTodas()
+  } else {
     var grid = document.getElementById('grid-todas')
-    if (grid) grid.innerHTML = '<div style="text-align:center;padding:64px;color:#9ca3af"><div style="width:32px;height:32px;border:3px solid rgba(0,0,0,.1);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>Cargando activos...</div>'
-    // Reintentar cada 300ms hasta que estén listos
+    if (grid) grid.innerHTML = '<div style="text-align:center;padding:64px;color:#9ca3af"><div style="width:32px;height:32px;border:3px solid rgba(0,0,0,.1);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>Cargando...</div>'
     var check = setInterval(function() {
       if (todosActivos && todosActivos.length > 0) {
         clearInterval(check)
         renderTodas()
       }
-    }, 300)
-    setTimeout(function() { clearInterval(check) }, 10000) // timeout 10s
-  } else {
-    renderTodas()
+    }, 200)
+    setTimeout(function() { clearInterval(check) }, 8000)
   }
 }
 
@@ -2074,11 +2073,8 @@ function filtrarTodas(filtro) {
   ['disponible','reservado','finalizado'].forEach(function(f) {
     var btn = document.getElementById('fp-'+f)
     if (btn) {
-      if (f === filtro) {
-        btn.classList.add('active')
-      } else {
-        btn.classList.remove('active')
-      }
+      if (f === filtro) { btn.classList.add('active') }
+      else { btn.classList.remove('active') }
     }
   })
   // Actualizar título/eyebrow
@@ -2094,7 +2090,8 @@ function filtrarTodas(filtro) {
     if (titulo) titulo.innerHTML = 'OPERACIONES<br>CERRADAS'
     if (eyebrow) eyebrow.textContent = 'Track record · Resultados reales'
   }
-  renderTodas()
+  // Solo renderizar si hay datos — si no, abrirTodas se encargará
+  if (todosActivos && todosActivos.length > 0) renderTodas()
 }
 
 function renderTodas() {
