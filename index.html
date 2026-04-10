@@ -811,108 +811,145 @@ footer{background:var(--dark);padding:56px 52px 32px}
 <div class="view" id="view-ficha">
   <div style="padding-top:68px;min-height:100vh;background:var(--gray5)">
 
-    <!-- Hero imagen -->
-    <div id="ficha-hero" style="height:420px;background:#111;position:relative;overflow:hidden">
-      <div id="ficha-gallery-main" style="width:100%;height:100%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;color:#444;font-size:14px">Sin fotos</div>
-      <div id="ficha-thumbs" style="position:absolute;bottom:16px;left:52px;display:flex;gap:8px"></div>
-      <div id="ficha-badge-hero" style="position:absolute;top:20px;right:20px"></div>
+    <!-- Galería -->
+    <div id="ficha-hero" style="height:400px;background:#111;position:relative;overflow:hidden">
+      <div id="ficha-gallery-main" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#555;font-size:14px">Sin fotos</div>
+      <div id="ficha-thumbs" style="position:absolute;bottom:14px;left:40px;display:flex;gap:8px;z-index:2"></div>
+      <div id="ficha-badges" style="position:absolute;top:16px;right:16px;display:flex;gap:8px"></div>
+      <!-- Links Maps / Street View -->
+      <div id="ficha-map-links" style="position:absolute;bottom:14px;right:40px;display:flex;gap:8px"></div>
     </div>
 
-    <div style="max-width:1200px;margin:0 auto;padding:48px 52px;display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start">
+    <div style="max-width:1200px;margin:0 auto;padding:40px 52px;display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:start">
 
-      <!-- COLUMNA IZQUIERDA -->
+      <!-- ── COLUMNA PRINCIPAL ── -->
       <div>
-        <!-- Título y ubicación -->
+
+        <!-- Cabecera -->
         <div id="ficha-eyebrow" style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px"></div>
-        <h1 id="ficha-titulo" style="font-family:var(--font-display);font-size:clamp(32px,4vw,52px);line-height:1;margin-bottom:6px;color:var(--dark)"></h1>
-        <div id="ficha-loc" style="font-size:15px;color:var(--gray);margin-bottom:32px">📍</div>
+        <h1 id="ficha-titulo" style="font-family:var(--font-display);font-size:clamp(28px,4vw,48px);line-height:1;margin-bottom:6px;color:var(--dark)"></h1>
+        <div id="ficha-loc" style="font-size:14px;color:var(--gray);margin-bottom:24px"></div>
 
         <!-- KPIs principales -->
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px" id="ficha-kpis-main"></div>
+        <div id="ficha-kpis-main" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px"></div>
+
+        <!-- €/m² comparativa -->
+        <div id="ficha-m2-wrap" style="display:none;margin-bottom:24px">
+          <div id="ficha-m2"></div>
+        </div>
 
         <!-- Descripción -->
-        <div style="margin-bottom:32px">
-          <div style="font-family:var(--font-display);font-size:18px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">DESCRIPCIÓN</div>
-          <p id="ficha-desc" style="font-size:15px;color:var(--gray);line-height:1.75"></p>
+        <div style="margin-bottom:28px">
+          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:10px;letter-spacing:.3px">DESCRIPCIÓN</div>
+          <p id="ficha-desc" style="font-size:14px;color:var(--gray);line-height:1.8"></p>
         </div>
 
         <!-- Datos del inmueble -->
-        <div style="margin-bottom:32px">
-          <div style="font-family:var(--font-display);font-size:18px;color:var(--dark);margin-bottom:16px;letter-spacing:.3px">DATOS DEL INMUEBLE</div>
+        <div style="margin-bottom:28px">
+          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">DATOS DEL INMUEBLE</div>
           <div id="ficha-datos" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gray3);border-radius:10px;overflow:hidden"></div>
         </div>
 
-        <!-- Economía detallada -->
-        <div style="margin-bottom:32px">
-          <div style="font-family:var(--font-display);font-size:18px;color:var(--dark);margin-bottom:16px;letter-spacing:.3px">NÚMEROS DE LA OPERACIÓN</div>
-          <div id="ficha-economia" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gray3);border-radius:10px;overflow:hidden"></div>
+        <!-- Retorno de inversión -->
+        <div id="ficha-retorno-wrap" style="display:none;margin-bottom:28px">
+          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">RETORNO DE LA INVERSIÓN</div>
+          <div id="ficha-retorno" style="background:#111318;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:20px"></div>
         </div>
 
-        <!-- Simulador hipoteca -->
-        <div style="background:var(--dark);border-radius:12px;padding:28px;margin-bottom:32px">
-          <div style="font-family:var(--font-display);font-size:18px;color:white;margin-bottom:6px;letter-spacing:.3px">SIMULADOR DE HIPOTECA</div>
-          <p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px">Calcula tu cashflow real con financiación bancaria.</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
-            <div>
-              <label style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Financiación (%)</label>
-              <input type="range" id="hip-pct" min="50" max="80" value="80" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
-              <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-pct-val">80%</div>
-            </div>
-            <div>
-              <label style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Interés anual (%)</label>
-              <input type="range" id="hip-int" min="2" max="6" step="0.1" value="3.5" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
-              <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-int-val">3.5%</div>
-            </div>
-            <div>
-              <label style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Años</label>
-              <input type="range" id="hip-anos" min="10" max="30" value="25" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
-              <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-anos-val">25 años</div>
-            </div>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.07);border-radius:8px;overflow:hidden">
-            <div style="background:rgba(255,255,255,.05);padding:16px;text-align:center">
-              <div style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Cuota hipoteca</div>
-              <div style="font-family:var(--font-display);font-size:24px;color:white" id="hip-cuota">—</div>
-            </div>
-            <div style="background:rgba(255,255,255,.05);padding:16px;text-align:center">
-              <div style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Cashflow con hipoteca</div>
-              <div style="font-family:var(--font-display);font-size:24px" id="hip-cf">—</div>
-            </div>
-            <div style="background:rgba(255,255,255,.05);padding:16px;text-align:center">
-              <div style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Capital propio</div>
-              <div style="font-family:var(--font-display);font-size:24px;color:white" id="hip-capital">—</div>
-            </div>
-          </div>
+        <!-- Proyección patrimonial -->
+        <div id="ficha-proyeccion-wrap" style="display:none;margin-bottom:28px">
+          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">PROYECCIÓN PATRIMONIAL A 20 AÑOS</div>
+          <div id="ficha-proyeccion" style="background:#111318;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:20px"></div>
+        </div>
+
+        <!-- Comparativa inversiones -->
+        <div id="ficha-comparativa-wrap" style="display:none;margin-bottom:28px">
+          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">COMPARATIVA CON OTRAS INVERSIONES</div>
+          <div id="ficha-comparativa" style="background:#111318;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:20px"></div>
         </div>
 
         <!-- Análisis de zona -->
-        <div id="ficha-zona-wrap" style="display:none;margin-bottom:32px">
-          <div style="font-family:var(--font-display);font-size:18px;color:var(--dark);margin-bottom:16px;letter-spacing:.3px">ANÁLISIS DE ZONA</div>
+        <div id="ficha-zona-wrap" style="display:none;margin-bottom:28px">
+          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">ANÁLISIS DE ZONA</div>
           <div id="ficha-zona"></div>
         </div>
-      </div>
 
-      <!-- COLUMNA DERECHA — Sidebar sticky -->
-      <div style="position:sticky;top:80px">
-        <div style="background:var(--dark);border-radius:14px;overflow:hidden">
-          <!-- Precio y CTA -->
-          <div style="padding:28px 28px 24px;border-bottom:1px solid rgba(255,255,255,.08)">
-            <div style="font-size:12px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Precio de compra</div>
-            <div id="ficha-precio-sidebar" style="font-family:var(--font-display);font-size:44px;color:white;line-height:1;margin-bottom:4px"></div>
-            <div id="ficha-honor-sidebar" style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:20px"></div>
-            <button id="ficha-reservar-btn" onclick="" style="width:100%;padding:14px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;margin-bottom:12px">Reservar este activo →</button>
-            <div style="display:flex;gap:8px">
-              <a href="https://t.me/creandounsueldo" target="_blank" style="flex:1;padding:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);color:rgba(255,255,255,.7);font-size:12px;font-weight:600;text-align:center;text-decoration:none;transition:all .2s">✈️ Telegram</a>
-              <a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank" style="flex:1;padding:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);color:rgba(255,255,255,.7);font-size:12px;font-weight:600;text-align:center;text-decoration:none;transition:all .2s">💬 WhatsApp</a>
+        <!-- Mapa -->
+        <div id="ficha-mapa-wrap" style="display:none;margin-bottom:28px">
+          <div style="font-family:var(--font-display);font-size:16px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">UBICACIÓN</div>
+          <div style="border-radius:12px;overflow:hidden;border:1px solid var(--gray3)">
+            <iframe id="ficha-mapa" width="100%" height="280" frameborder="0" style="display:block;border:none" allowfullscreen loading="lazy" title="mapa"></iframe>
+          </div>
+          <div id="ficha-mapa-btns" style="display:flex;gap:10px;margin-top:10px"></div>
+        </div>
+
+        <!-- Simulador hipoteca -->
+        <div style="background:#111318;border-radius:12px;padding:24px;margin-bottom:28px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="font-family:var(--font-display);font-size:18px;color:white;letter-spacing:.3px">SIMULADOR DE HIPOTECA</div>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:rgba(255,255,255,.5)">
+              <input type="checkbox" id="hip-activa" onchange="toggleHipoteca()" style="accent-color:var(--red);width:16px;height:16px"> Activar
+            </label>
+          </div>
+          <p style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px">Activa el simulador para ver el cashflow real con financiación bancaria.</p>
+          <div id="hip-controles" style="display:none">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
+              <div>
+                <label style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Financiación</label>
+                <input type="range" id="hip-pct" min="50" max="80" value="80" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
+                <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-pct-val">80%</div>
+              </div>
+              <div>
+                <label style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Interés anual</label>
+                <input type="range" id="hip-int" min="2" max="6" step="0.1" value="3.5" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
+                <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-int-val">3.5%</div>
+              </div>
+              <div>
+                <label style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Años</label>
+                <input type="range" id="hip-anos" min="10" max="30" value="25" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
+                <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-anos-val">25 años</div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.06);border-radius:8px;overflow:hidden">
+              <div style="background:rgba(255,255,255,.04);padding:14px;text-align:center">
+                <div style="font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">Cuota hipoteca</div>
+                <div style="font-family:var(--font-display);font-size:22px;color:white" id="hip-cuota">—</div>
+              </div>
+              <div style="background:rgba(255,255,255,.04);padding:14px;text-align:center">
+                <div style="font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">Cashflow con hipoteca</div>
+                <div style="font-family:var(--font-display);font-size:22px" id="hip-cf-result">—</div>
+              </div>
+              <div style="background:rgba(255,255,255,.04);padding:14px;text-align:center">
+                <div style="font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">Capital propio</div>
+                <div style="font-family:var(--font-display);font-size:22px;color:white" id="hip-capital">—</div>
+              </div>
             </div>
           </div>
-          <!-- KPIs sidebar -->
-          <div id="ficha-kpis-sidebar" style="padding:20px 28px;display:grid;grid-template-columns:1fr 1fr;gap:16px"></div>
-          <!-- Garantia -->
-          <div style="padding:16px 28px;background:rgba(34,197,94,.06);border-top:1px solid rgba(34,197,94,.12)">
-            <div style="font-size:12px;color:var(--green);font-weight:700">✅ Alquiler garantizado</div>
-            <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:3px;line-height:1.5">Si se alquila por debajo del estimado, compensamos la diferencia.</div>
+        </div>
+
+      </div>
+
+      <!-- ── SIDEBAR STICKY ── -->
+      <div style="position:sticky;top:80px">
+        <div style="background:var(--dark);border-radius:14px;overflow:hidden;margin-bottom:16px">
+          <div style="padding:24px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08)">
+            <div style="font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Precio de compra</div>
+            <div id="ficha-precio-sidebar" style="font-family:var(--font-display);font-size:40px;color:white;line-height:1;margin-bottom:3px"></div>
+            <div id="ficha-honor-sidebar" style="font-size:12px;color:rgba(255,255,255,.35);margin-bottom:16px"></div>
+            <button id="ficha-reservar-btn" style="width:100%;padding:13px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s">Reservar este activo →</button>
           </div>
+          <!-- KPIs sidebar — se actualizan con hipoteca -->
+          <div id="ficha-kpis-sidebar" style="padding:18px 24px;display:grid;grid-template-columns:1fr 1fr;gap:14px"></div>
+          <!-- Garantia -->
+          <div style="padding:14px 24px;background:rgba(34,197,94,.06);border-top:1px solid rgba(34,197,94,.12)">
+            <div style="font-size:12px;color:#22C55E;font-weight:700">✅ Alquiler garantizado</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:3px;line-height:1.5">Si se alquila por debajo del estimado, compensamos la diferencia durante el primer año.</div>
+          </div>
+        </div>
+        <!-- Economía detallada -->
+        <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:20px">
+          <div style="font-family:var(--font-display);font-size:14px;color:var(--dark);margin-bottom:12px;letter-spacing:.3px">NÚMEROS DE LA OPERACIÓN</div>
+          <div id="ficha-economia" style="display:flex;flex-direction:column;gap:0;border:1px solid var(--gray3);border-radius:8px;overflow:hidden"></div>
         </div>
       </div>
 
@@ -2037,7 +2074,11 @@ function toggleFaqAll() {
 // ─── MODAL CONTACTO ───────────────────────────────────────────────────────────
 // ─── FICHA ACTIVO ─────────────────────────────────────────────────────────────
 var _fichaActivo = null
-function fichaSetFoto(el) { var m = document.getElementById("ficha-gallery-main"); if(m) m.innerHTML = "<img src=\""+el.dataset.src+"\" style=\"width:100%;height:100%;object-fit:cover\"\/>"; }
+
+function fichaSetFoto(el) {
+  var m = document.getElementById('ficha-gallery-main')
+  if (m) m.innerHTML = '<img src="'+el.dataset.src+'" style="width:100%;height:100%;object-fit:cover"/>'
+}
 
 function abrirFicha(a) {
   _fichaActivo = a
@@ -2048,120 +2089,312 @@ function abrirFicha(a) {
   var rb  = calcRB(a.precio, alq)
   var cf  = calcCF(alq, com, ibi)
   var itp = +(a.itp || 8)
-  var itpAmt = Math.round(+a.precio * itp / 100)
-  var total = Math.round(+a.precio + itpAmt + 800 + 400 + 300)
+  var itpAmt  = Math.round(+a.precio * itp / 100)
+  var puesta  = +(a.puesta_a_punto || 0)
+  var total   = Math.round(+a.precio + itpAmt + 1500 + puesta)
+  var cashflowAnual = cf ? cf * 12 : 0
   var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(', ')
+  var direccion = [a.direccion, a.zona, a.ciudad, a.provincia].filter(Boolean).join(', ')
+  var m2 = +(a.m2 || 0)
+  var pa = m2 ? (alq / m2).toFixed(2) : null
 
-  // Gallery
+  // ── Galería ──
   var gallery = document.getElementById('ficha-gallery-main')
   if (fotos.length) {
-    gallery.innerHTML = '<img src="'+fotos[0]+'" style="width:100%;height:100%;object-fit:cover" />'
+    gallery.innerHTML = '<img src="'+fotos[0]+'" style="width:100%;height:100%;object-fit:cover"/>'
   } else {
-    gallery.innerHTML = '<div style="color:#444;font-size:13px">Sin fotos</div>'
+    gallery.innerHTML = '<div style="color:#555;font-size:13px">Sin fotos</div>'
   }
   var thumbs = document.getElementById('ficha-thumbs')
-  if (fotos.length > 1) {
-    thumbs.innerHTML = fotos.slice(1,5).map(function(f) {
-      return '<div onclick="fichaSetFoto(this)" data-src="'+f+'" style="width:72px;height:50px;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid rgba(255,255,255,.3)"><img src="'+f+'" style="width:100%;height:100%;object-fit:cover"/></div>'
-    }).join('')
-  } else { thumbs.innerHTML = '' }
+  thumbs.innerHTML = fotos.slice(1,5).map(function(f) {
+    return '<div onclick="fichaSetFoto(this)" data-src="'+f+'" style="width:68px;height:48px;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid rgba(255,255,255,.3);flex-shrink:0"><img src="'+f+'" style="width:100%;height:100%;object-fit:cover"/></div>'
+  }).join('')
 
   // Badge estado
-  var badgeEl = document.getElementById('ficha-badge-hero')
-  var badgeLabel = a.status === 'reservado' ? '◆ Reservado' : a.status === 'en_proceso' ? '◑ En proceso' : '● Disponible'
-  var badgeBg = a.status === 'disponible' ? 'rgba(34,197,94,.9)' : 'rgba(245,158,11,.9)'
-  badgeEl.innerHTML = '<span style="background:'+badgeBg+';color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:99px">'+badgeLabel+'</span>'
+  var badgeLabel = a.status==='reservado'?'◆ Reservado':a.status==='en_proceso'?'◑ En proceso':'● Disponible'
+  var badgeBg = a.status==='disponible'?'rgba(34,197,94,.9)':'rgba(245,158,11,.9)'
+  document.getElementById('ficha-badges').innerHTML = '<span style="background:'+badgeBg+';color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:99px">'+badgeLabel+'</span>'
 
-  // Título y loc
+  // Links Maps y Street View
+  if (direccion) {
+    var mapsUrl = 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(direccion)
+    var svUrl   = 'https://www.google.com/maps?q='+encodeURIComponent(direccion)+'&layer=c'
+    document.getElementById('ficha-map-links').innerHTML =
+      '<a href="'+mapsUrl+'" target="_blank" style="background:rgba(0,0,0,.6);backdrop-filter:blur(6px);color:white;font-size:11px;font-weight:700;padding:6px 12px;border-radius:7px;text-decoration:none;display:flex;align-items:center;gap:5px">🗺️ Google Maps</a>'
+      +'<a href="'+svUrl+'" target="_blank" style="background:rgba(0,0,0,.6);backdrop-filter:blur(6px);color:white;font-size:11px;font-weight:700;padding:6px 12px;border-radius:7px;text-decoration:none;display:flex;align-items:center;gap:5px">🚶 Street View</a>'
+  }
+
+  // ── Título y loc ──
   document.getElementById('ficha-eyebrow').textContent = a.provincia || a.ciudad || ''
-  document.getElementById('ficha-titulo').textContent = a.titulo_pagina || (a.habitaciones ? 'PISO '+a.habitaciones+' HAB.' : 'ACTIVO')
+  document.getElementById('ficha-titulo').textContent = a.titulo_pagina || (a.habitaciones ? 'PISO '+a.habitaciones+' HAB.' : 'ACTIVO EN '+loc.toUpperCase())
   document.getElementById('ficha-loc').textContent = '📍 '+loc
 
-  // Descripción
+  // ── Descripción ──
   document.getElementById('ficha-desc').textContent = a.descripcion || 'Activo de inversión seleccionado por CreandoUnSueldo. Rentabilidad garantizada desde el primer mes.'
 
-  // KPIs principales
-  document.getElementById('ficha-kpis-main').innerHTML = [
+  // ── KPIs principales ──
+  var kpis = [
     ['Rent. bruta', (rb||'—')+'%', rb&&+rb>=8?'#22C55E':'var(--red)'],
     ['Cashflow/mes', cf!=null?(cf>0?'+':'')+fmtE(cf):'—', cf&&cf>0?'#22C55E':'#F87171'],
     ['Alquiler/mes', fmtE(alq), 'var(--dark)'],
-  ].map(function(k) {
-    return '<div style="background:white;border:1px solid var(--gray3);border-radius:10px;padding:20px;text-align:center">'
-      +'<div style="font-family:var(--font-display);font-size:32px;color:'+k[2]+';line-height:1">'+k[1]+'</div>'
-      +'<div style="font-size:11px;color:var(--gray2);text-transform:uppercase;letter-spacing:.8px;margin-top:4px">'+k[0]+'</div>'
+    ['Recuperación', cashflowAnual>0?Math.ceil(total/cashflowAnual)+' años':'—', '#F59E0B'],
+  ]
+  document.getElementById('ficha-kpis-main').innerHTML = kpis.map(function(k) {
+    return '<div style="background:white;border:1px solid var(--gray3);border-radius:10px;padding:16px;text-align:center">'
+      +'<div style="font-family:var(--font-display);font-size:28px;color:'+k[2]+';line-height:1">'+k[1]+'</div>'
+      +'<div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:.8px;margin-top:4px">'+k[0]+'</div>'
       +'</div>'
   }).join('')
 
-  // Datos del inmueble
+  // ── €/m² comparativa ──
+  var zona = null
+  if (a.analisisZona) zona = a.analisisZona
+  else if (a.analisis_zona) { try { zona = JSON.parse(a.analisis_zona) } catch(e) {} }
+  var mercadoM2 = zona && zona.mercadoAlquiler && zona.mercadoAlquiler.precioMedioM2 ? parseFloat(zona.mercadoAlquiler.precioMedioM2) : null
+  var m2wrap = document.getElementById('ficha-m2-wrap')
+  if (pa && mercadoM2) {
+    var favorable = parseFloat(pa) <= mercadoM2
+    m2wrap.style.display = ''
+    document.getElementById('ficha-m2').innerHTML =
+      '<div style="display:flex;gap:10px">'
+      +'<div style="flex:1;background:'+(favorable?'rgba(34,197,94,.06)':'rgba(255,255,255,.03)')+';border:1px solid '+(favorable?'rgba(34,197,94,.2)':'var(--gray3)')+';border-radius:10px;padding:14px;text-align:center">'
+      +'<div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Este activo €/m² alquiler</div>'
+      +'<div style="font-family:var(--font-display);font-size:28px;color:'+(favorable?'#22C55E':'var(--dark)')+'">'+pa+'€</div>'
+      +(favorable?'<div style="font-size:11px;color:#22C55E;margin-top:4px">✓ Por debajo del mercado</div>':'')
+      +'</div>'
+      +'<div style="flex:1;background:rgba(255,255,255,.03);border:1px solid var(--gray3);border-radius:10px;padding:14px;text-align:center">'
+      +'<div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Precio medio zona €/m²</div>'
+      +'<div style="font-family:var(--font-display);font-size:28px;color:var(--gray)">'+mercadoM2+'€</div>'
+      +'<div style="font-size:11px;color:var(--gray2);margin-top:4px">Media del mercado local</div>'
+      +'</div>'
+      +'</div>'
+  } else { m2wrap.style.display = 'none' }
+
+  // ── Datos del inmueble ──
   var datos = []
   if (a.m2) datos.push(['Superficie', a.m2+' m²'])
   if (a.habitaciones) datos.push(['Habitaciones', a.habitaciones])
   if (a.banos) datos.push(['Baños', a.banos])
   if (a.planta) datos.push(['Planta', a.planta])
   datos.push(['Ascensor', a.ascensor||'—'])
-  if (a.puesta_a_punto) datos.push(['Reforma / puesta a punto', fmtE(a.puesta_a_punto)])
+  if (puesta > 0) datos.push(['Puesta a punto', fmtE(puesta)])
+  datos.push(['Comunidad', fmtE(com)+'/mes'])
+  datos.push(['IBI', fmtE(ibi)+'/año'])
   document.getElementById('ficha-datos').innerHTML = datos.map(function(d) {
-    return '<div style="background:white;padding:14px 18px;display:flex;justify-content:space-between;align-items:center">'
+    return '<div style="background:white;padding:12px 16px;display:flex;justify-content:space-between;align-items:center">'
       +'<span style="font-size:13px;color:var(--gray)">'+d[0]+'</span>'
       +'<span style="font-size:13px;font-weight:700;color:var(--dark)">'+d[1]+'</span>'
       +'</div>'
   }).join('')
 
-  // Economía
-  var econ = [
-    ['Precio de compra', fmtE(a.precio)],
-    ['ITP ('+itp+'%)', fmtE(itpAmt)],
-    ['Notaría + Registro', '~1.500€'],
-    ['Total inversión', fmtE(total)],
-    ['Alquiler estimado', fmtE(alq)+'/mes'],
-    ['Gastos comunidad', fmtE(com)+'/mes'],
-    ['IBI', fmtE(ibi)+'/año'],
-    ['Cashflow neto', cf!=null?(cf>0?'+':'')+fmtE(cf)+'/mes':'—'],
-  ]
-  if (a.honorarios) econ.splice(2, 0, ['Honorarios intermediación', fmtE(a.honorarios)+' + IVA'])
-  document.getElementById('ficha-economia').innerHTML = econ.map(function(d) {
-    return '<div style="background:white;padding:14px 18px;display:flex;justify-content:space-between;align-items:center">'
-      +'<span style="font-size:13px;color:var(--gray)">'+d[0]+'</span>'
-      +'<span style="font-size:13px;font-weight:700;color:var(--dark)">'+d[1]+'</span>'
+  // ── Retorno inversión ──
+  var retornoWrap = document.getElementById('ficha-retorno-wrap')
+  if (cashflowAnual > 0) {
+    retornoWrap.style.display = ''
+    var anosRecup = Math.ceil(total / cashflowAnual)
+    document.getElementById('ficha-retorno').innerHTML =
+      '<div style="display:flex;justify-content:space-around;margin-bottom:14px">'
+      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">INVERSIÓN TOTAL</div><div style="font-family:var(--font-display);font-size:28px;color:#E31E24">'+fmtE(total)+'</div></div>'
+      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">AÑO RECUPERACIÓN</div><div style="font-family:var(--font-display);font-size:28px;color:#22C55E">Año '+anosRecup+'</div></div>'
+      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">CASHFLOW ANUAL</div><div style="font-family:var(--font-display);font-size:28px;color:white">+'+fmtE(cashflowAnual)+'</div></div>'
       +'</div>'
-  }).join('')
+      +'<div style="height:4px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden"><div style="height:100%;background:linear-gradient(90deg,#E31E24,#22C55E);border-radius:4px;width:100%"></div></div>'
+      +'<div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:8px;text-align:center">A partir del año '+anosRecup+', cada +'+fmtE(cashflowAnual)+'/año es beneficio neto</div>'
+  } else { retornoWrap.style.display = 'none' }
 
-  // Sidebar
-  document.getElementById('ficha-precio-sidebar').textContent = fmtE(a.precio)
-  document.getElementById('ficha-honor-sidebar').textContent = a.honorarios ? '+ '+fmtE(a.honorarios)+' honorarios + IVA' : ''
-  document.getElementById('ficha-kpis-sidebar').innerHTML = [
-    ['Rent. bruta', (rb||'—')+'%'],
-    ['Cashflow', cf!=null?(cf>0?'+':'')+fmtE(cf)+'/mes':'—'],
-    ['Alquiler', fmtE(alq)+'/mes'],
-    ['Total inversión', fmtE(total)],
-  ].map(function(k) {
-    return '<div><div style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">'+k[0]+'</div>'
-      +'<div style="font-family:var(--font-display);font-size:20px;color:white">'+k[1]+'</div></div>'
-  }).join('')
+  // ── Proyección patrimonial 20 años ──
+  var proyWrap = document.getElementById('ficha-proyeccion-wrap')
+  if (a.precio && cashflowAnual > 0 && a.comunidad) {
+    var tasas = {'Baleares':8.2,'Canarias':6.1,'Comunidad de Madrid':6.8,'Andalucía':5.2,'Comunitat Valenciana':5.8,'País Vasco':4.1,'Cataluña':3.9,'Galicia':3.2,'Navarra':3.4,'Cantabria':2.9,'Aragón':3.1,'Castilla y León':2.4,'Asturias':2.8}
+    var tasa = tasas[a.comunidad] || 2.5
+    var anos = 20, pts = []
+    for (var i=0; i<=anos; i++) pts.push({ i:i, vp: Math.round(+a.precio*Math.pow(1+tasa/100,i)), alq: Math.round(cashflowAnual*i) })
+    pts.forEach(function(p){ p.total = p.vp + p.alq })
+    var fin = pts[anos]
+    var W=500,H=100,pL=60,pR=8,pT=8,pB=22,w=W-pL-pR,h=H-pT-pB
+    var minV = +a.precio, maxV = fin.total, range = maxV - minV || 1
+    var xP = function(i){ return (pL+(i/anos)*w).toFixed(1) }
+    var yP = function(v){ return (pT+h-((v-minV)/range)*h).toFixed(1) }
+    var pathPiso  = pts.map(function(p,idx){ return (idx===0?'M':'L')+xP(p.i)+','+yP(p.vp) }).join(' ')
+    var pathTotal = pts.map(function(p,idx){ return (idx===0?'M':'L')+xP(p.i)+','+yP(p.total) }).join(' ')
+    var area = 'M'+pL+','+yP(+a.precio)+' '+pts.map(function(p){ return 'L'+xP(p.i)+','+yP(p.total) }).join(' ')+' L'+xP(anos)+','+yP(+a.precio)+' Z'
+    var yearLabels = [5,10,15,20].map(function(y){ return '<text x="'+xP(y)+'" y="'+(H-4)+'" text-anchor="middle" font-size="9" fill="#6B7280">'+y+'a</text>' }).join('')
+    proyWrap.style.display = ''
+    document.getElementById('ficha-proyeccion').innerHTML =
+      '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block;overflow:visible">'
+      +'<defs><linearGradient id="gp" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22C55E" stop-opacity=".25"/><stop offset="100%" stop-color="#22C55E" stop-opacity=".03"/></linearGradient></defs>'
+      +'<path d="'+area+'" fill="url(#gp)"/>'
+      +'<path d="'+pathPiso+'" fill="none" stroke="#E31E24" stroke-width="2" stroke-dasharray="5,3"/>'
+      +'<path d="'+pathTotal+'" fill="none" stroke="#22C55E" stroke-width="2.5"/>'
+      +yearLabels
+      +'<text x="'+(pL-3)+'" y="'+(pT+6)+'" text-anchor="end" font-size="9" fill="#22C55E">'+fmtE(fin.total)+'</text>'
+      +'<text x="'+(pL-3)+'" y="'+(pT+h)+'" text-anchor="end" font-size="9" fill="#999">'+fmtE(+a.precio)+'</text>'
+      +'</svg>'
+      +'<div style="display:flex;justify-content:space-around;font-size:11px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.07)">'
+      +'<span><span style="color:#E31E24">●</span> Valor piso: <strong style="color:#E31E24">'+fmtE(fin.vp)+'</strong></span>'
+      +'<span>+ Alquiler acum.: <strong>'+fmtE(fin.alq)+'</strong></span>'
+      +'<span><span style="color:#22C55E">●</span> Total: <strong style="color:#22C55E">'+fmtE(fin.total)+'</strong></span>'
+      +'</div>'
+      +'<div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:8px;line-height:1.5">Proyección estimada ('+tasa+'%/año histórico en '+a.comunidad+'). No garantiza rendimientos futuros.</div>'
+  } else { proyWrap.style.display = 'none' }
 
-  // Botón reservar
-  var btn = document.getElementById('ficha-reservar-btn')
-  btn.onclick = function() { openContactoActivo(a) }
-  btn.style.display = a.status === 'disponible' ? '' : 'none'
+  // ── Comparativa vs otras inversiones ──
+  var compWrap = document.getElementById('ficha-comparativa-wrap')
+  if (rb) {
+    compWrap.style.display = ''
+    var rbN = parseFloat(rb) || 0
+    var alts = [
+      {label:'Este activo (rent. bruta)', val:rbN, color:'#E31E24', bold:true},
+      {label:'Fondo indexado S&P500', val:10.2, color:'#F59E0B'},
+      {label:'Oro (últimos 20 años)', val:8.1, color:'#D4AF37'},
+      {label:'Bolsa global (histórico)', val:7.2, color:'#6366F1'},
+      {label:'IBEX 35 (histórico)', val:5.8, color:'#8B5CF6'},
+      {label:'Depósito bancario', val:2.8, color:'#9CA3AF'},
+    ]
+    var maxA = Math.max.apply(null, alts.map(function(x){ return x.val }))
+    document.getElementById('ficha-comparativa').innerHTML =
+      alts.map(function(x) {
+        return '<div style="margin-bottom:10px">'
+          +'<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">'
+          +'<span style="color:'+(x.bold?'#fff':'#9CA3AF')+';font-weight:'+(x.bold?700:400)+'">'+x.label+'</span>'
+          +'<span style="font-weight:700;color:'+x.color+'">'+x.val+'%</span>'
+          +'</div>'
+          +'<div style="background:rgba(255,255,255,.05);border-radius:4px;height:7px;overflow:hidden">'
+          +'<div style="width:'+(x.val/maxA*100).toFixed(1)+'%;height:100%;background:'+x.color+';border-radius:4px"></div>'
+          +'</div></div>'
+      }).join('')
+      +'<div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:8px;line-height:1.5">Rentabilidades históricas de referencia. Los resultados pasados no garantizan rendimientos futuros.</div>'
+  } else { compWrap.style.display = 'none' }
 
-  // Análisis zona
-  var zonaData = null
-  if (a.analisisZona) zonaData = a.analisisZona
-  else if (a.analisis_zona) { try { zonaData = JSON.parse(a.analisis_zona) } catch(e) {} }
+  // ── Análisis de zona ──
   var zonaWrap = document.getElementById('ficha-zona-wrap')
-  if (zonaData && zonaData.resumen) {
+  if (zona) {
     zonaWrap.style.display = ''
-    document.getElementById('ficha-zona').innerHTML = '<p style="font-size:14px;color:var(--gray);line-height:1.75">'+zonaData.resumen+'</p>'
+    var zonaHtml = ''
+    if (zona.resumen) zonaHtml += '<div style="background:var(--gray5);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:14px 16px;font-size:13px;color:var(--gray);line-height:1.75;margin-bottom:12px">'+zona.resumen+'</div>'
+    // Población y mercado
+    if (zona.poblacion || zona.mercadoAlquiler) {
+      zonaHtml += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">'
+      if (zona.poblacion) {
+        var tendColor = zona.poblacion.tendencia==='creciente'?'#22C55E':zona.poblacion.tendencia==='decreciente'?'#E31E24':'#9CA3AF'
+        var tendText  = zona.poblacion.tendencia==='creciente'?'↑ En crecimiento':zona.poblacion.tendencia==='decreciente'?'↓ En descenso':'→ Estable'
+        zonaHtml += '<div style="background:#111318;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px">'
+          +'<div style="font-size:10px;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">👥 Población</div>'
+          +(zona.poblacion.habitantes?'<div style="font-family:var(--font-display);font-size:26px;color:white">'+new Intl.NumberFormat("es-ES").format(zona.poblacion.habitantes)+'</div>':'')
+          +'<div style="font-size:11px;color:'+tendColor+';margin-top:4px;font-weight:700">'+tendText+'</div>'
+          +(zona.poblacion.descripcion?'<div style="font-size:11px;color:#6B7280;margin-top:4px">'+zona.poblacion.descripcion+'</div>':'')
+          +'</div>'
+      }
+      if (zona.mercadoAlquiler) {
+        var mRows = [['Precio medio', (zona.mercadoAlquiler.precioMedioM2||'—')+'€/m²'],['Demanda',zona.mercadoAlquiler.demanda||'—'],['Oferta',zona.mercadoAlquiler.pisosDisponibles||'—'],['Perfil inquilino',zona.mercadoAlquiler.perfilInquilino||'—']]
+        zonaHtml += '<div style="background:#111318;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px">'
+          +'<div style="font-size:10px;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">🏠 Mercado alquiler</div>'
+          +mRows.map(function(r){ return '<div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="color:#9CA3AF">'+r[0]+'</span><span style="color:white;font-weight:600">'+r[1]+'</span></div>' }).join('')
+          +'</div>'
+      }
+      zonaHtml += '</div>'
+    }
+    // Distancias
+    if (zona.distancias && zona.distancias.length) {
+      var iconos = {ciudad:'🏙',hospital:'🏥',aeropuerto:'✈️',logistica:'📦',costa:'🏖',autopista:'🛣',tren:'🚂',otro:'📍'}
+      zonaHtml += '<div style="background:#111318;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px;margin-bottom:12px">'
+        +'<div style="font-size:10px;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">📍 Distancias y conexiones</div>'
+        +zona.distancias.map(function(d){ return '<div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="color:#D1D5DB">'+(iconos[d.tipo]||'📍')+' '+d.lugar+'</span><span style="color:#9CA3AF;font-weight:600">'+d.km+' km · ~'+d.minutos+' min</span></div>' }).join('')
+        +'</div>'
+    }
+    // Servicios
+    if (zona.servicios) {
+      var svcs = [['Supermercados',zona.servicios.supermercados?zona.servicios.supermercados.join(', '):null],['Educación',zona.servicios.colegios?'~'+zona.servicios.colegios+' centros':null],['Sanidad',zona.servicios.hospitales?zona.servicios.hospitales.join(', '):null],['Transporte',zona.servicios.transporte],['Otros',zona.servicios.otros?zona.servicios.otros.join(', '):null]].filter(function(s){ return s[1] })
+      if (svcs.length) {
+        zonaHtml += '<div style="background:#111318;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px">'
+          +'<div style="font-size:10px;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">🏪 Servicios</div>'
+          +svcs.map(function(s){ return '<div style="display:flex;gap:10px;font-size:12px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="color:#6B7280;min-width:90px">'+s[0]+'</span><span style="color:#D1D5DB">'+s[1]+'</span></div>' }).join('')
+          +'</div>'
+      }
+    }
+    document.getElementById('ficha-zona').innerHTML = zonaHtml
   } else { zonaWrap.style.display = 'none' }
 
-  // Reset simulador
+  // ── Mapa ──
+  var mapaWrap = document.getElementById('ficha-mapa-wrap')
+  if (direccion) {
+    mapaWrap.style.display = ''
+    document.getElementById('ficha-mapa').src = 'https://maps.google.com/maps?q='+encodeURIComponent(direccion)+'&output=embed&z=15'
+    var mapsUrl = 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(direccion)
+    var svUrl   = 'https://www.google.com/maps?q='+encodeURIComponent(direccion)+'&layer=c'
+    document.getElementById('ficha-mapa-btns').innerHTML =
+      '<a href="'+mapsUrl+'" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--dark);color:white;font-size:12px;font-weight:600;padding:8px 16px;border-radius:var(--radius);text-decoration:none">🗺️ Abrir en Google Maps</a>'
+      +'<a href="'+svUrl+'" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--dark);color:white;font-size:12px;font-weight:600;padding:8px 16px;border-radius:var(--radius);text-decoration:none">🚶 Street View</a>'
+  } else { mapaWrap.style.display = 'none' }
+
+  // ── Sidebar precio ──
+  document.getElementById('ficha-precio-sidebar').textContent = fmtE(a.precio)
+  document.getElementById('ficha-honor-sidebar').textContent = a.honorarios ? '+ '+fmtE(a.honorarios)+' honorarios + IVA' : ''
+  document.getElementById('ficha-reservar-btn').onclick = function() { openContactoActivo(a) }
+  document.getElementById('ficha-reservar-btn').style.display = a.status === 'disponible' ? '' : 'none'
+
+  // ── Economía sidebar ──
+  var econ = [
+    ['Precio compra', fmtE(a.precio)],
+    ['ITP ('+itp+'%)', fmtE(itpAmt)],
+    ['Notaría + Registro', '~1.500€'],
+  ]
+  if (puesta > 0) econ.push(['Puesta a punto', fmtE(puesta)])
+  if (a.honorarios) econ.push(['Honorarios', fmtE(a.honorarios)+' + IVA'])
+  econ.push(['TOTAL INVERSIÓN', fmtE(total)])
+  econ.push(['Alquiler/mes', fmtE(alq)])
+  econ.push(['Cashflow/mes', cf!=null?(cf>0?'+':'')+fmtE(cf):'—'])
+  document.getElementById('ficha-economia').innerHTML = econ.map(function(d, i) {
+    var isTotal = d[0] === 'TOTAL INVERSIÓN'
+    return '<div style="padding:10px 14px;display:flex;justify-content:space-between;background:'+(isTotal?'rgba(227,30,36,.04)':'white')+';border-bottom:1px solid var(--gray3)">'
+      +'<span style="font-size:12px;color:var(--gray);font-weight:'+(isTotal?700:400)+'">'+d[0]+'</span>'
+      +'<span style="font-size:12px;font-weight:700;color:'+(isTotal?'var(--red)':'var(--dark)')+'">'+d[1]+'</span>'
+      +'</div>'
+  }).join('')
+
+  // ── KPIs sidebar (sin hipoteca de inicio) ──
+  actualizarKPIsSidebar(cf, rb, alq, total, false, 0)
+
+  // Reset simulador hipoteca
+  document.getElementById('hip-activa').checked = false
+  document.getElementById('hip-controles').style.display = 'none'
   document.getElementById('hip-pct').value = 80
   document.getElementById('hip-int').value = 3.5
   document.getElementById('hip-anos').value = 25
-  calcHipoteca()
+  document.getElementById('hip-pct-val').textContent = '80%'
+  document.getElementById('hip-int-val').textContent = '3.5%'
+  document.getElementById('hip-anos-val').textContent = '25 años'
 
   showView('ficha')
   scrollToTop()
+}
+
+function actualizarKPIsSidebar(cf, rb, alq, total, conHipoteca, cuota) {
+  var cfMostrar = conHipoteca ? cf - cuota : cf
+  var cashflowAnual = cfMostrar ? cfMostrar * 12 : 0
+  var anosRecup = cashflowAnual > 0 ? Math.ceil(total / cashflowAnual) : null
+  document.getElementById('ficha-kpis-sidebar').innerHTML = [
+    ['Rent. bruta', (rb||'—')+'%', '#E31E24'],
+    ['Cashflow/mes', cfMostrar!=null?(cfMostrar>0?'+':'')+fmtE(cfMostrar):'—', cfMostrar&&cfMostrar>0?'#22C55E':'#F87171'],
+    ['Alquiler', fmtE(alq)+'/mes', 'white'],
+    ['Recuperación', anosRecup?anosRecup+' años':'—', '#F59E0B'],
+  ].map(function(k) {
+    return '<div><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">'+k[0]+'</div>'
+      +'<div style="font-family:var(--font-display);font-size:18px;color:'+k[2]+'">'+k[1]+'</div></div>'
+  }).join('')
+}
+
+function toggleHipoteca() {
+  var activa = document.getElementById('hip-activa').checked
+  document.getElementById('hip-controles').style.display = activa ? '' : 'none'
+  if (activa) calcHipoteca(); else {
+    var a = _fichaActivo
+    if (!a) return
+    var alq = +(a.alquiler_estimado||0), com = +(a.gastos_comunidad||0), ibi = +(a.ibi||0)
+    var cf = calcCF(alq,com,ibi), rb = calcRB(a.precio,alq)
+    var total = Math.round(+a.precio*(1+(+(a.itp||8)/100))+1500+(+(a.puesta_a_punto||0)))
+    actualizarKPIsSidebar(cf, rb, alq, total, false, 0)
+  }
 }
 
 function calcHipoteca() {
@@ -2173,26 +2406,24 @@ function calcHipoteca() {
   document.getElementById('hip-pct-val').textContent  = pct+'%'
   document.getElementById('hip-int-val').textContent  = int+'%'
   document.getElementById('hip-anos-val').textContent = anos+' años'
-
   var precio = +a.precio
-  var alq = +(a.alquiler_estimado||0)
-  var com = +(a.gastos_comunidad||0)
-  var ibi = +(a.ibi||0)
-  var cf  = calcCF(alq, com, ibi) || 0
+  var alq = +(a.alquiler_estimado||0), com = +(a.gastos_comunidad||0), ibi = +(a.ibi||0)
+  var cf = calcCF(alq,com,ibi) || 0
+  var rb = calcRB(precio, alq)
   var capital = Math.round(precio * pct / 100)
-  var total = Math.round(precio + precio*(+(a.itp||8)/100) + 1500)
+  var total = Math.round(precio*(1+(+(a.itp||8)/100))+1500+(+(a.puesta_a_punto||0)))
   var propio = total - capital
-  var r = int / 100 / 12
-  var n = anos * 12
-  var cuota = r > 0 ? Math.round(capital * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1)) : Math.round(capital/n)
+  var r = int / 100 / 12, n = anos * 12
+  var cuota = r > 0 ? Math.round(capital*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1)) : Math.round(capital/n)
   var cfHip = cf - cuota
-
   document.getElementById('hip-cuota').textContent = fmtE(cuota)+'/mes'
-  var cfEl = document.getElementById('hip-cf')
+  var cfEl = document.getElementById('hip-cf-result')
   cfEl.textContent = (cfHip>0?'+':'')+fmtE(cfHip)+'/mes'
   cfEl.style.color = cfHip > 0 ? '#22C55E' : '#F87171'
   document.getElementById('hip-capital').textContent = fmtE(propio)
+  actualizarKPIsSidebar(cf, rb, alq, total, true, cuota)
 }
+
 
 function openContactoActivo(a) {
   // Pre-rellenar el mensaje con info del activo
