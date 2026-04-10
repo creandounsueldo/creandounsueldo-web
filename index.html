@@ -510,6 +510,27 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
 
 
+  <!-- ACCESO ANTICIPADO -->
+  <div style="padding:0 52px 56px">
+    <div style="background:var(--dark);border-radius:12px;padding:24px 36px;display:flex;align-items:center;gap:36px;flex-wrap:wrap;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none"></div>
+      <div style="position:relative;flex:1;min-width:220px">
+        <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px">Acceso anticipado</div>
+        <div style="font-family:var(--font-display);font-size:clamp(20px,2.5vw,28px);color:white;line-height:1.05;letter-spacing:.3px">LOS MEJORES PISOS SE VAN EN HORAS.</div>
+      </div>
+      <div style="position:relative;flex-shrink:0">
+        <div id="acceso-form" style="display:flex;gap:8px;align-items:center">
+          <input id="acceso-email" type="email" placeholder="tu@email.com" style="padding:11px 16px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:white;font-family:var(--font-body);font-size:14px;outline:none;width:260px" onfocus="this.style.borderColor='rgba(227,30,36,.6)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
+          <button onclick="submitAcceso()" style="padding:11px 24px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">Unirme →</button>
+        </div>
+        <div id="acceso-ok" style="display:none;text-align:center;padding:8px 0">
+          <div style="font-family:var(--font-display);font-size:20px;color:white">🎉 ¡YA ESTÁS DENTRO!</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:4px">Te avisamos en cuanto suba el próximo activo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- PROCESO -->
   <section id="proceso" style="padding:56px 52px">
     <div class="section-eyebrow" style="color:rgba(227,30,36,.9)">Cómo funciona</div>
@@ -1390,25 +1411,28 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
 <!-- LEAD CAPTURE POPUP -->
 <div class="lead-popup-overlay" id="leadPopup">
-  <div class="lead-popup">
-    <div class="lead-popup-top">
-      <button class="lead-popup-close" onclick="closeLeadPopup()">&#215;</button>
-      <div style="font-size:32px;margin-bottom:12px">&#128242;</div>
-      <div style="font-family:var(--font-display);font-size:28px;letter-spacing:1px;color:white;margin-bottom:6px">ACCEDE ANTES<br>QUE NADIE</div>
-      <div style="font-size:14px;color:rgba(255,255,255,.75);line-height:1.5">Las mejores operaciones se reservan en horas. Recibe los activos antes que nadie.</div>
+  <div class="lead-popup" style="background:var(--dark);border-radius:16px;overflow:hidden;max-width:420px;width:100%;position:relative">
+    <!-- Franja roja top -->
+    <div style="background:var(--red);padding:24px 28px 20px;position:relative;overflow:hidden">
+      <div style="position:absolute;right:-20px;top:-20px;font-family:var(--font-display);font-size:140px;color:rgba(255,255,255,.06);line-height:1;pointer-events:none">$</div>
+      <button onclick="closeLeadPopup()" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,.2);border:none;color:white;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1">×</button>
+      <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px">Acceso anticipado</div>
+      <div style="font-family:var(--font-display);font-size:30px;color:white;line-height:1;letter-spacing:.5px;margin-bottom:6px">LOS MEJORES PISOS<br>SE VAN EN HORAS.</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.75);line-height:1.5">Recibe cada activo antes de que llegue a la web. Las mejores operaciones se reservan el mismo día.</div>
     </div>
-    <div class="lead-popup-body" id="leadPopupBody">
-      <div style="display:flex;gap:10px;margin-bottom:14px">
-        <div style="flex:1;background:var(--gray5);border-radius:8px;padding:12px;border:1px solid var(--gray3);text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:var(--red)">72</div><div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px">Operaciones</div></div>
-        <div style="flex:1;background:var(--gray5);border-radius:8px;padding:12px;border:1px solid var(--gray3);text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:var(--red)">+7%</div><div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px">Rent. media</div></div>
-        <div style="flex:1;background:var(--gray5);border-radius:8px;padding:12px;border:1px solid var(--gray3);text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:var(--green)">100%</div><div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px">Alquilados</div></div>
+    <!-- Body -->
+    <div id="leadPopupBody" style="padding:24px 28px">
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:var(--red)">72</div><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">Operaciones</div></div>
+        <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:var(--red)">+7%</div><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">Rent. media</div></div>
+        <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;text-align:center"><div style="font-family:var(--font-display);font-size:22px;color:#22C55E">100%</div><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">Alquilados</div></div>
       </div>
       <div style="display:flex;gap:8px;margin-bottom:10px">
-        <input id="leadEmail" class="form-input" type="email" placeholder="tu@email.com" style="flex:1">
-        <button id="leadSubmitBtn" style="background:var(--red);color:white;border:none;border-radius:var(--radius);padding:11px 20px;font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">Unirme &#8594;</button>
+        <input id="leadEmail" type="email" placeholder="tu@email.com" style="flex:1;padding:12px 14px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:white;font-family:var(--font-body);font-size:14px;outline:none">
+        <button id="leadSubmitBtn" style="background:var(--red);color:white;border:none;border-radius:var(--radius);padding:12px 20px;font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">Unirme →</button>
       </div>
-      <div style="font-size:11px;color:var(--gray2);text-align:center;line-height:1.5">Sin spam. Solo oportunidades reales.</div>
-      <div style="text-align:center;margin-top:12px"><button onclick="closeLeadPopup()" style="background:none;border:none;color:var(--gray2);font-size:12px;cursor:pointer;font-family:var(--font-body);text-decoration:underline">Ahora no, gracias</button></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center">Sin spam. Solo oportunidades reales.</div>
+      <div style="text-align:center;margin-top:12px"><button onclick="closeLeadPopup()" style="background:none;border:none;color:rgba(255,255,255,.3);font-size:12px;cursor:pointer;font-family:var(--font-body)">Ahora no, gracias</button></div>
     </div>
   </div>
 </div>
@@ -1787,11 +1811,37 @@ function closeLeadPopup() {
   document.body.style.overflow = '';
   try { localStorage.setItem('leadSeen', '1'); } catch(e) {}
 }
-function submitLead() {
-  var email = document.getElementById('leadEmail').value.trim();
-  if (!email || !email.includes('@')) { alert('Introduce un email valido'); return; }
-  document.getElementById('leadPopupBody').innerHTML = '<div style="text-align:center;padding:24px 0"><div style="font-size:48px;margin-bottom:12px">&#127881;</div><div style="font-family:var(--font-display);font-size:24px;color:var(--dark);margin-bottom:8px">YA ESTAS DENTRO</div><div style="font-size:14px;color:var(--gray)">Te avisaremos en cuanto haya nuevas oportunidades.</div></div>';
-  setTimeout(closeLeadPopup, 3000);
+async function guardarLead(email, origen) {
+  try {
+    await fetch(SUPA_URL + '/rest/v1/leads', {
+      method: 'POST',
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer '+SUPA_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ email: email, origen: origen || 'web', created_at: new Date().toISOString() })
+    })
+  } catch(e) { console.log('Lead save error:', e) }
+}
+
+async function submitLead() {
+  var email = document.getElementById('leadEmail').value.trim()
+  if (!email || !email.includes('@')) { alert('Introduce un email válido'); return }
+  await guardarLead(email, 'popup')
+  document.getElementById('leadPopupBody').innerHTML =
+    '<div style="text-align:center;padding:32px 0">'
+    +'<div style="font-size:48px;margin-bottom:14px">🎉</div>'
+    +'<div style="font-family:var(--font-display);font-size:26px;color:white;margin-bottom:8px;letter-spacing:.5px">¡YA ESTÁS DENTRO!</div>'
+    +'<div style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.6">Te avisamos en cuanto suba el próximo activo.</div>'
+    +'<button onclick="closeLeadPopup()" style="margin-top:20px;background:var(--red);color:white;border:none;border-radius:var(--radius);padding:11px 24px;font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer">Cerrar</button>'
+    +'</div>'
+}
+
+async function submitAcceso() {
+  var email = document.getElementById('acceso-email').value.trim()
+  if (!email || !email.includes('@')) { alert('Introduce un email válido'); return }
+  await guardarLead(email, 'home')
+  document.getElementById('acceso-form').style.display = 'none'
+  document.getElementById('acceso-ok').style.display = ''
+  // También cerrar popup si estuviera abierto
+  try { localStorage.setItem('leadSeen', '1') } catch(e) {}
 }
 function acceptCookies() {
   try { localStorage.setItem('cookiesAccepted', 'all'); } catch(e) {}
@@ -2373,10 +2423,52 @@ function actualizarKPIsSidebar(cf, rb, alq, total, conHipoteca, cuota) {
   var cfMostrar = conHipoteca ? cf - cuota : cf
   var cashflowAnual = cfMostrar ? cfMostrar * 12 : 0
   var anosRecup = cashflowAnual > 0 ? Math.ceil(total / cashflowAnual) : null
+  var capitalEmpleado = conHipoteca ? (total - cuota * 12 * 25) : total  // aprox
+  if (_fichaActivo && conHipoteca) {
+    var pct = +document.getElementById('hip-pct').value
+    capitalEmpleado = total - Math.round(+_fichaActivo.precio * pct / 100)
+  }
+  var ingresosBrutos = alq * 12
+  var gastosTot = (+(_fichaActivo?_fichaActivo.gastos_comunidad||0:0)*12) + +(_fichaActivo?_fichaActivo.ibi||0:0) + (conHipoteca ? cuota*12 : 0)
+  var roce = capitalEmpleado > 0 ? ((ingresosBrutos - gastosTot) / capitalEmpleado * 100).toFixed(1) : null
+
+  // Actualizar KPIs principales (columna izquierda)
+  var kpisMain = document.getElementById('ficha-kpis-main')
+  if (kpisMain) {
+    var kpis = [
+      ['Rent. bruta', (rb||'—')+'%', rb&&+rb>=8?'#22C55E':'var(--red)'],
+      ['Cashflow/mes', cfMostrar!=null?(cfMostrar>0?'+':'')+fmtE(cfMostrar):'—', cfMostrar&&cfMostrar>0?'#22C55E':'#F87171'],
+      ['ROCE', roce?roce+'%':'—', '#F59E0B'],
+      ['Recuperación', anosRecup?anosRecup+' años':'—', '#F59E0B'],
+    ]
+    kpisMain.innerHTML = kpis.map(function(k) {
+      return '<div style="background:white;border:1px solid var(--gray3);border-radius:10px;padding:16px;text-align:center">'
+        +'<div style="font-family:var(--font-display);font-size:28px;color:'+k[2]+';line-height:1">'+k[1]+'</div>'
+        +'<div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:.8px;margin-top:4px">'+k[0]+'</div>'
+        +'</div>'
+    }).join('')
+  }
+
+  // Actualizar bloque retorno
+  var retornoEl = document.getElementById('ficha-retorno')
+  if (retornoEl && cashflowAnual > 0 && total > 0) {
+    document.getElementById('ficha-retorno-wrap').style.display = ''
+    retornoEl.innerHTML =
+      '<div style="display:flex;justify-content:space-around;margin-bottom:14px">'
+      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">INVERSIÓN TOTAL</div><div style="font-family:var(--font-display);font-size:28px;color:#E31E24">'+fmtE(total)+'</div></div>'
+      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">AÑO RECUPERACIÓN</div><div style="font-family:var(--font-display);font-size:28px;color:#22C55E">Año '+(anosRecup||'—')+'</div></div>'
+      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">CASHFLOW ANUAL</div><div style="font-family:var(--font-display);font-size:28px;color:white">'+(cashflowAnual>0?'+':'')+fmtE(cashflowAnual)+'</div></div>'
+      +'</div>'
+      +'<div style="height:4px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden"><div style="height:100%;background:linear-gradient(90deg,#E31E24,#22C55E);border-radius:4px;width:100%"></div></div>'
+      +(anosRecup?'<div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:8px;text-align:center">A partir del año '+anosRecup+', cada +'+fmtE(cashflowAnual)+'/año es beneficio neto</div>':'')
+      +(conHipoteca?'<div style="font-size:11px;color:#F59E0B;margin-top:6px;text-align:center;font-weight:600">⚡ Calculado con hipoteca activa</div>':'')
+  }
+
+  // Actualizar sidebar KPIs
   document.getElementById('ficha-kpis-sidebar').innerHTML = [
     ['Rent. bruta', (rb||'—')+'%', '#E31E24'],
     ['Cashflow/mes', cfMostrar!=null?(cfMostrar>0?'+':'')+fmtE(cfMostrar):'—', cfMostrar&&cfMostrar>0?'#22C55E':'#F87171'],
-    ['Alquiler', fmtE(alq)+'/mes', 'white'],
+    ['ROCE', roce?roce+'%':'—', '#F59E0B'],
     ['Recuperación', anosRecup?anosRecup+' años':'—', '#F59E0B'],
   ].map(function(k) {
     return '<div><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">'+k[0]+'</div>'
