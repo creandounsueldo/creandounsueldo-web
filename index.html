@@ -163,7 +163,7 @@ h1{font-family:var(--font-display);font-size:clamp(64px,8.5vw,116px);line-height
 
 /* BLOG */
 #blog{background:#0d1117}
-.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px}
+.blog-grid{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:8px}.blog-grid::-webkit-scrollbar{height:3px}.blog-grid::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}.blog-grid .blog-card{flex:0 0 min(300px,78vw);scroll-snap-align:start}
 .blog-card{border-radius:10px;overflow:hidden;border:1.5px solid rgba(255,255,255,.08);background:#161b22;transition:transform .25s,box-shadow .25s;text-decoration:none;color:#e5e7eb;display:block;cursor:pointer}
 .blog-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--gray2)}
 .blog-img{height:200px;background:var(--gray4);display:flex;align-items:flex-end;justify-content:flex-start;position:relative;overflow:hidden;background-size:cover!important;background-position:center!important}
@@ -519,9 +519,15 @@ footer{background:var(--dark);padding:56px 52px 32px}
         <p style="font-size:13px;color:rgba(255,255,255,.4);line-height:1.5">Deja tu email y recibe cada nuevo activo antes de que llegue a la web pública. Sin spam.</p>
       </div>
       <div style="position:relative;flex-shrink:0">
-        <div id="acceso-form" style="display:flex;gap:8px;align-items:center">
-          <input id="acceso-email" type="email" placeholder="tu@email.com" style="padding:11px 16px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:white;font-family:var(--font-body);font-size:14px;outline:none;width:260px" onfocus="this.style.borderColor='rgba(227,30,36,.6)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
-          <button onclick="submitAcceso()" style="padding:11px 24px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">Unirme →</button>
+        <div id="acceso-form">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+            <input id="acceso-email" type="email" placeholder="tu@email.com" style="padding:11px 16px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:white;font-family:var(--font-body);font-size:14px;outline:none;width:220px" onfocus="this.style.borderColor='rgba(227,30,36,.6)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
+            <button onclick="submitAcceso()" style="padding:11px 24px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">Unirme →</button>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:6px;cursor:pointer">
+            <input type="checkbox" id="acceso-consent" style="margin-top:2px;accent-color:var(--red);flex-shrink:0">
+            <span style="font-size:11px;color:rgba(255,255,255,.35);line-height:1.5">Acepto recibir comunicaciones. <a href="#" onclick="showPrivacidad('privacidad');return false" style="color:rgba(255,255,255,.5);text-decoration:underline">Política de privacidad</a>.</span>
+          </label>
         </div>
         <div id="acceso-ok" style="display:none;text-align:center;padding:8px 0">
           <div style="font-family:var(--font-display);font-size:20px;color:white">🎉 ¡YA ESTÁS DENTRO!</div>
@@ -565,10 +571,15 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
   <!-- BLOG -->
   <section id="blog" style="padding:56px 52px">
-    <div class="section-eyebrow" style="color:rgba(227,30,36,.9)">Noticias &amp; Análisis</div>
-    <h2 style="color:white">EL MERCADO<br>A TU FAVOR</h2>
-    <p class="section-desc" style="color:rgba(255,255,255,.55)">Datos reales y noticias recientes sobre rentabilidad inmobiliaria en España.</p>
-    <div class="blog-grid">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:16px">
+      <div>
+        <div class="section-eyebrow" style="color:rgba(227,30,36,.9)">Noticias &amp; Análisis</div>
+        <h2 style="color:white;margin-bottom:6px">EL MERCADO<br>A TU FAVOR</h2>
+        <p style="color:rgba(255,255,255,.55);font-size:14px;margin:0">Datos reales y noticias recientes sobre rentabilidad inmobiliaria en España.</p>
+      </div>
+      <button id="blog-ver-todo-btn" onclick="toggleBlogTodo()" style="background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-family:var(--font-body);font-size:13px;font-weight:600;padding:9px 20px;border-radius:var(--radius);cursor:pointer;transition:all .2s;white-space:nowrap">Ver todos →</button>
+    </div>
+    <div class="blog-grid" id="blog-grid">
 
       <div class="blog-card">
         <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Rentabilidad</span></div>
@@ -610,6 +621,8 @@ footer{background:var(--dark);padding:56px 52px 32px}
         </div>
       </div>
 
+      <!-- Cards ocultas -->
+      <div id="blog-extra" style="display:none;contents">
       <div class="blog-card">
         <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Alquiler</span></div>
         <div class="blog-body">
@@ -670,6 +683,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
         </div>
       </div>
 
+      </div>
     </div>
   </section>
 
@@ -722,7 +736,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
       
       <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="mailto:info@creandounsueldo.com">info@creandounsueldo.com</a></li><li><a href="https://t.me/creandounsueldo" target="_blank">Canal Telegram</a></li><li><a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank">Grupo WhatsApp</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><span class="footer-legal">© 2025 NOGA HOUSE S.L. — CreandoUnSueldo</span><span class="footer-legal"><a href="#" onclick="showPrivacidad('aviso');return false">Aviso legal</a> · <a href="#" onclick="showPrivacidad('privacidad');return false">Privacidad</a> · <a href="#" onclick="showPrivacidad('cookies');return false">Cookies</a></span></div>
+    <div class="footer-bottom"><span class="footer-legal">© 2026 NOGA HOUSE S.L. — CreandoUnSueldo</span><span class="footer-legal"><a href="#" onclick="showPrivacidad('aviso');return false">Aviso legal</a> · <a href="#" onclick="showPrivacidad('privacidad');return false">Privacidad</a> · <a href="#" onclick="showPrivacidad('cookies');return false">Cookies</a></span></div>
   </footer>
 </div>
 
@@ -1489,6 +1503,10 @@ footer{background:var(--dark);padding:56px 52px 32px}
         <input id="leadEmail" type="email" placeholder="tu@email.com" style="flex:1;padding:12px 14px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:white;font-family:var(--font-body);font-size:14px;outline:none">
         <button id="leadSubmitBtn" style="background:var(--red);color:white;border:none;border-radius:var(--radius);padding:12px 20px;font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">Unirme →</button>
       </div>
+      <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;margin-bottom:10px">
+        <input type="checkbox" id="lead-consent" style="margin-top:2px;accent-color:var(--red);flex-shrink:0">
+        <span style="font-size:11px;color:rgba(255,255,255,.4);line-height:1.5">Acepto recibir comunicaciones sobre activos disponibles. <a href="#" onclick="showPrivacidad('privacidad');return false" style="color:rgba(255,255,255,.6);text-decoration:underline">Política de privacidad</a>.</span>
+      </label>
       <div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center">Sin spam. Solo oportunidades reales.</div>
       <div style="text-align:center;margin-top:12px"><button onclick="closeLeadPopup()" style="background:none;border:none;color:rgba(255,255,255,.3);font-size:12px;cursor:pointer;font-family:var(--font-body)">Ahora no, gracias</button></div>
     </div>
@@ -1515,30 +1533,19 @@ footer{background:var(--dark);padding:56px 52px 32px}
       <button onclick="showLegal('cookies')" id="tab-cookies" style="flex:1;padding:12px;border:none;background:none;font-family:var(--font-body);font-size:13px;font-weight:600;color:#888;border-bottom:2px solid transparent;cursor:pointer">Cookies</button>
     </div>
 
-    <div id="legal-aviso" style="padding:28px;font-size:13px;color:#555;line-height:1.8">
-      <h4 style="font-size:15px;color:#111;margin:0 0 12px">IDENTIFICACIÓN DEL TITULAR</h4>
-      <p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSI-CE), se informa:</p>
-      <ul style="margin:12px 0 16px 20px;display:flex;flex-direction:column;gap:4px">
-        <li><strong>Razón social:</strong> NOGA HOUSE S.L.</li>
-        <li><strong>CIF:</strong> B75385070</li>
-        <li><strong>Domicilio social:</strong> Barcelona, España</li>
-        <li><strong>Email:</strong> info@creandounsueldo.com</li>
-        <li><strong>Actividad:</strong> Intermediación inmobiliaria</li>
-      </ul>
-      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">OBJETO Y CONDICIONES DE USO</h4>
-      <p>El presente sitio web tiene por objeto la difusión de oportunidades de inversión inmobiliaria y la prestación de servicios de intermediación. El acceso y uso del sitio web implica la aceptación plena de las presentes condiciones. NOGA HOUSE S.L. se reserva el derecho a modificar, sin previo aviso, el contenido del sitio web.</p>
-      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">RESPONSABILIDAD</h4>
-      <p>Las rentabilidades mostradas son estimaciones basadas en condiciones actuales del mercado y no constituyen garantía de rendimiento futuro. NOGA HOUSE S.L. actúa como intermediario y no es parte compradora ni vendedora en las operaciones.</p>
-      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">PROPIEDAD INTELECTUAL</h4>
-      <p>Los contenidos, diseño y código del sitio son propiedad de NOGA HOUSE S.L. Queda prohibida su reproducción total o parcial sin autorización expresa.</p>
-      <p style="margin-top:20px;font-size:11px;color:#aaa">Última actualización: enero 2025</p>
-    </div>
+    <div class="footer-disc">Las rentabilidades, cashflows y proyecciones mostradas son estimaciones orientativas y no garantizan rendimientos futuros. Toda inversión conlleva riesgos. NOGA HOUSE S.L. actúa como intermediario inmobiliario, no como asesor financiero regulado por la CNMV. Se recomienda consultar con un asesor independiente antes de invertir.</div>
 
     <div id="legal-privacidad" style="display:none;padding:28px;font-size:13px;color:#555;line-height:1.8">
       <h4 style="font-size:15px;color:#111;margin:0 0 12px">RESPONSABLE DEL TRATAMIENTO</h4>
       <p>NOGA HOUSE S.L. (CIF B75385070), con domicilio en Barcelona. Contacto: info@creandounsueldo.com</p>
       <h4 style="font-size:15px;color:#111;margin:20px 0 10px">DATOS QUE RECOGEMOS</h4>
-      <p>Nombre, teléfono, email y, en caso de formalizar una operación, DNI/NIE y dirección postal. Los datos se recogen a través de los formularios del sitio web o por comunicación directa.</p>
+      <p>Recogemos los siguientes datos personales:</p>
+      <ul style="margin:8px 0 12px 20px;display:flex;flex-direction:column;gap:4px">
+        <li><strong>Formulario de contacto/reserva:</strong> nombre, teléfono, email y mensaje libre.</li>
+        <li><strong>Formulario de acceso anticipado:</strong> email (con consentimiento expreso).</li>
+        <li><strong>En caso de formalizar una operación:</strong> DNI/NIE, dirección postal y datos bancarios necesarios para el contrato.</li>
+      </ul>
+      <p>No recogemos datos de navegación ni usamos cookies publicitarias. Los mapas de Google Maps embebidos pueden instalar cookies técnicas propias de Google; consulta la <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--red)">política de privacidad de Google</a>.</p>
       <h4 style="font-size:15px;color:#111;margin:20px 0 10px">FINALIDAD Y BASE LEGAL</h4>
       <ul style="margin:8px 0 12px 20px;display:flex;flex-direction:column;gap:6px">
         <li><strong>Gestión de consultas</strong> (interés legítimo / consentimiento)</li>
@@ -1552,7 +1559,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
       <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a info@creandounsueldo.com. Tienes derecho a presentar reclamación ante la Agencia Española de Protección de Datos (www.aepd.es).</p>
       <h4 style="font-size:15px;color:#111;margin:20px 0 10px">TRANSFERENCIAS INTERNACIONALES</h4>
       <p>No se realizan transferencias internacionales de datos fuera del Espacio Económico Europeo.</p>
-      <p style="margin-top:20px;font-size:11px;color:#aaa">Última actualización: enero 2025</p>
+      <p style="margin-top:20px;font-size:11px;color:#aaa">Última actualización: abril 2026</p>
     </div>
 
     <div id="legal-cookies" style="display:none;padding:28px;font-size:13px;color:#555;line-height:1.8">
@@ -1564,9 +1571,10 @@ footer{background:var(--dark);padding:56px 52px 32px}
         <tbody>
           <tr><td style="padding:8px 12px;border:1px solid #eee">cookiesAccepted</td><td style="padding:8px 12px;border:1px solid #eee">Propia / Técnica</td><td style="padding:8px 12px;border:1px solid #eee">Guarda tu preferencia de cookies</td><td style="padding:8px 12px;border:1px solid #eee">1 año</td></tr>
           <tr><td style="padding:8px 12px;border:1px solid #eee">leadSeen</td><td style="padding:8px 12px;border:1px solid #eee">Propia / Funcional</td><td style="padding:8px 12px;border:1px solid #eee">Evita mostrar el popup repetidamente</td><td style="padding:8px 12px;border:1px solid #eee">Sesión</td></tr>
+          <tr><td style="padding:8px 12px;border:1px solid #eee">Cookies de Google Maps</td><td style="padding:8px 12px;border:1px solid #eee">Tercero / Técnica</td><td style="padding:8px 12px;border:1px solid #eee">Funcionamiento de los mapas integrados</td><td style="padding:8px 12px;border:1px solid #eee">Variable (gestión de Google)</td></tr>
         </tbody>
       </table>
-      <p>Este sitio web <strong>no utiliza cookies de terceros ni cookies publicitarias</strong>. No se comparten datos de navegación con terceros.</p>
+      <p>Este sitio web <strong>no utiliza cookies publicitarias ni de seguimiento</strong>. Sin embargo, los mapas integrados (Google Maps) pueden instalar cookies técnicas de Google para su funcionamiento. No usamos Google Analytics ni ninguna otra herramienta de analítica de terceros.</p>
       <h4 style="font-size:15px;color:#111;margin:20px 0 10px">CÓMO GESTIONAR LAS COOKIES</h4>
       <p>Puedes configurar tu navegador para rechazar o eliminar las cookies. Ten en cuenta que deshabilitar ciertas cookies puede afectar al funcionamiento del sitio. Instrucciones para los principales navegadores:</p>
       <ul style="margin:8px 0 0 20px;display:flex;flex-direction:column;gap:4px">
@@ -1574,7 +1582,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
         <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" style="color:var(--red)">Mozilla Firefox</a></li>
         <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" style="color:var(--red)">Safari</a></li>
       </ul>
-      <p style="margin-top:20px;font-size:11px;color:#aaa">Última actualización: enero 2025</p>
+      <p style="margin-top:20px;font-size:11px;color:#aaa">Última actualización: abril 2026</p>
     </div>
   </div>
 </div>
@@ -1882,6 +1890,8 @@ async function guardarLead(email, origen) {
 async function submitLead() {
   var email = document.getElementById('leadEmail').value.trim()
   if (!email || !email.includes('@')) { alert('Introduce un email válido'); return }
+  var consent = document.getElementById('lead-consent')
+  if (consent && !consent.checked) { alert('Debes aceptar la política de privacidad para continuar.'); return }
   await guardarLead(email, 'popup')
   document.getElementById('leadPopupBody').innerHTML =
     '<div style="text-align:center;padding:32px 0">'
@@ -1895,6 +1905,8 @@ async function submitLead() {
 async function submitAcceso() {
   var email = document.getElementById('acceso-email').value.trim()
   if (!email || !email.includes('@')) { alert('Introduce un email válido'); return }
+  var consent = document.getElementById('acceso-consent')
+  if (consent && !consent.checked) { alert('Debes aceptar la política de privacidad para continuar.'); return }
   await guardarLead(email, 'home')
   document.getElementById('acceso-form').style.display = 'none'
   document.getElementById('acceso-ok').style.display = ''
