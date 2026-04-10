@@ -52,7 +52,7 @@ nav.scrolled{box-shadow:var(--shadow)}
 .nav-back:hover{color:var(--dark)}
 
 /* ═══ SHARED ═══ */
-section{padding:96px 52px}
+section{padding:56px 52px}
 .section-eyebrow{font-family:var(--font-mono);font-size:11px;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px}
 .section-eyebrow::before{content:'';display:block;width:22px;height:2px;background:var(--red);border-radius:2px}
 h2{font-family:var(--font-display);font-size:clamp(40px,5vw,64px);line-height:.95;letter-spacing:.5px;margin-bottom:14px;color:var(--dark)}
@@ -60,21 +60,21 @@ h2{font-family:var(--font-display);font-size:clamp(40px,5vw,64px);line-height:.9
 .tag{padding:4px 10px;background:var(--gray4);border-radius:4px;font-size:11px;color:var(--gray);font-weight:500}
 
 /* ═══ HOME HERO ═══ */
-#hero{background:var(--red);padding:120px 52px 80px;position:relative;overflow:hidden;min-height:88vh;display:flex;align-items:center}
+#hero{background:var(--red);padding:120px 52px 80px;position:relative;overflow:hidden;min-height:88vh;display:flex;align-items:center;justify-content:center}
 .hero-pattern{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:64px 64px}
 .hero-deco{position:absolute;right:-40px;bottom:-60px;font-family:var(--font-display);font-size:480px;line-height:1;color:rgba(255,255,255,.04);letter-spacing:-20px;pointer-events:none;user-select:none}
-.hero-inner{position:relative;display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:center;max-width:1200px;width:100%}
+.hero-inner{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:860px;width:100%;margin:0 auto}
 h1{font-family:var(--font-display);font-size:clamp(64px,8.5vw,116px);line-height:.9;letter-spacing:1px;color:var(--white);margin-bottom:24px}
 .hero-sub{font-size:17px;color:rgba(255,255,255,.72);line-height:1.7;font-weight:300;margin-bottom:40px;max-width:460px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px;justify-content:center}
 .btn-white{background:var(--white);color:var(--red);padding:14px 30px;border-radius:var(--radius);font-weight:700;font-size:13px;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:none;font-family:var(--font-body)}
 .btn-white:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.18)}
 .btn-white-ghost{background:transparent;color:var(--white);padding:14px 28px;border:1.5px solid rgba(255,255,255,.35);border-radius:var(--radius);font-weight:500;font-size:13px;text-decoration:none;transition:all .2s;cursor:pointer;font-family:var(--font-body)}
 .btn-white-ghost:hover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.08)}
-.hero-stats{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.15);padding-top:32px;flex-wrap:wrap;margin-top:8px}
-.stat-item{padding-right:36px;margin-right:36px;border-right:1px solid rgba(255,255,255,.18)}
+.hero-stats{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.15);padding-top:32px;flex-wrap:nowrap;margin-top:8px;justify-content:center;width:100%}
+.stat-item{padding-right:32px;margin-right:32px;border-right:1px solid rgba(255,255,255,.18);flex:1;text-align:center}
 .stat-item:last-child{border-right:none;margin-right:0;padding-right:0}
-.stat-num{font-family:var(--font-display);font-size:44px;line-height:1;color:var(--white)}
+.stat-num{font-family:var(--font-display);font-size:40px;line-height:1;color:var(--white)}
 .stat-label{font-size:11px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}
 .hero-steps-card{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:28px 24px;backdrop-filter:blur(8px)}
 .hero-steps{display:flex;flex-direction:column;gap:0}
@@ -137,21 +137,21 @@ h1{font-family:var(--font-display);font-size:clamp(64px,8.5vw,116px);line-height
 .activo-cta.disabled{background:var(--gray4);color:var(--gray2);cursor:not-allowed;transform:none;box-shadow:none;pointer-events:none}
 
 /* PROCESO */
-#proceso{background:var(--white)}
-.proceso-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;background:var(--gray3);border:1px solid var(--gray3);border-radius:10px;overflow:hidden}
-.proceso-card{background:var(--white);padding:40px 28px;position:relative;overflow:hidden;transition:background .25s}
-.proceso-card:hover{background:var(--gray5)}
+#proceso{background:#13151f}
+.proceso-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.proceso-card{background:#1e2030;border:1px solid rgba(255,255,255,.07);color:#e5e7eb;padding:32px 24px;position:relative;overflow:hidden;transition:background .25s;border-radius:12px}
+.proceso-card:hover{background:#262840;border-color:rgba(227,30,36,.3)}
 .proceso-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s}
 .proceso-card:hover::after{transform:scaleX(1)}
 .proceso-num{font-family:var(--font-display);font-size:80px;color:rgba(227,30,36,.06);line-height:1;position:absolute;top:8px;right:14px;letter-spacing:-2px}
 .proceso-icon{font-size:26px;margin-bottom:18px;display:block}
-.proceso-title{font-family:var(--font-display);font-size:20px;letter-spacing:.5px;color:var(--dark);margin-bottom:10px}
-.proceso-desc{font-size:14px;color:var(--gray);line-height:1.7}
+.proceso-title{font-family:var(--font-display);font-size:17px;letter-spacing:.5px;color:#ffffff;margin-bottom:10px}
+.proceso-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7}
 
 /* VENDIDOS */
-#vendidos{background:var(--gray5)}
+#vendidos{background:#f7f3ef}
 .vendidos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-.vendido-card{border:1.5px solid var(--gray3);border-radius:10px;padding:26px;position:relative;overflow:hidden;background:var(--white);transition:border-color .2s}
+.vendido-card{border:1.5px solid #ddd;border-radius:10px;padding:26px;position:relative;overflow:hidden;background:var(--white);transition:border-color .2s;box-shadow:0 2px 12px rgba(0,0,0,.06)}
 .vendido-card:hover{border-color:var(--gray2)}
 .vendido-ribbon{position:absolute;top:18px;right:-30px;background:var(--gray3);color:var(--gray);font-family:var(--font-mono);font-size:9px;letter-spacing:2px;padding:5px 42px;transform:rotate(45deg);text-transform:uppercase;font-weight:600}
 .vendido-location{font-size:11px;color:var(--gray2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px;font-family:var(--font-mono)}
@@ -162,22 +162,22 @@ h1{font-family:var(--font-display);font-size:clamp(64px,8.5vw,116px);line-height
 .result-key{font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;margin-top:3px}
 
 /* BLOG */
-#blog{background:var(--white)}
+#blog{background:#0d1117}
 .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px}
-.blog-card{border-radius:10px;overflow:hidden;border:1.5px solid var(--gray3);background:var(--white);transition:transform .25s,box-shadow .25s;text-decoration:none;color:inherit;display:block;cursor:pointer}
+.blog-card{border-radius:10px;overflow:hidden;border:1.5px solid rgba(255,255,255,.08);background:#161b22;transition:transform .25s,box-shadow .25s;text-decoration:none;color:#e5e7eb;display:block;cursor:pointer}
 .blog-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--gray2)}
-.blog-img{height:170px;background:var(--gray4);display:flex;align-items:center;justify-content:center;font-size:44px;color:var(--gray3);position:relative}
+.blog-img{height:200px;background:var(--gray4);display:flex;align-items:flex-end;justify-content:flex-start;position:relative;overflow:hidden;background-size:cover!important;background-position:center!important}
 .blog-img.red-bg{background:var(--red)}.blog-img.dark-bg{background:var(--dark)}
 .blog-category{position:absolute;top:12px;left:12px;background:var(--white);color:var(--red);padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:var(--font-mono)}
 .blog-body{padding:22px}
 .blog-meta{font-size:11px;color:var(--gray2);font-family:var(--font-mono);margin-bottom:7px}
-.blog-title{font-family:var(--font-display);font-size:19px;color:var(--dark);line-height:1.15;margin-bottom:9px}
-.blog-excerpt{font-size:13px;color:var(--gray);line-height:1.65;margin-bottom:14px}
+.blog-title{font-family:var(--font-display);font-size:15px;letter-spacing:.3px;margin-bottom:10px;line-height:1.3;color:#fff}
+.blog-excerpt{font-size:13px;color:rgba(255,255,255,.5);line-height:1.65;margin-bottom:14px}
 .blog-readmore{font-size:12px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.5px}
 
 /* FAQ */
-#faq{background:var(--gray5)}
-.faq-list{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gray3);border-radius:10px;overflow:hidden;max-width:920px}
+#faq{background:#ffffff}
+.faq-list{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gray3);border-radius:10px;overflow:hidden;max-width:920px;margin:0 auto}
 .faq-item{background:var(--white)}
 .faq-q{width:100%;text-align:left;padding:22px 26px;background:none;border:none;border-left:3px solid transparent;color:var(--dark);font-family:var(--font-body);font-size:14px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:background .2s,border-color .2s;line-height:1.4}
 .faq-q:hover{background:var(--gray5)}.faq-q.open{color:var(--red);background:var(--red-light);border-left:3px solid var(--red)}
@@ -342,6 +342,10 @@ footer{background:var(--dark);padding:56px 52px 32px}
 .tip-box::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--dark)}
 .tooltip-wrap:hover .tip-box{display:block}
 .modal-actions{display:flex;gap:10px;margin-top:20px;padding:14px 0 4px;background:var(--white)}
+.btn-outline{background:transparent;border:1.5px solid var(--gray3);color:var(--gray);font-family:var(--font-body);font-size:14px;font-weight:600;padding:12px 20px;border-radius:var(--radius);cursor:pointer;flex:1;transition:all .2s}
+.btn-outline:hover{border-color:var(--gray2);color:var(--dark)}
+.btn-primary-form{background:var(--red);color:white;border:none;font-family:var(--font-body);font-size:14px;font-weight:700;padding:12px 24px;border-radius:var(--radius);cursor:pointer;flex:2;transition:all .2s}
+.btn-primary-form:hover{background:var(--red-dim)}
 .btn-back{flex:1;padding:12px;background:none;border:1.5px solid var(--gray3);border-radius:var(--radius);color:var(--gray);font-family:var(--font-body);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
 .btn-back:hover{border-color:var(--gray2);color:var(--dark)}
 .btn-next{flex:2;padding:12px;background:var(--red);border:none;border-radius:var(--radius);color:var(--white);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
@@ -399,7 +403,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
 @media(max-width:1024px){.activo-hero-inner,.activo-content{grid-template-columns:1fr}.activo-sidebar{position:static}}
 @media(max-width:960px){.hero-inner{grid-template-columns:1fr;gap:40px}.lejos-inner{grid-template-columns:1fr;gap:40px}}
-@media(max-width:768px){nav{padding:0 20px}.nav-links{display:none}section,#hero,#invierte-lejos{padding:72px 20px}#garantia{padding:28px 20px}h1{font-size:56px}.faq-list{grid-template-columns:1fr}footer{padding:44px 20px 28px}.activos-grid{grid-template-columns:1fr}.garantia-btn{margin-left:0}.activo-hero-inner,.activo-content{padding:32px 20px;gap:32px}.gallery-main{height:280px}.puntos-fuertes{grid-template-columns:1fr}.zona-stats{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}}
+@media(max-width:768px){nav{padding:0 20px}.nav-links{display:none}section,#hero{padding:48px 20px}.proceso-grid{grid-template-columns:1fr}#garantia{padding:28px 20px}h1{font-size:56px}.faq-list{grid-template-columns:1fr}footer{padding:44px 20px 28px}.activos-grid{grid-template-columns:1fr}.garantia-btn{margin-left:0}.activo-hero-inner,.activo-content{padding:32px 20px;gap:32px}.gallery-main{height:280px}.puntos-fuertes{grid-template-columns:1fr}.zona-stats{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}}
 
 /* LEAD POPUP */
 .lead-popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
@@ -437,7 +441,6 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
   <!-- Nav home -->
   <ul class="nav-links" id="navHome">
-    <li><a onclick="showView('home', true);scrollToSection('nosotros')">Quiénes somos</a></li>
     <li><a onclick="showView('home', true);scrollToSection('activos')">Activos</a></li>
     <li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li>
     <li><a onclick="showView('home', true);scrollToSection('vendidos')">Resultados</a></li>
@@ -463,31 +466,19 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <div class="hero-pattern"></div>
     <div class="hero-deco">€</div>
     <div class="hero-inner">
-      <div>
-        <h1>INVIERTE.<br>COBRA<br>CADA MES.</h1>
-        <p class="hero-sub">Seleccionamos pisos con alta rentabilidad, gestionamos todo el proceso y garantizamos el alquiler estimado. Tú solo firmas y cobras.</p>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:20px">✅ Alquiler garantizado en todas las operaciones</div>
+        <h1>PISOS QUE<br>PAGAN<br>CADA MES.</h1>
+        <p class="hero-sub" style="max-width:520px">Seleccionamos los activos, gestionamos la compra, ponemos el inquilino y garantizamos el alquiler estimado. Tú solo cobras.</p>
         <div class="hero-actions">
           <button class="btn-white" onclick="showView('home', true);scrollToSection('activos')">Ver activos disponibles →</button>
           <button class="btn-white-ghost" onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</button>
         </div>
         <div class="hero-stats">
-          <div class="stat-item"><div class="stat-num">+7%</div><div class="stat-label">Rentabilidad media neta</div></div>
+          <div class="stat-item"><div class="stat-num">+7%</div><div class="stat-label">Rent. media neta</div></div>
           <div class="stat-item"><div class="stat-num">72</div><div class="stat-label">Operaciones cerradas</div></div>
-          <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Alquiler garantizado</div></div>
+          <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Alquilados al precio estimado</div></div>
+          <div class="stat-item"><div class="stat-num">60%</div><div class="stat-label">Clientes que repiten</div></div>
         </div>
-      </div>
-      <div>
-        <div class="hero-steps-card">
-          <div class="hero-steps">
-            <div class="hero-step"><div class="hero-step-num">1</div><div><div class="hero-step-title">Reserva un activo online</div><div class="hero-step-desc">Señal online. Bloqueamos el piso para ti.</div></div></div>
-            <div class="hero-step"><div class="hero-step-num">2</div><div><div class="hero-step-title">Firma las arras digitalmente</div><div class="hero-step-desc">Sin papeles, sin desplazamientos.</div></div></div>
-            <div class="hero-step"><div class="hero-step-num">3</div><div><div class="hero-step-title">Firma ante notario</div><div class="hero-step-desc">Podemos representarte. No tienes que salir de casa.</div></div></div>
-            <div class="hero-step"><div class="hero-step-num">4</div><div><div class="hero-step-title">Alquilamos tu piso</div><div class="hero-step-desc">Inquilino solvente, contrato y suministros.</div></div></div>
-            <div class="hero-step"><div class="hero-step-num">5</div><div><div class="hero-step-title">Empieza a recibir tu sueldo</div><div class="hero-step-desc">Rentabilidad garantizada desde el primer mes.</div></div></div>
-          </div>
-          <button class="hero-steps-cta" onclick="showView('home', true);scrollToSection('proceso')">Ver el proceso completo →</button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -504,7 +495,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
   </div>
 
   <!-- ACTIVOS -->
-  <section id="activos">
+  <section id="activos" style="padding:48px 52px 56px">
     <div class="section-header-row">
       <div><div class="section-eyebrow">Activos disponibles</div><h2>OPORTUNIDADES<br>ACTIVAS</h2></div>
       <button class="ver-todas-btn" onclick="showView('activos')">Ver todas →</button>
@@ -517,31 +508,13 @@ footer{background:var(--dark);padding:56px 52px 32px}
     </div>
   </section>
 
-  <!-- INVIERTE LEJOS -->
-  <section id="invierte-lejos">
-    <div class="lejos-inner">
-      <div>
-        <div class="section-eyebrow" style="color:rgba(255,255,255,.5)"><span style="width:18px;height:2px;background:rgba(255,255,255,.3);display:block"></span>Sin barreras geográficas</div>
-        <h2 style="color:var(--white)">INVIERTE LEJOS<br>DESDE CASA.</h2>
-        <p style="color:rgba(255,255,255,.6);margin-top:14px;font-size:16px;line-height:1.75;font-weight:300">Muchos de nuestros inversores viven en Barcelona o Madrid e invierten en Asturias o León, donde la rentabilidad dobla a la de las grandes ciudades. Nunca han pisado el inmueble. Y cobran cada mes.</p>
-      </div>
-      <div class="lejos-checklist">
-        <div class="lejos-check"><span class="check-icon">🔍</span><div><div class="check-title">Nosotros buscamos el piso</div><div class="check-desc">Analizamos mercado, zona y demanda. Tú recibes oportunidades ya filtradas.</div></div></div>
-        <div class="lejos-check"><span class="check-icon">✍️</span><div><div class="check-title">Firma digital y representación notarial</div><div class="check-desc">Arras en digital. Escritura con poder notarial si lo prefieres. Sin viajar.</div></div></div>
-        <div class="lejos-check"><span class="check-icon">🔑</span><div><div class="check-title">Llaves, reforma y suministros</div><div class="check-desc">Gestionamos entrega, puesta a punto y alta de luz, agua y gas.</div></div></div>
-        <div class="lejos-check"><span class="check-icon">💰</span><div><div class="check-title">Inquilino seleccionado, contrato firmado</div><div class="check-desc">Análisis de solvencia y seguro de impago. Cobras desde el primer mes.</div></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- QUIEN SOY -->
 
 
   <!-- PROCESO -->
-  <section id="proceso">
-    <div class="section-eyebrow">Cómo funciona</div>
-    <h2>EL PROCESO,<br>PASO A PASO</h2>
-    <p class="section-desc">Desde que reservas hasta que cobras el primer mes. Sin ambigüedades.</p>
+  <section id="proceso" style="padding:56px 52px">
+    <div class="section-eyebrow" style="color:rgba(227,30,36,.9)">Cómo funciona</div>
+    <h2 style="color:white">EL PROCESO,<br>PASO A PASO</h2>
+    <p class="section-desc" style="color:rgba(255,255,255,.6)">Desde que reservas hasta que cobras el primer mes. Sin ambigüedades.</p>
     <div class="proceso-grid">
       <div class="proceso-card"><span class="proceso-num">1</span><span class="proceso-icon">🔒</span><div class="proceso-title">RESERVA UN ACTIVO</div><p class="proceso-desc">Elige el piso, paga la señal online y firma el contrato de honorarios digitalmente. Tu DNI queda registrado y el piso bloqueado para ti.</p></div>
       <div class="proceso-card"><span class="proceso-num">2</span><span class="proceso-icon">✍️</span><div class="proceso-title">FIRMA LAS ARRAS</div><p class="proceso-desc">Contrato de arras 100% digital. En este momento se cobran los honorarios de intermediación. Sin desplazamientos ni burocracia física.</p></div>
@@ -552,7 +525,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
   </section>
 
   <!-- VENDIDOS -->
-  <section id="vendidos">
+  <section id="vendidos" style="padding:56px 52px;color:var(--dark)">
     <div class="section-eyebrow">Track record</div>
     <h2>RESULTADOS<br>REALES</h2>
     <p class="section-desc">Operaciones cerradas con sus rentabilidades finales. Sin editar. Sin redondear.</p>
@@ -565,32 +538,72 @@ footer{background:var(--dark);padding:56px 52px 32px}
   </section>
 
   <!-- BLOG -->
-  <section id="blog">
-    <div class="section-eyebrow">Blog · Formación e ideas</div>
-    <h2>APRENDE A<br>INVERTIR MEJOR</h2>
-    <p class="section-desc">Contenido práctico sobre rentabilidad, fiscalidad y mercado. Sin humo.</p>
+  <section id="blog" style="padding:56px 52px">
+    <div class="section-eyebrow" style="color:rgba(227,30,36,.9)">Noticias &amp; Análisis</div>
+    <h2 style="color:white">EL MERCADO<br>A TU FAVOR</h2>
+    <p class="section-desc" style="color:rgba(255,255,255,.55)">Datos reales y noticias recientes sobre rentabilidad inmobiliaria en España.</p>
     <div class="blog-grid">
-      <div class="blog-card"><div class="blog-img red-bg"><span class="blog-category">Guía</span><span>📊</span></div><div class="blog-body"><div class="blog-meta">12 Mar 2025 · 8 min</div><div class="blog-title">RENTABILIDAD BRUTA VS NETA: QUÉ NÚMERO IMPORTA DE VERDAD</div><div class="blog-excerpt">La mayoría de portales muestran rentabilidad bruta. Aquí descontamos gastos reales y calculamos lo que entra en tu bolsillo.</div><div class="blog-readmore">Leer artículo →</div></div></div>
-      <div class="blog-card"><div class="blog-img dark-bg"><span class="blog-category">Mercado</span><span>🗺️</span></div><div class="blog-body"><div class="blog-meta">28 Feb 2025 · 6 min</div><div class="blog-title">POR QUÉ ASTURIAS Y LEÓN SON EL MEJOR MERCADO PARA INVERTIR EN 2025</div><div class="blog-excerpt">Precios bajos, alta demanda y rentabilidades del 8–13%. Analizamos por qué tantos inversores de Barcelona miran al norte.</div><div class="blog-readmore">Leer artículo →</div></div></div>
-      <div class="blog-card"><div class="blog-img"><span class="blog-category">Fiscal</span><span>🧾</span></div><div class="blog-body"><div class="blog-meta">10 Feb 2025 · 5 min</div><div class="blog-title">CÓMO TRIBUTA EL ALQUILER EN ESPAÑA: GUÍA PRÁCTICA 2025</div><div class="blog-excerpt">Reducción del 60% en IRPF, gastos deducibles, amortización. Todo lo que necesitas antes de comprar tu primer piso.</div><div class="blog-readmore">Leer artículo →</div></div></div>
-      <div class="blog-card"><div class="blog-img" style="background:var(--gray4)"><span class="blog-category">Inversión</span><span>🏠</span></div><div class="blog-body"><div class="blog-meta">22 Ene 2025 · 7 min</div><div class="blog-title">INVERTIR EN PISOS SIN SALIR DE CASA: TODO LO QUE NECESITAS SABER</div><div class="blog-excerpt">Poder notarial, firma digital, gestión remota del inquilino. Cómo funciona la inversión inmobiliaria 100% remota.</div><div class="blog-readmore">Leer artículo →</div></div></div>
+
+      <div class="blog-card">
+        <div style="padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Mercado</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Jul 2025 · Fuente: CBRE</div>
+          <div class="blog-title">LA INVERSIÓN INMOBILIARIA EN ESPAÑA SUPERA LOS 7.300M€ EN EL PRIMER SEMESTRE DE 2025</div>
+          <div class="blog-excerpt">Un crecimiento del 22% interanual según CBRE. España atrae capital internacional gracias a su estabilidad y rentabilidades superiores a la media europea. Las ubicaciones fuera de Madrid y Barcelona concentran ya el 40% del total invertido.</div>
+          <div class="blog-readmore">Leer análisis →</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div style="padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Rentabilidad</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Abr 2026 · Fuente: Idealista</div>
+          <div class="blog-title">POR QUÉ LOS MERCADOS INTERMEDIOS DOBLAN LA RENTABILIDAD DE MADRID Y BARCELONA</div>
+          <div class="blog-excerpt">Murcia (7,5%), Segovia (7,3%) y Lleida (7,3%) lideran la rentabilidad bruta en España en 2026. Madrid se queda en el 4,7% y Barcelona en el 5,2%. La inversión en ciudades medianas es la estrategia más rentable del momento.</div>
+          <div class="blog-readmore">Leer análisis →</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div style="padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Alquiler</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Oct 2025 · Fuente: Idealista</div>
+          <div class="blog-title">EL ALQUILER SUBE UN 10,9% EN 2025: POR QUÉ LA DEMANDA NO PARA</div>
+          <div class="blog-excerpt">El precio del alquiler cerró septiembre de 2025 con una subida del 10,9% anual. Escasez de oferta, inmigración y demanda estructural sostienen la presión al alza. El inversor que compra hoy se beneficia de rentas crecientes desde el primer mes.</div>
+          <div class="blog-readmore">Leer análisis →</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div style="padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Estrategia</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Ene 2026 · Fuente: Reental</div>
+          <div class="blog-title">VIVIENDA VS BONOS DEL ESTADO: EL LADRILLO SIGUE GANANDO EN 2026</div>
+          <div class="blog-excerpt">La rentabilidad bruta media de la vivienda en España cerró 2025 en el 6,7%, más del doble que el bono a 10 años (3,5%). Con el alquiler subiendo entre un 6-8% previsto para 2026, comprar para alquilar sigue siendo la inversión más sólida para el ahorrador particular.</div>
+          <div class="blog-readmore">Leer análisis →</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq">
-    <div class="section-eyebrow">Preguntas frecuentes</div>
+  <section id="faq" style="padding:56px 52px;text-align:center">
+    <div class="section-eyebrow" style="justify-content:center">Preguntas frecuentes</div>
     <h2>TODO LO QUE<br>NECESITAS SABER</h2>
-    <p class="section-desc">Si tienes más dudas, escríbenos. Respondemos en menos de 24h.</p>
-    <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto dinero necesito para empezar? <span class="faq-icon">+</span></button><div class="faq-a">Trabajamos operaciones desde 38.000 € de precio de compra. Con financiación, la entrada suele rondar el 20–30% más gastos. La calculadora de cada ficha te da la cifra exacta.</div></div>
+    <p class="section-desc">Las dudas más habituales. Si necesitas más, escríbenos.</p>
+    <div class="faq-list" id="faq-short">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto dinero necesito para empezar? <span class="faq-icon">+</span></button><div class="faq-a">Trabajamos operaciones desde 38.000 € de precio de compra. Con financiación, la entrada suele rondar el 20–30% más gastos.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cómo garantizáis el alquiler estimado? <span class="faq-icon">+</span></button><div class="faq-a">Si el piso se alquila por debajo del precio estimado, compensamos la diferencia. El 100% de nuestras operaciones se han alquilado por encima.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Tengo que ir a la notaría en persona? <span class="faq-icon">+</span></button><div class="faq-a">No. Podemos firmar en tu representación con poder notarial. Muchos inversores nunca han pisado el inmueble que compraron.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué incluye el servicio? <span class="faq-icon">+</span></button><div class="faq-a">Selección del activo, acompañamiento en la compra, suministros, seguro de hogar, búsqueda de inquilino con análisis de solvencia y firma del contrato.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuándo y cuánto cobráis? <span class="faq-icon">+</span></button><div class="faq-a">Los honorarios se cobran en el momento de las arras. No hay cuotas mensuales ni comisiones ocultas. El importe aparece en cada ficha.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Tengo que ir a la notaría en persona? <span class="faq-icon">+</span></button><div class="faq-a">No. Podemos firmar en tu representación con poder notarial. Muchos inversores nunca han pisado el inmueble que compraron.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si el inquilino deja de pagar? <span class="faq-icon">+</span></button><div class="faq-a">Gestionamos el seguro de impago para que estés cubierto. Nos encargamos de los trámites.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Puedo comprar desde fuera de España? <span class="faq-icon">+</span></button><div class="faq-a">Sí. Trabajamos con residentes y no residentes. La firma puede hacerse por poder notarial.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Para qué sirve la señal de reserva? <span class="faq-icon">+</span></button><div class="faq-a">Bloquea el activo mientras gestionas la financiación. Se descuenta del precio final. Antes de pagar, firmas el contrato de honorarios digitalmente.</div></div>
+      <div class="faq-item faq-hidden" style="display:none"><button class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si el inquilino deja de pagar? <span class="faq-icon">+</span></button><div class="faq-a">Gestionamos el seguro de impago para que estés cubierto. Nos encargamos de los trámites.</div></div>
+      <div class="faq-item faq-hidden" style="display:none"><button class="faq-q" onclick="toggleFaq(this)">¿Puedo comprar desde fuera de España? <span class="faq-icon">+</span></button><div class="faq-a">Sí. Trabajamos con residentes y no residentes. La firma puede hacerse por poder notarial.</div></div>
+      <div class="faq-item faq-hidden" style="display:none"><button class="faq-q" onclick="toggleFaq(this)">¿Para qué sirve la señal de reserva? <span class="faq-icon">+</span></button><div class="faq-a">Bloquea el activo mientras gestionas la financiación. Se descuenta del precio final. Antes de pagar, firmas el contrato de honorarios digitalmente.</div></div>
+    </div>
+    <div style="text-align:center;margin-top:24px">
+      <button id="faq-toggle-btn" onclick="toggleFaqAll()" style="background:none;border:1.5px solid var(--gray3);color:var(--gray);font-family:var(--font-body);font-size:13px;font-weight:600;padding:11px 28px;border-radius:var(--radius);cursor:pointer;transition:all .2s">Ver todas las preguntas +</button>
     </div>
   </section>
 
@@ -602,7 +615,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <p class="section-desc">Accede a las oportunidades antes de que lleguen a la web. Sin compromiso.</p>
     <div class="cta-actions">
       <button class="btn-white" onclick="showView('home', true);scrollToSection('activos')">Ver activos disponibles →</button>
-      <a href="/cdn-cgi/l/email-protection#452d2a292405263720242b212a302b36302029212a6b262a28" class="btn-white-ghost">Hablar con un asesor</a>
+      <button class="btn-white-ghost" onclick="openContacto()">Hablar con un asesor</button>
     </div>
     <div class="social-links">
       <a href="#" class="social-link"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Canal Telegram</a>
@@ -619,12 +632,11 @@ footer{background:var(--dark);padding:56px 52px 32px}
         </div>
         <p class="footer-tagline">Intermediación inmobiliaria para inversores que quieren resultados reales, no promesas.</p>
       </div>
-      <div class="footer-links-col"><h4>Navegar</h4><ul><li><a onclick="showView('home', true);scrollToSection('nosotros')">Quiénes somos</a></li>
-<li><a onclick="showView('home', true);scrollToSection('activos')">Activos disponibles</a></li><li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li><li><a onclick="showView('home', true);scrollToSection('vendidos')">Track record</a></li><li><a onclick="showView('home', true);scrollToSection('blog')">Blog</a></li><li><a onclick="showView('home', true);scrollToSection('faq')">FAQ</a></li></ul></div>
-      <div class="footer-links-col"><h4>Comunidad</h4><ul><li><a href="#">Canal Telegram</a></li><li><a href="#">Grupo WhatsApp</a></li></ul></div>
-      <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="/cdn-cgi/l/email-protection#85edeae9e4c5e6f7e0e4ebe1eaf0ebf6f0e0e9e1eaabe6eae8"><span class="__cf_email__" data-cfemail="0b6364676a4b68796e6a656f647e65787e6e676f6425686466">[email&#160;protected]</span></a></li><li><a>Barcelona, España</a></li><li><a>NOGA HOUSE S.L.</a></li></ul></div>
+      <div class="footer-links-col"><h4>Navegar</h4><ul><li><a onclick="showView('home', true);scrollToSection('activos')">Activos disponibles</a></li><li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li><li><a onclick="showView('home', true);scrollToSection('vendidos')">Track record</a></li><li><a onclick="showView('home', true);scrollToSection('blog')">Blog</a></li><li><a onclick="showView('home', true);scrollToSection('faq')">FAQ</a></li></ul></div>
+      
+      <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="mailto:info@creandounsueldo.com">info@creandounsueldo.com</a></li><li><a href="https://t.me/creandounsueldo" target="_blank">Canal Telegram</a></li><li><a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank">Grupo WhatsApp</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><span class="footer-legal">© 2025 NOGA HOUSE S.L. — CreandoUnSueldo</span><span class="footer-legal"><a href="#" onclick="showPrivacidad()">Aviso legal</a> · <a href="#" onclick="showPrivacidad()">Privacidad</a> · <a href="#" onclick="showPrivacidad()">Cookies</a></span></div>
+    <div class="footer-bottom"><span class="footer-legal">© 2025 NOGA HOUSE S.L. — CreandoUnSueldo</span><span class="footer-legal"><a href="#" onclick="showPrivacidad('aviso');return false">Aviso legal</a> · <a href="#" onclick="showPrivacidad('privacidad');return false">Privacidad</a> · <a href="#" onclick="showPrivacidad('cookies');return false">Cookies</a></span></div>
   </footer>
 </div>
 
@@ -754,83 +766,19 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <div style="background:white;border-bottom:1px solid var(--gray3);padding:16px 52px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:68px;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.04)">
       <span style="font-size:12px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-right:4px">Filtrar:</span>
       <button class="filter-pill active" onclick="filterAll(this,'todos')">Todos</button>
-      <button class="filter-pill" onclick="filterAll(this,'disponible')">&#9679; Disponibles</button>
-      <button class="filter-pill" onclick="filterAll(this,'leon')">León</button>
-      <button class="filter-pill" onclick="filterAll(this,'asturias')">Asturias</button>
-      <button class="filter-pill" onclick="filterAll(this,'barcelona')">Barcelona</button>
-      <button class="filter-pill" onclick="filterAll(this,'madrid')">Madrid</button>
+      <button class="filter-pill" onclick="filterAll(this,'disponible')">● Disponibles</button>
+      <button class="filter-pill" onclick="filterAll(this,'reservado')">◆ Reservados</button>
       <div style="margin-left:auto;font-size:12px;color:var(--gray2)" id="activosCount">3 activos</div>
     </div>
 
     <!-- Grid -->
-    <div style="padding:40px 52px;max-width:1400px" id="allActivosGrid">
-      <div class="activos-grid">
-
-        <!-- PONFERRADA -->
-        <div class="activo-card" data-zona="leon" data-estado="disponible" onclick="showView('activo')">
-          <div class="activo-img"><div class="activo-img-ph">&#127968;</div><span class="activo-badge badge-disponible">&#9679; Disponible</span><span class="garantia-tag">Alquiler garantizado</span></div>
-          <div class="activo-body">
-            <div class="activo-location">León · Ponferrada</div>
-            <div class="activo-title">PISO 2 HAB.<br>AV. JOSE VALGOMA</div>
-            <div class="kpi-main">
-              <div class="kpi-cell"><div class="kpi-val red">13,1%</div><div class="kpi-key">Rent. bruta</div></div>
-              <div class="kpi-cell"><div class="kpi-val green">+395€</div><div class="kpi-key">Cashflow/mes</div></div>
-              <div class="kpi-cell"><div class="kpi-val">38k€</div><div class="kpi-key">Precio</div></div>
-            </div>
-            <div class="kpi-grid">
-              <div class="kpi-grid-cell"><div class="kpi-grid-val">415€/mes</div><div class="kpi-grid-key">Alquiler (4.980€/año)</div></div>
-              <div class="kpi-grid-cell"><div class="kpi-grid-val">45 m²</div><div class="kpi-grid-key">Superficie</div></div>
-              <div class="kpi-grid-cell"><div class="kpi-grid-val">386€/año</div><div class="kpi-grid-key">Gastos totales</div></div>
-            </div>
-            <div class="activo-tags"><span class="tag">Amueblado</span><span class="tag">Lista para entrar</span><span class="tag">Suministros activos</span></div>
-            <div class="activo-cta">Ver activo completo →</div>
-          </div>
+    <div style="padding:40px 52px;max-width:1400px">
+      <div class="activos-grid" id="allActivosGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">
+          <div style="width:32px;height:32px;border:3px solid rgba(0,0,0,.1);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>
+          Cargando activos...
         </div>
-
-        <!-- BARCELONA -->
-        <div class="activo-card" data-zona="barcelona" data-estado="disponible" onclick="showView('activo')">
-          <div class="activo-img"><div class="activo-img-ph">&#127962;</div><span class="activo-badge badge-disponible">&#9679; Disponible</span><span class="garantia-tag">Alquiler garantizado</span></div>
-          <div class="activo-body">
-            <div class="activo-location">Barcelona · Nou Barris</div>
-            <div class="activo-title">PISO 3 HAB.<br>CON TERRAZA</div>
-            <div class="kpi-main">
-              <div class="kpi-cell"><div class="kpi-val red">8,0%</div><div class="kpi-key">Rent. bruta</div></div>
-              <div class="kpi-cell"><div class="kpi-val green">+680€</div><div class="kpi-key">Cashflow/mes</div></div>
-              <div class="kpi-cell"><div class="kpi-val">165k€</div><div class="kpi-key">Precio</div></div>
-            </div>
-            <div class="kpi-grid">
-              <div class="kpi-grid-cell"><div class="kpi-grid-val">1.100€/mes</div><div class="kpi-grid-key">Alquiler (13.200€/año)</div></div>
-              <div class="kpi-grid-cell"><div class="kpi-grid-val">72 m²</div><div class="kpi-grid-key">Superficie</div></div>
-              <div class="kpi-grid-cell"><div class="kpi-grid-val">—</div><div class="kpi-grid-key">Gastos totales</div></div>
-            </div>
-            <div class="activo-tags"><span class="tag">Reformado</span><span class="tag">Ascensor</span><span class="tag">Terraza</span></div>
-            <div class="activo-cta">Ver activo completo →</div>
-          </div>
-        </div>
-
-        <!-- MADRID RESERVADO -->
-        <div class="activo-card" data-zona="madrid" data-estado="reservado" style="opacity:.7;pointer-events:none">
-          <div class="activo-img"><div class="activo-img-ph">&#127961;</div><span class="activo-badge badge-reservado">&#9670; Reservado</span></div>
-          <div class="activo-body">
-            <div class="activo-location">Madrid · Carabanchel</div>
-            <div class="activo-title">ESTUDIO<br>BIEN COMUNICADO</div>
-            <div class="kpi-main">
-              <div class="kpi-cell"><div class="kpi-val red">7,0%</div><div class="kpi-key">Rent. bruta</div></div>
-              <div class="kpi-cell"><div class="kpi-val green">+520€</div><div class="kpi-key">Cashflow/mes</div></div>
-              <div class="kpi-cell"><div class="kpi-val">112k€</div><div class="kpi-key">Precio</div></div>
-            </div>
-            <div class="kpi-grid">
-              <div class="kpi-grid-cell"><div class="kpi-grid-val">750€/mes</div><div class="kpi-grid-key">Alquiler (9.000€/año)</div></div>
-              <div class="kpi-grid-cell"><div class="kpi-grid-val">38 m²</div><div class="kpi-grid-key">Superficie</div></div>
-              <div class="kpi-grid-cell"><div class="kpi-grid-val">—</div><div class="kpi-grid-key">Gastos totales</div></div>
-            </div>
-            <div class="activo-tags"><span class="tag">Metro L5</span><span class="tag">Amueblado</span></div>
-            <div class="activo-cta disabled">Ya reservado</div>
-          </div>
-        </div>
-
       </div>
-
       <!-- Empty state -->
       <div id="activosEmpty" style="display:none;text-align:center;padding:80px 20px">
         <div style="font-size:48px;margin-bottom:16px">🔍</div>
@@ -854,6 +802,46 @@ footer{background:var(--dark);padding:56px 52px 32px}
   </div>
 </div>
 
+<!-- MODAL CONTACTO -->
+<div class="modal-overlay" id="contactoOverlay" onclick="closeContactoOutside(event)">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header" style="border-radius:12px 12px 0 0">
+      <button class="modal-header-close" onclick="closeContacto()">×</button>
+      <div class="modal-title">CONTACTAR</div>
+      <div class="modal-subtitle">Te respondemos en menos de 24h.</div>
+    </div>
+    <div class="modal-body" id="contacto-form-body">
+      <div class="form-group">
+        <label class="form-label">Nombre *</label>
+        <input class="form-input" id="c-nombre" type="text" placeholder="Tu nombre">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Teléfono *</label>
+          <input class="form-input" id="c-tel" type="tel" placeholder="+34 6XX XXX XXX">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" id="c-email" type="email" placeholder="tu@email.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">¿En qué podemos ayudarte?</label>
+        <textarea class="form-input" id="c-msg" rows="4" placeholder="Cuéntanos qué buscas o escríbenos tu duda..." style="resize:none"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-outline" onclick="closeContacto()">Cancelar</button>
+        <button class="btn-primary-form" onclick="enviarContacto()">Enviar mensaje →</button>
+      </div>
+    </div>
+    <div id="contacto-success" style="display:none;text-align:center;padding:48px 28px">
+      <div style="font-size:52px;margin-bottom:16px">✅</div>
+      <div style="font-family:var(--font-display);font-size:28px;color:var(--dark);margin-bottom:8px">¡RECIBIDO!</div>
+      <p style="font-size:14px;color:var(--gray);line-height:1.6;margin-bottom:24px">Nos ponemos en contacto contigo en menos de 24h.</p>
+      <button class="btn-primary-form" onclick="closeContacto()">Cerrar</button>
+    </div>
+  </div>
+</div>
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
   <div class="modal">
     <div class="modal-header">
@@ -1257,26 +1245,83 @@ footer{background:var(--dark);padding:56px 52px 32px}
   </div>
 </div>
 <!-- PRIVACIDAD MODAL -->
-<div id="privacidadOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);z-index:3000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s">
-  <div style="background:var(--white);border-radius:12px;max-width:660px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,.2)">
-    <div style="background:var(--dark);padding:22px 28px;border-radius:12px 12px 0 0;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0">
-      <div style="font-family:var(--font-display);font-size:18px;letter-spacing:1px;color:white">POL&Iacute;TICA DE PRIVACIDAD</div>
-      <button onclick="closePrivacidad()" style="background:rgba(255,255,255,.15);border:none;color:white;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer">&#215;</button>
+<div id="privacidadOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:3000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s">
+  <div style="background:#fff;border-radius:12px;max-width:700px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,.3)">
+    <div style="background:#111;padding:20px 28px;border-radius:12px 12px 0 0;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1">
+      <div id="legal-title" style="font-family:var(--font-display);font-size:18px;letter-spacing:1px;color:white">AVISO LEGAL</div>
+      <button onclick="closePrivacidad()" style="background:rgba(255,255,255,.15);border:none;color:white;width:28px;height:28px;border-radius:50%;font-size:18px;cursor:pointer;line-height:1">×</button>
     </div>
-    <div style="padding:28px;font-size:14px;color:var(--gray);line-height:1.8">
-      <p><strong style="color:var(--dark)">Responsable:</strong> NOGA HOUSE S.L. &middot; <a href="/cdn-cgi/l/email-protection" ><span class="__cf_email__" data-cfemail="3f5750535e7f5c4d5a5e515b504a514c4a5a535b50115c5052">[email&#160;protected]</span></a> &middot; Barcelona</p>
-      <h4 style="font-family:var(--font-display);font-size:17px;color:var(--dark);margin:18px 0 8px">DATOS QUE RECOGEMOS</h4>
-      <p>Nombre, email, tel&eacute;fono y DNI/NIE para gestionar tu reserva y prestarte el servicio de intermediaci&oacute;n inmobiliaria.</p>
-      <h4 style="font-family:var(--font-display);font-size:17px;color:var(--dark);margin:18px 0 8px">FINALIDAD</h4>
-      <p>Gesti&oacute;n contractual, env&iacute;o de informaci&oacute;n sobre activos (con tu consentimiento) y cumplimiento de obligaciones legales.</p>
-      <h4 style="font-family:var(--font-display);font-size:17px;color:var(--dark);margin:18px 0 8px">COOKIES</h4>
-      <p>Cookies propias de sesi&oacute;n (necesarias) y anal&iacute;ticas de terceros. Puedes gestionar tus preferencias en el banner.</p>
-      <h4 style="font-family:var(--font-display);font-size:17px;color:var(--dark);margin:18px 0 8px">TUS DERECHOS</h4>
-      <p>Acceso, rectificaci&oacute;n, supresi&oacute;n y oposici&oacute;n en <a href="/cdn-cgi/l/email-protection" ><span class="__cf_email__" data-cfemail="076f686b66476475626669636872697472626b63682964686a">[email&#160;protected]</span></a>. Puedes reclamar ante la AEPD (www.aepd.es).</p>
-      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--gray3);font-size:12px;color:var(--gray2)">&Uacute;ltima actualizaci&oacute;n: Enero 2025</div>
+    <div style="display:flex;gap:0;border-bottom:1px solid #eee;background:#f9f9f9">
+      <button onclick="showLegal('aviso')" id="tab-aviso" style="flex:1;padding:12px;border:none;background:none;font-family:var(--font-body);font-size:13px;font-weight:700;color:var(--red);border-bottom:2px solid var(--red);cursor:pointer">Aviso Legal</button>
+      <button onclick="showLegal('privacidad')" id="tab-privacidad" style="flex:1;padding:12px;border:none;background:none;font-family:var(--font-body);font-size:13px;font-weight:600;color:#888;border-bottom:2px solid transparent;cursor:pointer">Privacidad</button>
+      <button onclick="showLegal('cookies')" id="tab-cookies" style="flex:1;padding:12px;border:none;background:none;font-family:var(--font-body);font-size:13px;font-weight:600;color:#888;border-bottom:2px solid transparent;cursor:pointer">Cookies</button>
+    </div>
+
+    <div id="legal-aviso" style="padding:28px;font-size:13px;color:#555;line-height:1.8">
+      <h4 style="font-size:15px;color:#111;margin:0 0 12px">IDENTIFICACIÓN DEL TITULAR</h4>
+      <p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSI-CE), se informa:</p>
+      <ul style="margin:12px 0 16px 20px;display:flex;flex-direction:column;gap:4px">
+        <li><strong>Razón social:</strong> NOGA HOUSE S.L.</li>
+        <li><strong>CIF:</strong> B75385070</li>
+        <li><strong>Domicilio social:</strong> Barcelona, España</li>
+        <li><strong>Email:</strong> info@creandounsueldo.com</li>
+        <li><strong>Actividad:</strong> Intermediación inmobiliaria</li>
+      </ul>
+      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">OBJETO Y CONDICIONES DE USO</h4>
+      <p>El presente sitio web tiene por objeto la difusión de oportunidades de inversión inmobiliaria y la prestación de servicios de intermediación. El acceso y uso del sitio web implica la aceptación plena de las presentes condiciones. NOGA HOUSE S.L. se reserva el derecho a modificar, sin previo aviso, el contenido del sitio web.</p>
+      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">RESPONSABILIDAD</h4>
+      <p>Las rentabilidades mostradas son estimaciones basadas en condiciones actuales del mercado y no constituyen garantía de rendimiento futuro. NOGA HOUSE S.L. actúa como intermediario y no es parte compradora ni vendedora en las operaciones.</p>
+      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">PROPIEDAD INTELECTUAL</h4>
+      <p>Los contenidos, diseño y código del sitio son propiedad de NOGA HOUSE S.L. Queda prohibida su reproducción total o parcial sin autorización expresa.</p>
+      <p style="margin-top:20px;font-size:11px;color:#aaa">Última actualización: enero 2025</p>
+    </div>
+
+    <div id="legal-privacidad" style="display:none;padding:28px;font-size:13px;color:#555;line-height:1.8">
+      <h4 style="font-size:15px;color:#111;margin:0 0 12px">RESPONSABLE DEL TRATAMIENTO</h4>
+      <p>NOGA HOUSE S.L. (CIF B75385070), con domicilio en Barcelona. Contacto: info@creandounsueldo.com</p>
+      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">DATOS QUE RECOGEMOS</h4>
+      <p>Nombre, teléfono, email y, en caso de formalizar una operación, DNI/NIE y dirección postal. Los datos se recogen a través de los formularios del sitio web o por comunicación directa.</p>
+      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">FINALIDAD Y BASE LEGAL</h4>
+      <ul style="margin:8px 0 12px 20px;display:flex;flex-direction:column;gap:6px">
+        <li><strong>Gestión de consultas</strong> (interés legítimo / consentimiento)</li>
+        <li><strong>Prestación del servicio de intermediación</strong> (ejecución contractual)</li>
+        <li><strong>Envío de comunicaciones comerciales sobre activos disponibles</strong> (consentimiento expreso)</li>
+        <li><strong>Cumplimiento de obligaciones legales</strong> (Ley de prevención de blanqueo de capitales)</li>
+      </ul>
+      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">CONSERVACIÓN</h4>
+      <p>Los datos se conservan durante el tiempo necesario para cumplir la finalidad para la que fueron recogidos y, en todo caso, durante los plazos legalmente establecidos.</p>
+      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">TUS DERECHOS</h4>
+      <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a info@creandounsueldo.com. Tienes derecho a presentar reclamación ante la Agencia Española de Protección de Datos (www.aepd.es).</p>
+      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">TRANSFERENCIAS INTERNACIONALES</h4>
+      <p>No se realizan transferencias internacionales de datos fuera del Espacio Económico Europeo.</p>
+      <p style="margin-top:20px;font-size:11px;color:#aaa">Última actualización: enero 2025</p>
+    </div>
+
+    <div id="legal-cookies" style="display:none;padding:28px;font-size:13px;color:#555;line-height:1.8">
+      <h4 style="font-size:15px;color:#111;margin:0 0 12px">¿QUÉ SON LAS COOKIES?</h4>
+      <p>Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo al visitar una página web. Permiten recordar tus preferencias y mejorar la experiencia de navegación.</p>
+      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">COOKIES QUE UTILIZAMOS</h4>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:8px 0 16px">
+        <thead><tr style="background:#f5f5f5"><th style="padding:8px 12px;text-align:left;border:1px solid #eee">Nombre</th><th style="padding:8px 12px;text-align:left;border:1px solid #eee">Tipo</th><th style="padding:8px 12px;text-align:left;border:1px solid #eee">Finalidad</th><th style="padding:8px 12px;text-align:left;border:1px solid #eee">Duración</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:8px 12px;border:1px solid #eee">cookiesAccepted</td><td style="padding:8px 12px;border:1px solid #eee">Propia / Técnica</td><td style="padding:8px 12px;border:1px solid #eee">Guarda tu preferencia de cookies</td><td style="padding:8px 12px;border:1px solid #eee">1 año</td></tr>
+          <tr><td style="padding:8px 12px;border:1px solid #eee">leadSeen</td><td style="padding:8px 12px;border:1px solid #eee">Propia / Funcional</td><td style="padding:8px 12px;border:1px solid #eee">Evita mostrar el popup repetidamente</td><td style="padding:8px 12px;border:1px solid #eee">Sesión</td></tr>
+        </tbody>
+      </table>
+      <p>Este sitio web <strong>no utiliza cookies de terceros ni cookies publicitarias</strong>. No se comparten datos de navegación con terceros.</p>
+      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">CÓMO GESTIONAR LAS COOKIES</h4>
+      <p>Puedes configurar tu navegador para rechazar o eliminar las cookies. Ten en cuenta que deshabilitar ciertas cookies puede afectar al funcionamiento del sitio. Instrucciones para los principales navegadores:</p>
+      <ul style="margin:8px 0 0 20px;display:flex;flex-direction:column;gap:4px">
+        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" style="color:var(--red)">Google Chrome</a></li>
+        <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" style="color:var(--red)">Mozilla Firefox</a></li>
+        <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" style="color:var(--red)">Safari</a></li>
+      </ul>
+      <p style="margin-top:20px;font-size:11px;color:#aaa">Última actualización: enero 2025</p>
     </div>
   </div>
 </div>
+
+
 
 <script>
 function goBack() {
@@ -1580,8 +1625,27 @@ function rejectCookies() {
   try { localStorage.setItem('cookiesAccepted', 'necessary'); } catch(e) {}
   document.getElementById('cookieBanner').style.transform = 'translateY(100%)';
 }
-function showPrivacidad() { var o = document.getElementById('privacidadOverlay'); o.style.opacity = '1'; o.style.pointerEvents = 'all'; }
-function closePrivacidad() { var o = document.getElementById('privacidadOverlay'); o.style.opacity = '0'; o.style.pointerEvents = 'none'; }
+function showPrivacidad(tab) {
+  var o = document.getElementById('privacidadOverlay');
+  o.style.opacity = '1'; o.style.pointerEvents = 'all';
+  if (tab) showLegal(tab); else showLegal('aviso');
+}
+function closePrivacidad() {
+  var o = document.getElementById('privacidadOverlay');
+  o.style.opacity = '0'; o.style.pointerEvents = 'none';
+}
+function showLegal(tab) {
+  ['aviso','privacidad','cookies'].forEach(function(t) {
+    var panel = document.getElementById('legal-'+t);
+    var btn = document.getElementById('tab-'+t);
+    if (panel) panel.style.display = t===tab ? '' : 'none';
+    if (btn) {
+      btn.style.color = t===tab ? 'var(--red)' : '#888';
+      btn.style.borderBottomColor = t===tab ? 'var(--red)' : 'transparent';
+      btn.style.fontWeight = t===tab ? '700' : '600';
+    }
+  });
+}
 document.addEventListener('DOMContentLoaded', function() {
   var lb = document.getElementById('leadSubmitBtn'); if (lb) lb.addEventListener('click', submitLead);
   var ca = document.getElementById('cookieAcceptBtn'); if (ca) ca.addEventListener('click', acceptCookies);
@@ -1629,6 +1693,45 @@ async function loadActivos() {
   }
 }
 
+function buildCard(a, onclick) {
+  var fotos = Array.isArray(a.fotos) ? a.fotos : []
+  var foto  = fotos[0] || null
+  var alq   = a.alquiler_estimado || 0
+  var com   = a.gastos_comunidad  || 0
+  var ibi   = a.ibi || 0
+  var rb    = calcRB(a.precio, alq)
+  var cf    = calcCF(alq, com, ibi)
+  var bloqueado = a.status !== 'disponible'
+  var badgeLabel = a.status === 'reservado' ? '◆ Reservado' : a.status === 'en_proceso' ? '◑ En proceso' : '● Disponible'
+  var badgeClass = a.status === 'reservado' || a.status === 'en_proceso' ? 'badge-reservado' : 'badge-disponible'
+  var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
+  var titulo = a.titulo_pagina || ((a.habitaciones ? a.habitaciones+' HAB.' : '') + (a.zona ? '<br>'+a.zona.toUpperCase() : ''))
+  var gastosAnual = (+com*12 + +ibi)
+  var imgHtml = foto
+    ? '<img src="'+foto+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" /><div class="activo-img-ph" style="display:none">🏠</div>'
+    : '<div class="activo-img-ph">🏠</div>'
+
+  return '<div class="activo-card" onclick="'+(bloqueado?'':onclick)+'" style="'+(bloqueado?'opacity:.75;pointer-events:none':'cursor:pointer')+'" data-zona="'+(a.provincia||'').toLowerCase()+'" data-estado="'+a.status+'">'
+    + '<div class="activo-img">'+imgHtml+'<span class="activo-badge '+badgeClass+'">'+badgeLabel+'</span>'+(bloqueado?'':'<span class="garantia-tag">Alquiler garantizado</span>')+'</div>'
+    + '<div class="activo-body">'
+    + '<div class="activo-location">'+loc+'</div>'
+    + '<div class="activo-title">'+titulo+'</div>'
+    + '<div class="kpi-main">'
+    +   '<div class="kpi-cell"><div class="kpi-val red">'+(rb||'—')+'%</div><div class="kpi-key">Rent. bruta</div></div>'
+    +   '<div class="kpi-cell"><div class="kpi-val '+(cf!=null&&cf>0?'green':'')+'">'+( cf!=null ? (cf>0?'+':'')+fmtNum(cf)+'€' : '—' )+'</div><div class="kpi-key">Cashflow/mes</div></div>'
+    +   '<div class="kpi-cell"><div class="kpi-val">'+fmtE(a.precio)+'</div><div class="kpi-key">Precio</div></div>'
+    + '</div>'
+    + '<div class="kpi-grid">'
+    +   '<div class="kpi-grid-cell"><div class="kpi-grid-val">'+fmtE(alq)+'/mes</div><div class="kpi-grid-key">Alquiler ('+fmtE(alq*12)+'/año)</div></div>'
+    +   (a.m2 ? '<div class="kpi-grid-cell"><div class="kpi-grid-val">'+a.m2+' m²</div><div class="kpi-grid-key">Superficie</div></div>' : '')
+    +   '<div class="kpi-grid-cell"><div class="kpi-grid-val">'+(gastosAnual>0?fmtE(gastosAnual)+'/año':'—')+'</div><div class="kpi-grid-key">Gastos fijos</div></div>'
+    + '</div>'
+    + (bloqueado
+        ? '<div class="activo-cta disabled">'+(a.status==='reservado'?'Ya reservado':'En proceso')+'</div>'
+        : '<div class="activo-cta">Ver activo completo →</div>')
+    + '</div></div>'
+}
+
 function renderActivos(activos) {
   var grid = document.getElementById('grid-activos')
   if (!grid) return
@@ -1636,49 +1739,24 @@ function renderActivos(activos) {
     return a.status === 'disponible' || a.status === 'reservado' || a.status === 'en_proceso'
   })
   if (!lista.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">No hay activos disponibles en este momento.<br>Únete a nuestro Telegram para recibir los próximos.</div>'
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">No hay activos disponibles ahora mismo.<br>Únete a nuestro Telegram para recibir los próximos.</div>'
+    var g2 = document.getElementById('allActivosGrid')
+    if (g2) g2.innerHTML = grid.innerHTML
     return
   }
-  grid.innerHTML = lista.map(function(a) {
-    var fotos = Array.isArray(a.fotos) ? a.fotos : []
-    var foto  = fotos[0] || null
-    var alq   = a.alquiler_estimado || 0
-    var com   = a.gastos_comunidad  || 0
-    var ibi   = a.ibi || 0
-    var rb    = calcRB(a.precio, alq)
-    var cf    = calcCF(alq, com, ibi)
-    var bloqueado = a.status !== 'disponible'
-    var badgeLabel = a.status === 'reservado' ? '◆ Reservado' : a.status === 'en_proceso' ? '◑ En proceso' : '● Disponible'
-    var badgeClass = a.status === 'reservado' ? 'badge-reservado' : a.status === 'en_proceso' ? 'badge-reservado' : 'badge-disponible'
-    var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
-    var titulo = a.titulo_pagina || ((a.habitaciones ? a.habitaciones+' HAB.' : '') + (a.zona ? '<br>'+a.zona.toUpperCase() : ''))
-    var gastosAnual = (+com*12 + +ibi)
-    var imgHtml = foto
-      ? '<img src="'+foto+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display=\x27none\x27;this.nextElementSibling.style.display=\x27flex\x27" /><div class="activo-img-ph" style="display:none">🏠</div>'
-      : '<div class="activo-img-ph">🏠</div>'
-
-    return '<div class="activo-card'+(bloqueado?' activo-bloqueado':'')+'" onclick="'+(bloqueado?'':('abrirActivo('+JSON.stringify(a)+');scrollToTop()'))+'" style="'+(bloqueado?'opacity:.75;':'cursor:pointer')+'">'
-      + '<div class="activo-img">'+imgHtml+'<span class="activo-badge '+badgeClass+'">'+badgeLabel+'</span>'+(bloqueado?'':'<span class="garantia-tag">Alquiler garantizado</span>')+'</div>'
-      + '<div class="activo-body">'
-      + '<div class="activo-location">'+loc+'</div>'
-      + '<div class="activo-title">'+titulo+'</div>'
-      + '<div class="kpi-main">'
-      +   '<div class="kpi-cell"><div class="kpi-val red">'+(rb||'—')+'%</div><div class="kpi-key">Rent. bruta</div></div>'
-      +   '<div class="kpi-cell"><div class="kpi-val '+(cf!=null&&cf>0?'green':'')+'">'+( cf!=null ? (cf>0?'+':'')+fmtNum(cf)+'€' : '—' )+'</div><div class="kpi-key">Cashflow/mes</div></div>'
-      +   '<div class="kpi-cell"><div class="kpi-val">'+fmtE(a.precio)+'</div><div class="kpi-key">Precio</div></div>'
-      + '</div>'
-      + '<div class="kpi-grid">'
-      +   '<div class="kpi-grid-cell"><div class="kpi-grid-val">'+fmtE(alq)+'/mes</div><div class="kpi-grid-key">Alquiler ('+fmtE(alq*12)+'/año)</div></div>'
-      +   (a.m2 ? '<div class="kpi-grid-cell"><div class="kpi-grid-val">'+a.m2+' m²</div><div class="kpi-grid-key">Superficie</div></div>' : '')
-      +   '<div class="kpi-grid-cell"><div class="kpi-grid-val">'+(gastosAnual>0?fmtE(gastosAnual)+'/año':'—')+'</div><div class="kpi-grid-key">Gastos fijos</div></div>'
-      + '</div>'
-      + (bloqueado
-          ? '<div class="activo-cta disabled">'+(a.status==='reservado'?'Ya reservado':'En proceso')+'</div>'
-          : '<div class="activo-cta">Ver activo completo →</div>')
-      + '</div></div>'
+  var html = lista.map(function(a) {
+    return buildCard(a, 'abrirActivo('+JSON.stringify(a)+');scrollToTop()')
   }).join('')
-}
+  grid.innerHTML = html
 
+  // También llenar la vista "Ver todas"
+  var allGrid = document.getElementById('allActivosGrid')
+  if (allGrid) {
+    allGrid.innerHTML = html
+    var cnt = document.getElementById('activosCount')
+    if (cnt) cnt.textContent = lista.length + ' activo' + (lista.length !== 1 ? 's' : '')
+  }
+}
 function renderVendidos(activos) {
   var grid = document.getElementById('grid-vendidos')
   if (!grid) return
@@ -1779,11 +1857,50 @@ function abrirActivo(a) {
   scrollToTop()
 }
 
-// Cargar al iniciar
+// ─── FAQ TOGGLE ───────────────────────────────────────────────────────────────
+function toggleFaqAll() {
+  var hidden = document.querySelectorAll('.faq-hidden')
+  var btn = document.getElementById('faq-toggle-btn')
+  var isHidden = hidden[0].style.display === 'none'
+  hidden.forEach(function(el) { el.style.display = isHidden ? '' : 'none' })
+  btn.textContent = isHidden ? 'Ver menos −' : 'Ver todas las preguntas +'
+}
+
+// ─── MODAL CONTACTO ───────────────────────────────────────────────────────────
+function openContacto() {
+  document.getElementById('contacto-form-body').style.display = ''
+  document.getElementById('contacto-success').style.display = 'none'
+  ;['c-nombre','c-tel','c-email','c-msg'].forEach(function(id){
+    var el = document.getElementById(id)
+    if (el) el.value = ''
+  })
+  document.getElementById('contactoOverlay').classList.add('open')
+  document.body.style.overflow = 'hidden'
+}
+function closeContacto() {
+  document.getElementById('contactoOverlay').classList.remove('open')
+  document.body.style.overflow = ''
+}
+function closeContactoOutside(e) {
+  if (e.target === document.getElementById('contactoOverlay')) closeContacto()
+}
+function enviarContacto() {
+  var nombre = document.getElementById('c-nombre').value.trim()
+  var tel    = document.getElementById('c-tel').value.trim()
+  var email  = document.getElementById('c-email').value.trim()
+  var msg    = document.getElementById('c-msg').value.trim()
+  if (!nombre || !tel) { alert('Por favor rellena nombre y teléfono.'); return }
+  var subject = encodeURIComponent('Contacto web — ' + nombre)
+  var body = encodeURIComponent('Nombre: ' + nombre + '\nTeléfono: ' + tel + (email ? '\nEmail: ' + email : '') + (msg ? '\n\nMensaje:\n' + msg : ''))
+  window.open('mailto:info@creandounsueldo.com?subject=' + subject + '&body=' + body)
+  document.getElementById('contacto-form-body').style.display = 'none'
+  document.getElementById('contacto-success').style.display = ''
+}
+
+// ─── CARGAR AL INICIAR ────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
   loadActivos()
 })
-// También cargar si DOMContentLoaded ya pasó
 if (document.readyState !== 'loading') {
   loadActivos()
 }
