@@ -143,7 +143,7 @@ h1{font-family:var(--font-display);font-size:clamp(64px,8.5vw,116px);line-height
 .proceso-card:hover{background:#262840;border-color:rgba(227,30,36,.3)}
 .proceso-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s}
 .proceso-card:hover::after{transform:scaleX(1)}
-.proceso-num{font-family:var(--font-display);font-size:80px;color:rgba(227,30,36,.06);line-height:1;position:absolute;top:8px;right:14px;letter-spacing:-2px}
+.proceso-num{font-family:var(--font-display);font-size:80px;color:rgba(255,255,255,.12);line-height:1;position:absolute;top:8px;right:14px;letter-spacing:-2px}
 .proceso-icon{font-size:26px;margin-bottom:18px;display:block}
 .proceso-title{font-family:var(--font-display);font-size:17px;letter-spacing:.5px;color:#ffffff;margin-bottom:10px}
 .proceso-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7}
@@ -470,7 +470,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
         <h1>PISOS QUE<br>PAGAN<br>CADA MES.</h1>
         <p class="hero-sub" style="max-width:520px">Seleccionamos los activos, gestionamos la compra, ponemos el inquilino y garantizamos el alquiler estimado. Tú solo cobras.</p>
         <div class="hero-actions">
-          <button class="btn-white" onclick="showView('home', true);scrollToSection('activos')">Ver activos disponibles →</button>
+          <button class="btn-white" onclick="showView('activos')">Ver activos disponibles →</button>
           <button class="btn-white-ghost" onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</button>
         </div>
         <div class="hero-stats">
@@ -516,7 +516,8 @@ footer{background:var(--dark);padding:56px 52px 32px}
       <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none"></div>
       <div style="position:relative;flex:1;min-width:220px">
         <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px">Acceso anticipado</div>
-        <div style="font-family:var(--font-display);font-size:clamp(20px,2.5vw,28px);color:white;line-height:1.05;letter-spacing:.3px">LOS MEJORES PISOS SE VAN EN HORAS.</div>
+        <div style="font-family:var(--font-display);font-size:clamp(20px,2.5vw,28px);color:white;line-height:1.05;letter-spacing:.3px;margin-bottom:6px">LOS MEJORES PISOS SE VAN EN HORAS.</div>
+        <p style="font-size:13px;color:rgba(255,255,255,.4);line-height:1.5">Deja tu email y recibe cada nuevo activo antes de que llegue a la web pública. Sin spam.</p>
       </div>
       <div style="position:relative;flex-shrink:0">
         <div id="acceso-form" style="display:flex;gap:8px;align-items:center">
@@ -571,41 +572,101 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <div class="blog-grid">
 
       <div class="blog-card">
-        <div style="padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Mercado</span></div>
-        <div class="blog-body">
-          <div class="blog-meta">Jul 2025 · Fuente: CBRE</div>
-          <div class="blog-title">LA INVERSIÓN INMOBILIARIA EN ESPAÑA SUPERA LOS 7.300M€ EN EL PRIMER SEMESTRE DE 2025</div>
-          <div class="blog-excerpt">Un crecimiento del 22% interanual según CBRE. España atrae capital internacional gracias a su estabilidad y rentabilidades superiores a la media europea. Las ubicaciones fuera de Madrid y Barcelona concentran ya el 40% del total invertido.</div>
-          <div class="blog-readmore">Leer análisis →</div>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div style="padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Rentabilidad</span></div>
+        <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Rentabilidad</span></div>
         <div class="blog-body">
           <div class="blog-meta">Abr 2026 · Fuente: Idealista</div>
-          <div class="blog-title">POR QUÉ LOS MERCADOS INTERMEDIOS DOBLAN LA RENTABILIDAD DE MADRID Y BARCELONA</div>
-          <div class="blog-excerpt">Murcia (7,5%), Segovia (7,3%) y Lleida (7,3%) lideran la rentabilidad bruta en España en 2026. Madrid se queda en el 4,7% y Barcelona en el 5,2%. La inversión en ciudades medianas es la estrategia más rentable del momento.</div>
+          <div class="blog-title">LOS MERCADOS INTERMEDIOS DOBLAN LA RENTABILIDAD DE MADRID Y BARCELONA EN 2026</div>
+          <div class="blog-excerpt">Murcia (7,5%), Segovia (7,3%) y Lleida (7,3%) lideran la rentabilidad bruta en el primer trimestre de 2026. Madrid se queda en el 4,7% y Barcelona en el 5,2%. La inversión en ciudades medianas es la estrategia más rentable del momento.</div>
           <div class="blog-readmore">Leer análisis →</div>
         </div>
       </div>
 
       <div class="blog-card">
-        <div style="padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Alquiler</span></div>
-        <div class="blog-body">
-          <div class="blog-meta">Oct 2025 · Fuente: Idealista</div>
-          <div class="blog-title">EL ALQUILER SUBE UN 10,9% EN 2025: POR QUÉ LA DEMANDA NO PARA</div>
-          <div class="blog-excerpt">El precio del alquiler cerró septiembre de 2025 con una subida del 10,9% anual. Escasez de oferta, inmigración y demanda estructural sostienen la presión al alza. El inversor que compra hoy se beneficia de rentas crecientes desde el primer mes.</div>
-          <div class="blog-readmore">Leer análisis →</div>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div style="padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Estrategia</span></div>
+        <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Estrategia</span></div>
         <div class="blog-body">
           <div class="blog-meta">Ene 2026 · Fuente: Reental</div>
           <div class="blog-title">VIVIENDA VS BONOS DEL ESTADO: EL LADRILLO SIGUE GANANDO EN 2026</div>
-          <div class="blog-excerpt">La rentabilidad bruta media de la vivienda en España cerró 2025 en el 6,7%, más del doble que el bono a 10 años (3,5%). Con el alquiler subiendo entre un 6-8% previsto para 2026, comprar para alquilar sigue siendo la inversión más sólida para el ahorrador particular.</div>
+          <div class="blog-excerpt">La rentabilidad bruta media de la vivienda en España cerró 2025 en el 6,7%, más del doble que el bono a 10 años (3,5%). Con el alquiler subiendo entre un 6-8% previsto para 2026, comprar para alquilar sigue siendo la inversión más sólida.</div>
+          <div class="blog-readmore">Leer análisis →</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Fiscalidad</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Dic 2025 · Fuente: AEAT</div>
+          <div class="blog-title">CÓMO TRIBUTA EL ALQUILER EN 2026: GUÍA PRÁCTICA PARA EL INVERSOR</div>
+          <div class="blog-excerpt">Reducción del 50% en IRPF para nuevos contratos de arrendamiento (antes 60%). Gastos deducibles, amortización del 3% y cómo declarar los ingresos del alquiler correctamente. Todo lo que necesitas saber antes de comprar.</div>
+          <div class="blog-readmore">Leer análisis →</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Mercado</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Nov 2025 · Fuente: Fotocasa</div>
+          <div class="blog-title">EL PRECIO DE LA VIVIENDA SUBE UN 15,3% INTERANUAL: QUÉ SIGNIFICA PARA EL INVERSOR</div>
+          <div class="blog-excerpt">El metro cuadrado alcanza nuevos máximos históricos en España. Para el inversor que compra hoy, esto significa mayor revalorización del activo a largo plazo y rentabilidades brutas que superan el 8% en mercados secundarios.</div>
+          <div class="blog-readmore">Leer análisis →</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Alquiler</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Oct 2025 · Fuente: Idealista</div>
+          <div class="blog-title">EL ALQUILER SUBE UN 10,9% EN 2025: POR QUÉ LA DEMANDA NO PARA</div>
+          <div class="blog-excerpt">Escasez de oferta, inmigración y demanda estructural sostienen la presión al alza. El inversor que compra hoy se beneficia de rentas crecientes desde el primer mes. Las zonas con mayor tensión son las que ofrecen mejor cashflow.</div>
+          <div class="blog-readmore">Leer análisis →</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Inversión</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Sep 2025 · Fuente: Fotocasa Research</div>
+          <div class="blog-title">INVERTIR EN PISOS SIN SALIR DE CASA: TODO LO QUE NECESITAS SABER</div>
+          <div class="blog-excerpt">Poder notarial, firma digital de arras, gestión remota del inquilino. El 60% de los inversores de CreandoUnSueldo nunca han visitado el inmueble que compraron. Así funciona la inversión inmobiliaria 100% remota.</div>
+          <div class="blog-readmore">Leer análisis →</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Mercado</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Jul 2025 · Fuente: CBRE</div>
+          <div class="blog-title">LA INVERSIÓN INMOBILIARIA EN ESPAÑA SUPERA LOS 7.300M€ EN EL PRIMER SEMESTRE DE 2025</div>
+          <div class="blog-excerpt">Un crecimiento del 22% interanual. España atrae capital internacional gracias a su estabilidad y rentabilidades superiores a la media europea. Las ubicaciones fuera de Madrid y Barcelona concentran ya el 40% del total.</div>
+          <div class="blog-readmore">Leer análisis →</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Financiación</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Jun 2025 · Fuente: Banco de España</div>
+          <div class="blog-title">BAJADA DE TIPOS: CÓMO AFECTA AL INVERSOR INMOBILIARIO EN 2025</div>
+          <div class="blog-excerpt">El BCE ha bajado los tipos al 2,25%. Las hipotecas a tipo fijo a 25 años están por debajo del 3%. Con alquileres subiendo y cuotas bajando, el cashflow positivo es ahora más fácil de conseguir que en los últimos tres años.</div>
+          <div class="blog-readmore">Leer análisis →</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Zonas</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">May 2025 · Fuente: Idealista / Inviertis</div>
+          <div class="blog-title">ASTURIAS Y LEÓN: LOS MERCADOS CON MEJOR RATIO RENTABILIDAD-RIESGO DE ESPAÑA</div>
+          <div class="blog-excerpt">Precios de compra bajos, demanda de alquiler estable y rentabilidades brutas del 8-13%. Analizamos por qué cada vez más inversores de Barcelona y Madrid miran al norte para construir su cartera inmobiliaria.</div>
+          <div class="blog-readmore">Leer análisis →</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Guía</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">Mar 2025 · CreandoUnSueldo</div>
+          <div class="blog-title">RENTABILIDAD BRUTA VS NETA: QUÉ NÚMERO IMPORTA DE VERDAD</div>
+          <div class="blog-excerpt">La mayoría de portales muestran rentabilidad bruta. Aquí descontamos IBI, comunidad, seguro, vacíos y períodos sin inquilino para calcular lo que realmente entra en tu bolsillo cada mes.</div>
           <div class="blog-readmore">Leer análisis →</div>
         </div>
       </div>
@@ -640,7 +701,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <h2>¿LISTO PARA<br>CREAR TU SUELDO?</h2>
     <p class="section-desc">Accede a las oportunidades antes de que lleguen a la web. Sin compromiso.</p>
     <div class="cta-actions">
-      <button class="btn-white" onclick="showView('home', true);scrollToSection('activos')">Ver activos disponibles →</button>
+      <button class="btn-white" onclick="showView('activos')">Ver activos disponibles →</button>
       <button class="btn-white-ghost" onclick="openContacto()">Hablar con un asesor</button>
     </div>
     <div class="social-links">
@@ -906,45 +967,60 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
         <!-- Simulador hipoteca -->
         <div style="background:#111318;border-radius:12px;padding:24px;margin-bottom:28px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
             <div style="font-family:var(--font-display);font-size:18px;color:white;letter-spacing:.3px">SIMULADOR DE HIPOTECA</div>
             <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:rgba(255,255,255,.5)">
               <input type="checkbox" id="hip-activa" onchange="toggleHipoteca()" style="accent-color:var(--red);width:16px;height:16px"> Activar
             </label>
           </div>
-          <p style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px">Activa el simulador para ver el cashflow real con financiación bancaria.</p>
+          <p style="font-size:12px;color:rgba(255,255,255,.35);margin-bottom:14px">Al activar, todos los dashboards se recalculan con financiación bancaria.</p>
           <div id="hip-controles" style="display:none">
+
+            <!-- Tipo fija/variable -->
+            <div style="display:flex;gap:6px;margin-bottom:16px">
+              <button id="hip-btn-fija" onclick="setTipoHip('fija')" style="flex:1;padding:8px;border-radius:var(--radius);border:1.5px solid var(--red);background:rgba(227,30,36,.1);color:var(--red);font-family:var(--font-body);font-size:12px;font-weight:700;cursor:pointer">Tipo fijo</button>
+              <button id="hip-btn-variable" onclick="setTipoHip('variable')" style="flex:1;padding:8px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.4);font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer">Tipo variable</button>
+            </div>
+
+            <!-- Sliders -->
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
               <div>
                 <label style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Financiación</label>
-                <input type="range" id="hip-pct" min="50" max="80" value="80" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
-                <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-pct-val">80%</div>
+                <input type="range" id="hip-pct" min="0" max="100" value="70" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
+                <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-pct-val">70%</div>
               </div>
               <div>
                 <label style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Interés anual</label>
-                <input type="range" id="hip-int" min="2" max="6" step="0.1" value="3.5" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
-                <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-int-val">3.5%</div>
+                <input type="range" id="hip-int" min="0" max="8" step="0.1" value="2" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
+                <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-int-val">2%</div>
               </div>
               <div>
-                <label style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Años</label>
-                <input type="range" id="hip-anos" min="10" max="30" value="25" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
+                <label style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Plazo</label>
+                <input type="range" id="hip-anos" min="5" max="30" value="25" oninput="calcHipoteca()" style="width:100%;accent-color:var(--red)">
                 <div style="font-size:13px;color:white;margin-top:4px;font-weight:700" id="hip-anos-val">25 años</div>
               </div>
             </div>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.06);border-radius:8px;overflow:hidden">
-              <div style="background:rgba(255,255,255,.04);padding:14px;text-align:center">
-                <div style="font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">Cuota hipoteca</div>
-                <div style="font-family:var(--font-display);font-size:22px;color:white" id="hip-cuota">—</div>
+
+            <!-- Resultados hipoteca -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.06);border-radius:8px;overflow:hidden;margin-bottom:10px">
+              <div style="background:rgba(255,255,255,.04);padding:12px;text-align:center">
+                <div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Capital hipoteca</div>
+                <div style="font-family:var(--font-display);font-size:18px;color:white" id="hip-capital-val">—</div>
               </div>
-              <div style="background:rgba(255,255,255,.04);padding:14px;text-align:center">
-                <div style="font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">Cashflow con hipoteca</div>
-                <div style="font-family:var(--font-display);font-size:22px" id="hip-cf-result">—</div>
+              <div style="background:rgba(255,255,255,.04);padding:12px;text-align:center">
+                <div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Capital propio</div>
+                <div style="font-family:var(--font-display);font-size:18px;color:white" id="hip-capital">—</div>
               </div>
-              <div style="background:rgba(255,255,255,.04);padding:14px;text-align:center">
-                <div style="font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">Capital propio</div>
-                <div style="font-family:var(--font-display);font-size:22px;color:white" id="hip-capital">—</div>
+              <div style="background:rgba(255,255,255,.04);padding:12px;text-align:center">
+                <div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Cuota/mes</div>
+                <div style="font-family:var(--font-display);font-size:18px;color:#F87171" id="hip-cuota">—</div>
+              </div>
+              <div style="background:rgba(255,255,255,.04);padding:12px;text-align:center">
+                <div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Cashflow neto</div>
+                <div style="font-family:var(--font-display);font-size:18px" id="hip-cf-result">—</div>
               </div>
             </div>
+            <div style="font-size:11px;color:rgba(255,255,255,.25);text-align:center">⚡ Los dashboards de inversión se actualizan en tiempo real</div>
           </div>
         </div>
 
@@ -957,7 +1033,8 @@ footer{background:var(--dark);padding:56px 52px 32px}
             <div style="font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Precio de compra</div>
             <div id="ficha-precio-sidebar" style="font-family:var(--font-display);font-size:40px;color:white;line-height:1;margin-bottom:3px"></div>
             <div id="ficha-honor-sidebar" style="font-size:12px;color:rgba(255,255,255,.35);margin-bottom:16px"></div>
-            <button id="ficha-reservar-btn" style="width:100%;padding:13px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s">Reservar este activo →</button>
+            <button id="ficha-reservar-btn" style="width:100%;padding:13px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-bottom:8px">Reservar este activo →</button>
+            <a id="ficha-idealista-btn" href="#" target="_blank" style="display:none;width:100%;padding:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);color:rgba(255,255,255,.6);font-family:var(--font-body);font-size:12px;font-weight:600;text-align:center;text-decoration:none;box-sizing:border-box;transition:all .2s">🔎 Ver alquileres similares en Idealista</a>
           </div>
           <!-- KPIs sidebar — se actualizan con hipoteca -->
           <div id="ficha-kpis-sidebar" style="padding:18px 24px;display:grid;grid-template-columns:1fr 1fr;gap:14px"></div>
@@ -2125,10 +2202,56 @@ function toggleFaqAll() {
 // ─── FICHA ACTIVO ─────────────────────────────────────────────────────────────
 var _fichaActivo = null
 
+var _lightboxFotos = []
+var _lightboxIdx = 0
+
 function fichaSetFoto(el) {
+  var src = el.dataset.src
   var m = document.getElementById('ficha-gallery-main')
-  if (m) m.innerHTML = '<img src="'+el.dataset.src+'" style="width:100%;height:100%;object-fit:cover"/>'
+  if (m) {
+    m.innerHTML = '<img id="ficha-main-img" style="width:100%;height:100%;object-fit:cover;cursor:zoom-in" />'
+    document.getElementById('ficha-main-img').src = src
+    document.getElementById('ficha-main-img').onclick = function(){ openLightbox(src) }
+  }
 }
+
+function openLightbox(src) {
+  var a = _fichaActivo
+  if (!a) return
+  _lightboxFotos = Array.isArray(a.fotos) ? a.fotos : []
+  _lightboxIdx = _lightboxFotos.indexOf(src)
+  if (_lightboxIdx < 0) _lightboxIdx = 0
+  showLightboxImg()
+  document.getElementById('lightbox').style.display = 'flex'
+  document.body.style.overflow = 'hidden'
+}
+
+function closeLightbox(e) {
+  if (e.target === document.getElementById('lightbox')) {
+    document.getElementById('lightbox').style.display = 'none'
+    document.body.style.overflow = ''
+  }
+}
+
+function lightboxNav(dir) {
+  _lightboxIdx = (_lightboxIdx + dir + _lightboxFotos.length) % _lightboxFotos.length
+  showLightboxImg()
+}
+
+function showLightboxImg() {
+  document.getElementById('lightbox-img').src = _lightboxFotos[_lightboxIdx]
+  document.getElementById('lightbox-counter').textContent = (_lightboxIdx+1) + ' / ' + _lightboxFotos.length
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('lightbox')
+  if (lb.style.display === 'flex') {
+    if (e.key === 'ArrowRight') lightboxNav(1)
+    else if (e.key === 'ArrowLeft') lightboxNav(-1)
+    else if (e.key === 'Escape') { lb.style.display = 'none'; document.body.style.overflow = '' }
+  }
+})
 
 function abrirFicha(a) {
   _fichaActivo = a
@@ -2151,7 +2274,12 @@ function abrirFicha(a) {
   // ── Galería ──
   var gallery = document.getElementById('ficha-gallery-main')
   if (fotos.length) {
-    gallery.innerHTML = '<img src="'+fotos[0]+'" style="width:100%;height:100%;object-fit:cover"/>'
+    var img0 = document.createElement('img')
+  img0.style.cssText = 'width:100%;height:100%;object-fit:cover;cursor:zoom-in'
+  img0.src = fotos[0]
+  img0.onclick = (function(src){ return function(){ openLightbox(src) } })(fotos[0])
+  gallery.innerHTML = ''
+  gallery.appendChild(img0)
   } else {
     gallery.innerHTML = '<div style="color:#555;font-size:13px">Sin fotos</div>'
   }
@@ -2379,6 +2507,20 @@ function abrirFicha(a) {
 
   // ── Sidebar precio ──
   document.getElementById('ficha-precio-sidebar').textContent = fmtE(a.precio)
+  // Idealista link — custom URL from CRM or auto-generated
+  var idealistaBtn = document.getElementById('ficha-idealista-btn')
+  if (a.url_idealista) {
+    idealistaBtn.href = a.url_idealista
+    idealistaBtn.style.display = 'block'
+  } else if (a.ciudad) {
+    // Auto-generate search URL by city
+    var ciudad = a.ciudad.toLowerCase().replace(/\s+/g, '-').normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    var maxAlq = Math.round((alq || 500) * 1.3)
+    idealistaBtn.href = 'https://www.idealista.com/alquiler-viviendas/'+ciudad+'/con-precio-hasta_'+maxAlq+'/'
+    idealistaBtn.style.display = 'block'
+  } else {
+    idealistaBtn.style.display = 'none'
+  }
   document.getElementById('ficha-honor-sidebar').textContent = a.honorarios ? '+ '+fmtE(a.honorarios)+' honorarios + IVA' : ''
   document.getElementById('ficha-reservar-btn').onclick = function() { openContactoActivo(a) }
   document.getElementById('ficha-reservar-btn').style.display = a.status === 'disponible' ? '' : 'none'
@@ -2408,11 +2550,11 @@ function abrirFicha(a) {
   // Reset simulador hipoteca
   document.getElementById('hip-activa').checked = false
   document.getElementById('hip-controles').style.display = 'none'
-  document.getElementById('hip-pct').value = 80
-  document.getElementById('hip-int').value = 3.5
+  document.getElementById('hip-pct').value = 70
+  document.getElementById('hip-int').value = 2
   document.getElementById('hip-anos').value = 25
-  document.getElementById('hip-pct-val').textContent = '80%'
-  document.getElementById('hip-int-val').textContent = '3.5%'
+  document.getElementById('hip-pct-val').textContent = '70%'
+  document.getElementById('hip-int-val').textContent = '2%'
   document.getElementById('hip-anos-val').textContent = '25 años'
 
   showView('ficha')
@@ -2420,72 +2562,20 @@ function abrirFicha(a) {
 }
 
 function actualizarKPIsSidebar(cf, rb, alq, total, conHipoteca, cuota) {
-  var cfMostrar = conHipoteca ? cf - cuota : cf
-  var cashflowAnual = cfMostrar ? cfMostrar * 12 : 0
-  var anosRecup = cashflowAnual > 0 ? Math.ceil(total / cashflowAnual) : null
-  var capitalEmpleado = conHipoteca ? (total - cuota * 12 * 25) : total  // aprox
-  if (_fichaActivo && conHipoteca) {
-    var pct = +document.getElementById('hip-pct').value
-    capitalEmpleado = total - Math.round(+_fichaActivo.precio * pct / 100)
-  }
-  var ingresosBrutos = alq * 12
-  var gastosTot = (+(_fichaActivo?_fichaActivo.gastos_comunidad||0:0)*12) + +(_fichaActivo?_fichaActivo.ibi||0:0) + (conHipoteca ? cuota*12 : 0)
-  var roce = capitalEmpleado > 0 ? ((ingresosBrutos - gastosTot) / capitalEmpleado * 100).toFixed(1) : null
-
-  // Actualizar KPIs principales (columna izquierda)
-  var kpisMain = document.getElementById('ficha-kpis-main')
-  if (kpisMain) {
-    var kpis = [
-      ['Rent. bruta', (rb||'—')+'%', rb&&+rb>=8?'#22C55E':'var(--red)'],
-      ['Cashflow/mes', cfMostrar!=null?(cfMostrar>0?'+':'')+fmtE(cfMostrar):'—', cfMostrar&&cfMostrar>0?'#22C55E':'#F87171'],
-      ['ROCE', roce?roce+'%':'—', '#F59E0B'],
-      ['Recuperación', anosRecup?anosRecup+' años':'—', '#F59E0B'],
-    ]
-    kpisMain.innerHTML = kpis.map(function(k) {
-      return '<div style="background:white;border:1px solid var(--gray3);border-radius:10px;padding:16px;text-align:center">'
-        +'<div style="font-family:var(--font-display);font-size:28px;color:'+k[2]+';line-height:1">'+k[1]+'</div>'
-        +'<div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:.8px;margin-top:4px">'+k[0]+'</div>'
-        +'</div>'
-    }).join('')
-  }
-
-  // Actualizar bloque retorno
-  var retornoEl = document.getElementById('ficha-retorno')
-  if (retornoEl && cashflowAnual > 0 && total > 0) {
-    document.getElementById('ficha-retorno-wrap').style.display = ''
-    retornoEl.innerHTML =
-      '<div style="display:flex;justify-content:space-around;margin-bottom:14px">'
-      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">INVERSIÓN TOTAL</div><div style="font-family:var(--font-display);font-size:28px;color:#E31E24">'+fmtE(total)+'</div></div>'
-      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">AÑO RECUPERACIÓN</div><div style="font-family:var(--font-display);font-size:28px;color:#22C55E">Año '+(anosRecup||'—')+'</div></div>'
-      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">CASHFLOW ANUAL</div><div style="font-family:var(--font-display);font-size:28px;color:white">'+(cashflowAnual>0?'+':'')+fmtE(cashflowAnual)+'</div></div>'
-      +'</div>'
-      +'<div style="height:4px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden"><div style="height:100%;background:linear-gradient(90deg,#E31E24,#22C55E);border-radius:4px;width:100%"></div></div>'
-      +(anosRecup?'<div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:8px;text-align:center">A partir del año '+anosRecup+', cada +'+fmtE(cashflowAnual)+'/año es beneficio neto</div>':'')
-      +(conHipoteca?'<div style="font-size:11px;color:#F59E0B;margin-top:6px;text-align:center;font-weight:600">⚡ Calculado con hipoteca activa</div>':'')
-  }
-
-  // Actualizar sidebar KPIs
-  document.getElementById('ficha-kpis-sidebar').innerHTML = [
-    ['Rent. bruta', (rb||'—')+'%', '#E31E24'],
-    ['Cashflow/mes', cfMostrar!=null?(cfMostrar>0?'+':'')+fmtE(cfMostrar):'—', cfMostrar&&cfMostrar>0?'#22C55E':'#F87171'],
-    ['ROCE', roce?roce+'%':'—', '#F59E0B'],
-    ['Recuperación', anosRecup?anosRecup+' años':'—', '#F59E0B'],
-  ].map(function(k) {
-    return '<div><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">'+k[0]+'</div>'
-      +'<div style="font-family:var(--font-display);font-size:18px;color:'+k[2]+'">'+k[1]+'</div></div>'
-  }).join('')
+  actualizarTodo(cf, rb, alq, total, conHipoteca, cuota, _fichaActivo)
 }
-
 function toggleHipoteca() {
   var activa = document.getElementById('hip-activa').checked
   document.getElementById('hip-controles').style.display = activa ? '' : 'none'
-  if (activa) calcHipoteca(); else {
+  if (activa) {
+    calcHipoteca()
+  } else {
     var a = _fichaActivo
     if (!a) return
     var alq = +(a.alquiler_estimado||0), com = +(a.gastos_comunidad||0), ibi = +(a.ibi||0)
-    var cf = calcCF(alq,com,ibi), rb = calcRB(a.precio,alq)
+    var cf = calcCF(alq, com, ibi), rb = calcRB(a.precio, alq)
     var total = Math.round(+a.precio*(1+(+(a.itp||8)/100))+1500+(+(a.puesta_a_punto||0)))
-    actualizarKPIsSidebar(cf, rb, alq, total, false, 0)
+    actualizarTodo(cf, rb, alq, total, false, 0, a)
   }
 }
 
@@ -2498,22 +2588,125 @@ function calcHipoteca() {
   document.getElementById('hip-pct-val').textContent  = pct+'%'
   document.getElementById('hip-int-val').textContent  = int+'%'
   document.getElementById('hip-anos-val').textContent = anos+' años'
+
   var precio = +a.precio
   var alq = +(a.alquiler_estimado||0), com = +(a.gastos_comunidad||0), ibi = +(a.ibi||0)
-  var cf = calcCF(alq,com,ibi) || 0
-  var rb = calcRB(precio, alq)
-  var capital = Math.round(precio * pct / 100)
-  var total = Math.round(precio*(1+(+(a.itp||8)/100))+1500+(+(a.puesta_a_punto||0)))
-  var propio = total - capital
-  var r = int / 100 / 12, n = anos * 12
-  var cuota = r > 0 ? Math.round(capital*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1)) : Math.round(capital/n)
+  var cf  = calcCF(alq, com, ibi) || 0
+  var rb  = calcRB(precio, alq)
+  var puesta = +(a.puesta_a_punto||0)
+  var itp = +(a.itp||8)
+  var totalInv = Math.round(precio*(1+itp/100)+1500+puesta)
+
+  var capitalHip = Math.round(precio * pct / 100)
+  var capitalPropio = totalInv - capitalHip
+
+  // Cuota: fija = amortización francesa, variable = solo intereses primer año
+  var cuota
+  if (_hipTipo === 'fija') {
+    var r = int / 100 / 12, n = anos * 12
+    cuota = r > 0 ? Math.round(capitalHip*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1)) : Math.round(capitalHip/n)
+  } else {
+    // Variable: cuota = interés sobre capital (simplificado)
+    cuota = Math.round(capitalHip * (int/100) / 12)
+  }
+
   var cfHip = cf - cuota
+
+  // Actualizar resultados del simulador
+  document.getElementById('hip-capital-val').textContent = fmtE(capitalHip)
+  document.getElementById('hip-capital').textContent = fmtE(capitalPropio)
   document.getElementById('hip-cuota').textContent = fmtE(cuota)+'/mes'
   var cfEl = document.getElementById('hip-cf-result')
   cfEl.textContent = (cfHip>0?'+':'')+fmtE(cfHip)+'/mes'
   cfEl.style.color = cfHip > 0 ? '#22C55E' : '#F87171'
-  document.getElementById('hip-capital').textContent = fmtE(propio)
-  actualizarKPIsSidebar(cf, rb, alq, total, true, cuota)
+
+  // Actualizar TODOS los dashboards con capital propio como base
+  actualizarTodo(cf, rb, alq, capitalPropio, true, cuota, a)
+}
+
+function actualizarTodo(cf, rb, alq, capitalBase, conHipoteca, cuota, a) {
+  var cfNeto = conHipoteca ? cf - cuota : cf
+  var cashflowAnual = cfNeto ? cfNeto * 12 : 0
+  var anosRecup = (cashflowAnual > 0 && capitalBase > 0) ? Math.ceil(capitalBase / cashflowAnual) : null
+  var puesta = +(a ? a.puesta_a_punto||0 : 0)
+  var itp = +(a ? a.itp||8 : 8)
+  var totalReal = Math.round(+(a?a.precio:0)*(1+itp/100)+1500+puesta)
+  var ingresosBrutos = alq * 12
+  var gastosTot = (+((a?a.gastos_comunidad:0)||0)*12) + +((a?a.ibi:0)||0) + (conHipoteca ? cuota*12 : 0)
+  var roce = capitalBase > 0 ? ((ingresosBrutos - gastosTot) / capitalBase * 100).toFixed(1) : null
+
+  // ── KPIs principales columna izquierda ──
+  var kpisMain = document.getElementById('ficha-kpis-main')
+  if (kpisMain) {
+    kpisMain.innerHTML = [
+      ['Rent. bruta', (rb||'—')+'%', rb&&+rb>=8?'#22C55E':'var(--red)'],
+      ['Cashflow/mes', cfNeto!=null?(cfNeto>0?'+':'')+fmtE(cfNeto):'—', cfNeto&&cfNeto>0?'#22C55E':'#F87171'],
+      ['ROCE', roce?roce+'%':'—', '#F59E0B'],
+      ['Recuperación', anosRecup?anosRecup+' años':'—', 'var(--dark)'],
+    ].map(function(k) {
+      return '<div style="background:white;border:1px solid var(--gray3);border-radius:10px;padding:16px;text-align:center">'
+        +'<div style="font-family:var(--font-display);font-size:28px;color:'+k[2]+';line-height:1">'+k[1]+'</div>'
+        +'<div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:.8px;margin-top:4px">'+k[0]+'</div>'
+        +'</div>'
+    }).join('')
+  }
+
+  // ── Bloque retorno ──
+  var retornoEl = document.getElementById('ficha-retorno')
+  var retornoWrap = document.getElementById('ficha-retorno-wrap')
+  if (retornoEl && cashflowAnual > 0) {
+    retornoWrap.style.display = ''
+    retornoEl.innerHTML =
+      '<div style="display:flex;justify-content:space-around;margin-bottom:14px">'
+      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">'+(conHipoteca?'CAPITAL PROPIO':'INVERSIÓN TOTAL')+'</div><div style="font-family:var(--font-display);font-size:26px;color:#E31E24">'+fmtE(capitalBase)+'</div></div>'
+      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">AÑO RECUPERACIÓN</div><div style="font-family:var(--font-display);font-size:26px;color:#22C55E">Año '+(anosRecup||'—')+'</div></div>'
+      +'<div style="text-align:center"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">CASHFLOW ANUAL</div><div style="font-family:var(--font-display);font-size:26px;color:white">'+(cashflowAnual>0?'+':'')+fmtE(cashflowAnual)+'</div></div>'
+      +'</div>'
+      +'<div style="height:4px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden"><div style="height:100%;background:linear-gradient(90deg,#E31E24,#22C55E);border-radius:4px;width:100%"></div></div>'
+      +(anosRecup?'<div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:8px;text-align:center">A partir del año '+anosRecup+', +'+fmtE(cashflowAnual)+'/año es beneficio neto</div>':'')
+      +(conHipoteca?'<div style="font-size:11px;color:#F59E0B;margin-top:6px;text-align:center;font-weight:600">⚡ Calculado con hipoteca '+_hipTipo+' al '+document.getElementById("hip-int").value+'%</div>':'')
+  }
+
+  // ── Tabla economía sidebar — actualizar filas dinámicas ──
+  var econEl = document.getElementById('ficha-economia')
+  if (econEl && a) {
+    var econ = [
+      ['Precio compra', fmtE(a.precio)],
+      ['ITP ('+itp+'%)', fmtE(Math.round(+a.precio*itp/100))],
+      ['Notaría + Registro', '~1.500€'],
+    ]
+    if (puesta > 0) econ.push(['Puesta a punto', fmtE(puesta)])
+    if (a.honorarios) econ.push(['Honorarios', fmtE(a.honorarios)+' + IVA'])
+    if (conHipoteca) {
+      var capitalHipoteca = Math.round(+a.precio * +document.getElementById('hip-pct').value / 100)
+      econ.push(['Hipoteca ('+document.getElementById('hip-pct').value+'%)', fmtE(capitalHipoteca)])
+      econ.push(['Capital propio', fmtE(capitalBase), true])
+      econ.push(['Cuota/mes', fmtE(cuota)+'/mes'])
+    } else {
+      econ.push(['TOTAL INVERSIÓN', fmtE(totalReal), true])
+    }
+    econ.push(['Alquiler/mes', fmtE(alq)])
+    econ.push(['Cashflow/mes', cfNeto!=null?(cfNeto>0?'+':'')+fmtE(cfNeto):'—'])
+    if (roce) econ.push(['ROCE', roce+'%'])
+    econEl.innerHTML = econ.map(function(d) {
+      var isHighlight = d[2]
+      return '<div style="padding:10px 14px;display:flex;justify-content:space-between;background:'+(isHighlight?'rgba(227,30,36,.04)':'white')+';border-bottom:1px solid var(--gray3)">'
+        +'<span style="font-size:12px;color:var(--gray);font-weight:'+(isHighlight?700:400)+'">'+d[0]+'</span>'
+        +'<span style="font-size:12px;font-weight:700;color:'+(isHighlight?'var(--red)':'var(--dark)')+'">'+d[1]+'</span>'
+        +'</div>'
+    }).join('')
+  }
+
+  // ── Sidebar KPIs ──
+  document.getElementById('ficha-kpis-sidebar').innerHTML = [
+    ['Rent. bruta', (rb||'—')+'%', '#E31E24'],
+    ['Cashflow/mes', cfNeto!=null?(cfNeto>0?'+':'')+fmtE(cfNeto):'—', cfNeto&&cfNeto>0?'#22C55E':'#F87171'],
+    ['ROCE', roce?roce+'%':'—', '#F59E0B'],
+    ['Recuperación', anosRecup?anosRecup+' años':'—', '#F59E0B'],
+  ].map(function(k) {
+    return '<div><div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">'+k[0]+'</div>'
+      +'<div style="font-family:var(--font-display);font-size:18px;color:'+k[2]+'">'+k[1]+'</div></div>'
+  }).join('')
 }
 
 
@@ -2568,5 +2761,14 @@ if (document.readyState !== 'loading') {
 }
 
 </script>
+
+<!-- LIGHTBOX FOTOS -->
+<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:5000;align-items:center;justify-content:center" onclick="closeLightbox(event)">
+  <button onclick="lightboxNav(-1)" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:white;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;z-index:1">‹</button>
+  <img id="lightbox-img" style="max-width:90vw;max-height:88vh;object-fit:contain;border-radius:6px;user-select:none" />
+  <button onclick="lightboxNav(1)" style="position:absolute;right:20px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:white;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;z-index:1">›</button>
+  <button onclick="document.getElementById('lightbox').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.1);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer">×</button>
+  <div id="lightbox-counter" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:12px;color:rgba(255,255,255,.5)"></div>
+</div>
 </body>
 </html>
