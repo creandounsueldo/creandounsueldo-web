@@ -2223,8 +2223,8 @@ function renderVendidos(activos) {
   })
   // Home: 3 más recientes
   grid.innerHTML = cards.slice(0, 3).join('')
-  // Vista "ver todas"
-  renderTodas()
+  // Si la vista todas está activa, actualizarla también
+  if (document.getElementById('view-todas') && document.getElementById('view-todas').classList.contains('active')) renderTodas()
 }
 
 function abrirActivo(a) {
