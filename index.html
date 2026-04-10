@@ -404,6 +404,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
 @media(max-width:1024px){.activo-hero-inner,.activo-content{grid-template-columns:1fr}.activo-sidebar{position:static}}
 @media(max-width:960px){.hero-inner{grid-template-columns:1fr;gap:40px}.lejos-inner{grid-template-columns:1fr;gap:40px}}
 .mobile-ver-todas-wrap{display:none}
+.scroll-hint-mobile{display:none}
 .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;border-radius:6px}
 .nav-hamburger span{display:block;width:22px;height:2px;background:var(--dark);border-radius:2px;transition:all .25s}
 .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -434,20 +435,22 @@ footer{background:var(--dark);padding:56px 52px 32px}
   #acceso-form>div{flex-direction:column!important}
   #acceso-email{width:100%!important;box-sizing:border-box}
   #acceso-form button{width:100%!important}
-  /* Activos home: 2 columnas */
-  .activos-grid{display:grid!important;grid-template-columns:1fr 1fr!important;overflow-x:unset!important;scroll-snap-type:unset!important;gap:10px!important;padding-bottom:0!important}
-  .activos-grid .activo-card{flex:unset!important;scroll-snap-align:unset!important}
+  /* Activos home: scroll horizontal con peek */
+  #activos{padding-right:0!important}
+  .activos-grid{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:12px!important;padding:0 16px 12px!important;-webkit-overflow-scrolling:touch!important}
+  .activos-grid::-webkit-scrollbar{display:none}
+  .activos-grid .activo-card{flex:0 0 78vw!important;scroll-snap-align:start!important;min-width:0!important}
   .mobile-ver-todas-wrap{display:block!important}
-  /* Proceso: scroll horizontal */
-  .proceso-grid{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:12px!important;padding-bottom:8px!important;-webkit-overflow-scrolling:touch}
-  .proceso-grid::-webkit-scrollbar{height:3px}
-  .proceso-grid::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
-  .proceso-card{flex:0 0 72vw!important;scroll-snap-align:start!important;min-width:0}
-  /* Vendidos: scroll horizontal */
-  .vendidos-grid{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:12px!important;padding-bottom:8px!important;-webkit-overflow-scrolling:touch}
-  .vendidos-grid::-webkit-scrollbar{height:3px}
-  .vendidos-grid::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
-  .vendido-card{flex:0 0 76vw!important;scroll-snap-align:start!important;min-width:0}
+  /* Proceso: scroll horizontal con peek */
+  #proceso{overflow:hidden!important;padding-right:0!important}
+  .proceso-grid{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:12px!important;padding:0 16px 12px!important;-webkit-overflow-scrolling:touch!important}
+  .proceso-grid::-webkit-scrollbar{display:none}
+  .proceso-card{flex:0 0 72vw!important;scroll-snap-align:start!important;min-width:0!important}
+  /* Vendidos: scroll horizontal con peek */
+  #vendidos{overflow:hidden!important;padding-right:0!important}
+  .vendidos-grid{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:12px!important;padding:0 16px 12px!important;-webkit-overflow-scrolling:touch!important}
+  .vendidos-grid::-webkit-scrollbar{display:none}
+  .vendido-card{flex:0 0 76vw!important;scroll-snap-align:start!important;min-width:0!important}
   /* Blog */
   .blog-grid .blog-card{flex:0 0 78vw!important}
   /* Reviews */
@@ -472,6 +475,16 @@ footer{background:var(--dark);padding:56px 52px 32px}
   #garantia{padding:18px 16px}
   .garantia-btn{margin-left:0;margin-top:10px;width:100%}
   .section-header-row{flex-direction:column;align-items:flex-start;gap:10px}
+  /* Scroll hint */
+  .scroll-hint-mobile{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.4);font-weight:600;letter-spacing:.5px;margin-bottom:10px}
+  .scroll-hint-mobile::after{content:"";display:block;width:24px;height:1px;background:rgba(255,255,255,.3)}
+  /* Acceso anticipado móvil */
+  #acceso-outer{padding:0 16px 40px!important}
+  #acceso-bloque{padding:20px!important;overflow:visible!important}
+  #acceso-bloque>div:first-child{min-width:unset!important}
+  #acceso-form>div:first-child{flex-direction:column!important;gap:10px!important}
+  #acceso-email{width:100%!important;box-sizing:border-box!important}
+  #acceso-form>div:first-child button{width:100%!important}
 }
 
 /* LEAD POPUP */
@@ -586,6 +599,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
       <div><div class="section-eyebrow">Activos disponibles</div><h2>OPORTUNIDADES<br>ACTIVAS</h2></div>
       <button class="ver-todas-btn" onclick="abrirTodas('disponible')">Ver todas →</button>
     </div>
+    <div class="scroll-hint-mobile">Desliza para ver más →</div>
     <div class="activos-grid" id="grid-activos">
       <div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">
         <div style="width:32px;height:32px;border:3px solid rgba(255,255,255,.1);border-top-color:#E31E24;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>
@@ -597,8 +611,8 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
 
   <!-- ACCESO ANTICIPADO -->
-  <div style="padding:0 52px 56px">
-    <div style="background:var(--dark);border-radius:12px;padding:24px 36px;display:flex;align-items:center;gap:36px;flex-wrap:wrap;position:relative;overflow:hidden">
+  <div style="padding:0 52px 56px" id="acceso-outer">
+    <div id="acceso-bloque" style="background:var(--dark);border-radius:12px;padding:24px 36px;display:flex;align-items:center;gap:36px;flex-wrap:wrap;position:relative;overflow:visible">
       <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none"></div>
       <div style="position:relative;flex:1;min-width:220px">
         <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px">Acceso anticipado</div>
@@ -629,6 +643,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <div class="section-eyebrow" style="color:rgba(227,30,36,.9)">Cómo funciona</div>
     <h2 style="color:white">EL PROCESO,<br>PASO A PASO</h2>
     <p class="section-desc" style="color:rgba(255,255,255,.6)">Desde que reservas hasta que cobras el primer mes. Sin ambigüedades.</p>
+    <div class="scroll-hint-mobile">Desliza para ver los pasos →</div>
     <div class="proceso-grid">
       <div class="proceso-card"><span class="proceso-num">1</span><span class="proceso-icon">🔒</span><div class="proceso-title">RESERVA UN ACTIVO</div><p class="proceso-desc">Elige el piso, paga la señal online y firma el contrato de honorarios digitalmente. Tu DNI queda registrado y el piso bloqueado para ti.</p></div>
       <div class="proceso-card"><span class="proceso-num">2</span><span class="proceso-icon">✍️</span><div class="proceso-title">FIRMA LAS ARRAS</div><p class="proceso-desc">Contrato de arras 100% digital. En este momento se cobran los honorarios de intermediación. Sin desplazamientos ni burocracia física.</p></div>
@@ -648,6 +663,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
       </div>
       <button class="ver-todas-btn" onclick="abrirTodas('finalizado')">Ver todas →</button>
     </div>
+    <div class="scroll-hint-mobile">Desliza para ver más →</div>
     <div class="vendidos-grid" id="grid-vendidos">
       <div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">
         <div style="width:32px;height:32px;border:3px solid rgba(255,255,255,.1);border-top-color:#E31E24;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>
