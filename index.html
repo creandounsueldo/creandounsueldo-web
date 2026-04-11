@@ -1137,7 +1137,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
         <!-- 6. Simulador hipoteca — fondo blanco -->
         <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:24px;margin-bottom:20px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <div id="ficha-hip-section" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
             <div style="font-family:var(--font-display);font-size:15px;color:var(--dark);letter-spacing:.3px">SIMULADOR DE HIPOTECA</div>
             <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--gray)">
               <input type="checkbox" id="hip-activa" onchange="toggleHipoteca()" style="accent-color:var(--red);width:16px;height:16px"> Activar
@@ -2348,7 +2348,7 @@ function buildCard(a) {
   var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
   var titulo = a.titulo_pagina || ((a.habitaciones ? a.habitaciones+' HAB.' : '') + (a.zona ? '<br>'+a.zona.toUpperCase() : ''))
   var gastosAnual = (+com*12 + +ibi)
-  var mapQuery = [a.direccion, a.zona, a.ciudad, a.provincia].filter(Boolean).join(', ')
+  var mapQuery = [a.direccion, a.ciudad, a.provincia, 'España'].filter(Boolean).join(', ')
   var mapUrl = mapQuery ? 'https://maps.google.com/maps?q='+encodeURIComponent(mapQuery)+'&output=embed&z=15' : null
   var imgHtml = foto
     ? '<img src="'+foto+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" />'
@@ -2773,7 +2773,7 @@ function abrirFicha(a) {
   var total   = Math.round(+a.precio + itpAmt + 1500 + puesta)
   var cashflowAnual = cf ? cf * 12 : 0
   var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(', ')
-  var direccion = [a.direccion, a.zona, a.ciudad, a.provincia].filter(Boolean).join(', ')
+  var direccion = [a.direccion, a.ciudad, a.provincia, 'España'].filter(Boolean).join(', ')
   var m2 = +(a.m2 || 0)
   var pa = m2 ? (alq / m2).toFixed(2) : null
 
@@ -2787,7 +2787,7 @@ function abrirFicha(a) {
   gallery.innerHTML = ''
   gallery.appendChild(img0)
   } else {
-    var mapQ = [a.direccion, a.zona, a.ciudad, a.provincia].filter(Boolean).join(', ')
+    var mapQ = [a.direccion, a.ciudad, a.provincia, 'España'].filter(Boolean).join(', ')
     if (mapQ) {
       gallery.innerHTML = '<iframe src="https://maps.google.com/maps?q='+encodeURIComponent(mapQ)+'&output=embed&z=15" style="width:100%;height:100%;border:none" loading="lazy"></iframe>'
         + '<div style="position:absolute;bottom:14px;left:40px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);color:white;font-size:11px;font-weight:600;padding:5px 12px;border-radius:7px">📍 Sin fotos — mostrando ubicación</div>'
@@ -3081,14 +3081,15 @@ function abrirFicha(a) {
   // ── KPIs sidebar (sin hipoteca de inicio) ──
   actualizarKPIsSidebar(cf, rb, alq, total, false, 0)
 
-  // Simulador hipoteca: reset always, hide for alquilado
+  // Simulador hipoteca: reset and hide for alquilado
   var hipActivaEl = document.getElementById('hip-activa')
   if (hipActivaEl) { hipActivaEl.checked = false }
   var hipControles = document.getElementById('hip-controles')
   if (hipControles) { hipControles.style.display = 'none' }
-  // The hipoteca section is a direct child div of the content column - find by its unique button id
-  var hipSectionWrap = hipActivaEl ? hipActivaEl.parentNode : null
-  if (hipSectionWrap) hipSectionWrap.style.display = a.status === 'alquilado' ? 'none' : ''
+  // Hide entire hipoteca card for alquilado using the id we added
+  var hipCard = document.getElementById('ficha-hip-section')
+  var hipCardWrap = hipCard ? hipCard.closest('div[style*="border:1px solid var(--gray3)"]') || hipCard.parentNode.parentNode : null
+  if (hipCardWrap) hipCardWrap.style.display = a.status === 'alquilado' ? 'none' : ''
   // Hide idealista button for non-disponible
   var ideBtn = document.getElementById('ficha-idealista-btn')
   if (ideBtn) ideBtn.style.display = a.status === 'disponible' ? '' : 'none'
@@ -3199,12 +3200,13 @@ function abrirFicha(a) {
             + '<div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:20px">LÍNEA TEMPORAL — '+totalDias+' días desde reserva hasta alquiler</div>'
             + '<div style="position:relative;height:50px">'
             + '<div style="position:absolute;top:10px;left:0;right:0;height:2px;background:rgba(255,255,255,.12);border-radius:2px"></div>'
-          hitosPts.forEach(function(h) {
-            var pct = ((+new Date(h.fecha)-mn)/rng*92).toFixed(1)
+          hitosPts.forEach(function(h, idx2) {
+            var pct = ((+new Date(h.fecha)-mn)/rng*88).toFixed(1)
+            var labelTop = (idx2%2===0) ? '16px' : '32px'  // stagger even/odd labels
             timelineHtml += '<div style="position:absolute;left:'+pct+'%;top:0;transform:translateX(-50%)">'
-              + '<div style="width:12px;height:12px;background:'+h.color+';border-radius:50%;border:2px solid #111318;margin:0 auto 4px;box-shadow:0 0 8px '+h.color+'88"></div>'
-              + '<div style="font-size:9px;font-weight:700;color:'+h.color+';white-space:nowrap;text-align:center;position:absolute;top:18px;left:50%;transform:translateX(-50%)">'+h.label+'</div>'
-              + '<div style="font-size:8px;color:rgba(255,255,255,.35);white-space:nowrap;text-align:center;position:absolute;top:30px;left:50%;transform:translateX(-50%)">'+new Date(h.fecha).toLocaleDateString('es-ES',{day:'2-digit',month:'short'})+'</div>'
+              + '<div style="width:14px;height:14px;background:'+h.color+';border-radius:50%;border:2px solid #111318;margin:0 auto;box-shadow:0 0 8px '+h.color+'88"></div>'
+              + '<div style="font-size:9px;font-weight:700;color:'+h.color+';white-space:nowrap;text-align:center;position:absolute;top:'+labelTop+';left:50%;transform:translateX(-50%)">'+h.label+'</div>'
+              + '<div style="font-size:8px;color:rgba(255,255,255,.35);white-space:nowrap;text-align:center;position:absolute;top:'+(parseInt(labelTop)+12)+'px;left:50%;transform:translateX(-50%)">'+new Date(h.fecha).toLocaleDateString('es-ES',{day:'2-digit',month:'short'})+'</div>'
               + '</div>'
           })
           timelineHtml += '</div></div>'
