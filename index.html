@@ -2004,7 +2004,7 @@ function showView(id, noScroll) {
   document.getElementById('navBack').style.display = isOff ? 'flex' : 'none';
   document.getElementById('navCtaHome').style.display = onHome ? 'block' : 'none';
   var navCtaActivo = document.getElementById('navCtaActivo');
-  if (navCtaActivo) navCtaActivo.style.display = id === 'activo' ? 'block' : 'none';
+  if (navCtaActivo) navCtaActivo.style.display = 'none'; // controlled by abrirFicha
   if (!noScroll) window.scrollTo(0, 0);
 }
 window.addEventListener('scroll', function() {
@@ -3950,7 +3950,7 @@ function updateNavForView(id) {
     navBack.onclick = volverDeficha
     if (navHome) navHome.style.display = 'none'
     if (navCtaHome) navCtaHome.style.display = 'none'
-    if (navCtaActivo) navCtaActivo.style.display = 'block'
+    if (navCtaActivo) navCtaActivo.style.display = 'none' // abrirFicha controls this
   } else if (id === 'blog') {
     navBack.style.display = 'flex'
     navBack.textContent = '← Inicio'
