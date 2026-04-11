@@ -485,6 +485,23 @@ footer{background:var(--dark);padding:56px 52px 32px}
   #acceso-form>div:first-child{flex-direction:column!important;gap:10px!important}
   #acceso-email{width:100%!important;box-sizing:border-box!important}
   #acceso-form>div:first-child button{width:100%!important}
+  /* Ficha mobile */
+  #view-ficha > div > div > div[style*="grid-template-columns:1fr 360px"]{grid-template-columns:1fr!important;padding:20px 16px!important}
+  #view-ficha > div > div > div[style*="grid-template-columns:1fr 360px"] > div:last-child{position:static!important}
+  #ficha-kpis-main{grid-template-columns:1fr 1fr!important}
+  /* Todas mobile */
+  #view-todas > div > div[style*="padding:48px 52px"]{padding:24px 16px 20px!important}
+  #view-todas > div > div[style*="padding:36px 52px"]{padding:20px 16px!important}
+  /* Blog/FAQ mobile */
+  #view-blog > div > div:last-child{padding:20px 16px!important}
+  #view-faq > div > div:last-child{padding:20px 16px!important}
+  .faq-list{grid-template-columns:1fr!important}
+  /* Empty state mobile */
+  div[style*="grid-template-columns:1fr 1fr;gap:48px"]{grid-template-columns:1fr!important;gap:24px!important;padding:28px 20px!important}
+  /* Vendido cards result grid mobile */
+  .vendido-result{grid-template-columns:1fr 1fr!important}
+  /* Resultados reales mobile */
+  #ficha-resultados div[style*="grid-template-columns:repeat(2,1fr)"]{grid-template-columns:1fr 1fr!important}
 }
 
 /* LEAD POPUP */
@@ -523,11 +540,11 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
   <!-- Nav home -->
   <ul class="nav-links" id="navHome">
-    <li><a onclick="showView('home', true);scrollToSection('activos')">Activos</a></li>
+    <li><a onclick="abrirTodas('disponible')">Activos</a></li>
     <li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li>
     <li><a onclick="showView('home', true);scrollToSection('vendidos')">Resultados</a></li>
-    <li><a onclick="showView('home', true);scrollToSection('blog')">Blog</a></li>
-    <li><a onclick="showView('home', true);scrollToSection('faq')">FAQ</a></li>
+    <li><a onclick="abrirBlog()">Blog</a></li>
+    <li><a onclick="abrirFaq()">FAQ</a></li>
   </ul>
 
   <!-- Nav ficha -->
@@ -546,11 +563,11 @@ footer{background:var(--dark);padding:56px 52px 32px}
 <div id="mobileMenu" style="display:none;position:fixed;inset:0;top:64px;background:white;z-index:998;padding:24px 24px;overflow-y:auto;border-top:1px solid var(--gray3)">
   <ul style="list-style:none;display:flex;flex-direction:column;gap:0">
     <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('nosotros')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Quiénes somos</a></li>
-    <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('activos')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Activos</a></li>
+    <li><a onclick="closeMobileMenu();abrirTodas('disponible')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Activos</a></li>
     <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('proceso')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Cómo funciona</a></li>
     <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('vendidos')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Resultados</a></li>
-    <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('blog')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Blog</a></li>
-    <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('faq')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">FAQ</a></li>
+    <li><a onclick="closeMobileMenu();abrirBlog()" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Blog</a></li>
+    <li><a onclick="closeMobileMenu();abrirFaq()" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">FAQ</a></li>
   </ul>
   <button onclick="closeMobileMenu();openAgente()" style="width:100%;margin-top:24px;padding:14px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:15px;font-weight:700;cursor:pointer">💬 Hablar con un agente</button>
   <button onclick="closeMobileMenu();abrirTodas('disponible')" style="width:100%;margin-top:10px;padding:14px;background:var(--dark);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:15px;font-weight:700;cursor:pointer">Ver activos disponibles →</button>
@@ -680,7 +697,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
         <h2 style="color:white;margin-bottom:6px">EL MERCADO<br>A TU FAVOR</h2>
         <p style="color:rgba(255,255,255,.55);font-size:14px;margin:0">Datos reales y noticias recientes sobre rentabilidad inmobiliaria en España.</p>
       </div>
-      <button id="blog-ver-todo-btn" onclick="toggleBlogTodo()" style="background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-family:var(--font-body);font-size:13px;font-weight:600;padding:9px 20px;border-radius:var(--radius);cursor:pointer;transition:all .2s;white-space:nowrap">Ver todos →</button>
+      <button id="blog-ver-todo-btn" onclick="abrirBlog()" style="background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-family:var(--font-body);font-size:13px;font-weight:600;padding:9px 20px;border-radius:var(--radius);cursor:pointer;transition:all .2s;white-space:nowrap">Ver todos →</button>
     </div>
     <div class="blog-grid" id="blog-grid">
 
@@ -915,7 +932,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
       <div class="faq-item faq-hidden" style="display:none"><button class="faq-q" onclick="toggleFaq(this)">¿Para qué sirve la señal de reserva? <span class="faq-icon">+</span></button><div class="faq-a">Bloquea el activo mientras gestionas la financiación. Se descuenta del precio final. Antes de pagar, firmas el contrato de honorarios digitalmente.</div></div>
     </div>
     <div style="text-align:center;margin-top:24px">
-      <button id="faq-toggle-btn" onclick="toggleFaqAll()" style="background:none;border:1.5px solid var(--gray3);color:var(--gray);font-family:var(--font-body);font-size:13px;font-weight:600;padding:11px 28px;border-radius:var(--radius);cursor:pointer;transition:all .2s">Ver todas las preguntas +</button>
+      <button id="faq-toggle-btn" onclick="abrirFaq()" style="background:none;border:1.5px solid var(--gray3);color:var(--gray);font-family:var(--font-body);font-size:13px;font-weight:600;padding:11px 28px;border-radius:var(--radius);cursor:pointer;transition:all .2s">Ver todas las preguntas +</button>
     </div>
   </section>
 
@@ -944,7 +961,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
         </div>
         <p class="footer-tagline">Intermediación inmobiliaria para inversores que quieren resultados reales, no promesas.</p>
       </div>
-      <div class="footer-links-col"><h4>Navegar</h4><ul><li><a onclick="showView('home', true);scrollToSection('nosotros')">Quiénes somos</a></li><li><a onclick="showView('home', true);scrollToSection('activos')">Activos disponibles</a></li><li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li><li><a onclick="showView('home', true);scrollToSection('vendidos')">Track record</a></li><li><a onclick="showView('home', true);scrollToSection('blog')">Blog</a></li><li><a onclick="showView('home', true);scrollToSection('faq')">FAQ</a></li></ul></div>
+      <div class="footer-links-col"><h4>Navegar</h4><ul><li><a onclick="showView('home', true);scrollToSection('nosotros')">Quiénes somos</a></li><li><a onclick="showView('home', true);scrollToSection('activos')">Activos disponibles</a></li><li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li><li><a onclick="showView('home', true);scrollToSection('vendidos')">Track record</a></li><li><a onclick="abrirBlog()">Blog</a></li><li><a onclick="abrirFaq()">FAQ</a></li></ul></div>
       
       <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="/cdn-cgi/l/email-protection#b9d0d7dfd6f9dacbdcd8d7ddd6ccd7caccdcd5ddd697dad6d4"><span class="__cf_email__" data-cfemail="98f1f6fef7d8fbeafdf9f6fcf7edf6ebedfdf4fcf7b6fbf7f5">[email&#160;protected]</span></a></li><li><a href="https://t.me/creandounsueldo" target="_blank">Canal Telegram</a></li><li><a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank">Grupo WhatsApp</a></li></ul></div>
     </div>
@@ -3527,6 +3544,71 @@ function enviarContacto() {
 
 // ─── CARGAR AL INICIAR ────────────────────────────────────────────────────────
 
+var BLOG_CARDS = [
+  {cat:'Rentabilidad', date:'Abr 2026', src:'Idealista', title:'LOS MERCADOS INTERMEDIOS DOBLAN LA RENTABILIDAD DE MADRID Y BARCELONA EN 2026', excerpt:'Murcia (7,5%), Segovia (7,3%) y Lleida (7,3%) lideran la rentabilidad bruta en el primer trimestre de 2026. Madrid se queda en el 4,7% y Barcelona en el 5,2%. La inversión en ciudades medianas es la estrategia más rentable del momento.'},
+  {cat:'Estrategia', date:'Ene 2026', src:'Reental', title:'VIVIENDA VS BONOS DEL ESTADO: EL LADRILLO SIGUE GANANDO EN 2026', excerpt:'La rentabilidad bruta media de la vivienda en España cerró 2025 en el 6,7%, más del doble que el bono a 10 años (3,5%). Con el alquiler subiendo entre un 6-8% previsto para 2026, comprar para alquilar sigue siendo la inversión más sólida.'},
+  {cat:'Fiscalidad', date:'Dic 2025', src:'AEAT', title:'CÓMO TRIBUTA EL ALQUILER EN 2026: GUÍA PRÁCTICA PARA EL INVERSOR', excerpt:'Reducción del 50% en IRPF para nuevos contratos de arrendamiento (antes 60%). Gastos deducibles, amortización del 3% y cómo declarar los ingresos del alquiler correctamente.'},
+  {cat:'Mercado', date:'Nov 2025', src:'Fotocasa', title:'EL PRECIO DE LA VIVIENDA SUBE UN 15,3% INTERANUAL: QUÉ SIGNIFICA PARA EL INVERSOR', excerpt:'El metro cuadrado alcanza nuevos máximos históricos en España. Para el inversor que compra hoy, esto significa mayor revalorización del activo a largo plazo y rentabilidades brutas que superan el 8% en mercados secundarios.'},
+  {cat:'Alquiler', date:'Oct 2025', src:'Idealista', title:'EL ALQUILER SUBE UN 10,9% EN 2025: POR QUÉ LA DEMANDA NO PARA', excerpt:'Escasez de oferta, inmigración y demanda estructural sostienen la presión al alza. El inversor que compra hoy se beneficia de rentas crecientes desde el primer mes.'},
+  {cat:'Inversión', date:'Sep 2025', src:'Fotocasa Research', title:'INVERTIR EN PISOS SIN SALIR DE CASA: TODO LO QUE NECESITAS SABER', excerpt:'Poder notarial, gestión remota del inquilino, firma de arras a distancia. El 60% de los inversores de CreandoUnSueldo nunca han visitado el inmueble que compraron.'},
+  {cat:'Mercado', date:'Jul 2025', src:'CBRE', title:'LA INVERSIÓN INMOBILIARIA EN ESPAÑA SUPERA LOS 7.300M€ EN EL PRIMER SEMESTRE DE 2025', excerpt:'Un crecimiento del 22% interanual. España atrae capital internacional gracias a su estabilidad y rentabilidades superiores a la media europea.'},
+  {cat:'Financiación', date:'Jun 2025', src:'Banco de España', title:'BAJADA DE TIPOS: CÓMO AFECTA AL INVERSOR INMOBILIARIO EN 2025', excerpt:'El BCE ha bajado los tipos al 2,25%. Las hipotecas a tipo fijo a 25 años están por debajo del 3%. Con alquileres subiendo y cuotas bajando, el cashflow positivo es más fácil de conseguir.'},
+  {cat:'Zonas', date:'May 2025', src:'Idealista / Inviertis', title:'ASTURIAS Y LEÓN: LOS MERCADOS CON MEJOR RATIO RENTABILIDAD-RIESGO DE ESPAÑA', excerpt:'Precios de compra bajos, demanda de alquiler estable y rentabilidades brutas del 8-13%. Analizamos por qué cada vez más inversores miran al norte para construir su cartera inmobiliaria.'},
+  {cat:'Guía', date:'Mar 2025', src:'CreandoUnSueldo', title:'RENTABILIDAD BRUTA VS NETA: QUÉ NÚMERO IMPORTA DE VERDAD', excerpt:'La mayoría de portales muestran rentabilidad bruta. Aquí descontamos IBI, comunidad, seguro, vacíos y períodos sin inquilino para calcular lo que realmente entra en tu bolsillo.'},
+]
+
+var FAQ_ITEMS = [
+  ['¿Cuánto dinero necesito para empezar?', 'Trabajamos operaciones desde 38.000 € de precio de compra. Con financiación, la entrada suele rondar el 20–30% más gastos.'],
+  ['¿Cómo garantizáis el alquiler estimado?', 'Si el piso se alquila por debajo del precio estimado, compensamos la diferencia. El 100% de nuestras operaciones se han alquilado por encima.'],
+  ['¿Tengo que ir a la notaría en persona?', 'No. Podemos firmar en tu representación con poder notarial. Muchos inversores nunca han pisado el inmueble que compraron.'],
+  ['¿Qué incluye el servicio?', 'Selección del activo, acompañamiento en la compra, suministros, seguro de hogar, búsqueda de inquilino con análisis de solvencia y firma del contrato.'],
+  ['¿Cuándo y cuánto cobráis?', 'Los honorarios se cobran en el momento de las arras. No hay cuotas mensuales ni comisiones ocultas. El importe aparece en cada ficha.'],
+  ['¿Qué pasa si el inquilino deja de pagar?', 'Gestionamos el seguro de impago para que estés cubierto. Nos encargamos de los trámites.'],
+  ['¿Puedo comprar desde fuera de España?', 'Sí. Trabajamos con residentes y no residentes. La firma puede hacerse por poder notarial.'],
+  ['¿Para qué sirve la señal de reserva?', 'Bloquea el activo mientras gestionas la financiación. Se descuenta del precio final. Antes de pagar, firmas el contrato de honorarios digitalmente.'],
+  ['¿Cuánto tiempo tarda el proceso completo?', 'De media 2-3 meses desde la reserva hasta tener inquilino dentro. La firma de arras suele ser en 1-2 semanas desde la reserva.'],
+  ['¿Gestionáis el piso después de comprarlo?', 'No gestionamos el día a día del alquiler (eso lo hace el inquilino directamente contigo), pero sí coordinamos cualquier incidencia post-compra durante el primer año.'],
+]
+
+function renderBlogPage() {
+  var grid = document.getElementById('blog-all-grid')
+  if (!grid) return
+  grid.innerHTML = BLOG_CARDS.map(function(c) {
+    return '<div class="blog-card" style="cursor:default">'
+      + '<div style="padding:14px 18px 12px;border-bottom:1px solid rgba(255,255,255,.08)">'
+      + '<span class="blog-category">'+c.cat+'</span></div>'
+      + '<div class="blog-body">'
+      + '<div class="blog-meta">'+c.date+' · Fuente: '+c.src+'</div>'
+      + '<div class="blog-title">'+c.title+'</div>'
+      + '<div class="blog-excerpt">'+c.excerpt+'</div>'
+      + '</div></div>'
+  }).join('')
+}
+
+function renderFaqPage() {
+  var list = document.getElementById('faq-page-list')
+  if (!list) return
+  list.innerHTML = FAQ_ITEMS.map(function(item, i) {
+    return '<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">'
+      + item[0] + ' <span class="faq-icon">+</span></button>'
+      + '<div class="faq-a">'+item[1]+'</div></div>'
+  }).join('')
+}
+
+function abrirBlog() {
+  renderBlogPage()
+  showView('blog')
+  navigateTo('/blog')
+  scrollToTop()
+}
+
+function abrirFaq() {
+  renderFaqPage()
+  showView('faq')
+  navigateTo('/faq')
+  scrollToTop()
+}
+
 // ═══ ROUTER ══════════════════════════════════════════════════════════════════
 function navigateTo(path, replaceState) {
   if (replaceState) {
@@ -3577,6 +3659,8 @@ function handleRoute(path) {
     loadActivos()
     return
   }
+  if (path === '/blog') { abrirBlog(); return }
+  if (path === '/faq') { abrirFaq(); return }
   // fallback
   _showView('home')
 }
@@ -3593,10 +3677,52 @@ var _abrirFicha = abrirFicha
 var _abrirTodas = abrirTodas
 var _filtrarTodas = filtrarTodas
 
+function updateNavForView(id) {
+  var navBack = document.getElementById('navBack')
+  var navHome = document.getElementById('navHome')
+  var navCtaHome = document.getElementById('navCtaHome')
+  var navCtaActivo = document.getElementById('navCtaActivo')
+  if (!navBack) return
+  if (id === 'home') {
+    navBack.style.display = 'none'
+    if (navHome) navHome.style.display = 'flex'
+    if (navCtaHome) navCtaHome.style.display = 'block'
+    if (navCtaActivo) navCtaActivo.style.display = 'none'
+  } else if (id === 'todas') {
+    navBack.style.display = 'flex'
+    navBack.textContent = '← Inicio'
+    navBack.onclick = function() { _showView('home'); navigateTo('/', true); scrollToTop() }
+    if (navHome) navHome.style.display = 'none'
+    if (navCtaHome) navCtaHome.style.display = 'none'
+    if (navCtaActivo) navCtaActivo.style.display = 'none'
+  } else if (id === 'ficha') {
+    navBack.style.display = 'flex'
+    navBack.textContent = '← Volver'
+    navBack.onclick = volverDeficha
+    if (navHome) navHome.style.display = 'none'
+    if (navCtaHome) navCtaHome.style.display = 'none'
+    if (navCtaActivo) navCtaActivo.style.display = 'block'
+  } else if (id === 'blog') {
+    navBack.style.display = 'flex'
+    navBack.textContent = '← Inicio'
+    navBack.onclick = function() { _showView('home'); navigateTo('/', true); scrollToTop() }
+    if (navHome) navHome.style.display = 'none'
+    if (navCtaHome) navCtaHome.style.display = 'none'
+    if (navCtaActivo) navCtaActivo.style.display = 'none'
+  } else if (id === 'faq') {
+    navBack.style.display = 'flex'
+    navBack.textContent = '← Inicio'
+    navBack.onclick = function() { _showView('home'); navigateTo('/', true); scrollToTop() }
+    if (navHome) navHome.style.display = 'none'
+    if (navCtaHome) navCtaHome.style.display = 'none'
+    if (navCtaActivo) navCtaActivo.style.display = 'none'
+  }
+}
+
 showView = function(id, noScroll) {
   _showView(id, noScroll)
+  updateNavForView(id)
   if (id === 'home') navigateTo('/', true)
-  // other views update URL themselves
 }
 
 var _fichaOrigen = null  // 'todas-disponible' | 'todas-reservado' | 'todas-finalizado' | 'home'
@@ -3655,6 +3781,34 @@ if (document.readyState !== 'loading') {
 }
 
 </script>
+
+
+<!-- ═══════════════════ VIEW: BLOG ═══════════════════ -->
+<div class="view" id="view-blog">
+  <div style="padding-top:68px;min-height:100vh;background:#0d1117">
+    <div style="background:#111318;padding:48px 52px 40px;border-bottom:1px solid rgba(255,255,255,.07)">
+      <div style="font-family:var(--font-mono);font-size:11px;color:rgba(227,30,36,.8);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px">Noticias & Análisis</div>
+      <h2 style="font-family:var(--font-display);font-size:clamp(36px,5vw,64px);line-height:.95;color:white;letter-spacing:.5px">EL MERCADO<br>A TU FAVOR</h2>
+    </div>
+    <div style="padding:40px 52px;max-width:1400px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px" id="blog-all-grid">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ VIEW: FAQ ═══════════════════ -->
+<div class="view" id="view-faq">
+  <div style="padding-top:68px;min-height:100vh;background:white">
+    <div style="background:var(--dark);padding:48px 52px 40px">
+      <div style="font-family:var(--font-mono);font-size:11px;color:rgba(227,30,36,.8);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px">Preguntas frecuentes</div>
+      <h2 style="font-family:var(--font-display);font-size:clamp(36px,5vw,64px);line-height:.95;color:white;letter-spacing:.5px">TODO LO QUE<br>NECESITAS SABER</h2>
+    </div>
+    <div style="padding:40px 52px;max-width:920px;margin:0 auto">
+      <div class="faq-list" id="faq-page-list"></div>
+    </div>
+  </div>
+</div>
 
 <!-- LIGHTBOX FOTOS -->
 <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:5000;align-items:center;justify-content:center" onclick="closeLightbox(event)">
