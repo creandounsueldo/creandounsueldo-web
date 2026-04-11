@@ -499,8 +499,10 @@ footer{background:var(--dark);padding:56px 52px 32px}
   #view-faq > div > div:last-child{padding:20px 16px!important}
   .faq-list{grid-template-columns:1fr!important}
   /* Colabora section mobile */
-  #colabora{padding:40px 16px!important}
-  #colabora > div > div{grid-template-columns:1fr!important;gap:32px!important}
+  #colabora{padding:28px 16px!important}
+  #colabora > div{flex-direction:column!important;gap:20px!important}
+  #view-colabora > div > div:last-child{padding:20px 16px!important}
+  #view-colabora .modal-body,#view-colabora div[style*='padding:28px 32px']{padding:20px 16px!important}
   /* Empty state mobile */
   div[style*="grid-template-columns:1fr 1fr;gap:48px"]{grid-template-columns:1fr!important;gap:24px!important;padding:28px 20px!important}
   /* Vendido cards result grid mobile */
@@ -662,46 +664,31 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
 
   <!-- COLABORA -->
-  <section id="colabora" style="padding:56px 52px;background:white;position:relative;overflow:hidden;border-top:1px solid var(--gray3)">
-    <div style="position:relative;max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
-      <div>
-        <div class="section-eyebrow">Colabora con nosotros</div>
-        <h2 style="color:var(--dark);font-size:clamp(36px,4vw,54px)">¿TIENES UN PISO INTERESANTE?</h2>
-        <p style="color:var(--gray);font-size:15px;line-height:1.75;margin-bottom:28px">Tanto si eres particular como agencia, llega a más de 2.000 inversores activos. Cerramos la mayoría de operaciones en menos de 24 horas. Un solo interlocutor, sin complicaciones, sin esperas.</p>
-        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px">
-          <div style="display:flex;gap:14px;align-items:flex-start">
-            <div style="width:32px;height:32px;background:rgba(227,30,36,.12);border:1px solid rgba(227,30,36,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px">⚡</div>
-            <div><div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:2px">24h de media hasta cerrar</div><div style="font-size:13px;color:var(--gray)">La mayoría de nuestros activos se reservan el mismo día que se publican</div></div>
-          </div>
-          <div style="display:flex;gap:14px;align-items:flex-start">
-            <div style="width:32px;height:32px;background:rgba(227,30,36,.12);border:1px solid rgba(227,30,36,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px">🎯</div>
-            <div><div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:2px">Un solo interlocutor</div><div style="font-size:13px;color:var(--gray)">Nosotros gestionamos todo el proceso de principio a fin</div></div>
-          </div>
-          <div style="display:flex;gap:14px;align-items:flex-start">
-            <div style="width:32px;height:32px;background:rgba(227,30,36,.12);border:1px solid rgba(227,30,36,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px">👥</div>
-            <div><div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:2px">+2.000 inversores activos</div><div style="font-size:13px;color:var(--gray)">Comunidad de inversores listos para comprar, sin pérdida de tiempo</div></div>
-          </div>
-        </div>
-        <button onclick="abrirColabora()" class="btn-primary" style="font-size:14px;padding:14px 32px">Proponer un activo →</button>
+  <section id="colabora" style="padding:40px 52px;background:var(--gray5);border-top:1px solid var(--gray3);border-bottom:1px solid var(--gray3)">
+    <div style="max-width:960px;margin:0 auto;display:flex;align-items:center;gap:48px;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        <div class="section-eyebrow" style="margin-bottom:6px">Colabora con nosotros</div>
+        <h2 style="color:var(--dark);font-size:clamp(24px,3vw,36px);margin-bottom:10px;line-height:1.1">¿TIENES UN PISO INTERESANTE?</h2>
+        <p style="color:var(--gray);font-size:14px;line-height:1.65;margin-bottom:20px;max-width:420px">Llega a +2.000 inversores activos. Cerramos la mayoría de operaciones en menos de 24h. Un solo interlocutor, sin complicaciones.</p>
+        <button onclick="abrirColabora()" class="btn-primary" style="font-size:13px;padding:12px 24px">Proponer un activo →</button>
       </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:28px">
-        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px">Así de simple</div>
-        <div style="display:flex;flex-direction:column;gap:0">
-          <div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)">
-            <div style="font-family:var(--font-display);font-size:28px;color:var(--red);line-height:1;width:28px;flex-shrink:0">1</div>
-            <div><div style="font-size:13px;font-weight:700;color:white;margin-bottom:2px">Rellenas el formulario</div><div style="font-size:12px;color:rgba(255,255,255,.4)">Datos del piso + fotos. 5 minutos.</div></div>
+      <div style="display:flex;gap:0;border:1px solid var(--gray3);border-radius:12px;overflow:hidden;background:white;flex-shrink:0">
+        <div style="display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--gray3)">
+            <div style="font-family:var(--font-display);font-size:22px;color:var(--red);line-height:1;width:20px;flex-shrink:0">1</div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Rellenas el formulario</div><div style="font-size:11px;color:var(--gray2)">Datos + fotos · 5 minutos</div></div>
           </div>
-          <div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)">
-            <div style="font-family:var(--font-display);font-size:28px;color:var(--red);line-height:1;width:28px;flex-shrink:0">2</div>
-            <div><div style="font-size:13px;font-weight:700;color:white;margin-bottom:2px">Nosotros lo revisamos</div><div style="font-size:12px;color:rgba(255,255,255,.4)">En menos de 24h te confirmamos si encaja con nuestra comunidad.</div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--gray3)">
+            <div style="font-family:var(--font-display);font-size:22px;color:var(--red);line-height:1;width:20px;flex-shrink:0">2</div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Revisamos en 24h</div><div style="font-size:11px;color:var(--gray2)">Te confirmamos si encaja</div></div>
           </div>
-          <div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)">
-            <div style="font-family:var(--font-display);font-size:28px;color:var(--red);line-height:1;width:28px;flex-shrink:0">3</div>
-            <div><div style="font-size:13px;font-weight:700;color:white;margin-bottom:2px">Se publica para inversores</div><div style="font-size:12px;color:rgba(255,255,255,.4)">Tu piso llega a +2.000 inversores activos al instante.</div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--gray3)">
+            <div style="font-family:var(--font-display);font-size:22px;color:var(--red);line-height:1;width:20px;flex-shrink:0">3</div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Publicamos para inversores</div><div style="font-size:11px;color:var(--gray2)">+2.000 compradores activos</div></div>
           </div>
-          <div style="display:flex;gap:16px;padding:14px 0">
-            <div style="font-family:var(--font-display);font-size:28px;color:var(--red);line-height:1;width:28px;flex-shrink:0">4</div>
-            <div><div style="font-size:13px;font-weight:700;color:white;margin-bottom:2px">Cerramos en 24h</div><div style="font-size:12px;color:rgba(255,255,255,.4)">Oferta de compra, gestión completa. Sin complicaciones.</div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 20px">
+            <div style="font-family:var(--font-display);font-size:22px;color:var(--red);line-height:1;width:20px;flex-shrink:0">4</div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Cerramos la operación</div><div style="font-size:11px;color:var(--gray2)">Gestión completa · Sin complicaciones</div></div>
           </div>
         </div>
       </div>
@@ -3665,29 +3652,28 @@ function abrirFaq() {
 // ═══ COLABORA ════════════════════════════════════════════════════════════════
 function abrirColabora() {
   colaboraStep(1)
-  document.getElementById('colaboraOverlay').classList.add('open')
-  document.body.style.overflow = 'hidden'
+  showView('colabora')
+  navigateTo('/colabora')
+  scrollToTop()
 }
 
 function closeColabora() {
-  document.getElementById('colaboraOverlay').classList.remove('open')
-  document.body.style.overflow = ''
-}
-
-function closeColaboraOutside(e) {
-  if (e.target.id === 'colaboraOverlay') closeColabora()
+  _showView('home')
+  navigateTo('/', true)
+  scrollToTop()
 }
 
 function colaboraStep(n) {
+  // Validate BEFORE changing panels
+  if (n === 2 && !validarColaboraStep1()) return
+  if (n === 3 && !validarColaboraStep2()) return
+
   document.querySelectorAll('.m-panel').forEach(function(p) { p.classList.remove('active') })
   var panel = document.getElementById('cp' + n)
   if (panel) panel.classList.add('active')
   var pct = {1: '33%', 2: '66%', 3: '100%'}
   var prog = document.getElementById('colaboraProgress')
   if (prog) prog.style.width = pct[n] || '33%'
-  // Validate before advancing
-  if (n === 2 && !validarColaboraStep1()) return
-  if (n === 3 && !validarColaboraStep2()) return
 }
 
 function validarColaboraStep1() {
@@ -3846,6 +3832,7 @@ async function enviarColabora() {
     document.querySelectorAll('.m-panel').forEach(function(p) { p.classList.remove('active') })
     document.getElementById('cp-ok').classList.add('active')
     document.getElementById('colaboraProgress').style.width = '100%'
+    scrollToTop()
 
   } catch(e) {
     alert('Error al enviar. Inténtalo de nuevo o escríbenos directamente.')
@@ -3905,6 +3892,7 @@ function handleRoute(path) {
     loadActivos()
     return
   }
+  if (path === '/colabora') { abrirColabora(); return }
   if (path === '/blog') { abrirBlog(); return }
   if (path === '/faq') { abrirFaq(); return }
   // fallback
@@ -3959,6 +3947,13 @@ function updateNavForView(id) {
     navBack.style.display = 'flex'
     navBack.textContent = '← Inicio'
     navBack.onclick = function() { _showView('home'); navigateTo('/', true); scrollToTop() }
+    if (navHome) navHome.style.display = 'none'
+    if (navCtaHome) navCtaHome.style.display = 'none'
+    if (navCtaActivo) navCtaActivo.style.display = 'none'
+  } else if (id === 'colabora') {
+    navBack.style.display = 'flex'
+    navBack.textContent = '← Inicio'
+    navBack.onclick = function() { closeColabora() }
     if (navHome) navHome.style.display = 'none'
     if (navCtaHome) navCtaHome.style.display = 'none'
     if (navCtaActivo) navCtaActivo.style.display = 'none'
@@ -4057,17 +4052,17 @@ if (document.readyState !== 'loading') {
 </div>
 
 
-<!-- ═══════════════════ MODAL COLABORA ═══════════════════ -->
-<div class="modal-overlay" id="colaboraOverlay" onclick="closeColaboraOutside(event)">
-  <div class="modal" style="max-width:680px;width:100%">
-    <div class="modal-header">
-      <button class="modal-header-close" onclick="closeColabora()">×</button>
-      <div class="modal-title">PROPONER UN ACTIVO</div>
-      <div class="modal-subtitle">Revisamos en menos de 24h · Sin compromiso</div>
-      <div class="modal-progress"><div class="modal-progress-fill" id="colaboraProgress" style="width:33%"></div></div>
+<!-- ═══════════════════ VIEW: COLABORA ═══════════════════ -->
+<div class="view" id="view-colabora">
+  <div style="padding-top:68px;min-height:100vh;background:var(--gray5)">
+    <div style="background:var(--dark);padding:40px 52px 36px">
+      <div style="font-family:var(--font-mono);font-size:11px;color:rgba(227,30,36,.8);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px">Sin compromiso · Revisamos en 24h</div>
+      <h2 style="font-family:var(--font-display);font-size:clamp(28px,4vw,48px);color:white;letter-spacing:.5px;line-height:1">PROPONER UN ACTIVO</h2>
     </div>
-    <div class="modal-body" style="max-height:75vh;overflow-y:auto">
-
+    <div style="max-width:720px;margin:0 auto;padding:36px 52px 60px">
+      <div style="background:white;border-radius:14px;border:1px solid var(--gray3);overflow:hidden">
+        <div style="padding:4px 0 0;background:var(--gray5)"><div id="colaboraProgress" style="height:4px;background:var(--red);border-radius:2px;transition:width .3s;width:33%"></div></div>
+        <div style="padding:28px 32px">
       <!-- PASO 1: Datos del piso -->
       <div id="cp1" class="m-panel active">
         <div class="step-heading">Datos del inmueble</div>
@@ -4150,7 +4145,7 @@ if (document.readyState !== 'loading') {
         </div>
 
         <div class="modal-actions">
-          <button class="btn-back" onclick="closeColabora()">Cancelar</button>
+          <button class="btn-back" onclick="closeColabora()">← Volver</button>
           <button class="btn-next" onclick="colaboraStep(2)">Continuar →</button>
         </div>
       </div>
@@ -4278,9 +4273,14 @@ if (document.readyState !== 'loading') {
         <div style="font-family:var(--font-display);font-size:28px;color:var(--dark);margin-bottom:8px;letter-spacing:.5px">¡RECIBIDO!</div>
         <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:8px">Hemos recibido la información del inmueble. Revisaremos tu propuesta y nos ponemos en contacto en menos de <strong>24 horas</strong>.</p>
         <p style="font-size:13px;color:var(--gray2);margin-bottom:24px">Recibirás una confirmación en tu email en unos minutos.</p>
-        <button class="btn-primary-form" onclick="closeColabora()">Cerrar</button>
+        <button class="btn-primary" onclick="closeColabora()">← Volver al inicio</button>
       </div>
 
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
