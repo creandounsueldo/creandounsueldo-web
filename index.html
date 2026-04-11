@@ -2321,11 +2321,15 @@ async function loadActivos() {
     })
     if (!res.ok) throw new Error('fetch error')
     todosActivos = await res.json()
+    // Build map
+    todosActivos.forEach(function(a){ _activosMap[a.id] = a })
     renderActivos(todosActivos)
     renderVendidos(todosActivos)
+    return todosActivos
   } catch(e) {
     var g = document.getElementById('grid-activos')
     if (g) g.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#9ca3af">Error cargando activos. Recarga la página.</div>'
+    return []
   }
 }
 
@@ -3512,11 +3516,110 @@ function enviarContacto() {
 }
 
 // ─── CARGAR AL INICIAR ────────────────────────────────────────────────────────
+
+// ═══ ROUTER ══════════════════════════════════════════════════════════════════
+function navigateTo(path, replaceState) {
+  if (replaceState) {
+    history.replaceState({path: path}, '', path)
+  } else {
+    history.pushState({path: path}, '', path)
+  }
+}
+
+function handleRoute(path) {
+  path = path || window.location.pathname
+  // Strip trailing slash
+  path = path.replace(/\/+$/, '') || '/'
+  
+  if (path === '/' || path === '/home') {
+    _showView('home')
+    return
+  }
+  if (path === '/activos' || path === '/activos/disponibles') {
+    _filtroTodas = 'disponible'
+    _showView('todas')
+    renderTodas()
+    return
+  }
+  if (path === '/activos/reservados') {
+    _filtroTodas = 'reservado'
+    _showView('todas')
+    renderTodas()
+    return
+  }
+  if (path === '/activos/cerrados') {
+    _filtroTodas = 'finalizado'
+    _showView('todas')
+    renderTodas()
+    return
+  }
+  // /activo/:id
+  var fichaMatch = path.match(/^\/activo\/(.+)$/)
+  if (fichaMatch) {
+    var id = fichaMatch[1]
+    // Wait for activos to load if needed
+    if (todosActivos.length > 0) {
+      var a = todosActivos.find(function(x){ return x.id === id })
+      if (a) { _abrirFicha(a); return }
+    }
+    // Queue: load activos first then open ficha
+    _pendingRoute = {type: 'ficha', id: id}
+    loadActivos()
+    return
+  }
+  // fallback
+  _showView('home')
+}
+
+var _pendingRoute = null
+
+window.addEventListener('popstate', function(e) {
+  handleRoute(window.location.pathname)
+})
+
+// Rename internal functions, wrap public ones to update URL
+var _showView = showView
+var _abrirFicha = abrirFicha
+var _abrirTodas = abrirTodas
+var _filtrarTodas = filtrarTodas
+
+showView = function(id, noScroll) {
+  _showView(id, noScroll)
+  if (id === 'home') navigateTo('/', true)
+  // other views update URL themselves
+}
+
+abrirFicha = function(a) {
+  navigateTo('/activo/' + a.id)
+  _abrirFicha(a)
+}
+
+abrirTodas = function(filtro) {
+  var pathMap = {disponible: '/activos', reservado: '/activos/reservados', finalizado: '/activos/cerrados'}
+  navigateTo(pathMap[filtro] || '/activos')
+  _abrirTodas(filtro)
+}
+
+filtrarTodas = function(filtro) {
+  var pathMap = {disponible: '/activos', reservado: '/activos/reservados', finalizado: '/activos/cerrados'}
+  navigateTo(pathMap[filtro] || '/activos', true)
+  _filtrarTodas(filtro)
+}
+// ═════════════════════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', function() {
-  loadActivos()
+  loadActivos().then(function() {
+    // Handle pending route after activos load
+    if (_pendingRoute && _pendingRoute.type === 'ficha') {
+      var a = todosActivos.find(function(x){ return x.id === _pendingRoute.id })
+      if (a) _abrirFicha(a)
+      _pendingRoute = null
+    }
+  })
+  // Route on load
+  handleRoute(window.location.pathname)
 })
 if (document.readyState !== 'loading') {
-  loadActivos()
+  // already loaded - handled above
 }
 
 </script>
