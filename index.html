@@ -946,7 +946,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
       </div>
       <div class="footer-links-col"><h4>Navegar</h4><ul><li><a onclick="showView('home', true);scrollToSection('nosotros')">Quiénes somos</a></li><li><a onclick="showView('home', true);scrollToSection('activos')">Activos disponibles</a></li><li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li><li><a onclick="showView('home', true);scrollToSection('vendidos')">Track record</a></li><li><a onclick="showView('home', true);scrollToSection('blog')">Blog</a></li><li><a onclick="showView('home', true);scrollToSection('faq')">FAQ</a></li></ul></div>
       
-      <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="mailto:info@creandounsueldo.com">info@creandounsueldo.com</a></li><li><a href="https://t.me/creandounsueldo" target="_blank">Canal Telegram</a></li><li><a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank">Grupo WhatsApp</a></li></ul></div>
+      <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="/cdn-cgi/l/email-protection#b9d0d7dfd6f9dacbdcd8d7ddd6ccd7caccdcd5ddd697dad6d4"><span class="__cf_email__" data-cfemail="98f1f6fef7d8fbeafdf9f6fcf7edf6ebedfdf4fcf7b6fbf7f5">[email&#160;protected]</span></a></li><li><a href="https://t.me/creandounsueldo" target="_blank">Canal Telegram</a></li><li><a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank">Grupo WhatsApp</a></li></ul></div>
     </div>
     <div class="footer-bottom"><span class="footer-legal">© 2026 NOGA HOUSE S.L. — CreandoUnSueldo</span><span class="footer-legal"><a href="#" onclick="showPrivacidad('aviso');return false">Aviso legal</a> · <a href="#" onclick="showPrivacidad('privacidad');return false">Privacidad</a> · <a href="#" onclick="showPrivacidad('cookies');return false">Cookies</a></span></div>
   </footer>
@@ -1825,7 +1825,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
     <div id="legal-privacidad" style="display:none;padding:28px;font-size:13px;color:#555;line-height:1.8">
       <h4 style="font-size:15px;color:#111;margin:0 0 12px">RESPONSABLE DEL TRATAMIENTO</h4>
-      <p>NOGA HOUSE S.L. (CIF B75385070), con domicilio en Barcelona. Contacto: info@creandounsueldo.com</p>
+      <p>NOGA HOUSE S.L. (CIF B75385070), con domicilio en Barcelona. Contacto: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e980878f86a98a9b8c88878d869c879a9c8c858d86c78a8684">[email&#160;protected]</a></p>
       <h4 style="font-size:15px;color:#111;margin:20px 0 10px">DATOS QUE RECOGEMOS</h4>
       <p>Recogemos los siguientes datos personales:</p>
       <ul style="margin:8px 0 12px 20px;display:flex;flex-direction:column;gap:4px">
@@ -1844,7 +1844,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
       <h4 style="font-size:15px;color:#111;margin:20px 0 10px">CONSERVACIÓN</h4>
       <p>Los datos se conservan durante el tiempo necesario para cumplir la finalidad para la que fueron recogidos y, en todo caso, durante los plazos legalmente establecidos.</p>
       <h4 style="font-size:15px;color:#111;margin:20px 0 10px">TUS DERECHOS</h4>
-      <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a info@creandounsueldo.com. Tienes derecho a presentar reclamación ante la Agencia Española de Protección de Datos (www.aepd.es).</p>
+      <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef86818980af8c9d8a8e818b809a819c9a8a838b80c18c8082">[email&#160;protected]</a>. Tienes derecho a presentar reclamación ante la Agencia Española de Protección de Datos (www.aepd.es).</p>
       <h4 style="font-size:15px;color:#111;margin:20px 0 10px">TRANSFERENCIAS INTERNACIONALES</h4>
       <p>No se realizan transferencias internacionales de datos fuera del Espacio Económico Europeo.</p>
       <p style="margin-top:20px;font-size:11px;color:#aaa">Última actualización: abril 2026</p>
@@ -1877,7 +1877,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
 
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function goBack() {
   // If on activo or activos view, go back to home
   if (document.getElementById('view-activo').classList.contains('active')) {
@@ -2403,7 +2403,7 @@ function renderTodas() {
   var lista = todosActivos.filter(function(a) {
     if (filtro === 'disponible') return a.status === 'disponible'
     if (filtro === 'reservado')  return a.status === 'reservado' || a.status === 'en_proceso'
-    if (filtro === 'finalizado') return a.status === 'finalizado'
+    if (filtro === 'finalizado') return a.status === 'alquilado' || a.status === 'descartado'
     return false
   })
 
@@ -2471,7 +2471,7 @@ function renderActivos(activos) {
 function renderVendidos(activos) {
   var grid = document.getElementById('grid-vendidos')
   if (!grid) return
-  var lista = activos.filter(function(a) { return a.status === 'finalizado' })
+  var lista = activos.filter(function(a) { return a.status === 'alquilado' })
   if (!lista.length) {
     var msg = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">Las operaciones cerradas aparecerán aquí con todos sus resultados.</div>'
     grid.innerHTML = msg
@@ -3328,9 +3328,4 @@ if (document.readyState !== 'loading') {
 <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:5000;align-items:center;justify-content:center" onclick="closeLightbox(event)">
   <button onclick="lightboxNav(-1)" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:white;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;z-index:1">‹</button>
   <img id="lightbox-img" style="max-width:90vw;max-height:88vh;object-fit:contain;border-radius:6px;user-select:none" />
-  <button onclick="lightboxNav(1)" style="position:absolute;right:20px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:white;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;z-index:1">›</button>
-  <button onclick="document.getElementById('lightbox').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.1);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer">×</button>
-  <div id="lightbox-counter" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:12px;color:rgba(255,255,255,.5)"></div>
-</div>
-</body>
-</html>
+  <button onclick="lightboxNav(1)" style="position:absolute;right:20px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:white;width:48px;height:48px;bo
