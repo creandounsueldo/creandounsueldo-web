@@ -2419,7 +2419,7 @@ function renderTodas() {
   var lista = todosActivos.filter(function(a) {
     if (filtro === 'disponible') return a.status === 'disponible'
     if (filtro === 'reservado')  return a.status === 'reservado' || a.status === 'en_proceso'
-    if (filtro === 'finalizado') return a.status === 'alquilado' || a.status === 'descartado'
+    if (filtro === 'finalizado') return a.status === 'alquilado' && +a.alquiler_final > 0
     return false
   })
 
@@ -2436,57 +2436,8 @@ function renderTodas() {
   }
 
   if (filtro === 'finalizado') {
-    // Cards de operaciones cerradas
-    grid.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px">'
-      + lista.map(function(a) {
-          _activosMap[a.id] = a
-          var alqEst  = +(a.alquiler_estimado || 0)
-          var alqFin  = +(a.alquiler_final || 0)
-          var rbEst   = calcRB(a.precio, alqEst)
-          var rbReal  = alqFin ? calcRB(a.precio, alqFin) : null
-          var superado = alqFin && alqEst && alqFin >= alqEst
-          var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
-          var titulo = a.titulo_pagina || (a.habitaciones ? 'PISO '+a.habitaciones+' HAB.' : 'ACTIVO')
-          var fotos = Array.isArray(a.fotos) ? a.fotos : []
-          var foto  = fotos[0] || null
-          var mapQuery = [a.direccion, a.zona, a.ciudad, a.provincia].filter(Boolean).join(', ')
-          var imgHtml = foto
-            ? '<img src="'+foto+'" style="width:100%;height:100%;object-fit:cover;opacity:.9" loading="lazy"/>'
-            : '<div style="width:100%;height:100%;background:linear-gradient(135deg,#e8f0fe,#d2e3fc);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px"><div style="font-size:28px">📍</div><div style="font-size:11px;font-weight:700;color:#1a73e8;text-align:center;padding:0 12px">'+(a.zona||a.ciudad||'')+'</div><div style="font-size:10px;color:#5f6368;text-align:center">'+(a.ciudad||'')+'</div></div>'
-          return '<div class="activo-card" onclick="abrirFicha(_activosMap[\''+a.id+'\'])" style="cursor:pointer;position:relative">'
-            + '<div class="activo-img" style="height:180px">'
-            + imgHtml
-            + '<span style="position:absolute;top:12px;left:12px;background:rgba(17,19,24,.75);backdrop-filter:blur(6px);color:#9CA3AF;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:99px">✓ Cerrado</span>'
-            + (superado ? '<span style="position:absolute;top:12px;right:12px;background:#22C55E;color:white;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px">+' + (alqFin-alqEst) + '€ sobre estimado</span>' : '')
-            + '</div>'
-            + '<div class="activo-body">'
-            + '<div class="activo-location">'+loc+'</div>'
-            + '<div class="activo-title" style="font-size:18px;margin-bottom:14px">'+titulo+'</div>'
-            // KPI grid: 4 cells
-            + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray3);border-radius:8px;overflow:hidden;margin-bottom:14px">'
-            +   '<div style="background:var(--gray5);padding:11px 13px">'
-            +     '<div style="font-size:11px;font-weight:700;color:'+(rbReal&&+rbReal>+rbEst?'#22C55E':'var(--red)')+'">'+(rbReal||rbEst||'—')+'%'+(rbReal&&rbReal!==rbEst?' <span style="font-size:9px;color:#9CA3AF;font-weight:400">real</span>':'')+'</div>'
-            +     '<div style="font-size:10px;color:var(--gray2);margin-top:2px">Rent. bruta'+(rbReal?'':' estimada')+'</div>'
-            +     (rbReal && rbReal !== rbEst ? '<div style="font-size:10px;color:var(--gray2);margin-top:1px">Estimada: '+rbEst+'%</div>' : '')
-            +   '</div>'
-            +   '<div style="background:var(--gray5);padding:11px 13px">'
-            +     '<div style="font-size:11px;font-weight:700;color:var(--dark)">'+fmtE(a.precio)+'</div>'
-            +     '<div style="font-size:10px;color:var(--gray2);margin-top:2px">Precio compra</div>'
-            +   '</div>'
-            +   '<div style="background:var(--gray5);padding:11px 13px;border-top:1px solid var(--gray3)">'
-            +     '<div style="font-size:11px;font-weight:700;color:'+(superado?'#22C55E':'var(--dark)')+'">'+fmtE(alqFin||alqEst)+'/mes'+(superado?' ↑':alqFin&&alqFin<alqEst?' ↓':'')+'</div>'
-            +     '<div style="font-size:10px;color:var(--gray2);margin-top:2px">Alquiler '+(alqFin?'final':'estimado')+'</div>'
-            +     (alqFin && alqFin !== alqEst ? '<div style="font-size:10px;color:var(--gray2);margin-top:1px">Estimado: '+fmtE(alqEst)+'/mes</div>' : '')
-            +   '</div>'
-            +   '<div style="background:var(--gray5);padding:11px 13px;border-top:1px solid var(--gray3)">'
-            +     '<div style="font-size:11px;font-weight:700;color:#6B7280">'+(a.fecha_alquilado ? fmtDate(a.fecha_alquilado) : '—')+'</div>'
-            +     '<div style="font-size:10px;color:var(--gray2);margin-top:2px">Fecha alquiler</div>'
-            +   '</div>'
-            + '</div>'
-            + '<div style="font-size:12px;color:var(--red);font-weight:600">Ver detalle completo →</div>'
-            + '</div>'
-            + '</div>'
-        }).join('')
+    grid.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">'
+      + lista.map(buildVendidoCard).join('')
       + '</div>'
   } else {
     // Cards de disponibles/reservados
@@ -2504,6 +2455,7 @@ function renderActivos(activos) {
   var disponibles = activos.filter(function(a) { return a.status === 'disponible' })
 
   if (!disponibles.length) {
+    var ao2 = document.getElementById('acceso-outer'); if (ao2) ao2.style.display = 'none'
     grid.innerHTML = '<div style="grid-column:1/-1">'
       + '<div style="background:var(--dark);border-radius:14px;padding:40px 48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;overflow:hidden">'
       + '<div style="position:absolute;right:-20px;bottom:-30px;font-family:var(--font-display);font-size:280px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none">0</div>'
@@ -2533,46 +2485,54 @@ function renderActivos(activos) {
       + '</div>'
   } else {
     grid.innerHTML = disponibles.slice(0, 3).map(function(a) { return buildCard(a) }).join('')
+    var ao = document.getElementById('acceso-outer')
+    if (ao) ao.style.display = ''
   }
 }
+function buildVendidoCard(a) {
+  _activosMap[a.id] = a
+  var alqEst  = +(a.alquiler_estimado || 0)
+  var alqFin  = +(a.alquiler_final || 0)
+  var rbEst   = calcRB(a.precio, alqEst)
+  var rbReal  = alqFin ? calcRB(a.precio, alqFin) : null
+  var sup = alqFin && alqEst && alqFin >= alqEst
+  var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
+  var titulo = a.titulo_pagina || (a.habitaciones ? 'PISO '+a.habitaciones+' HAB.' : 'ACTIVO')
+  var fotos = Array.isArray(a.fotos) ? a.fotos : []
+  var foto  = fotos[0] || null
+  var mapQuery = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(', ')
+  var imgHtml = foto
+    ? '<img src="'+foto+'" style="width:100%;height:100%;object-fit:cover;opacity:.9" loading="lazy"/>'
+    : '<div style="width:100%;height:100%;background:linear-gradient(135deg,#e8f0fe,#d2e3fc);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;pointer-events:none"><div style="font-size:24px">📍</div><div style="font-size:11px;font-weight:700;color:#1a73e8;text-align:center;padding:0 8px">'+(a.zona||a.ciudad||'')+'</div></div>'
+  return '<div class="vendido-card" onclick="abrirFicha(_activosMap[\''+a.id+'\'])" style="cursor:pointer">'
+    + '<div style="height:130px;overflow:hidden;border-radius:8px 8px 0 0;margin:-1px -1px 14px;position:relative">'
+    + imgHtml
+    + '<span style="position:absolute;top:10px;left:10px;background:rgba(17,19,24,.75);backdrop-filter:blur(6px);color:#9CA3AF;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:99px">✓ Cerrado</span>'
+    + (sup ? '<span style="position:absolute;top:10px;right:10px;background:#22C55E;color:white;font-size:9px;font-weight:700;padding:3px 8px;border-radius:99px">+' + (alqFin-alqEst) + '€</span>' : '')
+    + '</div>'
+    + '<div class="vendido-location">'+loc+'</div>'
+    + '<div class="vendido-title">'+titulo+'</div>'
+    + '<div class="vendido-result" style="grid-template-columns:1fr 1fr">'
+    +   '<div><div class="result-val '+(rbReal&&+rbReal>+rbEst?'positive':'')+'">'+( rbReal||rbEst||'—')+'%</div><div class="result-key">Rent. real'+(rbReal?'':' est.')+'</div></div>'
+    +   '<div><div class="result-val">'+fmtE(a.precio)+'</div><div class="result-key">Precio compra</div></div>'
+    +   '<div><div class="result-val '+(sup?'positive':alqFin&&alqFin<alqEst?'negative':'')+'">'+fmtE(alqFin)+'/mes'+(sup?' ↑':alqFin<alqEst?' ↓':'')+'</div><div class="result-key">Alquiler final</div></div>'
+    +   '<div><div class="result-val">'+fmtE(alqEst)+'/mes</div><div class="result-key">Alquiler estimado</div></div>'
+    + '</div>'
+    + (a.fecha_alquilado ? '<div style="font-size:11px;color:#9ca3af;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08)">📅 Alquilado: '+fmtDate(a.fecha_alquilado)+'</div>' : '')
+    + '</div>'
+}
+
 function renderVendidos(activos) {
   var grid = document.getElementById('grid-vendidos')
   if (!grid) return
-  var lista = activos.filter(function(a) { return a.status === 'alquilado' })
+  // Solo mostrar los que tienen alquiler_final
+  var lista = activos.filter(function(a) { return a.status === 'alquilado' && +a.alquiler_final > 0 })
   if (!lista.length) {
     var msg = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">Las operaciones cerradas aparecerán aquí con todos sus resultados.</div>'
     grid.innerHTML = msg
-    var g2 = document.getElementById('grid-vendidos-all')
-    if (g2) g2.innerHTML = msg
     return
   }
-  var cards = lista.map(function(a) {
-    var alqEst  = a.alquiler_estimado || 0
-    var alqReal = a.alquiler_conseguido
-    var rb      = calcRB(a.precio, alqEst)
-    var superado = alqReal && alqEst && +alqReal >= +alqEst
-    var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
-    var titulo = a.titulo_pagina || (a.habitaciones ? 'PISO '+a.habitaciones+' HAB.' : 'ACTIVO')
-    var fotos = Array.isArray(a.fotos) ? a.fotos : []
-    var foto  = fotos[0] || null
-    return '<div class="vendido-card">'
-      + (foto ? '<div style="height:120px;overflow:hidden;border-radius:8px 8px 0 0;margin:-1px -1px 12px"><img src="'+foto+'" style="width:100%;height:100%;object-fit:cover;opacity:.8" loading="lazy"/></div>' : '')
-      + '<span class="vendido-ribbon">Cerrado</span>'
-      + '<div class="vendido-location">'+loc+'</div>'
-      + '<div class="vendido-title">'+titulo+'</div>'
-      + '<div class="vendido-result">'
-      +   '<div><div class="result-val positive">'+(rb||'—')+'%</div><div class="result-key">Rent. bruta</div></div>'
-      +   '<div><div class="result-val">'+fmtE(a.precio)+'</div><div class="result-key">Precio compra</div></div>'
-      +   '<div><div class="result-val '+(alqReal?(superado?'positive':'negative'):'')+'">'
-      +     fmtE(alqReal||alqEst)+'/mes'+(alqReal?(superado?' ↑':' ↓'):'')
-      +   '</div><div class="result-key">Alquiler '+(alqReal?'conseguido':'estimado')+'</div></div>'
-      + '</div>'
-      + (a.fecha_alquilado ? '<div style="font-size:11px;color:#9ca3af;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06)">Alquilado: '+fmtDate(a.fecha_alquilado)+'</div>' : '')
-      + '</div>'
-  })
-  // Home: 3 más recientes
-  grid.innerHTML = cards.slice(0, 3).join('')
-  // Si la vista todas está activa, actualizarla también
+  grid.innerHTML = lista.slice(0, 3).map(buildVendidoCard).join('')
   if (document.getElementById('view-todas') && document.getElementById('view-todas').classList.contains('active')) renderTodas()
 }
 
@@ -2763,10 +2723,11 @@ function abrirFicha(a) {
   _fichaActivo = a
   var fotos = Array.isArray(a.fotos) ? a.fotos : []
   var alq = +(a.alquiler_estimado || 0)
+  var alqParaCalc = a.status === 'alquilado' && +a.alquiler_final > 0 ? +(a.alquiler_final) : alq
   var com = +(a.gastos_comunidad  || 0)
   var ibi = +(a.ibi || 0)
-  var rb  = calcRB(a.precio, alq)
-  var cf  = calcCF(alq, com, ibi)
+  var rb  = calcRB(a.precio, alqParaCalc)
+  var cf  = calcCF(alqParaCalc, com, ibi)
   var itp = +(a.itp || 8)
   var itpAmt  = Math.round(+a.precio * itp / 100)
   var puesta  = +(a.puesta_a_punto || 0)
@@ -3081,6 +3042,19 @@ function abrirFicha(a) {
   // ── KPIs sidebar (sin hipoteca de inicio) ──
   actualizarKPIsSidebar(cf, rb, alq, total, false, 0)
 
+  // Simulador hipoteca: ocultar para activos alquilados
+  var hipWrap = document.querySelector('#view-ficha [style*="SIMULADOR DE HIPOTECA"]') || document.querySelector('.calc-header')
+  var hipSection = document.getElementById('hip-activa') ? document.getElementById('hip-activa').closest('div[style*="border:1px solid"]') : null
+  // Hide entire hipoteca section for alquilado
+  var allSections = document.querySelectorAll('#view-ficha .content-main > div, #view-ficha > div > div > div > div > div')
+  document.querySelectorAll('#view-ficha div').forEach(function(d) {
+    if (d.querySelector && d.querySelector('#hip-activa')) {
+      d.style.display = a.status === 'alquilado' ? 'none' : ''
+    }
+  })
+  // Hide idealista button for alquilado
+  var ideBtn = document.getElementById('ficha-idealista-btn')
+  if (ideBtn) ideBtn.style.display = 'none'
   // Reset simulador hipoteca
   document.getElementById('hip-activa').checked = false
   document.getElementById('hip-controles').style.display = 'none'
@@ -3113,7 +3087,26 @@ function abrirFicha(a) {
     var papEst   = +(a.puesta_a_punto || 0)
     var sup2 = alqFin2 && alqEst2 && alqFin2 >= alqEst2
     document.getElementById('ficha-resultados').innerHTML =
-      '<div style="font-family:var(--font-display);font-size:18px;color:#22C55E;letter-spacing:.5px;margin-bottom:16px">✓ RESULTADOS REALES DE LA OPERACIÓN</div>'
+      (function() {
+        // Resumen narrativo
+        var diasReforma = null, diasAlquiler = null
+        if (a.fecha_notaria && a.fecha_puesta_a_punto) {
+          diasReforma = Math.round((new Date(a.fecha_puesta_a_punto) - new Date(a.fecha_notaria)) / 86400000)
+        } else if (a.fecha_notaria && a.fecha_busqueda_inquilino) {
+          diasReforma = Math.round((new Date(a.fecha_busqueda_inquilino) - new Date(a.fecha_notaria)) / 86400000)
+        }
+        if (a.fecha_busqueda_inquilino && a.fecha_alquilado) {
+          diasAlquiler = Math.round((new Date(a.fecha_alquilado) - new Date(a.fecha_busqueda_inquilino)) / 86400000)
+        }
+        var diff = alqFin2 - alqEst2
+        var resumenTexto = 'Este activo lo alquilamos a <strong style="color:#22C55E">'+fmtE(alqFin2)+'/mes</strong>'
+          + (diff > 0 ? ', <strong style="color:#22C55E">'+diff+'€ más</strong> que el precio anunciado' : diff < 0 ? ', '+Math.abs(diff)+'€ por debajo del anunciado' : ', exactamente al precio anunciado')
+          + ', dejando una rentabilidad bruta real del <strong style="color:#22C55E">'+(rbReal2||rbEst2)+'%</strong>.'
+          + (diasReforma !== null && diasReforma > 0 ? ' La puesta a punto duró <strong>'+diasReforma+' días</strong>.' : '')
+          + (diasAlquiler !== null ? ' Tardamos <strong>'+diasAlquiler+' días</strong> en alquilarlo desde que lo pusimos en el mercado.' : '')
+        return '<div style="font-family:var(--font-display);font-size:18px;color:#22C55E;letter-spacing:.5px;margin-bottom:12px">✓ RESULTADOS REALES DE LA OPERACIÓN</div>'
+          + '<div style="font-size:14px;color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:20px;padding:14px 16px;background:rgba(255,255,255,.04);border-radius:8px;border-left:3px solid #22C55E">' + resumenTexto + '</div>'
+      }())
       // KPI grid
       + '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px">'
       // Alquiler estimado vs final
@@ -3157,6 +3150,38 @@ function abrirFicha(a) {
             + '</div>'
         }).join('')
       + '</div>'
+      // Timeline visual
+      + (function() {
+          var hitos = [
+            {label:'Reserva',    fecha:a.fecha_reserva,           color:'#6366F1'},
+            {label:'Arras',      fecha:a.fecha_arras,             color:'#8B5CF6'},
+            {label:'Notaría',    fecha:a.fecha_notaria,           color:'#F59E0B'},
+            {label:'Reforma',    fecha:a.fecha_puesta_a_punto,    color:'#EC4899'},
+            {label:'Inquilino',  fecha:a.fecha_busqueda_inquilino,color:'#14B8A6'},
+            {label:'Alquilado',  fecha:a.fecha_alquilado,         color:'#22C55E'},
+          ].filter(function(h){ return h.fecha })
+          if (hitos.length < 2) return ''
+          var dates = hitos.map(function(h){ return new Date(h.fecha) })
+          var minD = Math.min.apply(null, dates), maxD = Math.max.apply(null, dates)
+          var range = maxD - minD || 1
+          var totalDias = Math.round(range / 86400000)
+          var W = 100 // percent
+          var html = '<div style="margin-top:20px">'
+            + '<div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">LÍNEA TEMPORAL — '+totalDias+' días total</div>'
+            + '<div style="position:relative;height:48px;margin:0 0 32px">'
+            // Base line
+            + '<div style="position:absolute;top:20px;left:0;right:0;height:2px;background:rgba(255,255,255,.1);border-radius:2px"></div>'
+          hitos.forEach(function(h) {
+            var pct = ((new Date(h.fecha) - minD) / range * 96).toFixed(1)
+            html += '<div style="position:absolute;left:'+pct+'%;top:0;transform:translateX(-50%);text-align:center;min-width:2px">'
+              + '<div style="width:12px;height:12px;background:'+h.color+';border-radius:50%;border:2px solid rgba(17,19,24,.8);margin:0 auto 6px;box-shadow:0 0 6px '+h.color+'66"></div>'
+              + '<div style="font-size:9px;font-weight:700;color:'+h.color+';white-space:nowrap;position:absolute;top:20px;left:50%;transform:translateX(-50%)">'+h.label+'</div>'
+              + '<div style="font-size:8px;color:rgba(255,255,255,.3);white-space:nowrap;position:absolute;top:32px;left:50%;transform:translateX(-50%)">'+ new Date(h.fecha).toLocaleDateString('es-ES',{day:'2-digit',month:'short'}) +'</div>'
+              + '</div>'
+          })
+          html += '</div></div>'
+          return html
+        }())
   } else {
     resultadosWrap.style.display = 'none'
   }
