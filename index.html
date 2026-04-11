@@ -2409,7 +2409,7 @@ function buildCard(a) {
   var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
   var titulo = a.titulo_pagina || ((a.habitaciones ? a.habitaciones+' HAB.' : '') + (a.zona ? '<br>'+a.zona.toUpperCase() : ''))
   var gastosAnual = (+com*12 + +ibi)
-  var mapQuery = [a.direccion, a.ciudad, a.provincia, 'España'].filter(Boolean).join(', ')
+  var mapQuery = [a.direccion, a.zona, a.ciudad, a.provincia, 'España'].filter(Boolean).join(', ')
   var mapUrl = mapQuery ? 'https://maps.google.com/maps?q='+encodeURIComponent(mapQuery)+'&output=embed&z=15' : null
   var imgHtml = foto
     ? '<img src="'+foto+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" />'
@@ -2858,7 +2858,7 @@ function abrirFicha(a) {
   gallery.innerHTML = ''
   gallery.appendChild(img0)
   } else {
-    var mapQ = [a.direccion, a.ciudad, a.provincia, 'España'].filter(Boolean).join(', ')
+    var mapQ = [a.direccion, a.zona, a.ciudad, a.provincia, 'España'].filter(Boolean).join(', ')
     if (mapQ) {
       gallery.innerHTML = '<iframe src="https://maps.google.com/maps?q='+encodeURIComponent(mapQ)+'&output=embed&z=15" style="width:100%;height:100%;border:none" loading="lazy"></iframe>'
         + '<div style="position:absolute;bottom:14px;left:40px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);color:white;font-size:11px;font-weight:600;padding:5px 12px;border-radius:7px">📍 Sin fotos — mostrando ubicación</div>'
