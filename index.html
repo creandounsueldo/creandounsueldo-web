@@ -3106,7 +3106,7 @@ function abrirFicha(a) {
     var rw = document.createElement('div')
     rw.id = 'ficha-resultados-wrap'
     rw.style.cssText = 'display:none;margin-bottom:20px'
-    rw.innerHTML = '<div style="background:rgba(34,197,94,.04);border:1.5px solid rgba(34,197,94,.2);border-radius:12px;padding:24px"><div id="ficha-resultados"></div></div>'
+    rw.innerHTML = '<div style="background:white;border:1.5px solid var(--gray3);border-radius:12px;padding:24px"><div id="ficha-resultados"></div></div>'
     var econEl2 = document.getElementById('ficha-economia')
     if (econEl2 && econEl2.parentNode) econEl2.parentNode.insertBefore(rw, econEl2.nextSibling)
     resultadosWrap = rw
@@ -3120,102 +3120,101 @@ function abrirFicha(a) {
     var papFin   = a.puesta_a_punto_final != null ? +a.puesta_a_punto_final : null
     var papEst   = +(a.puesta_a_punto || 0)
     var sup2 = alqFin2 && alqEst2 && alqFin2 >= alqEst2
-    document.getElementById('ficha-resultados').innerHTML =
-      (function() {
-        // Resumen narrativo
+    document.getElementById('ficha-resultados').innerHTML = (function() {
         var diasReforma = null, diasAlquiler = null
-        if (a.fecha_notaria && a.fecha_puesta_a_punto) {
+        if (a.fecha_notaria && a.fecha_puesta_a_punto)
           diasReforma = Math.round((new Date(a.fecha_puesta_a_punto) - new Date(a.fecha_notaria)) / 86400000)
-        } else if (a.fecha_notaria && a.fecha_busqueda_inquilino) {
+        else if (a.fecha_notaria && a.fecha_busqueda_inquilino)
           diasReforma = Math.round((new Date(a.fecha_busqueda_inquilino) - new Date(a.fecha_notaria)) / 86400000)
-        }
-        if (a.fecha_busqueda_inquilino && a.fecha_alquilado) {
+        if (a.fecha_busqueda_inquilino && a.fecha_alquilado)
           diasAlquiler = Math.round((new Date(a.fecha_alquilado) - new Date(a.fecha_busqueda_inquilino)) / 86400000)
-        }
         var diff = alqFin2 - alqEst2
-        var resumenTexto = 'Este activo lo alquilamos a <strong style="color:#22C55E">'+fmtE(alqFin2)+'/mes</strong>'
-          + (diff > 0 ? ', <strong style="color:#22C55E">'+diff+'€ más</strong> que el precio anunciado' : diff < 0 ? ', '+Math.abs(diff)+'€ por debajo del anunciado' : ', exactamente al precio anunciado')
-          + ', dejando una rentabilidad bruta real del <strong style="color:#22C55E">'+(rbReal2||rbEst2)+'%</strong>.'
-          + (diasReforma !== null && diasReforma > 0 ? ' La puesta a punto duró <strong>'+diasReforma+' días</strong>.' : '')
-          + (diasAlquiler !== null ? ' Tardamos <strong>'+diasAlquiler+' días</strong> en alquilarlo desde que lo pusimos en el mercado.' : '')
-        return '<div style="font-family:var(--font-display);font-size:18px;color:#22C55E;letter-spacing:.5px;margin-bottom:12px">✓ RESULTADOS REALES DE LA OPERACIÓN</div>'
-          + '<div style="font-size:14px;color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:20px;padding:14px 16px;background:rgba(255,255,255,.04);border-radius:8px;border-left:3px solid #22C55E">' + resumenTexto + '</div>'
-      }())
-      // KPI grid
-      + '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px">'
-      // Alquiler estimado vs final
-      + '<div style="background:rgba(255,255,255,.06);border:1px solid rgba(34,197,94,.15);border-radius:8px;padding:14px">'
-      +   '<div style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Alquiler estimado</div>'
-      +   '<div style="font-family:var(--font-display);font-size:26px;color:rgba(255,255,255,.7)">'+(alqEst2?fmtE(alqEst2)+'/mes':'—')+'</div>'
-      + '</div>'
-      + '<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);border-radius:8px;padding:14px">'
-      +   '<div style="font-size:10px;color:rgba(34,197,94,.7);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Alquiler final conseguido</div>'
-      +   '<div style="font-family:var(--font-display);font-size:26px;color:#22C55E">'+(alqFin2?fmtE(alqFin2)+'/mes'+(sup2?' ↑':''):'—')+'</div>'
-      +   (alqFin2 && alqEst2 && alqFin2 !== alqEst2 ? '<div style="font-size:11px;color:#22C55E;margin-top:4px;font-weight:600">'+(sup2?'+'+fmtE(alqFin2-alqEst2)+' sobre estimado':'−'+fmtE(alqEst2-alqFin2)+' bajo estimado')+'</div>' : '')
-      + '</div>'
-      // Rentabilidad estimada vs real
-      + '<div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:14px">'
-      +   '<div style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Rent. bruta estimada</div>'
-      +   '<div style="font-family:var(--font-display);font-size:26px;color:rgba(255,255,255,.7)">'+(rbEst2?rbEst2+'%':'—')+'</div>'
-      + '</div>'
-      + '<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);border-radius:8px;padding:14px">'
-      +   '<div style="font-size:10px;color:rgba(34,197,94,.7);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Rent. bruta real</div>'
-      +   '<div style="font-family:var(--font-display);font-size:26px;color:#22C55E">'+(rbReal2?rbReal2+'%':'—')+'</div>'
-      + '</div>'
-      + '</div>'
-      // Puesta a punto
-      + (papFin !== null || papEst > 0 ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">'
-      +   '<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">Puesta a punto estimada</div><div style="font-family:var(--font-display);font-size:22px;color:rgba(255,255,255,.6)">'+(papEst?fmtE(papEst):'0€')+'</div></div>'
-      +   '<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px"><div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px">Puesta a punto final</div><div style="font-family:var(--font-display);font-size:22px;color:rgba(255,255,255,.6)">'+(papFin!==null?fmtE(papFin):'—')+'</div></div>'
-      + '</div>' : '')
-      // Fechas hitos
-      + '<div style="display:flex;flex-direction:column;gap:0;border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden">'
-      + [
-          ['Reserva', a.fecha_reserva],
-          ['Arras', a.fecha_arras],
-          ['Notaría', a.fecha_notaria],
-          ['Puesta a punto', a.fecha_puesta_a_punto],
-          ['Búsq. inquilino', a.fecha_busqueda_inquilino],
-          ['Alquilado', a.fecha_alquilado],
-        ].filter(function(h){ return h[1] }).map(function(h) {
-          return '<div style="display:flex;justify-content:space-between;padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px">'
-            + '<span style="color:rgba(255,255,255,.4)">'+h[0]+'</span>'
-            + '<span style="color:rgba(255,255,255,.8);font-weight:600">'+fmtDate(h[1])+'</span>'
+        var resumen = 'Este activo lo alquilamos a <strong style="color:#16A34A">'+fmtE(alqFin2)+'/mes</strong>'
+          + (diff > 0 ? ', <strong style="color:#16A34A">'+diff+'€ más</strong> que el precio anunciado'
+             : diff < 0 ? ', <strong style="color:#DC2626">'+Math.abs(diff)+'€ por debajo</strong> del anunciado'
+             : ', exactamente al precio anunciado')
+          + ', dejando una rentabilidad bruta real del <strong style="color:#16A34A">'+(rbReal2||rbEst2)+'%</strong>.'
+          + (diasReforma > 0 ? ' Puesta a punto: <strong>'+diasReforma+' días</strong>.' : '')
+          + (diasAlquiler !== null ? ' Alquilado en <strong>'+diasAlquiler+' días</strong> desde su publicación.' : '')
+
+        // KPI boxes
+        var kpis = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">'
+          + '<div style="background:var(--gray5);border:1px solid var(--gray3);border-radius:8px;padding:14px">'
+          +   '<div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Alquiler estimado</div>'
+          +   '<div style="font-family:var(--font-display);font-size:26px;color:var(--gray)">'+(alqEst2?fmtE(alqEst2)+'/mes':'—')+'</div>'
+          + '</div>'
+          + '<div style="background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:8px;padding:14px">'
+          +   '<div style="font-size:10px;color:#15803D;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Alquiler final conseguido</div>'
+          +   '<div style="font-family:var(--font-display);font-size:26px;color:#16A34A">'+(alqFin2?fmtE(alqFin2)+'/mes'+(sup2?' ↑':alqFin2<alqEst2?' ↓':''):'—')+'</div>'
+          +   (diff !== 0 ? '<div style="font-size:11px;color:'+(diff>0?'#16A34A':'#DC2626')+';margin-top:4px;font-weight:600">'+(diff>0?'+'+diff+'€ sobre estimado':diff+'€ bajo estimado')+'</div>' : '')
+          + '</div>'
+          + '<div style="background:var(--gray5);border:1px solid var(--gray3);border-radius:8px;padding:14px">'
+          +   '<div style="font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Rent. bruta estimada</div>'
+          +   '<div style="font-family:var(--font-display);font-size:26px;color:var(--gray)">'+(rbEst2?rbEst2+'%':'—')+'</div>'
+          + '</div>'
+          + '<div style="background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:8px;padding:14px">'
+          +   '<div style="font-size:10px;color:#15803D;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Rent. bruta real</div>'
+          +   '<div style="font-family:var(--font-display);font-size:26px;color:#16A34A">'+(rbReal2?rbReal2+'%':'—')+'</div>'
+          + '</div>'
+          + '</div>'
+
+        // Puesta a punto row
+        var papRow = (papFin !== null || papEst > 0)
+          ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">'
+            + '<div style="background:var(--gray5);border:1px solid var(--gray3);border-radius:8px;padding:12px"><div style="font-size:10px;color:var(--gray2);margin-bottom:4px">Puesta a punto estimada</div><div style="font-family:var(--font-display);font-size:22px;color:var(--dark)">'+(papEst?fmtE(papEst):'0€')+'</div></div>'
+            + '<div style="background:var(--gray5);border:1px solid var(--gray3);border-radius:8px;padding:12px"><div style="font-size:10px;color:var(--gray2);margin-bottom:4px">Puesta a punto final</div><div style="font-family:var(--font-display);font-size:22px;color:var(--dark)">'+(papFin!==null?fmtE(papFin):'—')+'</div></div>'
             + '</div>'
-        }).join('')
-      + '</div>'
-      // Timeline visual
-      + (function() {
-          var hitos = [
-            {label:'Reserva',    fecha:a.fecha_reserva,           color:'#6366F1'},
-            {label:'Arras',      fecha:a.fecha_arras,             color:'#8B5CF6'},
-            {label:'Notaría',    fecha:a.fecha_notaria,           color:'#F59E0B'},
-            {label:'Reforma',    fecha:a.fecha_puesta_a_punto,    color:'#EC4899'},
-            {label:'Inquilino',  fecha:a.fecha_busqueda_inquilino,color:'#14B8A6'},
-            {label:'Alquilado',  fecha:a.fecha_alquilado,         color:'#22C55E'},
-          ].filter(function(h){ return h.fecha })
-          if (hitos.length < 2) return ''
-          var dates = hitos.map(function(h){ return new Date(h.fecha) })
-          var minD = Math.min.apply(null, dates), maxD = Math.max.apply(null, dates)
-          var range = maxD - minD || 1
-          var totalDias = Math.round(range / 86400000)
-          var W = 100 // percent
-          var html = '<div style="margin-top:20px">'
-            + '<div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">LÍNEA TEMPORAL — '+totalDias+' días total</div>'
-            + '<div style="position:relative;height:48px;margin:0 0 32px">'
-            // Base line
-            + '<div style="position:absolute;top:20px;left:0;right:0;height:2px;background:rgba(255,255,255,.1);border-radius:2px"></div>'
-          hitos.forEach(function(h) {
-            var pct = ((new Date(h.fecha) - minD) / range * 96).toFixed(1)
-            html += '<div style="position:absolute;left:'+pct+'%;top:0;transform:translateX(-50%);text-align:center;min-width:2px">'
-              + '<div style="width:12px;height:12px;background:'+h.color+';border-radius:50%;border:2px solid rgba(17,19,24,.8);margin:0 auto 6px;box-shadow:0 0 6px '+h.color+'66"></div>'
-              + '<div style="font-size:9px;font-weight:700;color:'+h.color+';white-space:nowrap;position:absolute;top:20px;left:50%;transform:translateX(-50%)">'+h.label+'</div>'
-              + '<div style="font-size:8px;color:rgba(255,255,255,.3);white-space:nowrap;position:absolute;top:32px;left:50%;transform:translateX(-50%)">'+ new Date(h.fecha).toLocaleDateString('es-ES',{day:'2-digit',month:'short'}) +'</div>'
+          : ''
+
+        // Fechas hitos
+        var hitos = [
+          ['Reserva', a.fecha_reserva],['Arras', a.fecha_arras],['Notaría', a.fecha_notaria],
+          ['Puesta a punto', a.fecha_puesta_a_punto],['Búsq. inquilino', a.fecha_busqueda_inquilino],
+          ['Alquilado', a.fecha_alquilado]
+        ].filter(function(h){ return h[1] })
+        var fechasHtml = hitos.length ? '<div style="border:1px solid var(--gray3);border-radius:8px;overflow:hidden;margin-bottom:20px">'
+          + hitos.map(function(h,i) {
+              return '<div style="display:flex;justify-content:space-between;padding:9px 14px;background:'+(i%2?'var(--gray5)':'white')+';border-bottom:1px solid var(--gray3);font-size:13px">'
+                + '<span style="color:var(--gray)">'+h[0]+'</span>'
+                + '<span style="font-weight:600;color:var(--dark)">'+fmtDate(h[1])+'</span>'
+                + '</div>'
+            }).join('')
+          + '</div>' : ''
+
+        // Timeline
+        var hitosPts = [
+          {label:'Reserva',fecha:a.fecha_reserva,color:'#6366F1'},
+          {label:'Arras',fecha:a.fecha_arras,color:'#8B5CF6'},
+          {label:'Notaría',fecha:a.fecha_notaria,color:'#F59E0B'},
+          {label:'Reforma',fecha:a.fecha_puesta_a_punto,color:'#EC4899'},
+          {label:'Inquilino',fecha:a.fecha_busqueda_inquilino,color:'#14B8A6'},
+          {label:'Alquilado',fecha:a.fecha_alquilado,color:'#22C55E'}
+        ].filter(function(h){ return h.fecha })
+        var timelineHtml = ''
+        if (hitosPts.length >= 2) {
+          var dts = hitosPts.map(function(h){ return +new Date(h.fecha) })
+          var mn = Math.min.apply(null,dts), mx = Math.max.apply(null,dts), rng = mx-mn||1
+          var totalDias = Math.round(rng/86400000)
+          timelineHtml = '<div style="background:var(--dark);border-radius:10px;padding:20px 24px 36px;margin-top:4px">'
+            + '<div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:20px">LÍNEA TEMPORAL — '+totalDias+' días desde reserva hasta alquiler</div>'
+            + '<div style="position:relative;height:50px">'
+            + '<div style="position:absolute;top:10px;left:0;right:0;height:2px;background:rgba(255,255,255,.12);border-radius:2px"></div>'
+          hitosPts.forEach(function(h) {
+            var pct = ((+new Date(h.fecha)-mn)/rng*92).toFixed(1)
+            timelineHtml += '<div style="position:absolute;left:'+pct+'%;top:0;transform:translateX(-50%)">'
+              + '<div style="width:12px;height:12px;background:'+h.color+';border-radius:50%;border:2px solid #111318;margin:0 auto 4px;box-shadow:0 0 8px '+h.color+'88"></div>'
+              + '<div style="font-size:9px;font-weight:700;color:'+h.color+';white-space:nowrap;text-align:center;position:absolute;top:18px;left:50%;transform:translateX(-50%)">'+h.label+'</div>'
+              + '<div style="font-size:8px;color:rgba(255,255,255,.35);white-space:nowrap;text-align:center;position:absolute;top:30px;left:50%;transform:translateX(-50%)">'+new Date(h.fecha).toLocaleDateString('es-ES',{day:'2-digit',month:'short'})+'</div>'
               + '</div>'
           })
-          html += '</div></div>'
-          return html
-        }())
+          timelineHtml += '</div></div>'
+        }
+
+        return '<div style="font-family:var(--font-display);font-size:15px;color:#16A34A;letter-spacing:.5px;margin-bottom:10px">✓ RESULTADOS REALES DE LA OPERACIÓN</div>'
+          + '<div style="font-size:14px;color:var(--gray);line-height:1.8;margin-bottom:18px;padding:12px 16px;background:#F0FDF4;border-radius:8px;border-left:3px solid #22C55E">' + resumen + '</div>'
+          + kpis + papRow + fechasHtml + timelineHtml
+      }())
+
   } else {
     resultadosWrap.style.display = 'none'
   }
