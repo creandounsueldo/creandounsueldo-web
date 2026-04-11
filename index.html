@@ -2840,6 +2840,9 @@ document.addEventListener('keydown', function(e) {
 })
 
 function abrirFicha(a) {
+  // Hide reservar button immediately - shown only if disponible below
+  var _navCta = document.getElementById('navCtaActivo')
+  if (_navCta) _navCta.style.display = 'none'
   _fichaActivo = a
   var fotos = Array.isArray(a.fotos) ? a.fotos : []
   var alq = +(a.alquiler_estimado || 0)
