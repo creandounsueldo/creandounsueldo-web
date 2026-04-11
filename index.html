@@ -531,7 +531,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
   </ul>
 
   <!-- Nav ficha -->
-  <button class="nav-back" id="navBack" style="display:none" onclick="showView('home', true);scrollToSection('activos')">← Volver a activos</button>
+  <button class="nav-back" id="navBack" style="display:none" onclick="volverDeficha()">← Volver a activos</button>
 
   <div class="nav-right">
     <button class="nav-cta" id="navCtaHome" onclick="showView('home', true);scrollToSection('activos')">Ver oportunidades →</button>
@@ -725,7 +725,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
       </div>
 
       <!-- Cards ocultas -->
-      <div id="blog-extra" style="display:none;contents">
+      <div id="blog-extra" style="display:none">
       <div class="blog-card">
         <div style="padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)"><span class="blog-category">Alquiler</span></div>
         <div class="blog-body">
@@ -2648,11 +2648,21 @@ function abrirActivo(a) {
 }
 
 // ─── FAQ TOGGLE ───────────────────────────────────────────────────────────────
+function toggleBlogTodo() {
+  var extra = document.getElementById('blog-extra')
+  var btn = document.getElementById('blog-ver-todo-btn')
+  if (!extra || !btn) return
+  var hidden = extra.style.display === 'none' || extra.style.display === ''
+  extra.style.display = hidden ? 'contents' : 'none'
+  btn.textContent = hidden ? 'Ver menos ←' : 'Ver todos →'
+}
+
 function toggleFaqAll() {
   var hidden = document.querySelectorAll('.faq-hidden')
   var btn = document.getElementById('faq-toggle-btn')
-  var isHidden = hidden[0].style.display === 'none'
-  hidden.forEach(function(el) { el.style.display = isHidden ? '' : 'none' })
+  if (!hidden.length || !btn) return
+  var isHidden = hidden[0].style.display === 'none' || hidden[0].style.display === ''
+  hidden.forEach(function(el) { el.style.display = isHidden ? 'block' : 'none' })
   btn.textContent = isHidden ? 'Ver menos −' : 'Ver todas las preguntas +'
 }
 
@@ -3589,7 +3599,15 @@ showView = function(id, noScroll) {
   // other views update URL themselves
 }
 
+var _fichaOrigen = null  // 'todas-disponible' | 'todas-reservado' | 'todas-finalizado' | 'home'
+
 abrirFicha = function(a) {
+  // Remember where we came from
+  var currentPath = window.location.pathname
+  if (currentPath.startsWith('/activos/cerrados')) _fichaOrigen = 'cerrados'
+  else if (currentPath.startsWith('/activos/reservados')) _fichaOrigen = 'reservados'
+  else if (currentPath.startsWith('/activos')) _fichaOrigen = 'disponibles'
+  else _fichaOrigen = 'home'
   navigateTo('/activo/' + a.id)
   _abrirFicha(a)
 }
@@ -3604,6 +3622,20 @@ filtrarTodas = function(filtro) {
   var pathMap = {disponible: '/activos', reservado: '/activos/reservados', finalizado: '/activos/cerrados'}
   navigateTo(pathMap[filtro] || '/activos', true)
   _filtrarTodas(filtro)
+}
+function volverDeficha() {
+  if (_fichaOrigen === 'cerrados') {
+    abrirTodas('finalizado')
+  } else if (_fichaOrigen === 'reservados') {
+    abrirTodas('reservado')
+  } else if (_fichaOrigen === 'disponibles') {
+    abrirTodas('disponible')
+  } else {
+    // came from home — go back to home scrolled to activos
+    _showView('home', true)
+    navigateTo('/', true)
+    scrollToSection('activos')
+  }
 }
 // ═════════════════════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', function() {
