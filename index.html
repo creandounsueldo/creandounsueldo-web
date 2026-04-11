@@ -67,6 +67,8 @@ h2{font-family:var(--font-display);font-size:clamp(40px,5vw,64px);line-height:.9
 h1{font-family:var(--font-display);font-size:clamp(64px,8.5vw,116px);line-height:.9;letter-spacing:1px;color:var(--white);margin-bottom:24px}
 .hero-sub{font-size:17px;color:rgba(255,255,255,.72);line-height:1.7;font-weight:300;margin-bottom:40px;max-width:460px}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px;justify-content:center}
+.btn-primary{background:var(--red);color:white;padding:14px 30px;border-radius:var(--radius);font-family:var(--font-body);font-size:14px;font-weight:700;border:none;cursor:pointer;transition:opacity .2s;letter-spacing:.3px}
+.btn-primary:hover{opacity:.88}
 .btn-white{background:var(--white);color:var(--red);padding:14px 30px;border-radius:var(--radius);font-weight:700;font-size:13px;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:none;font-family:var(--font-body)}
 .btn-white:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.18)}
 .btn-white-ghost{background:transparent;color:var(--white);padding:14px 28px;border:1.5px solid rgba(255,255,255,.35);border-radius:var(--radius);font-weight:500;font-size:13px;text-decoration:none;transition:all .2s;cursor:pointer;font-family:var(--font-body)}
@@ -616,7 +618,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
   <!-- ACTIVOS -->
   <section id="activos" style="padding:48px 52px 56px">
     <div class="section-header-row">
-      <div><div class="section-eyebrow">Activos disponibles</div><h2>OPORTUNIDADES<br>ACTIVAS</h2></div>
+      <div><div class="section-eyebrow">Activos disponibles</div><h2>OPORTUNIDADES ACTIVAS</h2></div>
       <button class="ver-todas-btn" onclick="abrirTodas('disponible')">Ver todas →</button>
     </div>
     <div class="scroll-hint-mobile">Desliza para ver más →</div>
@@ -660,28 +662,27 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
 
   <!-- COLABORA -->
-  <section id="colabora" style="padding:56px 52px;background:var(--dark);position:relative;overflow:hidden">
-    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none"></div>
+  <section id="colabora" style="padding:56px 52px;background:white;position:relative;overflow:hidden;border-top:1px solid var(--gray3)">
     <div style="position:relative;max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
       <div>
-        <div class="section-eyebrow" style="color:rgba(227,30,36,.8)">Colabora con nosotros</div>
-        <h2 style="color:white;font-size:clamp(36px,4vw,54px)">¿TIENES UN PISO<br>INTERESANTE?</h2>
-        <p style="color:rgba(255,255,255,.55);font-size:15px;line-height:1.75;margin-bottom:28px">Tanto si eres particular como agencia, llega a más de 2.000 inversores activos. Cerramos la mayoría de operaciones en menos de 24 horas. Un solo interlocutor, sin complicaciones, sin esperas.</p>
+        <div class="section-eyebrow">Colabora con nosotros</div>
+        <h2 style="color:var(--dark);font-size:clamp(36px,4vw,54px)">¿TIENES UN PISO INTERESANTE?</h2>
+        <p style="color:var(--gray);font-size:15px;line-height:1.75;margin-bottom:28px">Tanto si eres particular como agencia, llega a más de 2.000 inversores activos. Cerramos la mayoría de operaciones en menos de 24 horas. Un solo interlocutor, sin complicaciones, sin esperas.</p>
         <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px">
           <div style="display:flex;gap:14px;align-items:flex-start">
             <div style="width:32px;height:32px;background:rgba(227,30,36,.12);border:1px solid rgba(227,30,36,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px">⚡</div>
-            <div><div style="font-size:14px;font-weight:700;color:white;margin-bottom:2px">24h de media hasta cerrar</div><div style="font-size:13px;color:rgba(255,255,255,.45)">La mayoría de nuestros activos se reservan el mismo día que se publican</div></div>
+            <div><div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:2px">24h de media hasta cerrar</div><div style="font-size:13px;color:var(--gray)">La mayoría de nuestros activos se reservan el mismo día que se publican</div></div>
           </div>
           <div style="display:flex;gap:14px;align-items:flex-start">
             <div style="width:32px;height:32px;background:rgba(227,30,36,.12);border:1px solid rgba(227,30,36,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px">🎯</div>
-            <div><div style="font-size:14px;font-weight:700;color:white;margin-bottom:2px">Un solo interlocutor</div><div style="font-size:13px;color:rgba(255,255,255,.45)">Nosotros gestionamos todo el proceso de principio a fin</div></div>
+            <div><div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:2px">Un solo interlocutor</div><div style="font-size:13px;color:var(--gray)">Nosotros gestionamos todo el proceso de principio a fin</div></div>
           </div>
           <div style="display:flex;gap:14px;align-items:flex-start">
             <div style="width:32px;height:32px;background:rgba(227,30,36,.12);border:1px solid rgba(227,30,36,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px">👥</div>
-            <div><div style="font-size:14px;font-weight:700;color:white;margin-bottom:2px">+2.000 inversores activos</div><div style="font-size:13px;color:rgba(255,255,255,.45)">Comunidad de inversores listos para comprar, sin pérdida de tiempo</div></div>
+            <div><div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:2px">+2.000 inversores activos</div><div style="font-size:13px;color:var(--gray)">Comunidad de inversores listos para comprar, sin pérdida de tiempo</div></div>
           </div>
         </div>
-        <button onclick="abrirColabora()" class="btn-white" style="font-size:14px;padding:14px 32px">Proponer un activo →</button>
+        <button onclick="abrirColabora()" class="btn-primary" style="font-size:14px;padding:14px 32px">Proponer un activo →</button>
       </div>
       <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:28px">
         <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px">Así de simple</div>
@@ -710,7 +711,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
   <!-- PROCESO -->
   <section id="proceso" style="padding:56px 52px">
     <div class="section-eyebrow" style="color:rgba(227,30,36,.9)">Cómo funciona</div>
-    <h2 style="color:white">EL PROCESO,<br>PASO A PASO</h2>
+    <h2 style="color:white">EL PROCESO, PASO A PASO</h2>
     <p class="section-desc" style="color:rgba(255,255,255,.6)">Desde que reservas hasta que cobras el primer mes. Sin ambigüedades.</p>
     <div class="scroll-hint-mobile">Desliza para ver los pasos →</div>
     <div class="proceso-grid">
@@ -727,7 +728,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <div class="section-header-row">
       <div>
         <div class="section-eyebrow">Track record</div>
-        <h2>RESULTADOS<br>REALES</h2>
+        <h2>RESULTADOS REALES</h2>
         <p class="section-desc">Operaciones cerradas con sus rentabilidades finales. Sin editar. Sin redondear.</p>
       </div>
       <button class="ver-todas-btn" onclick="abrirTodas('finalizado')">Ver todas →</button>
@@ -746,7 +747,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:16px">
       <div>
         <div class="section-eyebrow" style="color:rgba(227,30,36,.9)">Noticias &amp; Análisis</div>
-        <h2 style="color:white;margin-bottom:6px">EL MERCADO<br>A TU FAVOR</h2>
+        <h2 style="color:white;margin-bottom:6px">EL MERCADO A TU FAVOR</h2>
         <p style="color:rgba(255,255,255,.55);font-size:14px;margin:0">Datos reales y noticias recientes sobre rentabilidad inmobiliaria en España.</p>
       </div>
       <button id="blog-ver-todo-btn" onclick="abrirBlog()" style="background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-family:var(--font-body);font-size:13px;font-weight:600;padding:9px 20px;border-radius:var(--radius);cursor:pointer;transition:all .2s;white-space:nowrap">Ver todos →</button>
@@ -893,7 +894,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
   <section id="reviews" style="padding:56px 52px;background:var(--gray5)">
     <div style="text-align:center;margin-bottom:40px">
       <div class="section-eyebrow" style="justify-content:center;display:flex">Opiniones reales</div>
-      <h2>LO QUE DICEN<br>NUESTROS INVERSORES</h2>
+      <h2>LO QUE DICEN NUESTROS INVERSORES</h2>
       <p class="section-desc">Personas reales, operaciones reales, resultados reales.</p>
     </div>
     <div style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:8px;max-width:1200px;margin:0 auto">
@@ -971,7 +972,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
   <!-- FAQ -->
   <section id="faq" style="padding:56px 52px;text-align:center">
     <div class="section-eyebrow" style="justify-content:center">Preguntas frecuentes</div>
-    <h2>TODO LO QUE<br>NECESITAS SABER</h2>
+    <h2>TODO LO QUE NECESITAS SABER</h2>
     <p class="section-desc">Las dudas más habituales. Si necesitas más, escríbenos.</p>
     <div class="faq-list" id="faq-short">
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto dinero necesito para empezar? <span class="faq-icon">+</span></button><div class="faq-a">Trabajamos operaciones desde 38.000 € de precio de compra. Con financiación, la entrada suele rondar el 20–30% más gastos.</div></div>
@@ -1138,7 +1139,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
       <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none"></div>
       <div style="position:relative;max-width:1200px">
         <div style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.5);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px" id="todas-eyebrow">Todas las oportunidades</div>
-        <h2 style="font-family:var(--font-display);font-size:clamp(40px,5vw,64px);line-height:.95;color:white;margin-bottom:16px;letter-spacing:.5px" id="todas-titulo">OPORTUNIDADES<br>ACTIVAS</h2>
+        <h2 style="font-family:var(--font-display);font-size:clamp(40px,5vw,64px);line-height:.95;color:white;margin-bottom:16px;letter-spacing:.5px" id="todas-titulo">OPORTUNIDADES ACTIVAS</h2>
 
         <!-- Filtros -->
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
@@ -1846,7 +1847,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
       <div style="position:absolute;right:-20px;top:-20px;font-family:var(--font-display);font-size:140px;color:rgba(255,255,255,.06);line-height:1;pointer-events:none">$</div>
       <button onclick="closeLeadPopup()" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,.2);border:none;color:white;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1">×</button>
       <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px">Acceso anticipado</div>
-      <div style="font-family:var(--font-display);font-size:30px;color:white;line-height:1;letter-spacing:.5px;margin-bottom:6px">LOS MEJORES PISOS<br>SE VAN EN HORAS.</div>
+      <div style="font-family:var(--font-display);font-size:30px;color:white;line-height:1;letter-spacing:.5px;margin-bottom:6px">LOS MEJORES PISOS SE VAN EN HORAS.</div>
       <div style="font-size:13px;color:rgba(255,255,255,.75);line-height:1.5">Recibe cada activo antes de que llegue a la web. Las mejores operaciones se reservan el mismo día.</div>
     </div>
     <!-- Body -->
@@ -2470,7 +2471,7 @@ function abrirTodas(filtro) {
   var titulo = document.getElementById('todas-titulo')
   var eyebrow = document.getElementById('todas-eyebrow')
   if (_filtroTodas === 'disponible') {
-    if (titulo) titulo.innerHTML = 'OPORTUNIDADES<br>ACTIVAS'
+    if (titulo) titulo.innerHTML = 'OPORTUNIDADES ACTIVAS'
     if (eyebrow) eyebrow.textContent = 'Activos disponibles ahora mismo'
   } else if (_filtroTodas === 'reservado') {
     if (titulo) titulo.innerHTML = 'ACTIVOS<br>RESERVADOS'
@@ -2518,7 +2519,7 @@ function renderTodas() {
         + '<div style="position:absolute;right:-20px;bottom:-30px;font-family:var(--font-display);font-size:280px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none">0</div>'
         + '<div style="position:relative">'
         +   '<div style="font-family:var(--font-mono);font-size:10px;color:rgba(227,30,36,.8);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px">Ahora mismo</div>'
-        +   '<div style="font-family:var(--font-display);font-size:clamp(28px,3vw,40px);color:white;line-height:1;margin-bottom:14px">SIN ACTIVOS<br>DISPONIBLES.</div>'
+        +   '<div style="font-family:var(--font-display);font-size:clamp(28px,3vw,40px);color:white;line-height:1;margin-bottom:14px">SIN ACTIVOS DISPONIBLES.</div>'
         +   '<p style="font-size:14px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:20px">Los mejores pisos se reservan el mismo día que los publicamos. Déjanos tu email y serás el primero en saberlo.</p>'
         +   '<div style="display:flex;gap:8px;flex-wrap:wrap">'
         +     '<button onclick="filtrarTodas(\'finalizado\')" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-family:var(--font-body);font-size:12px;font-weight:600;padding:9px 16px;border-radius:var(--radius);cursor:pointer">Ver operaciones cerradas →</button>'
@@ -2572,7 +2573,7 @@ function renderActivos(activos) {
       + '<div style="position:absolute;right:-20px;bottom:-30px;font-family:var(--font-display);font-size:280px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none">0</div>'
       + '<div style="position:relative">'
       +   '<div style="font-family:var(--font-mono);font-size:10px;color:rgba(227,30,36,.8);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px">Ahora mismo</div>'
-      +   '<div style="font-family:var(--font-display);font-size:clamp(28px,3vw,40px);color:white;line-height:1;margin-bottom:14px">SIN ACTIVOS<br>DISPONIBLES.</div>'
+      +   '<div style="font-family:var(--font-display);font-size:clamp(28px,3vw,40px);color:white;line-height:1;margin-bottom:14px">SIN ACTIVOS DISPONIBLES.</div>'
       +   '<p style="font-size:14px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:20px">Los mejores pisos se reservan el mismo día que los publicamos. Déjanos tu email y serás el primero en saberlo.</p>'
       +   '<div style="display:flex;gap:8px;flex-wrap:wrap">'
       +     '<button onclick="abrirTodas(\'finalizado\')" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-family:var(--font-body);font-size:12px;font-weight:600;padding:9px 16px;border-radius:var(--radius);cursor:pointer;transition:all .2s" onmouseover="this.style.background=\'rgba(255,255,255,.1)\'" onmouseout="this.style.background=\'rgba(255,255,255,.06)\'">Ver las 67 operaciones cerradas →</button>'
@@ -3664,12 +3665,12 @@ function abrirFaq() {
 // ═══ COLABORA ════════════════════════════════════════════════════════════════
 function abrirColabora() {
   colaboraStep(1)
-  document.getElementById('colaboraOverlay').classList.add('active')
+  document.getElementById('colaboraOverlay').classList.add('open')
   document.body.style.overflow = 'hidden'
 }
 
 function closeColabora() {
-  document.getElementById('colaboraOverlay').classList.remove('active')
+  document.getElementById('colaboraOverlay').classList.remove('open')
   document.body.style.overflow = ''
 }
 
@@ -4033,7 +4034,7 @@ if (document.readyState !== 'loading') {
   <div style="padding-top:68px;min-height:100vh;background:#0d1117">
     <div style="background:#111318;padding:48px 52px 40px;border-bottom:1px solid rgba(255,255,255,.07)">
       <div style="font-family:var(--font-mono);font-size:11px;color:rgba(227,30,36,.8);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px">Noticias & Análisis</div>
-      <h2 style="font-family:var(--font-display);font-size:clamp(36px,5vw,64px);line-height:.95;color:white;letter-spacing:.5px">EL MERCADO<br>A TU FAVOR</h2>
+      <h2 style="font-family:var(--font-display);font-size:clamp(36px,5vw,64px);line-height:.95;color:white;letter-spacing:.5px">EL MERCADO A TU FAVOR</h2>
     </div>
     <div style="padding:40px 52px;max-width:1400px">
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px" id="blog-all-grid">
@@ -4047,7 +4048,7 @@ if (document.readyState !== 'loading') {
   <div style="padding-top:68px;min-height:100vh;background:white">
     <div style="background:var(--dark);padding:48px 52px 40px">
       <div style="font-family:var(--font-mono);font-size:11px;color:rgba(227,30,36,.8);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px">Preguntas frecuentes</div>
-      <h2 style="font-family:var(--font-display);font-size:clamp(36px,5vw,64px);line-height:.95;color:white;letter-spacing:.5px">TODO LO QUE<br>NECESITAS SABER</h2>
+      <h2 style="font-family:var(--font-display);font-size:clamp(36px,5vw,64px);line-height:.95;color:white;letter-spacing:.5px">TODO LO QUE NECESITAS SABER</h2>
     </div>
     <div style="padding:40px 52px;max-width:920px;margin:0 auto">
       <div class="faq-list" id="faq-page-list"></div>
