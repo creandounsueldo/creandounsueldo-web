@@ -3138,7 +3138,12 @@ function abrirFicha(a) {
   }
   document.getElementById('ficha-honor-sidebar').textContent = a.honorarios ? '+ '+fmtE(a.honorarios)+' honorarios + IVA' : ''
   document.getElementById('ficha-reservar-btn').onclick = function() { openContactoActivo(a) }
-  document.getElementById('ficha-reservar-btn').style.display = a.status === 'disponible' ? '' : 'none'
+  // Show/hide ALL reservar buttons based on status
+  var isDisponible = a.status === 'disponible'
+  document.getElementById('ficha-reservar-btn').style.display = isDisponible ? '' : 'none'
+  document.querySelectorAll('.btn-reservar').forEach(function(btn){ btn.style.display = isDisponible ? '' : 'none' })
+  var navCta = document.getElementById('navCtaActivo')
+  if (navCta) navCta.style.display = isDisponible ? 'block' : 'none'
 
   // ── Economía sidebar ──
   var econ = [
