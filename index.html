@@ -496,6 +496,9 @@ footer{background:var(--dark);padding:56px 52px 32px}
   #view-blog > div > div:last-child{padding:20px 16px!important}
   #view-faq > div > div:last-child{padding:20px 16px!important}
   .faq-list{grid-template-columns:1fr!important}
+  /* Colabora section mobile */
+  #colabora{padding:40px 16px!important}
+  #colabora > div > div{grid-template-columns:1fr!important;gap:32px!important}
   /* Empty state mobile */
   div[style*="grid-template-columns:1fr 1fr;gap:48px"]{grid-template-columns:1fr!important;gap:24px!important;padding:28px 20px!important}
   /* Vendido cards result grid mobile */
@@ -654,6 +657,55 @@ footer{background:var(--dark);padding:56px 52px 32px}
       </div>
     </div>
   </div>
+
+
+  <!-- COLABORA -->
+  <section id="colabora" style="padding:56px 52px;background:var(--dark);position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none"></div>
+    <div style="position:relative;max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+      <div>
+        <div class="section-eyebrow" style="color:rgba(227,30,36,.8)">Colabora con nosotros</div>
+        <h2 style="color:white;font-size:clamp(36px,4vw,54px)">¿TIENES UN PISO<br>INTERESANTE?</h2>
+        <p style="color:rgba(255,255,255,.55);font-size:15px;line-height:1.75;margin-bottom:28px">Tanto si eres particular como agencia, llega a más de 2.000 inversores activos. Cerramos la mayoría de operaciones en menos de 24 horas. Un solo interlocutor, sin complicaciones, sin esperas.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px">
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:32px;height:32px;background:rgba(227,30,36,.12);border:1px solid rgba(227,30,36,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px">⚡</div>
+            <div><div style="font-size:14px;font-weight:700;color:white;margin-bottom:2px">24h de media hasta cerrar</div><div style="font-size:13px;color:rgba(255,255,255,.45)">La mayoría de nuestros activos se reservan el mismo día que se publican</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:32px;height:32px;background:rgba(227,30,36,.12);border:1px solid rgba(227,30,36,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px">🎯</div>
+            <div><div style="font-size:14px;font-weight:700;color:white;margin-bottom:2px">Un solo interlocutor</div><div style="font-size:13px;color:rgba(255,255,255,.45)">Nosotros gestionamos todo el proceso de principio a fin</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:32px;height:32px;background:rgba(227,30,36,.12);border:1px solid rgba(227,30,36,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px">👥</div>
+            <div><div style="font-size:14px;font-weight:700;color:white;margin-bottom:2px">+2.000 inversores activos</div><div style="font-size:13px;color:rgba(255,255,255,.45)">Comunidad de inversores listos para comprar, sin pérdida de tiempo</div></div>
+          </div>
+        </div>
+        <button onclick="abrirColabora()" class="btn-white" style="font-size:14px;padding:14px 32px">Proponer un activo →</button>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:28px">
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px">Así de simple</div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="font-family:var(--font-display);font-size:28px;color:var(--red);line-height:1;width:28px;flex-shrink:0">1</div>
+            <div><div style="font-size:13px;font-weight:700;color:white;margin-bottom:2px">Rellenas el formulario</div><div style="font-size:12px;color:rgba(255,255,255,.4)">Datos del piso + fotos. 5 minutos.</div></div>
+          </div>
+          <div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="font-family:var(--font-display);font-size:28px;color:var(--red);line-height:1;width:28px;flex-shrink:0">2</div>
+            <div><div style="font-size:13px;font-weight:700;color:white;margin-bottom:2px">Nosotros lo revisamos</div><div style="font-size:12px;color:rgba(255,255,255,.4)">En menos de 24h te confirmamos si encaja con nuestra comunidad.</div></div>
+          </div>
+          <div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="font-family:var(--font-display);font-size:28px;color:var(--red);line-height:1;width:28px;flex-shrink:0">3</div>
+            <div><div style="font-size:13px;font-weight:700;color:white;margin-bottom:2px">Se publica para inversores</div><div style="font-size:12px;color:rgba(255,255,255,.4)">Tu piso llega a +2.000 inversores activos al instante.</div></div>
+          </div>
+          <div style="display:flex;gap:16px;padding:14px 0">
+            <div style="font-family:var(--font-display);font-size:28px;color:var(--red);line-height:1;width:28px;flex-shrink:0">4</div>
+            <div><div style="font-size:13px;font-weight:700;color:white;margin-bottom:2px">Cerramos en 24h</div><div style="font-size:12px;color:rgba(255,255,255,.4)">Oferta de compra, gestión completa. Sin complicaciones.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- PROCESO -->
   <section id="proceso" style="padding:56px 52px">
@@ -3609,6 +3661,199 @@ function abrirFaq() {
   scrollToTop()
 }
 
+// ═══ COLABORA ════════════════════════════════════════════════════════════════
+function abrirColabora() {
+  colaboraStep(1)
+  document.getElementById('colaboraOverlay').classList.add('active')
+  document.body.style.overflow = 'hidden'
+}
+
+function closeColabora() {
+  document.getElementById('colaboraOverlay').classList.remove('active')
+  document.body.style.overflow = ''
+}
+
+function closeColaboraOutside(e) {
+  if (e.target.id === 'colaboraOverlay') closeColabora()
+}
+
+function colaboraStep(n) {
+  document.querySelectorAll('.m-panel').forEach(function(p) { p.classList.remove('active') })
+  var panel = document.getElementById('cp' + n)
+  if (panel) panel.classList.add('active')
+  var pct = {1: '33%', 2: '66%', 3: '100%'}
+  var prog = document.getElementById('colaboraProgress')
+  if (prog) prog.style.width = pct[n] || '33%'
+  // Validate before advancing
+  if (n === 2 && !validarColaboraStep1()) return
+  if (n === 3 && !validarColaboraStep2()) return
+}
+
+function validarColaboraStep1() {
+  var required = {
+    'c-comunidad': 'Comunidad autónoma',
+    'c-provincia': 'Provincia',
+    'c-ciudad': 'Municipio',
+    'c-direccion': 'Dirección',
+    'c-precio': 'Precio',
+    'c-habitaciones': 'Habitaciones',
+    'c-banos': 'Baños',
+    'c-m2': 'Metros cuadrados'
+  }
+  for (var id in required) {
+    var el = document.getElementById(id)
+    if (!el || !el.value.trim()) {
+      alert('Por favor, completa el campo: ' + required[id])
+      if (el) el.focus()
+      return false
+    }
+  }
+  return true
+}
+
+function validarColaboraStep2() {
+  var checks = ['c-check-cargas', 'c-check-comunidad', 'c-check-ibi', 'c-check-ocupado']
+  for (var i = 0; i < checks.length; i++) {
+    var el = document.getElementById(checks[i])
+    if (!el || !el.checked) {
+      alert('Debes confirmar todas las condiciones legales para continuar.')
+      return false
+    }
+  }
+  if (!document.getElementById('c-ibi').value) { alert('Por favor indica el IBI anual'); return false }
+  if (!document.getElementById('c-comunidad-gastos').value) { alert('Por favor indica los gastos de comunidad'); return false }
+  return true
+}
+
+function previewFotosColabora(input) {
+  var preview = document.getElementById('c-fotos-preview')
+  preview.innerHTML = ''
+  Array.from(input.files).forEach(function(file) {
+    var reader = new FileReader()
+    reader.onload = function(e) {
+      var img = document.createElement('img')
+      img.src = e.target.result
+      img.style.cssText = 'width:72px;height:72px;object-fit:cover;border-radius:6px;border:1.5px solid var(--gray3)'
+      preview.appendChild(img)
+    }
+    reader.readAsDataURL(file)
+  })
+  var area = document.getElementById('c-fotos-area')
+  if (area) area.style.border = '2px solid var(--red)'
+}
+
+async function uploadFotosColabora(activoId) {
+  var input = document.getElementById('c-fotos-input')
+  if (!input || !input.files.length) return []
+  var urls = []
+  for (var i = 0; i < input.files.length; i++) {
+    var file = input.files[i]
+    var ext = file.name.split('.').pop()
+    var path = 'colabora/' + activoId + '/' + Date.now() + '_' + i + '.' + ext
+    var res = await fetch(SUPA_URL + '/storage/v1/object/activos-fotos/' + path, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': file.type,
+        'x-upsert': 'true'
+      },
+      body: file
+    })
+    if (res.ok) {
+      urls.push(SUPA_URL + '/storage/v1/object/public/activos-fotos/' + path)
+    }
+  }
+  return urls
+}
+
+async function enviarColabora() {
+  // Validate step 3
+  var nombre = document.getElementById('c-contacto-nombre').value.trim()
+  var tel    = document.getElementById('c-contacto-tel').value.trim()
+  var email  = document.getElementById('c-contacto-email').value.trim()
+  var priv   = document.getElementById('c-privacidad').checked
+  var fotos  = document.getElementById('c-fotos-input').files
+
+  if (!nombre) { alert('Indica tu nombre'); return }
+  if (!tel)    { alert('Indica tu teléfono'); return }
+  if (!email || !email.includes('@')) { alert('Indica un email válido'); return }
+  if (!priv)   { alert('Debes aceptar la política de privacidad'); return }
+  if (fotos.length < 1) { alert('Sube al menos 1 foto del inmueble'); return }
+
+  var btn = document.getElementById('c-submit-btn')
+  btn.textContent = 'Enviando...'
+  btn.disabled = true
+
+  try {
+    // Generate temp ID for storage path
+    var tempId = 'col-' + Date.now()
+    var fotoUrls = await uploadFotosColabora(tempId)
+
+    var activo = {
+      status:              'en_revision',
+      comunidad_autonoma:  document.getElementById('c-comunidad').value,
+      provincia:           document.getElementById('c-provincia').value.trim(),
+      ciudad:              document.getElementById('c-ciudad').value.trim(),
+      zona:                document.getElementById('c-zona').value.trim() || null,
+      direccion:           document.getElementById('c-direccion').value.trim(),
+      precio:              +document.getElementById('c-precio').value || null,
+      precio_negociable:   document.getElementById('c-negociable').checked,
+      habitaciones:        +document.getElementById('c-habitaciones').value || null,
+      banos:               +document.getElementById('c-banos').value || null,
+      m2:                  +document.getElementById('c-m2').value || null,
+      planta:              document.getElementById('c-planta').value.trim() || null,
+      ascensor:            document.getElementById('c-ascensor').value || null,
+      catastro:            document.getElementById('c-catastro').value.trim() || null,
+      alquiler_estimado:   +document.getElementById('c-alquiler').value || null,
+      ibi:                 +document.getElementById('c-ibi').value || null,
+      gastos_comunidad:    +document.getElementById('c-comunidad-gastos').value || null,
+      estado_inmueble:     document.getElementById('c-estado-inmueble').value || null,
+      notas:               document.getElementById('c-notas').value.trim() || null,
+      fotos:               fotoUrls,
+      colaborador_nombre:  nombre,
+      colaborador_tel:     tel,
+      colaborador_email:   email,
+      colaborador_tipo:    document.getElementById('c-tipo').value,
+    }
+
+    var res = await fetch(SUPA_URL + '/rest/v1/activos', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify(activo)
+    })
+
+    if (!res.ok) throw new Error('Error al guardar')
+
+    // Confirmation email via mailto (fallback until email service configured)
+    var subject = encodeURIComponent('Hemos recibido tu propuesta - CreandoUnSueldo')
+    var body = encodeURIComponent(
+      'Hola ' + nombre + ',\n\n' +
+      'Hemos recibido correctamente la información del inmueble en ' + activo.ciudad + '.\n\n' +
+      'Nuestro equipo lo revisará en menos de 24 horas y te contactará en el teléfono ' + tel + ' o por este email.\n\n' +
+      'Gracias por confiar en CreandoUnSueldo.\n\nEl equipo de CreandoUnSueldo'
+    )
+    // Open confirmation email (silent fallback)
+    try { window.open('mailto:' + email + '?subject=' + subject + '&body=' + body, '_blank') } catch(e) {}
+
+    // Show success
+    document.querySelectorAll('.m-panel').forEach(function(p) { p.classList.remove('active') })
+    document.getElementById('cp-ok').classList.add('active')
+    document.getElementById('colaboraProgress').style.width = '100%'
+
+  } catch(e) {
+    alert('Error al enviar. Inténtalo de nuevo o escríbenos directamente.')
+    btn.textContent = 'Enviar propuesta →'
+    btn.disabled = false
+  }
+}
+// ═════════════════════════════════════════════════════════════════════════════
+
 // ═══ ROUTER ══════════════════════════════════════════════════════════════════
 function navigateTo(path, replaceState) {
   if (replaceState) {
@@ -3806,6 +4051,235 @@ if (document.readyState !== 'loading') {
     </div>
     <div style="padding:40px 52px;max-width:920px;margin:0 auto">
       <div class="faq-list" id="faq-page-list"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ MODAL COLABORA ═══════════════════ -->
+<div class="modal-overlay" id="colaboraOverlay" onclick="closeColaboraOutside(event)">
+  <div class="modal" style="max-width:680px;width:100%">
+    <div class="modal-header">
+      <button class="modal-header-close" onclick="closeColabora()">×</button>
+      <div class="modal-title">PROPONER UN ACTIVO</div>
+      <div class="modal-subtitle">Revisamos en menos de 24h · Sin compromiso</div>
+      <div class="modal-progress"><div class="modal-progress-fill" id="colaboraProgress" style="width:33%"></div></div>
+    </div>
+    <div class="modal-body" style="max-height:75vh;overflow-y:auto">
+
+      <!-- PASO 1: Datos del piso -->
+      <div id="cp1" class="m-panel active">
+        <div class="step-heading">Datos del inmueble</div>
+        <div class="step-sub">Necesitamos toda la información para poder publicarlo sin tener que pedirte nada más.</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Comunidad autónoma *</label>
+            <select class="form-select" id="c-comunidad">
+              <option value="">Selecciona...</option>
+              <option>Principado de Asturias</option><option>Galicia</option><option>Castilla y León</option>
+              <option>Castilla-La Mancha</option><option>Comunidad de Madrid</option><option>Cataluña</option>
+              <option>Andalucía</option><option>Comunitat Valenciana</option><option>Región de Murcia</option>
+              <option>Extremadura</option><option>Aragón</option><option>País Vasco</option>
+              <option>Comunidad Foral de Navarra</option><option>La Rioja</option><option>Cantabria</option>
+              <option>Illes Balears</option><option>Canarias</option><option>Ceuta</option><option>Melilla</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Provincia *</label>
+            <input class="form-input" id="c-provincia" type="text" placeholder="Ej: Asturias">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Municipio / Ciudad *</label>
+            <input class="form-input" id="c-ciudad" type="text" placeholder="Ej: Oviedo">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Barrio / Zona</label>
+            <input class="form-input" id="c-zona" type="text" placeholder="Ej: Centro">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Dirección completa *</label>
+          <input class="form-input" id="c-direccion" type="text" placeholder="Calle, número, piso, letra">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Precio de venta (€) *</label>
+            <input class="form-input" id="c-precio" type="number" placeholder="Ej: 45000">
+          </div>
+          <div class="form-group" style="display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:2px">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--dark);margin-bottom:0">
+              <input type="checkbox" id="c-negociable" style="accent-color:var(--red);width:15px;height:15px">
+              Precio negociable
+            </label>
+            <div style="font-size:11px;color:var(--gray2);margin-top:4px">Marcar si hay margen de negociación</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Habitaciones *</label>
+            <input class="form-input" id="c-habitaciones" type="number" placeholder="Ej: 3">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Baños *</label>
+            <input class="form-input" id="c-banos" type="number" placeholder="Ej: 1">
+          </div>
+          <div class="form-group">
+            <label class="form-label">m² útiles *</label>
+            <input class="form-input" id="c-m2" type="number" placeholder="Ej: 65">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Planta</label>
+            <input class="form-input" id="c-planta" type="text" placeholder="Ej: 2ª">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ascensor</label>
+            <select class="form-select" id="c-ascensor">
+              <option value="">—</option><option value="Sí">Sí</option><option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Referencia catastral</label>
+            <input class="form-input" id="c-catastro" type="text" placeholder="Opcional">
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-back" onclick="closeColabora()">Cancelar</button>
+          <button class="btn-next" onclick="colaboraStep(2)">Continuar →</button>
+        </div>
+      </div>
+
+      <!-- PASO 2: Gastos y estado legal -->
+      <div id="cp2" class="m-panel">
+        <div class="step-heading">Gastos y situación legal</div>
+        <div class="step-sub">Esta información es clave para que el inversor pueda calcular la rentabilidad sin sorpresas.</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Alquiler estimado (€/mes)</label>
+            <input class="form-input" id="c-alquiler" type="number" placeholder="Ej: 450">
+          </div>
+          <div class="form-group">
+            <label class="form-label">IBI (€/año) *</label>
+            <input class="form-input" id="c-ibi" type="number" placeholder="Ej: 180">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Comunidad (€/mes) *</label>
+            <input class="form-input" id="c-comunidad-gastos" type="number" placeholder="Ej: 35">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Estado del inmueble</label>
+          <select class="form-select" id="c-estado-inmueble">
+            <option value="">Selecciona...</option>
+            <option>Listo para entrar a vivir</option>
+            <option>Necesita pequeña reforma (pintura, limpieza)</option>
+            <option>Necesita reforma parcial</option>
+            <option>Necesita reforma integral</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Descripción / notas adicionales</label>
+          <textarea class="form-input" id="c-notas" rows="3" placeholder="Estado actual, características especiales, motivo de venta..."></textarea>
+        </div>
+
+        <div style="background:var(--gray5);border:1px solid var(--gray3);border-radius:10px;padding:16px;margin-bottom:4px">
+          <div style="font-size:12px;font-weight:700;color:var(--dark);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px">Confirmaciones legales *</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+              <input type="checkbox" id="c-check-cargas" style="accent-color:var(--red);margin-top:2px;flex-shrink:0">
+              <span style="font-size:13px;color:var(--dark);line-height:1.5">El inmueble está libre de cargas, hipotecas y embargos, o cualquier carga existente será cancelada antes de la transmisión.</span>
+            </label>
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+              <input type="checkbox" id="c-check-comunidad" style="accent-color:var(--red);margin-top:2px;flex-shrink:0">
+              <span style="font-size:13px;color:var(--dark);line-height:1.5">Los pagos de la comunidad de propietarios están al corriente.</span>
+            </label>
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+              <input type="checkbox" id="c-check-ibi" style="accent-color:var(--red);margin-top:2px;flex-shrink:0">
+              <span style="font-size:13px;color:var(--dark);line-height:1.5">El IBI está al corriente de pago.</span>
+            </label>
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+              <input type="checkbox" id="c-check-ocupado" style="accent-color:var(--red);margin-top:2px;flex-shrink:0">
+              <span style="font-size:13px;color:var(--dark);line-height:1.5">El inmueble está libre de ocupantes (no está alquilado ni ocupado).</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-back" onclick="colaboraStep(1)">← Volver</button>
+          <button class="btn-next" onclick="colaboraStep(3)">Continuar →</button>
+        </div>
+      </div>
+
+      <!-- PASO 3: Fotos y contacto -->
+      <div id="cp3" class="m-panel">
+        <div class="step-heading">Fotos y tus datos</div>
+        <div class="step-sub">Sube al menos 3 fotos del inmueble. Más fotos = más rápido cerramos.</div>
+
+        <div class="form-group">
+          <label class="form-label">Fotos del inmueble *</label>
+          <div class="upload-area" id="c-fotos-area" onclick="document.getElementById('c-fotos-input').click()" style="min-height:100px">
+            <div style="font-size:28px;margin-bottom:8px">📸</div>
+            <div class="upload-text">Haz clic o arrastra las fotos aquí · <span>Seleccionar</span></div>
+            <div style="font-size:11px;color:var(--gray2);margin-top:4px">JPG, PNG · Máx 10MB por foto · Mínimo 3 fotos</div>
+            <div id="c-fotos-preview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;justify-content:center"></div>
+          </div>
+          <input type="file" id="c-fotos-input" multiple accept="image/*" style="display:none" onchange="previewFotosColabora(this)">
+        </div>
+
+        <div style="border-top:1px solid var(--gray3);margin:20px 0 16px"></div>
+        <div class="step-heading" style="font-size:16px">Tus datos de contacto</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nombre *</label>
+            <input class="form-input" id="c-contacto-nombre" type="text" placeholder="Tu nombre">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Teléfono *</label>
+            <input class="form-input" id="c-contacto-tel" type="tel" placeholder="+34 6XX XXX XXX">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Email *</label>
+            <input class="form-input" id="c-contacto-email" type="email" placeholder="tu@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">¿Eres?</label>
+            <select class="form-select" id="c-tipo">
+              <option value="particular">Particular</option>
+              <option value="agencia">Agencia inmobiliaria</option>
+              <option value="promotor">Promotor / Inversor</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+        </div>
+        <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;margin-bottom:4px">
+          <input type="checkbox" id="c-privacidad" style="margin-top:2px;accent-color:var(--red);flex-shrink:0">
+          <span style="font-size:11px;color:var(--gray2);line-height:1.5">Acepto la <a href="#" onclick="showPrivacidad('privacidad');return false" style="color:var(--red)">política de privacidad</a> y que CreandoUnSueldo contacte conmigo para valorar el inmueble.</span>
+        </label>
+
+        <div class="modal-actions">
+          <button class="btn-back" onclick="colaboraStep(2)">← Volver</button>
+          <button class="btn-next" id="c-submit-btn" onclick="enviarColabora()">Enviar propuesta →</button>
+        </div>
+      </div>
+
+      <!-- ÉXITO -->
+      <div id="cp-ok" class="m-panel" style="text-align:center;padding:40px 20px">
+        <div style="font-size:56px;margin-bottom:16px">🎉</div>
+        <div style="font-family:var(--font-display);font-size:28px;color:var(--dark);margin-bottom:8px;letter-spacing:.5px">¡RECIBIDO!</div>
+        <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:8px">Hemos recibido la información del inmueble. Revisaremos tu propuesta y nos ponemos en contacto en menos de <strong>24 horas</strong>.</p>
+        <p style="font-size:13px;color:var(--gray2);margin-bottom:24px">Recibirás una confirmación en tu email en unos minutos.</p>
+        <button class="btn-primary-form" onclick="closeColabora()">Cerrar</button>
+      </div>
+
     </div>
   </div>
 </div>
