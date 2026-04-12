@@ -3922,6 +3922,19 @@ async function confirmarBaja() {
 }
 // ═════════════════════════════════════════════════════════════════════════════
 
+// ═══ LISTA ═══════════════════════════════════════════════════════════════════
+async function submitLista() {
+  var email = document.getElementById('lista-email').value.trim()
+  if (!email || !email.includes('@')) { alert('Introduce un email válido'); return }
+  var consent = document.getElementById('lista-consent')
+  if (consent && !consent.checked) { alert('Debes aceptar la política de privacidad.'); return }
+  await guardarLead(email, 'lista')
+  document.getElementById('lista-form-wrap').style.display = 'none'
+  document.getElementById('lista-ok').style.display = ''
+  try { localStorage.setItem('leadSeen', '1') } catch(e) {}
+}
+// ═════════════════════════════════════════════════════════════════════════════
+
 // ═══ ROUTER ══════════════════════════════════════════════════════════════════
 function navigateTo(path, replaceState) {
   if (replaceState) {
@@ -3970,6 +3983,12 @@ function handleRoute(path) {
     // Queue: load activos first then open ficha
     _pendingRoute = {type: 'ficha', id: id}
     loadActivos()
+    return
+  }
+  if (path === '/lista') {
+    showView('lista')
+    navigateTo('/lista', true)
+    scrollToTop()
     return
   }
   if (path === '/unsubscribe' || path.startsWith('/unsubscribe')) {
@@ -4043,7 +4062,7 @@ function updateNavForView(id) {
     if (navHome) navHome.style.display = 'none'
     if (navCtaHome) navCtaHome.style.display = 'none'
     if (navCtaActivo) navCtaActivo.style.display = 'none'
-  } else if (id === 'unsubscribe') {
+  } else if (id === 'unsubscribe' || id === 'lista') {
     navBack.style.display = 'none'
     if (navHome) navHome.style.display = 'none'
     if (navCtaHome) navCtaHome.style.display = 'none'
@@ -4418,6 +4437,44 @@ if (document.readyState !== 'loading') {
         <div style="font-size:40px;margin-bottom:16px">⚠️</div>
         <p style="font-size:14px;color:var(--gray)">No encontramos ese email en nuestra lista.</p>
         <button onclick="_showView('home');navigateTo('/',true)" style="margin-top:16px;padding:11px 24px;background:var(--dark);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:600;cursor:pointer">Volver al inicio</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ VIEW: LISTA ═══════════════════ -->
+<div class="view" id="view-lista">
+  <div style="min-height:100vh;background:#111318;display:flex;align-items:center;justify-content:center;padding:24px">
+    <div style="max-width:480px;width:100%;text-align:center">
+      <div style="font-family:var(--font-mono);font-size:11px;color:rgba(227,30,36,.8);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px">Acceso anticipado</div>
+      <h1 style="font-family:var(--font-display);font-size:clamp(32px,6vw,52px);color:white;line-height:1;margin-bottom:16px;letter-spacing:.5px">LOS MEJORES PISOS SE VAN EN HORAS.</h1>
+      <p style="font-size:15px;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:32px">Déjanos tu email y serás el primero en recibir cada nuevo activo antes de que llegue a la web pública. Sin spam. Solo oportunidades reales.</p>
+
+      <div id="lista-form-wrap">
+        <div style="display:flex;gap:10px;margin-bottom:12px">
+          <input id="lista-email" type="email" placeholder="tu@email.com"
+            style="flex:1;padding:14px 18px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:white;font-family:var(--font-body);font-size:15px;outline:none"
+            onfocus="this.style.borderColor='rgba(227,30,36,.6)'"
+            onblur="this.style.borderColor='rgba(255,255,255,.12)'"
+            onkeydown="if(event.key==='Enter')submitLista()">
+          <button onclick="submitLista()" style="padding:14px 24px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap">Unirme →</button>
+        </div>
+        <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;text-align:left">
+          <input type="checkbox" id="lista-consent" style="margin-top:3px;accent-color:var(--red);flex-shrink:0">
+          <span style="font-size:12px;color:rgba(255,255,255,.35);line-height:1.5">Acepto recibir comunicaciones sobre activos disponibles. <a href="#" onclick="showPrivacidad('privacidad');return false" style="color:rgba(255,255,255,.4);text-decoration:underline">Privacidad</a>.</span>
+        </label>
+      </div>
+
+      <div id="lista-ok" style="display:none">
+        <div style="font-family:var(--font-display);font-size:36px;color:white;margin-bottom:8px">🎉 ¡YA ESTÁS DENTRO!</div>
+        <p style="font-size:14px;color:rgba(255,255,255,.5)">Te avisamos en cuanto publiquemos el próximo activo.</p>
+        <a href="https://www.creandounsueldo.com/activos/cerrados" style="display:inline-block;margin-top:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:11px 22px;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:600;text-decoration:none">Ver nuestras 67 operaciones cerradas →</a>
+      </div>
+
+      <div style="margin-top:40px;display:flex;gap:16px;justify-content:center">
+        <a href="https://t.me/creandounsueldo" target="_blank" style="display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.4);font-size:12px;text-decoration:none">📢 Telegram</a>
+        <span style="color:rgba(255,255,255,.15)">·</span>
+        <a href="https://www.creandounsueldo.com" style="color:rgba(255,255,255,.4);font-size:12px;text-decoration:none">creandounsueldo.com</a>
       </div>
     </div>
   </div>
