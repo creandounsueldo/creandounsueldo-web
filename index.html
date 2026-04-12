@@ -3796,7 +3796,8 @@ async function enviarColabora() {
   try {
     // Generate temp ID for storage path
     var tempId = 'col-' + Date.now()
-    var fotoUrls = await uploadFotosColabora(tempId)
+    var fotoUrls = []
+    try { fotoUrls = await uploadFotosColabora(tempId) } catch(uploadErr) { console.warn('Fotos no subidas:', uploadErr) }
 
     var activo = {
       status:              'en_revision',
@@ -3818,6 +3819,9 @@ async function enviarColabora() {
       gastos_comunidad:    +document.getElementById('c-comunidad-gastos').value || null,
       estado_inmueble:     document.getElementById('c-estado-inmueble').value || null,
       notas:               document.getElementById('c-notas').value.trim() || null,
+      puesta_a_punto:      +document.getElementById('c-puesta-a-punto').value || null,
+      gestiona_alquiler:   document.getElementById('c-gestiona-alquiler').checked,
+      algo_mas:            document.getElementById('c-algo-mas').value.trim() || null,
       fotos:               fotoUrls,
       colaborador_nombre:  nombre,
       colaborador_tel:     tel,
@@ -4201,9 +4205,26 @@ if (document.readyState !== 'loading') {
             <option>Necesita reforma integral</option>
           </select>
         </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Puesta a punto estimada (€)</label>
+            <input class="form-input" id="c-puesta-a-punto" type="number" placeholder="Ej: 2000">
+          </div>
+          <div class="form-group" style="display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:2px">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--dark)">
+              <input type="checkbox" id="c-gestiona-alquiler" style="accent-color:var(--red);width:15px;height:15px">
+              ¿Os encargáis vosotros del alquiler?
+            </label>
+            <div style="font-size:11px;color:var(--gray2);margin-top:4px">Búsqueda de inquilino incluida</div>
+          </div>
+        </div>
         <div class="form-group">
           <label class="form-label">Descripción / notas adicionales</label>
-          <textarea class="form-input" id="c-notas" rows="3" placeholder="Estado actual, características especiales, motivo de venta..."></textarea>
+          <textarea class="form-input" id="c-notas" rows="2" placeholder="Estado actual, características especiales, motivo de venta..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">¿Algo más que deberíamos saber?</label>
+          <textarea class="form-input" id="c-algo-mas" rows="2" placeholder="Cualquier detalle relevante que no hayas podido indicar antes..."></textarea>
         </div>
 
         <div style="background:var(--gray5);border:1px solid var(--gray3);border-radius:10px;padding:16px;margin-bottom:4px">
