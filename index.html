@@ -2360,6 +2360,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ═══ SUPABASE — ACTIVOS EN TIEMPO REAL ═══════════════════════════════════════
 var SUPA_URL  = 'https://vblyzzhixeoamcstnsqk.supabase.co'
+var EDGE_URL  = SUPA_URL + '/functions/v1'
 var SUPA_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZibHl6emhpeGVvYW1jc3Ruc3FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NTk5MzUsImV4cCI6MjA5MTIzNTkzNX0.wRTF5dEeI2TkNfUm_xnWJCglE6SWfW_0kri0avfOVRI'
 
 var _activoSeleccionado = null
@@ -3808,7 +3809,7 @@ async function enviarColabora() {
       precio:              +document.getElementById('c-precio').value || null,
       habitaciones:        +document.getElementById('c-habitaciones').value || null,
       m2:                  +document.getElementById('c-m2').value || null,
-      alquiler_estimado:   +document.getElementById('c-alquiler').value || null,
+      alquiler_estimado:   +document.getElementById('c-alquiler').value || 0,
       ibi:                 +document.getElementById('c-ibi').value || null,
       gastos_comunidad:    +document.getElementById('c-comunidad-gastos').value || null,
       puesta_a_punto:      +document.getElementById('c-puesta-a-punto').value || null,
