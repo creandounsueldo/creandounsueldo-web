@@ -3758,7 +3758,7 @@ async function uploadFotosColabora(activoId) {
     var file = input.files[i]
     var ext = file.name.split('.').pop()
     var path = 'colabora/' + activoId + '/' + Date.now() + '_' + i + '.' + ext
-    var res = await fetch(SUPA_URL + '/storage/v1/object/activos-fotos/' + path, {
+    var res = await fetch(SUPA_URL + '/storage/v1/object/fotos-activos/' + path, {
       method: 'POST',
       headers: {
         'apikey': SUPA_KEY,
@@ -3769,7 +3769,7 @@ async function uploadFotosColabora(activoId) {
       body: file
     })
     if (res.ok) {
-      urls.push(SUPA_URL + '/storage/v1/object/public/activos-fotos/' + path)
+      urls.push(SUPA_URL + '/storage/v1/object/public/fotos-activos/' + path)
     }
   }
   return urls
