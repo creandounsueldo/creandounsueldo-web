@@ -703,7 +703,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
     <p class="section-desc" style="color:rgba(255,255,255,.6)">Desde que reservas hasta que cobras el primer mes. Sin ambigüedades.</p>
     <div class="scroll-hint-mobile">Desliza para ver los pasos →</div>
     <div class="proceso-grid">
-      <div class="proceso-card"><span class="proceso-num">1</span><span class="proceso-icon">🔒</span><div class="proceso-title">RESERVA EL ACTIVO</div><p class="proceso-desc">Te interesa un piso, nos lo dices y lo bloqueamos para ti. Hablas con uno de nosotros, aclaramos dudas y acordamos los términos. Pagas la señal y firmamos el contrato de honorarios.</p></div>
+      <div class="proceso-card"><span class="proceso-num">1</span><span class="proceso-icon">🔒</span><div class="proceso-title">RESERVA EL ACTIVO</div><p class="proceso-desc">Te interesa un piso, nos lo dices y lo bloqueamos para ti. Hablas con uno de nosotros, aclaramos dudas y acordamos los términos. Firmas el contrato de honorarios digitalmente y pagas el 50% de los honorarios. El activo queda bloqueado para ti desde ese momento.</p></div>
       <div class="proceso-card"><span class="proceso-num">2</span><span class="proceso-icon">✍️</span><div class="proceso-title">FIRMA LAS ARRAS</div><p class="proceso-desc">Contrato de arras con el vendedor. Se puede firmar digitalmente. En este momento se cobran los honorarios de intermediación.</p></div>
       <div class="proceso-card"><span class="proceso-num">3</span><span class="proceso-icon">🏛️</span><div class="proceso-title">FIRMA ANTE NOTARIO</div><p class="proceso-desc">Escritura de compraventa. Podemos firmar en tu representación con poder notarial. Muchos inversores nunca han pisado el inmueble que compraron.</p></div>
       <div class="proceso-card"><span class="proceso-num">4</span><span class="proceso-icon">🔑</span><div class="proceso-title">ALQUILAMOS TU PISO</div><p class="proceso-desc">Gestionamos reforma si procede, puesta a punto, suministros, seguro de hogar y búsqueda de inquilino con análisis de solvencia y seguro de impago.</p></div>
@@ -970,7 +970,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuándo y cuánto cobráis? <span class="faq-icon">+</span></button><div class="faq-a">Los honorarios se cobran en el momento de las arras. No hay cuotas mensuales ni comisiones ocultas. El importe aparece en cada ficha.</div></div>
       <div class="faq-item faq-hidden" style="display:none"><button class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si el inquilino deja de pagar? <span class="faq-icon">+</span></button><div class="faq-a">Gestionamos el seguro de impago para que estés cubierto. Nos encargamos de los trámites.</div></div>
       <div class="faq-item faq-hidden" style="display:none"><button class="faq-q" onclick="toggleFaq(this)">¿Puedo comprar desde fuera de España? <span class="faq-icon">+</span></button><div class="faq-a">Sí. Trabajamos con residentes y no residentes. La firma puede hacerse por poder notarial.</div></div>
-      <div class="faq-item faq-hidden" style="display:none"><button class="faq-q" onclick="toggleFaq(this)">¿Para qué sirve la señal de reserva? <span class="faq-icon">+</span></button><div class="faq-a">Bloquea el activo mientras gestionas la financiación. Se descuenta del precio final. Antes de pagar, firmas el contrato de honorarios digitalmente.</div></div>
+      <div class="faq-item faq-hidden" style="display:none"><button class="faq-q" onclick="toggleFaq(this)">¿Cómo funciona la reserva? <span class="faq-icon">+</span></button><div class="faq-a">Firmas el contrato de honorarios digitalmente y pagas el 50% del importe en ese momento. El otro 50% se abona al firmar las arras. El activo queda bloqueado para ti desde que firmas y pagas.</div></div>
     </div>
     <div style="text-align:center;margin-top:24px">
       <button id="faq-toggle-btn" onclick="abrirFaq()" style="background:none;border:1.5px solid var(--gray3);color:var(--gray);font-family:var(--font-body);font-size:13px;font-weight:600;padding:11px 28px;border-radius:var(--radius);cursor:pointer;transition:all .2s">Ver todas las preguntas +</button>
@@ -1035,7 +1035,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
               <div class="kpi-row"><span class="kpi-row-label">Comunidad</span><span class="kpi-row-val">18 €/mes</span></div>
             </div>
             <button class="btn-reservar" onclick="openModal('León', 4000)">Reservar este activo →</button>
-            <div class="sidebar-note">Señal de 500 € · Se descuenta del precio final<br>Contrato de honorarios digital antes del pago</div>
+            <div class="sidebar-note">50% honorarios al reservar · 50% en arras<br>Contrato de honorarios digital antes del pago</div>
           </div>
         </div>
       </div>
@@ -3628,16 +3628,42 @@ var BLOG_CARDS = [
 ]
 
 var FAQ_ITEMS = [
-  ['¿Cuánto dinero necesito para empezar?', 'Trabajamos operaciones desde 38.000 € de precio de compra. Con financiación, la entrada suele rondar el 20–30% más gastos.'],
-  ['¿Cómo garantizáis el alquiler estimado?', 'Si el piso se alquila por debajo del precio estimado, compensamos la diferencia. El 100% de nuestras operaciones se han alquilado por encima.'],
-  ['¿Tengo que ir a la notaría en persona?', 'No. Podemos firmar en tu representación con poder notarial. Muchos inversores nunca han pisado el inmueble que compraron.'],
-  ['¿Qué incluye el servicio?', 'Selección del activo, acompañamiento en la compra, suministros, seguro de hogar, búsqueda de inquilino con análisis de solvencia y firma del contrato.'],
-  ['¿Cuándo y cuánto cobráis?', 'Los honorarios se cobran en el momento de las arras. No hay cuotas mensuales ni comisiones ocultas. El importe aparece en cada ficha.'],
-  ['¿Qué pasa si el inquilino deja de pagar?', 'Gestionamos el seguro de impago para que estés cubierto. Nos encargamos de los trámites.'],
-  ['¿Puedo comprar desde fuera de España?', 'Sí. Trabajamos con residentes y no residentes. La firma puede hacerse por poder notarial.'],
-  ['¿Para qué sirve la señal de reserva?', 'Bloquea el activo mientras gestionas la financiación. Se descuenta del precio final. Antes de pagar, firmas el contrato de honorarios digitalmente.'],
-  ['¿Cuánto tiempo tarda el proceso completo?', 'De media 2-3 meses desde la reserva hasta tener inquilino dentro. La firma de arras suele ser en 1-2 semanas desde la reserva.'],
-  ['¿Gestionáis el piso después de comprarlo?', 'No gestionamos el día a día del alquiler (eso lo hace el inquilino directamente contigo), pero sí coordinamos cualquier incidencia post-compra durante el primer año.'],
+
+  // ── INVERSIÓN Y DINERO ──
+  ['¿Cuánto dinero necesito para empezar?', 'Trabajamos operaciones desde 38.000 € de precio de compra. Con financiación al 80%, la entrada mínima suele ser de 12.000–15.000 € más gastos (ITP, notaría, honorarios). Sin financiación, desde 45.000–50.000 € todo incluido. La mayoría de nuestros inversores empiezan con una operación pequeña y repiten.'],
+  ['¿Qué rentabilidades consiguen vuestros inversores?', 'La rentabilidad bruta media de nuestras operaciones cerradas es del 10%+, con casos desde el 8% hasta el 14% en mercados secundarios. El cashflow neto mensual (después de IBI y comunidad) está entre 280 € y 450 € en la mayoría de activos. Puedes ver todos los resultados reales en la sección de operaciones cerradas, sin editar.'],
+  ['¿Es mejor comprar al contado o con hipoteca?', 'Depende de tu situación. Al contado maximizas el cashflow mensual. Con hipoteca a tipo fijo por debajo del 3%, el apalancamiento puede disparar la rentabilidad sobre el capital invertido (ROCE) por encima del 15-20%. Te asesoramos en función de tu perfil financiero.'],
+  ['¿Qué gastos adicionales tiene la compra?', 'Además del precio del inmueble: ITP (varía por comunidad autónoma, entre el 6% y el 10%), notaría y registro (~1.500 €), honorarios de CreandoUnSueldo (indicados en cada ficha, normalmente 4.000 € + IVA) y puesta a punto si procede. Todo detallado en la ficha antes de comprometerte.'],
+  ['¿Cuánto cashflow mensual puedo esperar?', 'En la mayoría de nuestros activos, entre 280 € y 420 € netos al mes después de IBI y comunidad, sin hipoteca. Con financiación al 80%, el cashflow se reduce pero la rentabilidad sobre capital invertido aumenta. Cada ficha incluye el cálculo exacto.'],
+
+  // ── EL SERVICIO ──
+  ['¿Qué incluye exactamente vuestro servicio?', 'Los honorarios cubren la selección y análisis del activo, acompañamiento en la negociación y compra, y un solo interlocutor durante todo el proceso. No están incluidos en los honorarios: la búsqueda de inquilino (una mensualidad que se abona a la agencia local), la contratación del seguro de hogar, el seguro de impago y la puesta a punto — estos son costes adicionales que se gestionan por separado y aparecen detallados en cada ficha.'],
+  ['¿Cuándo y cuánto cobráis?', 'Los honorarios se pagan en dos tramos: el 50% al formalizar la reserva (señal incluida) y el otro 50% en el momento de las arras. No hay cuotas mensuales ni porcentajes sobre el alquiler. El importe exacto aparece en cada ficha antes de que te comprometas a nada.'],
+  ['¿Gestionáis el piso después de comprarlo?', 'No gestionamos el alquiler de forma continua — eso lo haces tú directamente con el inquilino, que es lo que te permite no tener intermediarios en tu flujo de caja. Sí resolvemos cualquier incidencia post-compra durante el primer año y te orientamos si surge algún problema.'],
+  ['¿Garantizáis el alquiler estimado?', 'Sí. Si el piso se alquila por debajo del precio estimado en la ficha, compensamos la diferencia durante el primer año. Dicho esto, el 100% de nuestras operaciones se han alquilado por encima del precio estimado — nunca hemos tenido que activar esa garantía.'],
+  ['¿Qué pasa si el inquilino deja de pagar?', 'Gestionamos la contratación de un seguro de impago que cubre hasta 12 meses de renta impagada más los gastos legales de desahucio. Si ocurre, el seguro paga y nosotros te acompañamos en los trámites. Es un coste anual de ~150-250 € que recomendamos siempre.'],
+
+  // ── EL PROCESO ──
+  ['¿Cuánto tiempo tarda el proceso completo?', 'De media, 2-3 meses desde que reservas hasta que el inquilino entra y cobras el primer mes. La señal de reserva se formaliza en 24-48h, las arras suelen firmarse en 1-2 semanas, la notaría en 4-8 semanas y la puesta a punto + alquiler en 2-4 semanas más. En algunos activos ya alquilados, el proceso es más rápido.'],
+  ['¿Tengo que ir a la notaría en persona?', 'No. Podemos firmar en tu representación mediante poder notarial — tú lo otorgas en una notaría de tu ciudad y nosotros firmamos en la notaría donde está el inmueble. También existe la opción de ratificación telemática entre notarías. El 60% de nuestros inversores nunca han pisado el inmueble que compraron.'],
+  ['¿Cómo funciona el proceso de reserva?', 'Para reservar un activo firmas digitalmente el contrato de honorarios y pagas el 50% de los honorarios en ese momento. El otro 50% se abona al firmar las arras. No hay señal previa — el activo queda bloqueado para ti en el momento en que firmas y pagas ese primer tramo.'],
+  ['¿Puedo visitar el piso antes de comprarlo?', 'Sí, lo organizamos cuando quieras. Dicho esto, el activo se reserva por orden de llegada — si otro inversor firma el contrato de honorarios y paga el primer tramo antes que tú, el piso es suyo aunque tengamos una visita organizada. Muchos inversores deciden sin visitar apoyándose en las fotos, vídeos y el análisis de zona.'],
+  ['¿Qué documentación necesito aportar?', 'DNI o NIE para el contrato de honorarios y la escritura notarial. Si financias, también necesitarás la tasación y los documentos que pida el banco. Nosotros te guiamos en cada paso.'],
+
+  // ── FISCALIDAD Y LEGAL ──
+  ['¿Cómo tributa el alquiler en el IRPF?', 'Los ingresos del alquiler tributan en IRPF como rendimientos del capital inmobiliario. Puedes deducir IBI, comunidad, seguro, intereses de hipoteca, amortización del inmueble (3% anual sobre el valor de construcción) y gastos de reparación. Para nuevos contratos firmados desde 2024 existe una reducción del 50% sobre el rendimiento neto. Te recomendamos consultar con un asesor fiscal.'],
+  ['¿Qué ITP tengo que pagar?', 'El Impuesto de Transmisiones Patrimoniales varía por comunidad autónoma: Asturias 8%, Castilla y León 8%, Castilla-La Mancha 9%, Cataluña 10%, Andalucía 7%... En cada ficha indicamos el porcentaje aplicable y el importe exacto.'],
+  ['¿Puedo comprar desde fuera de España?', 'Sí, trabajamos con residentes y no residentes. Necesitarás un NIE (número de identificación de extranjeros) para la escritura — te orientamos en cómo obtenerlo. La firma puede hacerse por poder notarial desde tu país.'],
+  ['¿Los pisos tienen alguna carga o deuda pendiente?', 'Antes de cada operación verificamos que el inmueble está libre de cargas, que el IBI está al corriente y que la comunidad no tiene deudas pendientes. Es uno de los requisitos que exigimos también a los colaboradores que nos proponen activos.'],
+
+  // ── ZONA Y MERCADO ──
+  ['¿Por qué invertís en ciudades pequeñas y no en Madrid o Barcelona?', 'En Madrid la rentabilidad bruta media es del 4,7% y en Barcelona del 5,2%. En mercados secundarios como Asturias, Castilla-La Mancha o Ciudad Real conseguimos rentabilidades del 10-14% con menor precio de entrada y demanda de alquiler estable. El inversor que busca cashflow real, no revalorización especulativa, tiene mucho más margen en estos mercados.'],
+  ['¿Cómo elegís los activos que publicáis?', 'Analizamos cientos de operaciones para publicar unas pocas. Los criterios principales: rentabilidad bruta mínima del 8%, precio por debajo de mercado, demanda de alquiler demostrable en la zona, estado legal limpio y posibilidad de alquilar en menos de 30 días tras la compra.'],
+  ['¿Cómo sabéis que se va a alquilar?', 'Analizamos la oferta y demanda de alquiler en cada zona antes de publicar. Miramos tiempo medio de alquiler en portales, precio de mercado, perfil de inquilino habitual y tasa de vacío. Si no tenemos convicción de que se alquila en menos de 4 semanas, no lo publicamos. Además, lo garantizamos contractualmente.'],
+
+  // ── PARA COLABORADORES ──
+  ['Soy agencia inmobiliaria, ¿cómo puedo colaborar?', 'Puedes proponer activos directamente desde la sección "Tengo un piso" de nuestra web. Rellenas los datos del inmueble, subes fotos y nos los envías. Revisamos en menos de 24h y te contactamos si encaja con nuestra comunidad de inversores. Operamos en toda España.'],
+  ['Tengo un piso para vender, ¿qué necesito para que lo publiquéis?', 'El inmueble debe estar libre de cargas y ocupantes, con IBI y comunidad al corriente. Necesitamos dirección completa, precio, características, IBI, gastos de comunidad y al menos 5-6 fotos de calidad. Con eso podemos hacer el análisis y decirte si encaja en 24h.'],
 ]
 
 function renderBlogPage() {
