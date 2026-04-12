@@ -3801,32 +3801,30 @@ async function enviarColabora() {
 
     var activo = {
       status:              'en_revision',
-      comunidad_autonoma:  document.getElementById('c-comunidad').value,
       provincia:           document.getElementById('c-provincia').value.trim(),
       ciudad:              document.getElementById('c-ciudad').value.trim(),
       zona:                document.getElementById('c-zona').value.trim() || null,
       direccion:           document.getElementById('c-direccion').value.trim(),
       precio:              +document.getElementById('c-precio').value || null,
-      precio_negociable:   document.getElementById('c-negociable').checked,
       habitaciones:        +document.getElementById('c-habitaciones').value || null,
-      banos:               +document.getElementById('c-banos').value || null,
       m2:                  +document.getElementById('c-m2').value || null,
-      planta:              document.getElementById('c-planta').value.trim() || null,
-      ascensor:            document.getElementById('c-ascensor').value || null,
-      catastro:            document.getElementById('c-catastro').value.trim() || null,
       alquiler_estimado:   +document.getElementById('c-alquiler').value || null,
       ibi:                 +document.getElementById('c-ibi').value || null,
       gastos_comunidad:    +document.getElementById('c-comunidad-gastos').value || null,
-      estado_inmueble:     document.getElementById('c-estado-inmueble').value || null,
-      notas:               document.getElementById('c-notas').value.trim() || null,
       puesta_a_punto:      +document.getElementById('c-puesta-a-punto').value || null,
-      gestiona_alquiler:   document.getElementById('c-gestiona-alquiler').checked,
-      algo_mas:            document.getElementById('c-algo-mas').value.trim() || null,
-      fotos:               fotoUrls,
-      colaborador_nombre:  nombre,
-      colaborador_tel:     tel,
-      colaborador_email:   email,
-      colaborador_tipo:    document.getElementById('c-tipo').value,
+      fotos:               fotoUrls.length ? fotoUrls : null,
+      notas:               [
+        document.getElementById('c-notas').value.trim(),
+        document.getElementById('c-gestiona-alquiler').checked ? 'Solicita gestión de alquiler' : '',
+        document.getElementById('c-algo-mas').value.trim() ? 'Más info: ' + document.getElementById('c-algo-mas').value.trim() : '',
+        'Comunidad: ' + document.getElementById('c-comunidad').value,
+        'Planta: ' + (document.getElementById('c-planta').value || '—'),
+        'Ascensor: ' + (document.getElementById('c-ascensor').value || '—'),
+        'Catastro: ' + (document.getElementById('c-catastro').value || '—'),
+        'Estado: ' + (document.getElementById('c-estado-inmueble').value || '—'),
+        'Precio negociable: ' + (document.getElementById('c-negociable').checked ? 'Sí' : 'No'),
+        'Contacto: ' + nombre + ' · ' + tel + ' · ' + email + ' (' + document.getElementById('c-tipo').value + ')',
+      ].filter(Boolean).join(' | ') || null,
     }
 
     var res = await fetch(SUPA_URL + '/rest/v1/activos', {
@@ -3840,7 +3838,12 @@ async function enviarColabora() {
       body: JSON.stringify(activo)
     })
 
-    if (!res.ok) throw new Error('Error al guardar')
+    if (!res.ok) {
+      var errBody = ''
+      try { errBody = await res.text() } catch(e) {}
+      console.error('Supabase error:', res.status, errBody)
+      throw new Error('Supabase ' + res.status + ': ' + errBody)
+    }
 
     // Confirmation email via mailto (fallback until email service configured)
     var subject = encodeURIComponent('Hemos recibido tu propuesta - CreandoUnSueldo')
