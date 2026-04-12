@@ -2256,6 +2256,14 @@ async function guardarLead(email, origen) {
       headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer '+SUPA_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
       body: JSON.stringify({ email: email, origen: origen || 'web', created_at: new Date().toISOString() })
     })
+    // Send welcome email
+    try {
+      await fetch(EDGE_URL + '/send-mail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPA_KEY },
+        body: JSON.stringify({ type: 'nueva_suscripcion', email: email })
+      })
+    } catch(e) { console.warn('Welcome email error:', e) }
   } catch(e) { console.log('Lead save error:', e) }
 }
 
@@ -3880,6 +3888,40 @@ async function enviarColabora() {
 }
 // ═════════════════════════════════════════════════════════════════════════════
 
+// ═══ UNSUBSCRIBE ═════════════════════════════════════════════════════════════
+var _unsubEmail = null
+
+async function abrirUnsubscribe(email) {
+  _unsubEmail = email
+  document.getElementById('unsub-email').textContent = email || ''
+  document.getElementById('unsub-pending').style.display = ''
+  document.getElementById('unsub-ok').style.display = 'none'
+  document.getElementById('unsub-error').style.display = 'none'
+  showView('unsubscribe')
+  scrollToTop()
+}
+
+async function confirmarBaja() {
+  if (!_unsubEmail) return
+  try {
+    var res = await fetch(SUPA_URL + '/rest/v1/leads?email=eq.' + encodeURIComponent(_unsubEmail), {
+      method: 'DELETE',
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    })
+    if (res.ok) {
+      document.getElementById('unsub-pending').style.display = 'none'
+      document.getElementById('unsub-ok').style.display = ''
+    } else {
+      document.getElementById('unsub-pending').style.display = 'none'
+      document.getElementById('unsub-error').style.display = ''
+    }
+  } catch(e) {
+    document.getElementById('unsub-pending').style.display = 'none'
+    document.getElementById('unsub-error').style.display = ''
+  }
+}
+// ═════════════════════════════════════════════════════════════════════════════
+
 // ═══ ROUTER ══════════════════════════════════════════════════════════════════
 function navigateTo(path, replaceState) {
   if (replaceState) {
@@ -3928,6 +3970,12 @@ function handleRoute(path) {
     // Queue: load activos first then open ficha
     _pendingRoute = {type: 'ficha', id: id}
     loadActivos()
+    return
+  }
+  if (path === '/unsubscribe' || path.startsWith('/unsubscribe')) {
+    var urlParams = new URLSearchParams(window.location.search)
+    var emailParam = urlParams.get('email') || ''
+    abrirUnsubscribe(decodeURIComponent(emailParam))
     return
   }
   if (path === '/colabora') { abrirColabora(); return }
@@ -3992,6 +4040,11 @@ function updateNavForView(id) {
     navBack.style.display = 'flex'
     navBack.textContent = '← Inicio'
     navBack.onclick = function() { closeColabora() }
+    if (navHome) navHome.style.display = 'none'
+    if (navCtaHome) navCtaHome.style.display = 'none'
+    if (navCtaActivo) navCtaActivo.style.display = 'none'
+  } else if (id === 'unsubscribe') {
+    navBack.style.display = 'none'
     if (navHome) navHome.style.display = 'none'
     if (navCtaHome) navCtaHome.style.display = 'none'
     if (navCtaActivo) navCtaActivo.style.display = 'none'
@@ -4336,6 +4389,35 @@ if (document.readyState !== 'loading') {
   </div>
 </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ VIEW: UNSUBSCRIBE ═══════════════════ -->
+<div class="view" id="view-unsubscribe">
+  <div style="padding-top:68px;min-height:100vh;background:var(--gray5);display:flex;align-items:center;justify-content:center">
+    <div style="background:white;border:1px solid var(--gray3);border-radius:14px;padding:48px 40px;max-width:480px;width:100%;text-align:center">
+      <div id="unsub-pending">
+        <div style="font-size:40px;margin-bottom:16px">📧</div>
+        <h2 style="font-family:var(--font-display);font-size:24px;color:var(--dark);margin-bottom:8px">Darse de baja</h2>
+        <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:24px">¿Quieres dejar de recibir notificaciones de nuevos activos? Tu email se eliminará de nuestra lista.</p>
+        <p id="unsub-email" style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:24px"></p>
+        <div style="display:flex;gap:12px;justify-content:center">
+          <button onclick="_showView('home');navigateTo('/',true)" style="padding:11px 24px;background:var(--gray5);border:1px solid var(--gray3);border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:600;cursor:pointer;color:var(--gray)">Cancelar</button>
+          <button onclick="confirmarBaja()" style="padding:11px 24px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:600;cursor:pointer">Confirmar baja</button>
+        </div>
+      </div>
+      <div id="unsub-ok" style="display:none">
+        <div style="font-size:40px;margin-bottom:16px">✅</div>
+        <h2 style="font-family:var(--font-display);font-size:24px;color:var(--dark);margin-bottom:8px">Baja confirmada</h2>
+        <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:24px">Tu email ha sido eliminado de nuestra lista. No recibirás más notificaciones.</p>
+        <button onclick="_showView('home');navigateTo('/',true)" style="padding:11px 24px;background:var(--dark);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:600;cursor:pointer">Volver al inicio</button>
+      </div>
+      <div id="unsub-error" style="display:none">
+        <div style="font-size:40px;margin-bottom:16px">⚠️</div>
+        <p style="font-size:14px;color:var(--gray)">No encontramos ese email en nuestra lista.</p>
+        <button onclick="_showView('home');navigateTo('/',true)" style="margin-top:16px;padding:11px 24px;background:var(--dark);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:600;cursor:pointer">Volver al inicio</button>
       </div>
     </div>
   </div>
