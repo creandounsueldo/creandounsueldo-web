@@ -3865,17 +3865,7 @@ async function enviarColabora() {
       })
     } catch(emailErr) { console.warn('Email no enviado:', emailErr) }
 
-    // Confirmation email via mailto (fallback)
-    var subject = encodeURIComponent('Hemos recibido tu propuesta - CreandoUnSueldo')
-    var body = encodeURIComponent(
-      'Hola ' + nombre + ',\n\n' +
-      'Hemos recibido correctamente la información del inmueble en ' + activo.ciudad + '.\n\n' +
-      'Nuestro equipo lo revisará en menos de 24 horas y te contactará en el teléfono ' + tel + ' o por este email.\n\n' +
-      'Gracias por confiar en CreandoUnSueldo.\n\nEl equipo de CreandoUnSueldo'
-    )
-    // Open confirmation email (silent fallback)
-    try { window.open('mailto:' + email + '?subject=' + subject + '&body=' + body, '_blank') } catch(e) {}
-
+    
     // Show success
     document.querySelectorAll('.m-panel').forEach(function(p) { p.classList.remove('active') })
     document.getElementById('cp-ok').classList.add('active')
