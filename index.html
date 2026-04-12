@@ -585,8 +585,9 @@ footer{background:var(--dark);padding:56px 52px 32px}
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-pattern"></div>
-    <div class="hero-deco">€</div>
+    
+    <div class="hero-deco"></div>
+    
     <div class="hero-inner">
         <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:20px">✅ Alquiler garantizado en todas las operaciones</div>
         <h1>PISOS QUE<br>PAGAN<br>CADA MES.</h1>
@@ -2414,8 +2415,8 @@ function buildCard(a) {
   var rb    = calcRB(a.precio, alq)
   var cf    = calcCF(alq, com, ibi)
   var bloqueado = a.status !== 'disponible'
-  var badgeLabel = a.status === 'reservado' ? '◆ Reservado' : a.status === 'en_proceso' ? '◑ En proceso' : '● Disponible'
-  var badgeClass = a.status === 'reservado' || a.status === 'en_proceso' ? 'badge-reservado' : 'badge-disponible'
+  var badgeLabel = a.status === 'reservado' ? '◆ Reservado' : a.status === 'en_proceso' ? '◑ En proceso' : (a.status === 'alquilado' || a.status === 'finalizado') ? '✓ Cerrado' : '● Disponible'
+  var badgeClass = a.status === 'reservado' || a.status === 'en_proceso' ? 'badge-reservado' : (a.status === 'alquilado' || a.status === 'finalizado') ? 'badge-reservado' : 'badge-disponible'
   var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
   var titulo = a.titulo_pagina || ((a.habitaciones ? a.habitaciones+' HAB.' : '') + (a.zona ? '<br>'+a.zona.toUpperCase() : ''))
   var gastosAnual = (+com*12 + +ibi)
@@ -2502,7 +2503,7 @@ function renderTodas() {
   var lista = todosActivos.filter(function(a) {
     if (filtro === 'disponible') return a.status === 'disponible'
     if (filtro === 'reservado')  return a.status === 'reservado' || a.status === 'en_proceso'
-    if (filtro === 'finalizado') return a.status === 'alquilado' && +a.alquiler_final > 0
+    if (filtro === 'finalizado') return (a.status === 'alquilado' || a.status === 'finalizado') && +a.alquiler_final > 0
     return false
   })
 
@@ -2635,7 +2636,7 @@ function renderVendidos(activos) {
   var grid = document.getElementById('grid-vendidos')
   if (!grid) return
   // Solo mostrar los que tienen alquiler_final
-  var lista = activos.filter(function(a) { return a.status === 'alquilado' && +a.alquiler_final > 0 })
+  var lista = activos.filter(function(a) { return (a.status === 'alquilado' || a.status === 'finalizado') && +a.alquiler_final > 0 })
   lista.sort(function(a,b){ return new Date(b.fecha_alquilado||b.created_at||0) - new Date(a.fecha_alquilado||a.created_at||0) })
   if (!lista.length) {
     var msg = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">Las operaciones cerradas aparecerán aquí con todos sus resultados.</div>'
@@ -2846,7 +2847,7 @@ function abrirFicha(a) {
   _fichaActivo = a
   var fotos = Array.isArray(a.fotos) ? a.fotos : []
   var alq = +(a.alquiler_estimado || 0)
-  var alqParaCalc = a.status === 'alquilado' && +a.alquiler_final > 0 ? +(a.alquiler_final) : alq
+  var alqParaCalc = (a.status === 'alquilado' || a.status === 'finalizado') && +a.alquiler_final > 0 ? +(a.alquiler_final) : alq
   var com = +(a.gastos_comunidad  || 0)
   var ibi = +(a.ibi || 0)
   var rb  = calcRB(a.precio, alqParaCalc)
@@ -3178,7 +3179,7 @@ function abrirFicha(a) {
   // Hide entire hipoteca card for alquilado using the id we added
   var hipCard = document.getElementById('ficha-hip-section')
   var hipCardWrap = hipCard ? hipCard.closest('div[style*="border:1px solid var(--gray3)"]') || hipCard.parentNode.parentNode : null
-  if (hipCardWrap) hipCardWrap.style.display = a.status === 'alquilado' ? 'none' : ''
+  if (hipCardWrap) hipCardWrap.style.display = (a.status === 'alquilado' || a.status === 'finalizado') ? 'none' : ''
   // Hide idealista button for non-disponible
   var ideBtn = document.getElementById('ficha-idealista-btn')
   if (ideBtn) ideBtn.style.display = a.status === 'disponible' ? '' : 'none'
@@ -3201,7 +3202,7 @@ function abrirFicha(a) {
     if (econEl2 && econEl2.parentNode) econEl2.parentNode.insertBefore(rw, econEl2.nextSibling)
     resultadosWrap = rw
   }
-  if (a.status === 'alquilado') {
+  if (a.status === 'alquilado' || a.status === 'finalizado') {
     resultadosWrap.style.display = ''
     var alqFin2  = +(a.alquiler_final || 0)
     var alqEst2  = +(a.alquiler_estimado || 0)
