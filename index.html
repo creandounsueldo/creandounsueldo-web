@@ -2886,8 +2886,10 @@ function abrirFicha(a) {
   }).join('')
 
   // Badge estado
-  var badgeLabel = a.status==='reservado'?'◆ Reservado':a.status==='en_proceso'?'◑ En proceso':'● Disponible'
-  var badgeBg = a.status==='disponible'?'rgba(34,197,94,.9)':'rgba(245,158,11,.9)'
+  var _isCerrado = a.status==='alquilado'||a.status==='finalizado'
+  var _isReservado = a.status==='reservado'||a.status==='en_proceso'||a.status==='arras'||a.status==='notaria'||a.status==='puesta_a_punto'||a.status==='busqueda_inquilino'
+  var badgeLabel = _isCerrado?'✓ Cerrado':_isReservado?'◆ Reservado':'● Disponible'
+  var badgeBg = _isCerrado?'rgba(30,30,30,.75)':a.status==='disponible'?'rgba(34,197,94,.9)':'rgba(245,158,11,.9)'
   document.getElementById('ficha-badges').innerHTML = '<span style="background:'+badgeBg+';color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:99px">'+badgeLabel+'</span>'
 
   // Links Maps y Street View
@@ -3904,7 +3906,7 @@ function handleRoute(path) {
     // Wait for activos to load if needed
     if (todosActivos.length > 0) {
       var a = todosActivos.find(function(x){ return x.id === id })
-      if (a) { _abrirFicha(a); return }
+      if (a) { abrirFicha(a); return }
     }
     // Queue: load activos first then open ficha
     _pendingRoute = {type: 'ficha', id: id}
@@ -3993,8 +3995,9 @@ abrirFicha = function(a) {
   if (currentPath.startsWith('/activos/cerrados')) _fichaOrigen = 'cerrados'
   else if (currentPath.startsWith('/activos/reservados')) _fichaOrigen = 'reservados'
   else if (currentPath.startsWith('/activos')) _fichaOrigen = 'disponibles'
+  else if (currentPath.startsWith('/activo/')) _fichaOrigen = _fichaOrigen || 'home'
   else _fichaOrigen = 'home'
-  navigateTo('/activo/' + a.id)
+  if (!currentPath.startsWith('/activo/')) navigateTo('/activo/' + a.id)
   _abrirFicha(a)
 }
 
@@ -4029,7 +4032,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle pending route after activos load
     if (_pendingRoute && _pendingRoute.type === 'ficha') {
       var a = todosActivos.find(function(x){ return x.id === _pendingRoute.id })
-      if (a) _abrirFicha(a)
+      if (a) abrirFicha(a)
       _pendingRoute = null
     }
   })
