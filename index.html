@@ -3845,7 +3845,26 @@ async function enviarColabora() {
       throw new Error('Supabase ' + res.status + ': ' + errBody)
     }
 
-    // Confirmation email via mailto (fallback until email service configured)
+    // Get saved activo data
+    var savedActivo = null
+    try { savedActivo = (await res.json())[0] } catch(e) {}
+
+    // Send emails via Edge Function
+    try {
+      await fetch(EDGE_URL + '/send-mail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + SUPA_KEY
+        },
+        body: JSON.stringify({
+          type: 'nueva_propuesta',
+          activo: savedActivo || activo
+        })
+      })
+    } catch(emailErr) { console.warn('Email no enviado:', emailErr) }
+
+    // Confirmation email via mailto (fallback)
     var subject = encodeURIComponent('Hemos recibido tu propuesta - CreandoUnSueldo')
     var body = encodeURIComponent(
       'Hola ' + nombre + ',\n\n' +
