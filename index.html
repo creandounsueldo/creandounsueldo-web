@@ -1890,11 +1890,13 @@ footer{background:var(--dark);padding:56px 52px 32px}
         <li><strong>Formulario de contacto/reserva:</strong> nombre, teléfono, email y mensaje libre.</li>
         <li><strong>Formulario de acceso anticipado:</strong> email (con consentimiento expreso).</li>
         <li><strong>En caso de formalizar una operación:</strong> DNI/NIE, dirección postal y datos bancarios necesarios para el contrato.</li>
+        <li><strong>Mensajes por Instagram y otras redes sociales:</strong> tu nombre de usuario, el contenido de los comentarios y mensajes que nos envías y, si nos los facilitas, tu nombre y teléfono. Los usamos para enviarte la información que nos pides y, si lo solicitas, llamarte sobre la oportunidad que te interesa. Algunas respuestas pueden generarse con ayuda de un asistente automático supervisado por nuestro equipo.</li>
       </ul>
       <p>No recogemos datos de navegación ni usamos cookies publicitarias. Los mapas de Google Maps embebidos pueden instalar cookies técnicas propias de Google; consulta la <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--red)">política de privacidad de Google</a>.</p>
       <h4 style="font-size:15px;color:#111;margin:20px 0 10px">FINALIDAD Y BASE LEGAL</h4>
       <ul style="margin:8px 0 12px 20px;display:flex;flex-direction:column;gap:6px">
         <li><strong>Gestión de consultas</strong> (interés legítimo / consentimiento)</li>
+        <li><strong>Atención de solicitudes de información recibidas por redes sociales y llamada comercial si nos dejas tu teléfono</strong> (consentimiento)</li>
         <li><strong>Prestación del servicio de intermediación</strong> (ejecución contractual)</li>
         <li><strong>Envío de comunicaciones comerciales sobre activos disponibles</strong> (consentimiento expreso)</li>
         <li><strong>Cumplimiento de obligaciones legales</strong> (Ley de prevención de blanqueo de capitales)</li>
@@ -1903,9 +1905,9 @@ footer{background:var(--dark);padding:56px 52px 32px}
       <p>Los datos se conservan durante el tiempo necesario para cumplir la finalidad para la que fueron recogidos y, en todo caso, durante los plazos legalmente establecidos.</p>
       <h4 style="font-size:15px;color:#111;margin:20px 0 10px">TUS DERECHOS</h4>
       <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef86818980af8c9d8a8e818b809a819c9a8a838b80c18c8082">[email&#160;protected]</a>. Tienes derecho a presentar reclamación ante la Agencia Española de Protección de Datos (www.aepd.es).</p>
-      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">TRANSFERENCIAS INTERNACIONALES</h4>
-      <p>No se realizan transferencias internacionales de datos fuera del Espacio Económico Europeo.</p>
-      <p style="margin-top:20px;font-size:11px;color:#aaa">Última actualización: abril 2026</p>
+      <h4 style="font-size:15px;color:#111;margin:20px 0 10px">ENCARGADOS Y TRANSFERENCIAS INTERNACIONALES</h4>
+      <p>Para prestar el servicio nos apoyamos en proveedores tecnológicos que tratan datos por cuenta nuestra (alojamiento y base de datos, mensajería de Meta/Instagram y servicios de inteligencia artificial para redactar respuestas). Algunos de ellos pueden tratar datos fuera del Espacio Económico Europeo; en ese caso, la transferencia se ampara en garantías adecuadas, como las cláusulas contractuales tipo de la Comisión Europea o el Marco de Privacidad de Datos UE-EE. UU.</p>
+      <p style="margin-top:20px;font-size:11px;color:#aaa">Última actualización: noviembre 2026</p>
     </div>
 
     <div id="legal-cookies" style="display:none;padding:28px;font-size:13px;color:#555;line-height:1.8">
@@ -4024,6 +4026,12 @@ function handleRoute(path) {
     return
   }
   if (path === '/colabora') { abrirColabora(); return }
+  // páginas legales con enlace propio (las pide Meta para la app de Instagram)
+  if (path === '/privacidad' || path === '/aviso-legal' || path === '/cookies') {
+    _showView('home')
+    showPrivacidad(path === '/privacidad' ? 'privacidad' : path === '/cookies' ? 'cookies' : 'aviso')
+    return
+  }
   if (path === '/blog') { abrirBlog(); return }
   if (path === '/faq') { abrirFaq(); return }
   // fallback
