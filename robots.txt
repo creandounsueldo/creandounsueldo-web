@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /canal
+Disallow: /unsubscribe
+
+Sitemap: https://www.creandounsueldo.com/sitemap.xml
