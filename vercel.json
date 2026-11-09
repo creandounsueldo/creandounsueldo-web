@@ -1,6 +1,16 @@
 {
   "rewrites": [
-    { "source": "/canal", "destination": "/canal/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/canal",
+      "destination": "/canal/index.html"
+    },
+    {
+      "source": "/calculadora",
+      "destination": "/calculadora/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }

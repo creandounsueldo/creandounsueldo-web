@@ -1040,7 +1040,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
       </div>
       <div class="footer-links-col"><h4>Navegar</h4><ul><li><a onclick="showView('home', true);scrollToSection('nosotros')">Quiénes somos</a></li><li><a onclick="showView('home', true);scrollToSection('activos')">Activos disponibles</a></li><li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li><li><a onclick="showView('home', true);scrollToSection('vendidos')">Track record</a></li><li><a onclick="abrirBlog()">Blog</a></li><li><a onclick="abrirFaq()">FAQ</a></li></ul></div>
       
-      <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="mailto:info@creandounsueldo.com">info@creandounsueldo.com</a></li><li><a href="https://t.me/creandounsueldo" target="_blank">Canal Telegram</a></li><li><a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank" rel="noopener">Canal de WhatsApp</a></li></ul></div>
+      <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="mailto:info@creandounsueldo.com">info@creandounsueldo.com</a></li><li><a href="/calculadora">Calculadora de rentabilidad</a></li><li><a href="https://t.me/creandounsueldo" target="_blank">Canal Telegram</a></li><li><a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank" rel="noopener">Canal de WhatsApp</a></li></ul></div>
     </div>
     <div class="footer-bottom"><span class="footer-legal">© 2026 HOUSE NOGA S.L. — CreandoUnSueldo</span><span class="footer-legal"><a href="#" onclick="showPrivacidad('aviso');return false">Aviso legal</a> · <a href="#" onclick="showPrivacidad('privacidad');return false">Privacidad</a> · <a href="#" onclick="showPrivacidad('cookies');return false">Cookies</a></span></div>
   </footer>
@@ -3978,9 +3978,11 @@ async function abrirUnsubscribe(email) {
 async function confirmarBaja() {
   if (!_unsubEmail) return
   try {
-    var res = await fetch(SUPA_URL + '/rest/v1/leads?email=eq.' + encodeURIComponent(_unsubEmail), {
-      method: 'DELETE',
-      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    // baja_lead borra de verdad (el DELETE directo no tenía permiso y no borraba nada)
+    var res = await fetch(SUPA_URL + '/rest/v1/rpc/baja_lead', {
+      method: 'POST',
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_email: _unsubEmail })
     })
     if (res.ok) {
       document.getElementById('unsub-pending').style.display = 'none'

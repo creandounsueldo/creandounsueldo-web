@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de rentabilidad de un piso para alquilar | CreandoUnSueldo</title>
+<meta name="description" content="Calcula gratis la rentabilidad bruta y neta de un piso para alquilar, el cashflow mensual y en cuántos años recuperas la inversión. Con ITP, comunidad, IBI y gastos reales.">
+<link rel="canonical" href="https://www.creandounsueldo.com/calculadora">
+<meta property="og:title" content="¿Cuánto rinde un piso? Calculadora de rentabilidad">
+<meta property="og:description" content="Rentabilidad bruta y neta, cashflow mensual y años para recuperar la inversión, en 30 segundos.">
+<meta property="og:url" content="https://www.creandounsueldo.com/calculadora">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1664395115220620');fbq('track','PageView');
+</script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--rojo:#E31E24;--oscuro:#111318;--verde:#16A34A;--gris:#6B7280;--borde:#E5E7EB}
+  body{font-family:'DM Sans',sans-serif;color:var(--oscuro);background:#F9FAFB;font-size:16px;line-height:1.55}
+  header{background:#fff;border-bottom:1px solid var(--borde);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+  .logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--oscuro);text-decoration:none}
+  .logo span{color:var(--rojo)}
+  header a.web{color:var(--gris);font-size:14px;text-decoration:none}
+  .hero{background:var(--oscuro);color:#fff;padding:40px 16px 34px;text-align:center}
+  .hero h1{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(40px,8vw,64px);line-height:.95;letter-spacing:.5px}
+  .hero h1 span{color:var(--rojo)}
+  .hero p{color:#9CA3AF;max-width:520px;margin:12px auto 0}
+  main{max-width:720px;margin:0 auto;padding:24px 16px 48px}
+  .tarjeta{background:#fff;border:1px solid var(--borde);border-radius:14px;padding:22px 18px;margin-bottom:18px}
+  .tarjeta h2{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:28px;letter-spacing:.5px;margin-bottom:14px}
+  .campos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:520px){.campos{grid-template-columns:1fr}}
+  label{display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px}
+  label small{font-weight:400;color:var(--gris)}
+  input[type=number],input[type=email]{width:100%;padding:12px;border:1px solid #D1D5DB;border-radius:9px;font:inherit;font-size:16px}
+  input:focus{outline:2px solid var(--rojo);border-color:transparent}
+  details{margin-top:14px}
+  summary{cursor:pointer;color:var(--gris);font-size:14px}
+  .grande{display:flex;align-items:baseline;justify-content:center;gap:10px;flex-wrap:wrap;text-align:center}
+  .grande b{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:64px;line-height:1;color:var(--rojo)}
+  .grande span{color:var(--gris)}
+  .comparar{text-align:center;font-size:14px;color:var(--gris);margin-top:6px}
+  .resultados{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .dato{background:#F9FAFB;border-radius:10px;padding:14px}
+  .dato small{display:block;color:var(--gris);font-size:13px}
+  .dato b{font-size:22px}
+  .bloqueado{position:relative}
+  .bloqueado .resultados{filter:blur(6px);user-select:none;pointer-events:none}
+  .muro{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:10px}
+  .muro form{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:18px;max-width:380px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .muro p{font-size:15px;margin-bottom:10px;font-weight:700}
+  .consent{display:flex;gap:8px;font-size:12px;color:var(--gris);margin:10px 0;line-height:1.4}
+  .consent a{color:var(--gris)}
+  button{width:100%;background:var(--rojo);color:#fff;border:0;border-radius:9px;padding:13px;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+  .nota{font-size:13px;color:var(--gris);margin-top:12px}
+  .cta{background:var(--oscuro);color:#fff;text-align:center;border-radius:14px;padding:26px 18px}
+  .cta b{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:30px;display:block;line-height:1;margin-bottom:8px}
+  .cta p{color:#9CA3AF;font-size:15px;margin-bottom:16px}
+  .cta a{display:inline-block;background:var(--verde);color:#fff;text-decoration:none;font-weight:700;padding:14px 22px;border-radius:10px}
+  .cta small{display:block;color:#6B7280;font-size:12px;margin-top:10px}
+  footer{text-align:center;font-size:13px;color:var(--gris);padding:20px 16px 30px}
+  footer a{color:var(--gris)}
+</style>
+</head>
+<body>
+<header><a class="logo" href="/">CREANDO<span>UN</span>SUELDO</a><a class="web" href="/">Ver pisos →</a></header>
+<div class="hero">
+  <h1>¿CUÁNTO <span>RINDE</span> UN PISO?</h1>
+  <p>Calcula en 30 segundos la rentabilidad de un piso para alquilar: bruta, neta, lo que te queda cada mes y cuándo recuperas lo invertido.</p>
+</div>
+<main>
+  <section class="tarjeta">
+    <h2>Los datos del piso</h2>
+    <div class="campos">
+      <div><label for="precio">Precio de compra (€)</label><input id="precio" type="number" inputmode="numeric" value="39000" min="0"></div>
+      <div><label for="alquiler">Alquiler mensual (€)</label><input id="alquiler" type="number" inputmode="numeric" value="480" min="0"></div>
+      <div><label for="comunidad">Comunidad <small>(€/mes)</small></label><input id="comunidad" type="number" inputmode="numeric" value="30" min="0"></div>
+      <div><label for="ibi">IBI <small>(€/año)</small></label><input id="ibi" type="number" inputmode="numeric" value="94" min="0"></div>
+    </div>
+    <details>
+      <summary>Más gastos (ya puestos con valores habituales)</summary>
+      <div class="campos" style="margin-top:12px">
+        <div><label for="itp">ITP <small>(% del precio, 6–10 % según comunidad)</small></label><input id="itp" type="number" inputmode="decimal" value="8" min="0" step="0.5"></div>
+        <div><label for="compra">Notaría, registro y gestoría (€)</label><input id="compra" type="number" inputmode="numeric" value="1500" min="0"></div>
+        <div><label for="reforma">Puesta a punto (€)</label><input id="reforma" type="number" inputmode="numeric" value="0" min="0"></div>
+        <div><label for="seguros">Seguros hogar e impago <small>(€/año)</small></label><input id="seguros" type="number" inputmode="numeric" value="250" min="0"></div>
+        <div><label for="colchon">Mantenimiento y meses vacíos <small>(% del alquiler)</small></label><input id="colchon" type="number" inputmode="decimal" value="5" min="0" step="1"></div>
+      </div>
+    </details>
+  </section>
+
+  <section class="tarjeta">
+    <div class="grande"><b id="r-bruta">14,8 %</b><span>rentabilidad bruta</span></div>
+    <p class="comparar">Los pisos que publicamos tienen una rentabilidad bruta mediana del <b>14,4 %</b>.</p>
+  </section>
+
+  <section class="tarjeta bloqueado" id="analisis">
+    <h2>El análisis completo</h2>
+    <div class="resultados">
+      <div class="dato"><small>Rentabilidad neta</small><b id="r-neta">–</b></div>
+      <div class="dato"><small>Te queda cada mes</small><b id="r-cash">–</b></div>
+      <div class="dato"><small>Inversión total</small><b id="r-inv">–</b></div>
+      <div class="dato"><small>Recuperas lo invertido en</small><b id="r-anos">–</b></div>
+      <div class="dato"><small>Ingresos al año</small><b id="r-ing">–</b></div>
+      <div class="dato"><small>Gastos al año</small><b id="r-gas">–</b></div>
+    </div>
+    <p class="nota" id="nota-calc" style="display:none">Sin hipoteca y antes del impuesto sobre la renta. La rentabilidad neta se calcula sobre la inversión total (precio, ITP, gastos de compra y puesta a punto).</p>
+    <div class="muro" id="muro">
+      <form id="form-email">
+        <p>Te enseño el análisis completo y te aviso de los pisos que salgan así</p>
+        <input id="email" type="email" required placeholder="Tu email" autocomplete="email">
+        <label class="consent"><input type="checkbox" id="acepto" required> <span>Quiero recibir los pisos nuevos y un resumen semanal por email. Me puedo dar de baja cuando quiera. <a href="/privacidad" target="_blank">Privacidad</a></span></label>
+        <button type="submit">Ver el análisis completo</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="cta">
+    <b>LOS PISOS ASÍ SALEN PRIMERO EN NUESTRO CANAL</b>
+    <p>Pisos con alquiler por menos de 50.000 € en toda España, con precio, alquiler y rentabilidad. Se reservan en menos de 3 horas.</p>
+    <a href="/canal?utm_source=calculadora&utm_medium=web">Entrar al canal de WhatsApp</a>
+    <small>Al entrar verás el chat vacío: es normal, los pisos nuevos llegan en cuanto salen.</small>
+  </section>
+</main>
+<footer>© HOUSE NOGA S.L. · <a href="/">Inicio</a> · <a href="/blog">Blog</a> · <a href="/privacidad">Privacidad</a></footer>
+
+<script>
+(function () {
+  var SUPA_URL = 'https://vblyzzhixeoamcstnsqk.supabase.co';
+  var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZibHl6emhpeGVvYW1jc3Ruc3FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NTk5MzUsImV4cCI6MjA5MTIzNTkzNX0.wRTF5dEeI2TkNfUm_xnWJCglE6SWfW_0kri0avfOVRI';
+  var $ = function (id) { return document.getElementById(id); };
+  var v = function (id) { var n = parseFloat(String($(id).value).replace(',', '.')); return isFinite(n) && n > 0 ? n : 0; };
+  var eur = function (n) { return Math.round(n).toLocaleString('es-ES') + ' €'; };
+  var pct = function (n) { return (Math.round(n * 10) / 10).toLocaleString('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' %'; };
+
+  function calcular() {
+    var precio = v('precio'), alquiler = v('alquiler');
+    var inversion = precio * (1 + v('itp') / 100) + v('compra') + v('reforma');
+    var ingresos = alquiler * 12;
+    var gastos = v('comunidad') * 12 + v('ibi') + v('seguros') + ingresos * v('colchon') / 100;
+    var neto = ingresos - gastos;
+    $('r-bruta').textContent = precio ? pct(ingresos / precio * 100) : '–';
+    $('r-neta').textContent = inversion ? pct(neto / inversion * 100) : '–';
+    $('r-cash').textContent = (neto >= 0 ? '+' : '') + eur(neto / 12) + '/mes';
+    $('r-inv').textContent = eur(inversion);
+    $('r-anos').textContent = neto > 0 ? (Math.round(inversion / neto * 10) / 10).toLocaleString('es-ES') + ' años' : '–';
+    $('r-ing').textContent = eur(ingresos);
+    $('r-gas').textContent = eur(gastos);
+  }
+  function desbloquear() {
+    $('analisis').classList.remove('bloqueado');
+    $('muro').style.display = 'none';
+    $('nota-calc').style.display = '';
+  }
+  document.querySelectorAll('input[type=number]').forEach(function (i) { i.addEventListener('input', calcular); });
+  calcular();
+  try { if (localStorage.getItem('cus_calc_ok')) desbloquear(); } catch (e) {}
+
+  $('form-email').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var email = $('email').value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !$('acepto').checked) return;
+    desbloquear();
+    try { localStorage.setItem('cus_calc_ok', '1'); } catch (e) {}
+    try { fbq('track', 'CompleteRegistration', { content_name: 'calculadora' }); } catch (e) {}
+    fetch(SUPA_URL + '/rest/v1/leads', {
+      method: 'POST',
+      headers: { apikey: SUPA_KEY, Authorization: 'Bearer ' + SUPA_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+      body: JSON.stringify({ email: email, origen: 'calculadora' })
+    }).then(function () {
+      return fetch(SUPA_URL + '/functions/v1/send-mail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + SUPA_KEY },
+        body: JSON.stringify({ type: 'nueva_suscripcion', email: email })
+      });
+    }).catch(function () {});
+  });
+})();
+</script>
+</body>
+</html>
