@@ -30,7 +30,7 @@
   <h1>Te llevamos al <span>canal</span></h1>
   <p>Pisos con alquiler por menos de 50.000 € en toda España.<br>Salen primero en nuestro canal de WhatsApp.</p>
   <a class="boton" id="ir" href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj">Entrar al canal de WhatsApp</a>
-  <div class="nota">Si no se abre solo en un segundo, pulsa el botón.</div>
+  <div class="nota">Al entrar verás el chat vacío: es normal, los pisos nuevos llegan en cuanto salen.<br>Si no se abre solo en un segundo, pulsa el botón.</div>
 </div>
 <script>
 (function () {
@@ -87,7 +87,7 @@
     }
   } catch (e) {}
 
-  var espera = (PIXELES.meta || PIXELES.tiktok || PIXELES.google || PIXELES.x) ? 900 : 350;
+  var espera = (PIXELES.meta || PIXELES.tiktok || PIXELES.google || PIXELES.x) ? 1800 : 1200;
   setTimeout(function () { location.replace(CANAL); }, espera);
 })();
 </script>
