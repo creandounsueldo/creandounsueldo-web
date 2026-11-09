@@ -478,6 +478,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
   #garantia{padding:18px 16px}
   .garantia-btn{margin-left:0;margin-top:10px;width:100%}
   .section-header-row{flex-direction:column;align-items:flex-start;gap:10px}
+  .section-header-row>div{max-width:100%}
   /* Scroll hint */
   .scroll-hint-mobile{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.4);font-weight:600;letter-spacing:.5px;margin-bottom:10px}
   .scroll-hint-mobile::after{content:"";display:block;width:24px;height:1px;background:rgba(255,255,255,.3)}
@@ -500,6 +501,10 @@ footer{background:var(--dark);padding:56px 52px 32px}
   #view-faq > div > div:last-child{padding:20px 16px!important}
   .faq-list{grid-template-columns:1fr!important}
   /* Colabora section mobile */
+  #calc-cta{padding:0 16px 40px!important}
+  #calc-cta .cc-in{flex-direction:column;align-items:flex-start!important;gap:18px!important;padding:24px 20px!important}
+  #calc-cta a.cc-btn{width:100%;text-align:center}
+  #calc-cta .cc-ico{font-size:30px!important}
   #colabora{padding:28px 16px!important}
   #colabora > div{flex-direction:column!important;gap:20px!important}
   #view-colabora > div > div:last-child{padding:20px 16px!important}
@@ -585,6 +590,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
     <li><a onclick="abrirTodas('disponible')">Activos</a></li>
     <li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li>
     <li><a onclick="showView('home', true);scrollToSection('vendidos')">Resultados</a></li>
+    <li><a href="/calculadora?utm_source=web&utm_medium=menu">Calculadora</a></li>
     <li><a onclick="abrirBlog()">Blog</a></li>
     <li><a onclick="abrirFaq()">FAQ</a></li>
   </ul>
@@ -608,6 +614,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
     <li><a onclick="closeMobileMenu();abrirTodas('disponible')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Activos</a></li>
     <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('proceso')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Cómo funciona</a></li>
     <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('vendidos')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Resultados</a></li>
+    <li><a href="/calculadora?utm_source=web&utm_medium=menu" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">🧮 Calculadora de rentabilidad</a></li>
     <li><a onclick="closeMobileMenu();abrirBlog()" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Blog</a></li>
     <li><a onclick="closeMobileMenu();abrirFaq()" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">FAQ</a></li>
   </ul>
@@ -699,6 +706,18 @@ fbq('init','1664395115220620');fbq('track','PageView');
     </div>
   </div>
 
+  <!-- CALCULADORA (enlace a /calculadora) -->
+  <div id="calc-cta" style="padding:0 52px 56px">
+    <div class="cc-in" style="max-width:1100px;margin:0 auto;border:1.5px solid var(--gray3);border-radius:12px;padding:28px 36px;display:flex;align-items:center;gap:32px;background:white;box-shadow:var(--shadow)">
+      <div class="cc-ico" style="font-size:44px;line-height:1;flex-shrink:0">🧮</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:6px">Herramienta gratuita</div>
+        <h3 style="font-family:var(--font-display);font-size:32px;line-height:1;letter-spacing:.5px;color:var(--dark);margin-bottom:8px">¿CUÁNTO TE DARÍA UN PISO?</h3>
+        <p style="font-size:14px;color:var(--gray);line-height:1.6;margin:0">Pon el precio y el alquiler y te calculamos la rentabilidad bruta y neta, lo que te queda al mes y en cuántos años recuperas la inversión.</p>
+      </div>
+      <a class="cc-btn" href="/calculadora?utm_source=web&utm_medium=home" style="background:var(--red);color:white;text-decoration:none;font-weight:700;font-size:15px;padding:14px 24px;border-radius:var(--radius);white-space:nowrap;flex-shrink:0">Calcular rentabilidad →</a>
+    </div>
+  </div>
 
   <!-- COLABORA -->
   <section id="colabora" style="padding:40px 52px;background:var(--gray5);border-top:1px solid var(--gray3);border-bottom:1px solid var(--gray3)">
