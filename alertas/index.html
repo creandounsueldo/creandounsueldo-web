@@ -108,12 +108,17 @@ label.l{display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom
     </div>
   </div>
   <div class="tarjeta">
-    <div class="pregunta">¿Dónde te avisamos?</div>
+    <div class="pregunta">¿Por dónde te avisamos? <small>(marca las que quieras)</small></div>
+    <div class="chips" data-campo="avisar_por" style="margin-bottom:14px">
+      <button type="button" class="chip" data-v="email" aria-pressed="true">📧 Email</button>
+      <button type="button" class="chip" data-v="whatsapp">💬 WhatsApp</button>
+      <button type="button" class="chip" data-v="telegram">✈️ Telegram</button>
+    </div>
     <label class="l" for="email">Email *</label>
     <input type="email" id="email" required placeholder="tu@email.com" autocomplete="email" style="margin-bottom:12px">
     <div class="campos">
       <div><label class="l" for="nombre">Nombre <small style="font-weight:400;color:#6B7280">(opcional)</small></label><input type="text" id="nombre" autocomplete="given-name" maxlength="120"></div>
-      <div><label class="l" for="telefono">Teléfono <small style="font-weight:400;color:#6B7280">(si quieres que te llamemos)</small></label><input type="tel" id="telefono" autocomplete="tel" maxlength="40"></div>
+      <div><label class="l" for="telefono">Teléfono <small id="tel-nota" style="font-weight:400;color:#6B7280">(si quieres que te llamemos)</small></label><input type="tel" id="telefono" autocomplete="tel" maxlength="40"></div>
     </div>
     <label class="l" for="notas" style="margin-top:12px">¿Algo más? <small style="font-weight:400;color:#6B7280">(opcional)</small></label>
     <textarea id="notas" maxlength="500" placeholder="Ej.: busco 3 habitaciones, cerca de Oviedo, rentabilidad de al menos un 10 %…"></textarea>
@@ -125,6 +130,7 @@ label.l{display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom
 <div class="tarjeta ok" id="ok">
   <div class="icono">🔔</div>
   <h2>¡Apuntado!</h2>
+  <p id="ok-tg" style="display:none;margin-bottom:14px"><a id="tg-link" href="#" style="color:#229ED9;font-weight:700">✈️ Activa los avisos por Telegram aquí</a></p>
   <p>Cuando tengamos un piso que encaje contigo, te escribimos. Los pisos salen primero en nuestro canal de WhatsApp: si quieres verlos todos al momento, entra gratis.</p>
   <a class="wa" id="wa" href="/canal">Entrar al canal de WhatsApp</a>
 </div>
@@ -146,6 +152,7 @@ label.l{display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom
       if (g.hasAttribute('data-uno')) g.querySelectorAll('.chip').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
       if (b.dataset.v === '_otra') document.getElementById('zona-otra').style.display = on ? 'block' : 'none';
+      if (b.dataset.v === 'whatsapp') document.getElementById('tel-nota').textContent = on ? '(móvil para WhatsApp) *' : '(si quieres que te llamemos)';
     });
   });
   function marcados(campo) {
@@ -158,6 +165,8 @@ label.l{display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom
     var email = document.getElementById('email').value.trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return error('Pon un email válido.');
     if (!document.getElementById('consent').checked) return error('Marca la casilla para que podamos escribirte.');
+    var canales = marcados('avisar_por');
+    if (canales.indexOf('whatsapp') >= 0 && document.getElementById('telefono').value.replace(/\D/g, '').length < 9) return error('Para avisarte por WhatsApp necesitamos tu móvil.');
     var zonas = marcados('zonas').filter(function (z) { return z !== '_otra'; });
     var otra = document.getElementById('zona-otra').value.trim(); if (otra) zonas.push(otra);
     var datos = {
@@ -165,7 +174,7 @@ label.l{display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom
       nombre: document.getElementById('nombre').value, telefono: document.getElementById('telefono').value,
       presupuesto_max: marcados('presupuesto_max')[0] || '', zonas: zonas,
       financiacion: marcados('financiacion')[0] || '', tipo: marcados('tipo')[0] || '',
-      notas: document.getElementById('notas').value
+      notas: document.getElementById('notas').value, avisar_por: canales.length ? canales : ['email']
     };
     var b = document.getElementById('enviar'); b.disabled = true; b.textContent = 'Guardando…';
     try {
