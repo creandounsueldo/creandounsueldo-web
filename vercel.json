@@ -9,6 +9,10 @@
       "destination": "/calculadora/index.html"
     },
     {
+      "source": "/unete",
+      "destination": "/unete/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
