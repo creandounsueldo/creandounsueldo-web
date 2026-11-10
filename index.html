@@ -702,6 +702,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
         <div id="acceso-ok" style="display:none;text-align:center;padding:8px 0">
           <div style="font-family:var(--font-display);font-size:20px;color:white">🎉 ¡YA ESTÁS DENTRO!</div>
           <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:4px">Te avisamos en cuanto suba el próximo activo.</div>
+          <a id="acceso-afinar" href="/alertas?utm_source=web&utm_medium=acceso" style="display:inline-block;margin-top:10px;color:#fff;font-size:13px;font-weight:700;text-decoration:underline">🔔 Dinos qué buscas y te avisamos solo de lo que encaje →</a>
         </div>
       </div>
     </div>
@@ -1060,7 +1061,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
       </div>
       <div class="footer-links-col"><h4>Navegar</h4><ul><li><a onclick="showView('home', true);scrollToSection('nosotros')">Quiénes somos</a></li><li><a onclick="showView('home', true);scrollToSection('activos')">Activos disponibles</a></li><li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li><li><a onclick="showView('home', true);scrollToSection('vendidos')">Track record</a></li><li><a onclick="abrirBlog()">Blog</a></li><li><a onclick="abrirFaq()">FAQ</a></li></ul></div>
       
-      <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="mailto:info@creandounsueldo.com">info@creandounsueldo.com</a></li><li><a href="/calculadora">Calculadora de rentabilidad</a></li><li><a href="https://t.me/creandounsueldo" target="_blank">Canal Telegram</a></li><li><a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank" rel="noopener">Canal de WhatsApp</a></li></ul></div>
+      <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="mailto:info@creandounsueldo.com">info@creandounsueldo.com</a></li><li><a href="/calculadora">Calculadora de rentabilidad</a></li><li><a href="/alertas?utm_source=web&utm_medium=footer">Avísame de pisos</a></li><li><a href="https://t.me/creandounsueldo" target="_blank">Canal Telegram</a></li><li><a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank" rel="noopener">Canal de WhatsApp</a></li></ul></div>
     </div>
     <div class="footer-bottom"><span class="footer-legal">© 2026 HOUSE NOGA S.L. — CreandoUnSueldo</span><span class="footer-legal"><a href="#" onclick="showPrivacidad('aviso');return false">Aviso legal</a> · <a href="#" onclick="showPrivacidad('privacidad');return false">Privacidad</a> · <a href="#" onclick="showPrivacidad('cookies');return false">Cookies</a></span></div>
   </footer>
@@ -2377,6 +2378,7 @@ async function submitAcceso() {
   await guardarLead(email, 'home')
   document.getElementById('acceso-form').style.display = 'none'
   document.getElementById('acceso-ok').style.display = ''
+  try { document.getElementById('acceso-afinar').href += '&email=' + encodeURIComponent(email) } catch(e) {}
   // También cerrar popup si estuviera abierto
   try { localStorage.setItem('leadSeen', '1') } catch(e) {}
 }

@@ -13,6 +13,10 @@
       "destination": "/unete/index.html"
     },
     {
+      "source": "/alertas",
+      "destination": "/alertas/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
