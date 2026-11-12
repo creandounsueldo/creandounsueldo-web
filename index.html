@@ -2930,6 +2930,13 @@ function abrirFicha(a) {
   var ibi = +(a.ibi || 0)
   var rb  = calcRB(a.precio, alqParaCalc)
   var cf  = calcCF(alqParaCalc, com, ibi)
+  try {
+    var _lugar = [a.ciudad, a.provincia].filter(Boolean).join(', ')
+    var _hab = a.habitaciones ? a.habitaciones + ' hab. ' : ''
+    document.title = 'Piso ' + _hab + (_lugar ? 'en ' + _lugar : '') + (a.status === 'alquilado' ? ' (alquilado)' : '') + ' | CreandoUnSueldo'
+    var _d = document.querySelector('meta[name="description"]')
+    if (_d) _d.setAttribute('content', 'Piso con inquilino ' + (_lugar ? 'en ' + _lugar : '') + (rb ? ': rentabilidad bruta del ' + String(rb).replace('.', ',') + ' %' : '') + '. Analizado por CreandoUnSueldo.')
+  } catch (e) {}
   var itp = +(a.itp || 8)
   var itpAmt  = Math.round(+a.precio * itp / 100)
   var puesta  = +(a.puesta_a_punto || 0)
@@ -4033,6 +4040,40 @@ async function submitLista() {
 }
 // ═════════════════════════════════════════════════════════════════════════════
 
+// ═══ SEO POR RUTA ═══════════════════════════════════════════
+// Cada página interna tiene su título, descripción y canonical (antes todas decían ser la portada)
+var SEO_RUTAS = {
+  '/': ['CreandoUnSueldo — Pisos con inquilino por menos de 50.000 €', 'Pisos con alquiler por menos de 50.000 € en toda España para pequeños inversores. Analizamos cada piso, te acompañamos hasta el primer cobro y las oportunidades salen primero en nuestro canal de WhatsApp.'],
+  '/activos': ['Pisos con inquilino a la venta para invertir | CreandoUnSueldo', 'Pisos disponibles para invertir por menos de 50.000 €, con alquiler y rentabilidad bruta. Las oportunidades nuevas salen primero en nuestro canal de WhatsApp.'],
+  '/activos/reservados': ['Pisos reservados por nuestros inversores | CreandoUnSueldo', 'Pisos con inquilino que ya han reservado nuestros inversores: precio, alquiler y rentabilidad de cada operación.'],
+  '/activos/cerrados': ['Operaciones cerradas: pisos alquilados de nuestros inversores | CreandoUnSueldo', 'Más de 70 pisos comprados y alquilados por pequeños inversores con CreandoUnSueldo: precio, alquiler y rentabilidad bruta reales.'],
+  '/faq': ['Preguntas frecuentes sobre invertir en pisos con inquilino | CreandoUnSueldo', 'Cómo funciona invertir con CreandoUnSueldo: compra, reforma, inquilino, alquiler garantizado, gastos e impuestos. Respuestas claras.'],
+  '/colabora': ['Colabora con CreandoUnSueldo', 'Trabaja con nosotros o tráenos pisos: cómo colaborar con CreandoUnSueldo.'],
+  '/lista': ['Recibe las oportunidades por email | CreandoUnSueldo', 'Apúntate y te avisamos por email de los nuevos pisos con inquilino por menos de 50.000 €.'],
+  '/privacidad': ['Política de privacidad | CreandoUnSueldo', 'Política de privacidad de CreandoUnSueldo (HOUSE NOGA, S.L.).'],
+  '/aviso-legal': ['Aviso legal | CreandoUnSueldo', 'Aviso legal de CreandoUnSueldo (HOUSE NOGA, S.L.).'],
+  '/cookies': ['Política de cookies | CreandoUnSueldo', 'Política de cookies de CreandoUnSueldo.']
+}
+function seoRuta(path) {
+  try {
+    var r = SEO_RUTAS[path] || (path.indexOf('/activos/') === 0 ? null : SEO_RUTAS['/'])
+    var url = 'https://www.creandounsueldo.com' + (path === '/' ? '/' : path)
+    if (r) {
+      document.title = r[0]
+      var d = document.querySelector('meta[name="description"]'); if (d) d.setAttribute('content', r[1])
+      var ot = document.querySelector('meta[property="og:title"]'); if (ot) ot.setAttribute('content', r[0])
+      var od = document.querySelector('meta[property="og:description"]'); if (od) od.setAttribute('content', r[1])
+    }
+    var c = document.querySelector('link[rel="canonical"]'); if (c) c.setAttribute('href', url)
+    var ou = document.querySelector('meta[property="og:url"]'); if (ou) ou.setAttribute('content', url)
+    var rb = document.querySelector('meta[name="robots"]')
+    var noindex = path.indexOf('/unsubscribe') === 0
+    if (noindex && !rb) { rb = document.createElement('meta'); rb.name = 'robots'; document.head.appendChild(rb) }
+    if (rb) rb.setAttribute('content', noindex ? 'noindex' : 'index,follow')
+  } catch (e) {}
+}
+// ═══════════════════════════════════════════════════════════
+
 // ═══ ROUTER ══════════════════════════════════════════════════════════════════
 function navigateTo(path, replaceState) {
   if (replaceState) {
@@ -4046,6 +4087,7 @@ function handleRoute(path) {
   path = path || window.location.pathname
   // Strip trailing slash
   path = path.replace(/\/+$/, '') || '/'
+  seoRuta(path)
   
   if (path === '/' || path === '/home') {
     _showView('home')
