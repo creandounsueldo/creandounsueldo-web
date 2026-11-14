@@ -683,6 +683,52 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
 .activo-img img{transition:transform .5s var(--ease-out)}
 @media (hover:hover) and (pointer:fine){.activo-card:hover{transform:translateY(-2px)}.activo-card:hover .activo-img img{transform:scale(1.03)}}
 .nomina-pie .btn-link{white-space:nowrap}
+/* ═══ FICHA v2 ═══ */
+#ficha-eyebrow{display:none}
+#ficha-titulo{font-size:clamp(34px,4.6vw,56px)!important;margin-bottom:8px!important}
+#ficha-loc{font-size:15px!important;color:var(--hierro)!important}
+#ficha-kpis-main>div>div:first-child{color:var(--dark)!important}
+#ficha-kpis-main>div:nth-child(2)>div:first-child{color:var(--cobro)!important}
+#ficha-kpis-main>div>div:last-child{text-transform:none!important;letter-spacing:.2px!important;font-size:12px!important;color:#6b717b!important}
+#view-ficha [style*="font-family:var(--font-display);font-size:15px"]{font-size:20px!important}
+.fs-badge{font:700 12.5px var(--font-body);padding:6px 12px;border-radius:99px;color:#fff;background:rgba(17,19,24,.78)}
+.fs-disponible{background:var(--cobro)}.fs-reservado{background:#b45309}
+.ficha-side>div{background:#fff!important;border:1px solid #dfe2e6;border-radius:6px!important;box-shadow:0 1px 2px rgba(17,19,24,.06),0 18px 40px -18px rgba(17,19,24,.28);position:relative}
+.ficha-side>div::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--red)}
+.ficha-side>div>div:first-child{border-bottom:1px dashed #cfd3d9!important}
+.ficha-side>div>div:first-child>div:first-child{color:var(--hierro)!important;text-transform:none!important;letter-spacing:0!important;font-size:13px!important}
+#ficha-precio-sidebar{color:var(--dark)!important;font-size:48px!important}
+#ficha-honor-sidebar{color:var(--hierro)!important;font-size:13px!important}
+#ficha-reservar-btn{font-size:15px!important;padding:15px!important}
+#ficha-idealista-btn{background:none!important;border:1.5px solid var(--gray3)!important;color:var(--dark)!important;font-size:13px!important;padding:11px!important}
+#ficha-idealista-btn:hover{border-color:var(--dark)!important}
+.fs-nomina{padding:18px 24px 6px}
+.fs-cab{font-size:13px;color:var(--hierro);margin-bottom:4px}
+.fs-nomina dl{margin:0}
+.fs-nomina dl div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eef0f2;font-size:14.5px}
+.fs-nomina dt{color:var(--hierro)}.fs-nomina dd{font-weight:600;color:var(--dark)}
+.fs-total{display:flex;justify-content:space-between;align-items:flex-end;padding:12px 0 4px}
+.fs-total span{font-weight:700;font-size:14.5px;padding-bottom:5px}
+.fs-total b{font-family:var(--font-display);font-weight:400;font-size:46px;line-height:.9;color:var(--red)}
+.fs-nota{font-size:12px;color:#7a808a;padding-bottom:14px}
+.ficha-side>div>div:last-child{background:#f3f8f5!important;border-top:1px solid #dcebe2!important}
+.fs-garantia{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--hierro)}
+.fs-garantia svg{color:var(--cobro);flex-shrink:0;margin-top:1px}.fs-garantia b{color:var(--dark)}
+#ficha-barra{display:none}
+@media(max-width:900px){
+  .ficha-grid{grid-template-columns:1fr!important;padding:22px 18px 110px!important;gap:24px!important}
+  .ficha-side{position:static!important}
+  #ficha-hero{height:300px!important}
+  #ficha-thumbs{left:18px!important}#ficha-map-links{right:18px!important}
+  #ficha-kpis-main{grid-template-columns:1fr 1fr!important}
+  #ficha-datos{grid-template-columns:1fr!important}
+  body:has(#view-ficha.active) #ficha-barra[data-on="1"]{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:600;background:#fff;border-top:1px solid var(--gray3);box-shadow:0 -8px 24px rgba(17,19,24,.08);padding:12px 18px calc(12px + env(safe-area-inset-bottom));align-items:center;justify-content:space-between;gap:14px}
+  #ficha-barra b{display:block;font-family:var(--font-display);font-weight:400;font-size:28px;line-height:1;color:var(--dark)}
+  #ficha-barra span{font-size:12.5px;color:var(--cobro);font-weight:600}
+  #ficha-barra button{background:var(--red);color:#fff;border:none;border-radius:var(--radius);font:700 15px var(--font-body);padding:14px 20px;min-height:48px;white-space:nowrap}
+  body:has(#view-ficha.active) .wa-float{display:none}
+}
+#ficha-idealista-btn:not([style*="display: none"]):not([style*="display:none"]){display:block!important}
 </style>
 </head>
 <body>
@@ -710,7 +756,7 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
 
   <div class="nav-right">
     <button class="nav-cta" id="navCtaHome" onclick="showView('home', true);scrollToSection('activos')">Ver pisos</button>
-    <button class="nav-cta" id="navCtaActivo" style="display:none" onclick="openModal('León', 4000)">Reservar este activo →</button>
+    <button class="nav-cta" id="navCtaActivo" style="display:none" onclick="openModal('León', 4000)">Reservar este piso</button>
     <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileMenu()" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
@@ -1190,7 +1236,7 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
               <div class="kpi-row"><span class="kpi-row-label">IBI</span><span class="kpi-row-val">170 €/año</span></div>
               <div class="kpi-row"><span class="kpi-row-label">Comunidad</span><span class="kpi-row-val">18 €/mes</span></div>
             </div>
-            <button class="btn-reservar" onclick="openModal('León', 4000)">Reservar este activo →</button>
+            <button class="btn-reservar" onclick="openModal('León', 4000)">Reservar este piso</button>
             <div class="sidebar-note">50% honorarios al reservar · 50% en arras<br>Contrato de honorarios digital antes del pago</div>
           </div>
         </div>
@@ -1265,7 +1311,7 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
             </div>
           </div>
           <div class="calc-nota">Rent. bruta = ingresos anuales / precio compra · Rent. neta = (ingresos − gastos) / precio compra · ROCE = ingresos netos / inversión inicial</div>
-          <button class="btn-reservar" style="margin-top:18px;border-radius:var(--radius)" onclick="openModal('León', 4000)">Reservar este activo →</button>
+          <button class="btn-reservar" style="margin-top:18px;border-radius:var(--radius)" onclick="openModal('León', 4000)">Reservar este piso</button>
         </div>
       </div>
     </div>
@@ -1318,7 +1364,7 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
       <div id="ficha-map-links" style="position:absolute;bottom:14px;right:40px;display:flex;gap:8px"></div>
     </div>
 
-    <div style="max-width:1200px;margin:0 auto;padding:36px 52px;display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start">
+    <div class="ficha-grid" style="max-width:1200px;margin:0 auto;padding:36px 52px;display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start">
 
       <!-- ── COLUMNA PRINCIPAL ── -->
       <div>
@@ -1453,21 +1499,20 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
       </div>
 
       <!-- ── SIDEBAR STICKY ── -->
-      <div style="position:sticky;top:80px">
+      <div class="ficha-side" style="position:sticky;top:80px">
         <div style="background:var(--dark);border-radius:14px;overflow:hidden;margin-bottom:16px">
           <div style="padding:24px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08)">
             <div style="font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Precio de compra</div>
             <div id="ficha-precio-sidebar" style="font-family:var(--font-display);font-size:40px;color:white;line-height:1;margin-bottom:3px"></div>
             <div id="ficha-honor-sidebar" style="font-size:12px;color:rgba(255,255,255,.35);margin-bottom:16px"></div>
-            <button id="ficha-reservar-btn" style="display:none;width:100%;padding:13px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-bottom:8px">Reservar este activo →</button>
-            <a id="ficha-idealista-btn" href="#" target="_blank" style="display:none;width:100%;padding:10px;background:#F5E642;border:1.5px solid #D4C800;border-radius:var(--radius);color:#1a1a00;font-family:var(--font-body);font-size:12px;font-weight:700;text-align:center;text-decoration:none;box-sizing:border-box">🔎 Ver alquileres similares en Idealista</a>
+            <button id="ficha-reservar-btn" style="display:none;width:100%;padding:13px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-bottom:8px">Reservar este piso</button>
+            <a id="ficha-idealista-btn" href="#" target="_blank" style="display:none;width:100%;padding:10px;background:#F5E642;border:1.5px solid #D4C800;border-radius:var(--radius);color:#1a1a00;font-family:var(--font-body);font-size:12px;font-weight:700;text-align:center;text-decoration:none;box-sizing:border-box">Ver alquileres parecidos en Idealista</a>
           </div>
           <!-- KPIs sidebar -->
           <div id="ficha-kpis-sidebar" style="padding:18px 24px;display:grid;grid-template-columns:1fr 1fr;gap:14px"></div>
           <!-- Garantia -->
           <div style="padding:14px 24px;background:rgba(34,197,94,.06);border-top:1px solid rgba(34,197,94,.12)">
-            <div style="font-size:12px;color:#22C55E;font-weight:700">✅ Alquiler garantizado</div>
-            <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:3px;line-height:1.5">Si se alquila por debajo del estimado, compensamos la diferencia durante el primer año.</div>
+            <div class="fs-garantia"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2.5 4.5 5.4v6.1c0 4.6 3.1 8.6 7.5 10 4.4-1.4 7.5-5.4 7.5-10V5.4L12 2.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.6 12.2 2.4 2.4 4.4-4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Alquiler del primer año garantizado.</b> Si se alquila por debajo del precio anunciado, te compensamos la diferencia.</span></div>
           </div>
         </div>
       </div>
@@ -3120,10 +3165,10 @@ function abrirFicha(a) {
   // ── Título y loc ──
   document.getElementById('ficha-eyebrow').textContent = a.provincia || a.ciudad || ''
   document.getElementById('ficha-titulo').textContent = a.titulo_pagina || (a.habitaciones ? 'PISO '+a.habitaciones+' HAB.' : 'ACTIVO EN '+loc.toUpperCase())
-  document.getElementById('ficha-loc').textContent = '📍 '+loc
+  document.getElementById('ficha-loc').textContent = loc
 
   // ── Descripción ──
-  document.getElementById('ficha-desc').textContent = a.descripcion || 'Activo de inversión seleccionado por CreandoUnSueldo. Rentabilidad garantizada desde el primer mes.'
+  document.getElementById('ficha-desc').textContent = a.descripcion || 'Piso seleccionado por CreandoUnSueldo, con el alquiler del primer año garantizado.'
 
   // ── KPIs principales ──
   var kpis = [
@@ -3254,11 +3299,11 @@ function abrirFicha(a) {
     var rbN = parseFloat(rb) || 0
     var alts = [
       {label:'Este activo (rent. bruta)', val:rbN, color:'#E31E24', bold:true},
-      {label:'Fondo indexado S&P500', val:10.2, color:'#F59E0B'},
-      {label:'Oro (últimos 20 años)', val:8.1, color:'#D4AF37'},
-      {label:'Bolsa global (histórico)', val:7.2, color:'#6366F1'},
-      {label:'IBEX 35 (histórico)', val:5.8, color:'#8B5CF6'},
-      {label:'Depósito bancario', val:2.8, color:'#9CA3AF'},
+      {label:'Fondo indexado S&P500', val:10.2, color:'#AEB3BB'},
+      {label:'Oro (últimos 20 años)', val:8.1, color:'#AEB3BB'},
+      {label:'Bolsa global (histórico)', val:7.2, color:'#AEB3BB'},
+      {label:'IBEX 35 (histórico)', val:5.8, color:'#AEB3BB'},
+      {label:'Depósito bancario', val:2.8, color:'#AEB3BB'},
     ]
     var maxA = Math.max.apply(null, alts.map(function(x){ return x.val }))
     document.getElementById('ficha-comparativa').innerHTML =
@@ -3729,6 +3774,47 @@ function actualizarTodo(cf, rb, alq, capitalBase, conHipoteca, cuota, a) {
   }).join('')
 }
 
+
+// Ficha v2: la barra lateral enseña la nómina del piso (como la portada) y en móvil hay una barra fija para reservar
+function fichaV2(a) {
+  if (!a) return
+  var cerrado = a.status === 'alquilado' || a.status === 'finalizado'
+  var renta = +(cerrado ? (a.alquiler_final || a.alquiler_conseguido || a.alquiler_estimado) : a.alquiler_estimado) || 0
+  var com = +a.gastos_comunidad || 0, ibi = Math.round((+a.ibi || 0) / 12)
+  var e = function(n){ return fmtNum(n) + '\u00a0€' }
+  var side = document.getElementById('ficha-kpis-sidebar')
+  if (side && renta) {
+    side.className = 'fs-nomina'
+    side.removeAttribute('style')
+    side.innerHTML = '<div class="fs-cab">' + (cerrado ? 'Lo que deja al mes' : 'Lo que te dejaría al mes') + '</div>'
+      + '<dl><div><dt>Alquiler' + (cerrado ? '' : ' garantizado') + '</dt><dd>+' + e(renta) + '</dd></div>'
+      + '<div><dt>Comunidad</dt><dd>−' + e(com) + '</dd></div>'
+      + '<div><dt>IBI, al mes</dt><dd>−' + e(ibi) + '</dd></div></dl>'
+      + '<div class="fs-total"><span>Te queda</span><b>' + e(renta - com - ibi) + '</b></div>'
+      + '<div class="fs-nota">Antes de seguros e impuestos.</div>'
+  }
+  var b = document.getElementById('ficha-badges')
+  if (b) {
+    var r = ['reservado','en_proceso','arras','notaria','puesta_a_punto','busqueda_inquilino'].indexOf(a.status) >= 0
+    var t = cerrado ? 'Alquilado' : r ? 'Reservado' : 'Disponible'
+    b.innerHTML = '<span class="fs-badge fs-' + t.toLowerCase() + '">' + t + '</span>'
+  }
+  var barra = document.getElementById('ficha-barra')
+  if (!barra) {
+    barra = document.createElement('div'); barra.id = 'ficha-barra'
+    barra.innerHTML = '<div><b id="fb-precio"></b><span id="fb-sub"></span></div><button id="fb-btn">Reservar este piso</button>'
+    document.body.appendChild(barra)
+  }
+  var disp = a.status === 'disponible' || a.status === 'pte_validacion'
+  document.getElementById('fb-precio').textContent = e(a.precio)
+  document.getElementById('fb-sub').textContent = renta ? 'te quedan ' + e(renta - com - ibi) + ' al mes' : ''
+  document.getElementById('fb-btn').onclick = function(){ openContactoActivo(a) }
+  barra.dataset.on = disp ? '1' : '0'
+}
+(function(){
+  var orig = abrirFicha
+  abrirFicha = function(a){ var r = orig.apply(this, arguments); try { fichaV2(a) } catch(e){ console.warn('fichaV2', e) } return r }
+})();
 
 function openContactoActivo(a) {
   // Pre-rellenar el mensaje con info del activo
