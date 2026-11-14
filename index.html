@@ -575,6 +575,108 @@ if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createEl
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1664395115220620');fbq('track','PageView');
 </script>
+<style id="v2">
+/* ═══ V2 · capa de diseño (nov 2026): hero con nómina, menos adornos, detalles de interacción ═══ */
+:root{--ease-out:cubic-bezier(.23,1,.32,1);--hierro:#565c66;--niebla:#f2f3f5;--cobro:#0f7a45}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px}
+body{font-feature-settings:"tnum" 1,"lnum" 1}
+button,.btn-white,.btn-primary,.nav-cta,.cc-btn,.ver-todas-btn{transition:transform 160ms var(--ease-out),background-color .2s,color .2s,border-color .2s,box-shadow .2s}
+button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:active,.ver-todas-btn:active{transform:scale(.97)}
+.btn-white:hover{transform:none}
+@media (hover:hover) and (pointer:fine){.activo-card{transition:transform .25s var(--ease-out),box-shadow .25s,border-color .25s}.activo-card:hover{transform:translateY(-3px)}}
+@media (hover:none){.activo-card:hover{transform:none}}
+#view-home .section-eyebrow{display:none}
+.btn-link{background:none;border:none;padding:6px 2px;font:600 15px var(--font-body);color:var(--dark);cursor:pointer;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;text-decoration-color:rgba(17,19,24,.25)}
+.btn-link:hover{text-decoration-color:var(--red)}
+
+/* HERO */
+#hero{background:#fff;min-height:auto;display:block;padding:128px 52px 72px;border-bottom:1px solid var(--gray3)}
+#hero .hero-inner{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:72px;align-items:center;text-align:left;max-width:1180px;margin:0 auto}
+#hero h1{color:var(--dark);font-size:clamp(68px,8.2vw,124px);line-height:.88;letter-spacing:.5px;margin-bottom:28px;text-wrap:balance}
+#hero .hero-sub{color:var(--hierro);font-size:19px;line-height:1.6;font-weight:400;max-width:34ch;margin-bottom:32px}
+#hero .hero-actions{justify-content:flex-start;align-items:center;gap:22px;margin-bottom:36px}
+.hero-cta{font-size:16px;padding:16px 30px}
+.hero-garantia{display:flex;gap:12px;align-items:flex-start;max-width:46ch;font-size:14.5px;line-height:1.55;color:var(--hierro);padding-top:22px;border-top:1px solid var(--gray3)}
+.hero-garantia svg{flex-shrink:0;color:var(--cobro);margin-top:1px}
+.hero-garantia b{color:var(--dark);font-weight:700}
+
+/* NÓMINA: el momento animado de la página */
+.nomina{background:#fff;border:1px solid #dfe2e6;border-radius:6px;padding:26px 28px 22px;box-shadow:0 1px 2px rgba(17,19,24,.06),0 18px 40px -18px rgba(17,19,24,.28);position:relative;max-width:440px;justify-self:end;width:100%}
+.nomina::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--red);border-radius:6px 6px 0 0}
+.nomina-cab{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--hierro);padding-bottom:12px;border-bottom:1px dashed #cfd3d9}
+.nomina-cab b{font-family:var(--font-display);font-weight:400;font-size:26px;letter-spacing:.5px;color:var(--dark);text-transform:uppercase}
+.nomina-piso{font-size:14px;color:var(--dark);font-weight:600;padding:14px 0 6px}
+.nomina-lineas{margin:0}
+.nomina-lineas div{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #eef0f2;font-size:15px}
+.nomina-lineas dt{color:var(--hierro)}
+.nomina-lineas dd{font-weight:600;color:var(--dark);font-variant-numeric:tabular-nums}
+.nomina-total{display:flex;justify-content:space-between;align-items:flex-end;padding:16px 0 12px}
+.nomina-total span{font-size:15px;font-weight:700;color:var(--dark);padding-bottom:6px}
+.nomina-total b{font-family:var(--font-display);font-weight:400;font-size:64px;line-height:.9;color:var(--red);font-variant-numeric:tabular-nums}
+.nomina-pie{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13.5px;color:var(--cobro);font-weight:600;padding-top:12px;border-top:1px dashed #cfd3d9}
+.nomina-pie .btn-link{font-size:14px;padding:4px 0}
+.nomina-nota{font-size:12px;color:#7a808a;margin-top:10px}
+@media (prefers-reduced-motion:no-preference){
+  .nomina{animation:nm-entra 520ms var(--ease-out) both 120ms}
+  .nomina-lineas div{animation:nm-linea 420ms var(--ease-out) both}
+  .nomina-lineas div:nth-child(1){animation-delay:420ms}.nomina-lineas div:nth-child(2){animation-delay:540ms}.nomina-lineas div:nth-child(3){animation-delay:640ms}
+  .nomina-total b{animation:nm-total 520ms var(--ease-out) both 820ms}
+}
+@keyframes nm-entra{from{opacity:0;transform:translateY(14px) rotate(-.6deg)}}
+@keyframes nm-linea{from{opacity:0;transform:translateX(-6px)}}
+@keyframes nm-total{from{opacity:0;transform:translateY(8px);filter:blur(4px)}}
+
+/* SECCIONES: cabeceras sin etiquetas, textos legibles */
+#view-home h2{text-wrap:balance}
+#view-home .section-desc{color:var(--hierro);font-weight:400;font-size:17px;max-width:52ch;margin-bottom:40px}
+#activos{background:var(--niebla)}
+.activo-location{font-family:var(--font-body);letter-spacing:.2px;text-transform:none;font-size:13px;color:var(--hierro)}
+.activo-badge{font-family:var(--font-body);letter-spacing:.3px;text-transform:none;font-size:12px}
+.kpi-key,.kpi-grid-key{letter-spacing:.3px;text-transform:none;font-size:11.5px;color:#6b717b}
+.proceso-card{border-radius:8px}
+.proceso-num{font-size:56px}
+#calc-cta .cc-in{box-shadow:none;border-color:#dfe2e6}
+
+/* FAQ: una sola columna, sin huecos */
+.faq-list{grid-template-columns:1fr;max-width:760px;gap:1px;text-align:left}
+.faq-q{font-size:15.5px;padding:20px 22px}
+#faq{text-align:left!important}
+#faq h2,#faq .section-desc{text-align:center;margin-left:auto;margin-right:auto}
+
+/* MÓVIL */
+@media(max-width:960px){
+  #hero .hero-inner{grid-template-columns:1fr;gap:40px}
+  .nomina{justify-self:start}
+}
+@media(max-width:768px){
+  #hero{padding:96px 18px 44px}
+  #hero h1{font-size:clamp(58px,17vw,84px);margin-bottom:20px}
+  #hero .hero-sub{font-size:17px;margin-bottom:26px}
+  #hero .hero-actions{flex-direction:row;flex-wrap:wrap;gap:16px;margin-bottom:28px}
+  .hero-cta{width:100%;padding:16px 20px}
+  .nomina{padding:22px 20px 18px}
+  .nomina-total b{font-size:56px}
+  .kpi-val{font-size:20px}
+  .kpi-cell{padding:11px 10px;min-width:0}
+  .kpi-grid-cell{padding:10px 10px;min-width:0}
+}
+
+/* ajustes tras la primera revisión */
+#vendidos{background:#fff}
+.vendido-location{font-family:var(--font-body);letter-spacing:.2px;text-transform:none;font-size:13px;color:var(--hierro)}
+.vendido-title{opacity:1}
+#cta-final .section-desc{color:rgba(255,255,255,.88)!important}
+#activos .scroll-hint-mobile,#vendidos .scroll-hint-mobile{color:var(--hierro)}
+#activos .scroll-hint-mobile::after,#vendidos .scroll-hint-mobile::after{background:var(--gray2)}
+.footer-col-title,.footer-title{letter-spacing:.5px}
+#view-home .section-eyebrow{display:none!important}
+@media(max-width:768px){
+  #view-home section{padding-left:18px!important;padding-right:18px!important}
+  #view-home .activos-grid,#view-home .proceso-grid,#view-home .vendidos-grid{margin-left:-18px!important;margin-right:-18px!important;padding-left:18px!important;padding-right:18px!important;scroll-padding-left:18px}
+  #acceso-outer,#calc-cta{padding-left:18px!important;padding-right:18px!important}
+}
+</style>
 </head>
 <body>
 <a class="wa-float" href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank" rel="noopener" aria-label="Únete a nuestro canal de WhatsApp"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg><span class="wa-float-label">Canal de WhatsApp</span></a>
@@ -600,7 +702,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
   <button class="nav-back" id="navBack" style="display:none" onclick="volverDeficha()">← Volver a activos</button>
 
   <div class="nav-right">
-    <button class="nav-cta" id="navCtaHome" onclick="showView('home', true);scrollToSection('activos')">Ver oportunidades →</button>
+    <button class="nav-cta" id="navCtaHome" onclick="showView('home', true);scrollToSection('activos')">Ver pisos</button>
     <button class="nav-cta" id="navCtaActivo" style="display:none" onclick="openModal('León', 4000)">Reservar este activo →</button>
     <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileMenu()" aria-label="Menú">
       <span></span><span></span><span></span>
@@ -629,46 +731,38 @@ fbq('init','1664395115220620');fbq('track','PageView');
 
   <!-- HERO -->
   <section id="hero">
-    
-    <div class="hero-deco"></div>
-    
     <div class="hero-inner">
-        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:20px">✅ Alquiler garantizado en todas las operaciones</div>
-        <h1>PISOS QUE<br>PAGAN<br>CADA MES.</h1>
-        <p class="hero-sub" style="max-width:560px">Seleccionamos el activo, gestionamos la compra, coordinamos la reforma, ponemos el inquilino y garantizamos el alquiler estimado. Tú solo cobras.</p>
+      <div class="hero-texto">
+        <h1>Pisos que pagan<br>cada mes.</h1>
+        <p class="hero-sub">Pisos por menos de 50.000&nbsp;€ que buscamos, compramos contigo y te entregamos alquilados. Tú solo cobras.</p>
         <div class="hero-actions">
-          <button class="btn-white" onclick="abrirTodas('disponible')">Ver activos disponibles →</button>
-          <button class="btn-white-ghost" onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</button>
-          <button class="btn-white-ghost" onclick="openAgente()" style="border-color:rgba(255,255,255,.5)">💬 Hablar con un agente</button>
+          <button class="btn-primary hero-cta" onclick="abrirTodas('disponible')">Ver pisos disponibles</button>
+          <button class="btn-link" onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</button>
         </div>
-        <div class="hero-stats">
-          <div class="stat-item"><div class="stat-num">+10%</div><div class="stat-label">Rent. media bruta</div></div>
-          <div class="stat-item"><div class="stat-num">72</div><div class="stat-label">Operaciones cerradas</div></div>
-          <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Alquilados al precio estimado</div></div>
-          <div class="stat-item"><div class="stat-num">60%</div><div class="stat-label">Clientes que repiten</div></div>
-        </div>
+        <p class="hero-garantia"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2.5 4.5 5.4v6.1c0 4.6 3.1 8.6 7.5 10 4.4-1.4 7.5-5.4 7.5-10V5.4L12 2.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.6 12.2 2.4 2.4 4.4-4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Alquiler del primer año garantizado.</b> Si se alquila por debajo del precio anunciado, te compensamos la diferencia. No nos ha pasado nunca.</span></p>
+      </div>
+      <aside class="nomina" aria-label="Lo que deja al mes un piso disponible ahora">
+        <div class="nomina-cab"><span>Tu nómina de</span><b id="nm-mes">este mes</b></div>
+        <div class="nomina-piso" id="nm-piso">Piso en Ponferrada · comprado por 41.000&nbsp;€</div>
+        <dl class="nomina-lineas">
+          <div><dt>Alquiler</dt><dd id="nm-alq">+600&nbsp;€</dd></div>
+          <div><dt>Comunidad</dt><dd id="nm-com">−35&nbsp;€</dd></div>
+          <div><dt>IBI, al mes</dt><dd id="nm-ibi">−14&nbsp;€</dd></div>
+        </dl>
+        <div class="nomina-total"><span>Te queda</span><b id="nm-total">551&nbsp;€</b></div>
+        <div class="nomina-pie"><span id="nm-rb">17,6&nbsp;% de rentabilidad bruta</span><button class="btn-link" id="nm-ver" onclick="abrirTodas('disponible')">Ver este piso</button></div>
+        <p class="nomina-nota">Un piso disponible ahora mismo. Antes de seguros e impuestos.</p>
+      </aside>
     </div>
   </section>
-
-  <!-- GARANTIA -->
-  <div id="garantia">
-    <div class="garantia-inner">
-      <div class="garantia-icon">✓</div>
-      <div class="garantia-text">
-        <h3>GARANTIZAMOS EL ALQUILER ESTIMADO</h3>
-        <p>Si tu piso se alquila por debajo del precio estimado, nosotros compensamos la diferencia. El 100% de nuestras operaciones se han alquilado por encima.</p>
-      </div>
-      <button class="garantia-btn" onclick="showView('home', true);scrollToSection('vendidos')">Ver resultados →</button>
-    </div>
-  </div>
 
   <!-- ACTIVOS -->
   <section id="activos" style="padding:48px 52px 56px">
     <div class="section-header-row">
-      <div><div class="section-eyebrow">Activos disponibles</div><h2>OPORTUNIDADES ACTIVAS</h2></div>
-      <button class="ver-todas-btn" onclick="abrirTodas('disponible')">Ver todas →</button>
+      <div><div class="section-eyebrow">Activos disponibles</div><h2>PISOS DISPONIBLES</h2></div>
+      <button class="ver-todas-btn" onclick="abrirTodas('disponible')">Ver todas</button>
     </div>
-    <div class="scroll-hint-mobile">Desliza para ver más →</div>
+    <div class="scroll-hint-mobile">Desliza para ver más</div>
     <div class="activos-grid" id="grid-activos">
       <div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">
         <div style="width:32px;height:32px;border:3px solid rgba(255,255,255,.1);border-top-color:#E31E24;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>
@@ -684,7 +778,6 @@ fbq('init','1664395115220620');fbq('track','PageView');
     <div id="acceso-bloque" style="background:var(--dark);border-radius:12px;padding:24px 36px;display:flex;align-items:center;gap:36px;flex-wrap:wrap;position:relative;overflow:visible">
       <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none"></div>
       <div style="position:relative;flex:1;min-width:220px">
-        <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px">Acceso anticipado</div>
         <div style="font-family:var(--font-display);font-size:clamp(20px,2.5vw,28px);color:white;line-height:1.05;letter-spacing:.3px;margin-bottom:6px">LOS MEJORES PISOS SE VAN EN HORAS.</div>
         <p style="font-size:13px;color:rgba(255,255,255,.4);line-height:1.5">Deja tu email y recibe cada nuevo activo antes de que llegue a la web pública. Sin spam.</p>
       </div>
@@ -692,7 +785,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
         <div id="acceso-form">
           <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
             <input id="acceso-email" type="email" placeholder="tu@email.com" style="padding:11px 16px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:white;font-family:var(--font-body);font-size:14px;outline:none;width:220px" onfocus="this.style.borderColor='rgba(227,30,36,.6)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
-            <button onclick="submitAcceso()" style="padding:11px 24px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">Unirme →</button>
+            <button onclick="submitAcceso()" style="padding:11px 24px;background:var(--red);color:white;border:none;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">Avisarme</button>
           </div>
           <label style="display:flex;align-items:flex-start;gap:6px;cursor:pointer">
             <input type="checkbox" id="acceso-consent" style="margin-top:2px;accent-color:var(--red);flex-shrink:0">
@@ -700,9 +793,9 @@ fbq('init','1664395115220620');fbq('track','PageView');
           </label>
         </div>
         <div id="acceso-ok" style="display:none;text-align:center;padding:8px 0">
-          <div style="font-family:var(--font-display);font-size:20px;color:white">🎉 ¡YA ESTÁS DENTRO!</div>
+          <div style="font-family:var(--font-display);font-size:20px;color:white">YA ESTÁS DENTRO</div>
           <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:4px">Te avisamos en cuanto suba el próximo activo.</div>
-          <a id="acceso-afinar" href="/alertas?utm_source=web&utm_medium=acceso" style="display:inline-block;margin-top:10px;color:#fff;font-size:13px;font-weight:700;text-decoration:underline">🔔 Dinos qué buscas y te avisamos solo de lo que encaje →</a>
+          <a id="acceso-afinar" href="/alertas?utm_source=web&utm_medium=acceso" style="display:inline-block;margin-top:10px;color:#fff;font-size:13px;font-weight:700;text-decoration:underline">Dinos qué buscas y te avisamos solo de lo que encaje</a>
         </div>
       </div>
     </div>
@@ -711,13 +804,12 @@ fbq('init','1664395115220620');fbq('track','PageView');
   <!-- CALCULADORA (enlace a /calculadora) -->
   <div id="calc-cta" style="padding:0 52px 56px">
     <div class="cc-in" style="max-width:1100px;margin:0 auto;border:1.5px solid var(--gray3);border-radius:12px;padding:28px 36px;display:flex;align-items:center;gap:32px;background:white;box-shadow:var(--shadow)">
-      <div class="cc-ico" style="font-size:44px;line-height:1;flex-shrink:0">🧮</div>
+      
       <div style="flex:1;min-width:0">
-        <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:6px">Herramienta gratuita</div>
         <h3 style="font-family:var(--font-display);font-size:32px;line-height:1;letter-spacing:.5px;color:var(--dark);margin-bottom:8px">¿CUÁNTO TE DARÍA UN PISO?</h3>
         <p style="font-size:14px;color:var(--gray);line-height:1.6;margin:0">Pon el precio y el alquiler y te calculamos la rentabilidad bruta y neta, lo que te queda al mes y en cuántos años recuperas la inversión.</p>
       </div>
-      <a class="cc-btn" href="/calculadora?utm_source=web&utm_medium=home" style="background:var(--red);color:white;text-decoration:none;font-weight:700;font-size:15px;padding:14px 24px;border-radius:var(--radius);white-space:nowrap;flex-shrink:0">Calcular rentabilidad →</a>
+      <a class="cc-btn" href="/calculadora?utm_source=web&utm_medium=home" style="background:var(--red);color:white;text-decoration:none;font-weight:700;font-size:15px;padding:14px 24px;border-radius:var(--radius);white-space:nowrap;flex-shrink:0">Calcular rentabilidad</a>
     </div>
   </div>
 
@@ -726,9 +818,9 @@ fbq('init','1664395115220620');fbq('track','PageView');
     <div style="max-width:960px;margin:0 auto;display:flex;align-items:center;gap:48px;flex-wrap:wrap">
       <div style="flex:1;min-width:260px">
         <div class="section-eyebrow" style="margin-bottom:6px">Colabora con nosotros</div>
-        <h2 style="color:var(--dark);font-size:clamp(24px,3vw,36px);margin-bottom:10px;line-height:1.1">¿TIENES UN PISO INTERESANTE?</h2>
-        <p style="color:var(--gray);font-size:14px;line-height:1.65;margin-bottom:20px;max-width:420px">Llega a +2.000 inversores activos. Cerramos la mayoría de operaciones en menos de 24h. Un solo interlocutor, sin complicaciones.</p>
-        <button onclick="abrirColabora()" class="btn-primary" style="font-size:13px;padding:12px 24px">Proponer un activo →</button>
+        <h2 style="color:var(--dark);font-size:clamp(24px,3vw,36px);margin-bottom:10px;line-height:1.1">¿VENDES UN PISO CON INQUILINO?</h2>
+        <p style="color:var(--gray);font-size:14px;line-height:1.65;margin-bottom:20px;max-width:420px">Lo enseñamos a nuestra comunidad de pequeños inversores y nos encargamos de todo hasta la firma. Un solo interlocutor, sin complicaciones.</p>
+        <button onclick="abrirColabora()" class="btn-primary" style="font-size:13px;padding:12px 24px">Proponer un piso</button>
       </div>
       <div style="display:flex;gap:0;border:1px solid var(--gray3);border-radius:12px;overflow:hidden;background:white;flex-shrink:0">
         <div style="display:flex;flex-direction:column">
@@ -742,7 +834,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
           </div>
           <div style="display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--gray3)">
             <div style="font-family:var(--font-display);font-size:22px;color:var(--red);line-height:1;width:20px;flex-shrink:0">3</div>
-            <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Publicamos para inversores</div><div style="font-size:11px;color:var(--gray2)">+2.000 compradores activos</div></div>
+            <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Publicamos para inversores</div><div style="font-size:11px;color:var(--gray2)">En el canal y en la web</div></div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;padding:14px 20px">
             <div style="font-family:var(--font-display);font-size:22px;color:var(--red);line-height:1;width:20px;flex-shrink:0">4</div>
@@ -758,13 +850,13 @@ fbq('init','1664395115220620');fbq('track','PageView');
     <div class="section-eyebrow" style="color:rgba(227,30,36,.9)">Cómo funciona</div>
     <h2 style="color:white">EL PROCESO, PASO A PASO</h2>
     <p class="section-desc" style="color:rgba(255,255,255,.6)">Desde que reservas hasta que cobras el primer mes. Sin ambigüedades.</p>
-    <div class="scroll-hint-mobile">Desliza para ver los pasos →</div>
+    <div class="scroll-hint-mobile">Desliza para ver los pasos</div>
     <div class="proceso-grid">
-      <div class="proceso-card"><span class="proceso-num">1</span><span class="proceso-icon">🔒</span><div class="proceso-title">RESERVA EL ACTIVO</div><p class="proceso-desc">Te interesa un piso, nos lo dices y lo bloqueamos para ti. Hablas con uno de nosotros, aclaramos dudas y acordamos los términos. Firmas el contrato de honorarios digitalmente y pagas el 50% de los honorarios. El activo queda bloqueado para ti desde ese momento.</p></div>
-      <div class="proceso-card"><span class="proceso-num">2</span><span class="proceso-icon">✍️</span><div class="proceso-title">FIRMA LAS ARRAS</div><p class="proceso-desc">Contrato de arras con el vendedor. Se puede firmar digitalmente. En este momento se cobran los honorarios de intermediación.</p></div>
-      <div class="proceso-card"><span class="proceso-num">3</span><span class="proceso-icon">🏛️</span><div class="proceso-title">FIRMA ANTE NOTARIO</div><p class="proceso-desc">Escritura de compraventa. Podemos firmar en tu representación con poder notarial. Muchos inversores nunca han pisado el inmueble que compraron.</p></div>
-      <div class="proceso-card"><span class="proceso-num">4</span><span class="proceso-icon">🔑</span><div class="proceso-title">ALQUILAMOS TU PISO</div><p class="proceso-desc">Gestionamos reforma si procede, puesta a punto, suministros, seguro de hogar y búsqueda de inquilino con análisis de solvencia y seguro de impago.</p></div>
-      <div class="proceso-card"><span class="proceso-num">5</span><span class="proceso-icon">💶</span><div class="proceso-title">EMPIEZA TU SUELDO</div><p class="proceso-desc">Inquilino dentro, contrato firmado. Cobras cada mes. Garantizamos el alquiler estimado: si se alquila por debajo, compensamos la diferencia.</p></div>
+      <div class="proceso-card"><span class="proceso-num">1</span><div class="proceso-title">RESERVA EL ACTIVO</div><p class="proceso-desc">Te interesa un piso, nos lo dices y lo bloqueamos para ti. Hablas con uno de nosotros, aclaramos dudas y acordamos los términos. Firmas el contrato de honorarios digitalmente y pagas el 50% de los honorarios. El activo queda bloqueado para ti desde ese momento.</p></div>
+      <div class="proceso-card"><span class="proceso-num">2</span><div class="proceso-title">FIRMA LAS ARRAS</div><p class="proceso-desc">Contrato de arras con el vendedor. Se puede firmar digitalmente. En este momento se cobran los honorarios de intermediación.</p></div>
+      <div class="proceso-card"><span class="proceso-num">3</span><div class="proceso-title">FIRMA ANTE NOTARIO</div><p class="proceso-desc">Escritura de compraventa. Podemos firmar en tu representación con poder notarial. Muchos inversores nunca han pisado el inmueble que compraron.</p></div>
+      <div class="proceso-card"><span class="proceso-num">4</span><div class="proceso-title">ALQUILAMOS TU PISO</div><p class="proceso-desc">Gestionamos reforma si procede, puesta a punto, suministros, seguro de hogar y búsqueda de inquilino con análisis de solvencia y seguro de impago.</p></div>
+      <div class="proceso-card"><span class="proceso-num">5</span><div class="proceso-title">EMPIEZA TU SUELDO</div><p class="proceso-desc">Inquilino dentro, contrato firmado. Cobras cada mes. Garantizamos el alquiler estimado: si se alquila por debajo, compensamos la diferencia.</p></div>
     </div>
   </section>
 
@@ -776,9 +868,9 @@ fbq('init','1664395115220620');fbq('track','PageView');
         <h2>RESULTADOS REALES</h2>
         <p class="section-desc">Operaciones cerradas con sus rentabilidades finales. Sin editar. Sin redondear.</p>
       </div>
-      <button class="ver-todas-btn" onclick="abrirTodas('finalizado')">Ver todas →</button>
+      <button class="ver-todas-btn" onclick="abrirTodas('finalizado')">Ver todas</button>
     </div>
-    <div class="scroll-hint-mobile">Desliza para ver más →</div>
+    <div class="scroll-hint-mobile">Desliza para ver más</div>
     <div class="vendidos-grid" id="grid-vendidos">
       <div style="grid-column:1/-1;text-align:center;padding:48px;color:#9ca3af">
         <div style="width:32px;height:32px;border:3px solid rgba(255,255,255,.1);border-top-color:#E31E24;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px"></div>
@@ -795,7 +887,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
         <h2 style="color:white;margin-bottom:6px">EL MERCADO A TU FAVOR</h2>
         <p style="color:rgba(255,255,255,.55);font-size:14px;margin:0">Datos reales y noticias recientes sobre rentabilidad inmobiliaria en España.</p>
       </div>
-      <button id="blog-ver-todo-btn" onclick="abrirBlog()" style="background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-family:var(--font-body);font-size:13px;font-weight:600;padding:9px 20px;border-radius:var(--radius);cursor:pointer;transition:all .2s;white-space:nowrap">Ver todos →</button>
+      <button id="blog-ver-todo-btn" onclick="abrirBlog()" style="background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-family:var(--font-body);font-size:13px;font-weight:600;padding:9px 20px;border-radius:var(--radius);cursor:pointer;transition:all .2s;white-space:nowrap">Ver todos</button>
     </div>
     <div class="blog-grid" id="blog-grid">
 
@@ -805,7 +897,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
           <div class="blog-meta">Abr 2026 · Fuente: Idealista</div>
           <div class="blog-title">LOS MERCADOS INTERMEDIOS DOBLAN LA RENTABILIDAD DE MADRID Y BARCELONA EN 2026</div>
           <div class="blog-excerpt">Murcia (7,5%), Segovia (7,3%) y Lleida (7,3%) lideran la rentabilidad bruta en el primer trimestre de 2026. Madrid se queda en el 4,7% y Barcelona en el 5,2%. La inversión en ciudades medianas es la estrategia más rentable del momento.</div>
-          <div class="blog-readmore">Leer análisis →</div>
+          <div class="blog-readmore">Leer análisis</div>
         </div>
       </div>
 
@@ -815,7 +907,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
           <div class="blog-meta">Ene 2026 · Fuente: Reental</div>
           <div class="blog-title">VIVIENDA VS BONOS DEL ESTADO: EL LADRILLO SIGUE GANANDO EN 2026</div>
           <div class="blog-excerpt">La rentabilidad bruta media de la vivienda en España cerró 2025 en el 6,7%, más del doble que el bono a 10 años (3,5%). Con el alquiler subiendo entre un 6-8% previsto para 2026, comprar para alquilar sigue siendo la inversión más sólida.</div>
-          <div class="blog-readmore">Leer análisis →</div>
+          <div class="blog-readmore">Leer análisis</div>
         </div>
       </div>
 
@@ -825,7 +917,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
           <div class="blog-meta">Dic 2025 · Fuente: AEAT</div>
           <div class="blog-title">CÓMO TRIBUTA EL ALQUILER EN 2026: GUÍA PRÁCTICA PARA EL INVERSOR</div>
           <div class="blog-excerpt">Reducción del 50% en IRPF para nuevos contratos de arrendamiento (antes 60%). Gastos deducibles, amortización del 3% y cómo declarar los ingresos del alquiler correctamente. Todo lo que necesitas saber antes de comprar.</div>
-          <div class="blog-readmore">Leer análisis →</div>
+          <div class="blog-readmore">Leer análisis</div>
         </div>
       </div>
 
@@ -835,7 +927,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
           <div class="blog-meta">Nov 2025 · Fuente: Fotocasa</div>
           <div class="blog-title">EL PRECIO DE LA VIVIENDA SUBE UN 15,3% INTERANUAL: QUÉ SIGNIFICA PARA EL INVERSOR</div>
           <div class="blog-excerpt">El metro cuadrado alcanza nuevos máximos históricos en España. Para el inversor que compra hoy, esto significa mayor revalorización del activo a largo plazo y rentabilidades brutas que superan el 8% en mercados secundarios.</div>
-          <div class="blog-readmore">Leer análisis →</div>
+          <div class="blog-readmore">Leer análisis</div>
         </div>
       </div>
 
@@ -847,7 +939,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
           <div class="blog-meta">Oct 2025 · Fuente: Idealista</div>
           <div class="blog-title">EL ALQUILER SUBE UN 10,9% EN 2025: POR QUÉ LA DEMANDA NO PARA</div>
           <div class="blog-excerpt">Escasez de oferta, inmigración y demanda estructural sostienen la presión al alza. El inversor que compra hoy se beneficia de rentas crecientes desde el primer mes. Las zonas con mayor tensión son las que ofrecen mejor cashflow.</div>
-          <div class="blog-readmore">Leer análisis →</div>
+          <div class="blog-readmore">Leer análisis</div>
         </div>
       </div>
 
@@ -857,7 +949,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
           <div class="blog-meta">Sep 2025 · Fuente: Fotocasa Research</div>
           <div class="blog-title">INVERTIR EN PISOS SIN SALIR DE CASA: TODO LO QUE NECESITAS SABER</div>
           <div class="blog-excerpt">Poder notarial, gestión remota del inquilino, firma de arras a distancia. El 60% de los inversores de CreandoUnSueldo nunca han visitado el inmueble que compraron. Así funciona la inversión inmobiliaria gestionada por nosotros.</div>
-          <div class="blog-readmore">Leer análisis →</div>
+          <div class="blog-readmore">Leer análisis</div>
         </div>
       </div>
 
@@ -867,7 +959,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
           <div class="blog-meta">Jul 2025 · Fuente: CBRE</div>
           <div class="blog-title">LA INVERSIÓN INMOBILIARIA EN ESPAÑA SUPERA LOS 7.300M€ EN EL PRIMER SEMESTRE DE 2025</div>
           <div class="blog-excerpt">Un crecimiento del 22% interanual. España atrae capital internacional gracias a su estabilidad y rentabilidades superiores a la media europea. Las ubicaciones fuera de Madrid y Barcelona concentran ya el 40% del total.</div>
-          <div class="blog-readmore">Leer análisis →</div>
+          <div class="blog-readmore">Leer análisis</div>
         </div>
       </div>
 
@@ -877,7 +969,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
           <div class="blog-meta">Jun 2025 · Fuente: Banco de España</div>
           <div class="blog-title">BAJADA DE TIPOS: CÓMO AFECTA AL INVERSOR INMOBILIARIO EN 2025</div>
           <div class="blog-excerpt">El BCE ha bajado los tipos al 2,25%. Las hipotecas a tipo fijo a 25 años están por debajo del 3%. Con alquileres subiendo y cuotas bajando, el cashflow positivo es ahora más fácil de conseguir que en los últimos tres años.</div>
-          <div class="blog-readmore">Leer análisis →</div>
+          <div class="blog-readmore">Leer análisis</div>
         </div>
       </div>
 
@@ -887,7 +979,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
           <div class="blog-meta">May 2025 · Fuente: Idealista / Inviertis</div>
           <div class="blog-title">ASTURIAS Y LEÓN: LOS MERCADOS CON MEJOR RATIO RENTABILIDAD-RIESGO DE ESPAÑA</div>
           <div class="blog-excerpt">Precios de compra bajos, demanda de alquiler estable y rentabilidades brutas del 8-13%. Analizamos por qué cada vez más inversores de Barcelona y Madrid miran al norte para construir su cartera inmobiliaria.</div>
-          <div class="blog-readmore">Leer análisis →</div>
+          <div class="blog-readmore">Leer análisis</div>
         </div>
       </div>
 
@@ -897,7 +989,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
           <div class="blog-meta">Mar 2025 · CreandoUnSueldo</div>
           <div class="blog-title">RENTABILIDAD BRUTA VS NETA: QUÉ NÚMERO IMPORTA DE VERDAD</div>
           <div class="blog-excerpt">La mayoría de portales muestran rentabilidad bruta. Aquí descontamos IBI, comunidad, seguro, vacíos y períodos sin inquilino para calcular lo que realmente entra en tu bolsillo cada mes.</div>
-          <div class="blog-readmore">Leer análisis →</div>
+          <div class="blog-readmore">Leer análisis</div>
         </div>
       </div>
 
@@ -927,7 +1019,7 @@ fbq('init','1664395115220620');fbq('track','PageView');
           <div style="font-family:var(--font-display);font-size:20px;color:white;margin-bottom:6px">¿ESTÁS LISTO PARA EMPEZAR?</div>
           <p style="font-size:13px;color:rgba(255,255,255,.55);margin:0">Si buscas una forma diferente de invertir, rodeado de gente real, estás en el lugar adecuado.</p>
         </div>
-        <button class="btn-white" onclick="openAgente()">💬 Únete y hablamos →</button>
+        <button class="btn-white" onclick="openAgente()">Escríbenos por WhatsApp</button>
       </div>
 
       <!-- Placeholder foto/video -->
@@ -1041,8 +1133,8 @@ fbq('init','1664395115220620');fbq('track','PageView');
     <h2>¿LISTO PARA<br>CREAR TU SUELDO?</h2>
     <p class="section-desc">Accede a las oportunidades antes de que lleguen a la web. Sin compromiso.</p>
     <div class="cta-actions">
-      <button class="btn-white" onclick="abrirTodas('disponible')">Ver activos disponibles →</button>
-      <button class="btn-white-ghost" onclick="openAgente()">💬 Hablar con un agente</button>
+      <button class="btn-white" onclick="abrirTodas('disponible')">Ver pisos disponibles</button>
+      <button class="btn-white-ghost" onclick="openAgente()">Hablar con nosotros</button>
     </div>
     <div class="social-links">
       <a href="https://t.me/creandounsueldo" target="_blank" rel="noopener" class="social-link"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Canal Telegram</a>
@@ -2469,6 +2561,7 @@ async function loadActivos() {
     todosActivos.forEach(function(a){ _activosMap[a.id] = a })
     renderActivos(todosActivos)
     renderVendidos(todosActivos)
+    try { pintarNomina(todosActivos) } catch(e) { console.warn('nomina', e) }
     return todosActivos
   } catch(e) {
     var g = document.getElementById('grid-activos')
@@ -2527,7 +2620,7 @@ function buildCard(a) {
     + '</div>'
     + (bloqueado
         ? '<div class="activo-cta disabled">'+(a.status==='reservado'?'◆ Ya reservado':'◑ En proceso')+'</div>'
-        : '<button class="activo-cta" onclick="abrirFicha(_activosMap[\'' + a.id + '\'])">Ver activo completo →</button>')
+        : '<button class="activo-cta" onclick="abrirFicha(_activosMap[\'' + a.id + '\'])">Ver el piso</button>')
     + '</div></div>'
 }
 
@@ -2632,6 +2725,24 @@ function renderTodas() {
       + lista.map(function(a) { return buildCard(a) }).join('')
       + '</div>'
   }
+}
+
+// Nómina del hero: lo que deja al mes un piso disponible ahora (alquiler − comunidad − IBI/12)
+function pintarNomina(lista) {
+  var disp = (lista || []).filter(function(a){ return (a.status === 'disponible' || a.status === 'pte_validacion') && +a.precio >= 10000 && +a.alquiler_estimado > 0 })
+  var a = disp.filter(function(x){ return x.status === 'disponible' })[0] || disp[0]
+  if (!a) return
+  var e = function(n){ return fmtNum(n) + '\u00a0€' }
+  var com = +a.gastos_comunidad || 0, ibi = Math.round((+a.ibi || 0) / 12), alq = +a.alquiler_estimado
+  var ciudad = String(a.ciudad || '').trim()
+  ciudad = ciudad.charAt(0).toUpperCase() + ciudad.slice(1)
+  var set = function(id, t){ var el = document.getElementById(id); if (el) el.textContent = t }
+  set('nm-mes', new Date().toLocaleDateString('es-ES', { month: 'long' }))
+  set('nm-piso', 'Piso en ' + ciudad + ' · cuesta ' + fmtNum(a.precio) + '\u00a0€')
+  set('nm-alq', '+' + e(alq)); set('nm-com', '−' + e(com)); set('nm-ibi', '−' + e(ibi))
+  set('nm-total', e(alq - com - ibi))
+  set('nm-rb', String(((alq * 12) / a.precio * 100).toFixed(1)).replace('.', ',') + '\u00a0% de rentabilidad bruta')
+  var b = document.getElementById('nm-ver'); if (b) b.onclick = function(){ abrirFicha(_activosMap[a.id]) }
 }
 
 function renderActivos(activos) {
