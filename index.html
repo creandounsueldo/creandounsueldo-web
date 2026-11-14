@@ -676,6 +676,13 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
   #view-home .activos-grid,#view-home .proceso-grid,#view-home .vendidos-grid{margin-left:-18px!important;margin-right:-18px!important;padding-left:18px!important;padding-right:18px!important;scroll-padding-left:18px}
   #acceso-outer,#calc-cta{padding-left:18px!important;padding-right:18px!important}
 }
+/* Taste: la foto real del piso en la nómina, fotos que responden al puntero, objetivos táctiles de 44px */
+.nomina-piso{display:flex;align-items:center;gap:12px}
+#nm-foto{width:56px;height:56px;object-fit:cover;border-radius:4px;flex-shrink:0;background:var(--niebla)}
+.btn-link{min-height:44px;display:inline-flex;align-items:center}
+.activo-img img{transition:transform .5s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.activo-card:hover{transform:translateY(-2px)}.activo-card:hover .activo-img img{transform:scale(1.03)}}
+.nomina-pie .btn-link{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -743,7 +750,7 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
       </div>
       <aside class="nomina" aria-label="Lo que deja al mes un piso disponible ahora">
         <div class="nomina-cab"><span>Tu nómina de</span><b id="nm-mes">este mes</b></div>
-        <div class="nomina-piso" id="nm-piso">Piso en Ponferrada · comprado por 41.000&nbsp;€</div>
+        <div class="nomina-piso"><img id="nm-foto" alt="" hidden><span id="nm-piso">Piso en Ponferrada · cuesta 41.000&nbsp;€</span></div>
         <dl class="nomina-lineas">
           <div><dt>Alquiler</dt><dd id="nm-alq">+600&nbsp;€</dd></div>
           <div><dt>Comunidad</dt><dd id="nm-com">−35&nbsp;€</dd></div>
@@ -751,7 +758,7 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
         </dl>
         <div class="nomina-total"><span>Te queda</span><b id="nm-total">551&nbsp;€</b></div>
         <div class="nomina-pie"><span id="nm-rb">17,6&nbsp;% de rentabilidad bruta</span><button class="btn-link" id="nm-ver" onclick="abrirTodas('disponible')">Ver este piso</button></div>
-        <p class="nomina-nota">Un piso disponible ahora mismo. Antes de seguros e impuestos.</p>
+        <p class="nomina-nota" id="nm-nota">Un piso real de los nuestros. Antes de seguros e impuestos.</p>
       </aside>
     </div>
   </section>
@@ -2727,22 +2734,35 @@ function renderTodas() {
   }
 }
 
-// Nómina del hero: lo que deja al mes un piso disponible ahora (alquiler − comunidad − IBI/12)
+// Nómina del hero: lo que deja al mes un piso (alquiler − comunidad − IBI/12).
+// Si hay pisos disponibles, el último publicado; si no, el último ya alquilado (con su alquiler real).
 function pintarNomina(lista) {
-  var disp = (lista || []).filter(function(a){ return (a.status === 'disponible' || a.status === 'pte_validacion') && +a.precio >= 10000 && +a.alquiler_estimado > 0 })
-  var a = disp.filter(function(x){ return x.status === 'disponible' })[0] || disp[0]
+  lista = lista || []
+  var ok = function(a){ return +a.precio >= 10000 && +a.precio <= 150000 }
+  var disp = lista.filter(function(a){ return a.status === 'disponible' && ok(a) && +a.alquiler_estimado > 0 })
+  var alq = lista.filter(function(a){ return a.status === 'alquilado' && ok(a) && +(a.alquiler_final || a.alquiler_conseguido) > 0 })
+    .sort(function(x, y){ return String(y.fecha_alquilado || y.updated_at).localeCompare(String(x.fecha_alquilado || x.updated_at)) })
+  var a = disp[0] || alq[0]
   if (!a) return
+  var libre = a.status === 'disponible'
+  var renta = +(libre ? a.alquiler_estimado : (a.alquiler_final || a.alquiler_conseguido))
   var e = function(n){ return fmtNum(n) + '\u00a0€' }
-  var com = +a.gastos_comunidad || 0, ibi = Math.round((+a.ibi || 0) / 12), alq = +a.alquiler_estimado
-  var ciudad = String(a.ciudad || '').trim()
-  ciudad = ciudad.charAt(0).toUpperCase() + ciudad.slice(1)
+  var com = +a.gastos_comunidad || 0, ibi = Math.round((+a.ibi || 0) / 12)
+  var ciudad = String(a.ciudad || '').trim(); ciudad = ciudad.charAt(0).toUpperCase() + ciudad.slice(1)
   var set = function(id, t){ var el = document.getElementById(id); if (el) el.textContent = t }
   set('nm-mes', new Date().toLocaleDateString('es-ES', { month: 'long' }))
-  set('nm-piso', 'Piso en ' + ciudad + ' · cuesta ' + fmtNum(a.precio) + '\u00a0€')
-  set('nm-alq', '+' + e(alq)); set('nm-com', '−' + e(com)); set('nm-ibi', '−' + e(ibi))
-  set('nm-total', e(alq - com - ibi))
-  set('nm-rb', String(((alq * 12) / a.precio * 100).toFixed(1)).replace('.', ',') + '\u00a0% de rentabilidad bruta')
-  var b = document.getElementById('nm-ver'); if (b) b.onclick = function(){ abrirFicha(_activosMap[a.id]) }
+  set('nm-piso', 'Piso en ' + ciudad + (libre ? ' · cuesta ' : ' · comprado por ') + e(a.precio))
+  set('nm-alq', '+' + e(renta)); set('nm-com', '−' + e(com)); set('nm-ibi', '−' + e(ibi))
+  set('nm-total', e(renta - com - ibi))
+  set('nm-rb', String(((renta * 12) / a.precio * 100).toFixed(1)).replace('.', ',') + '\u00a0% de rentabilidad bruta')
+  set('nm-nota', (libre ? 'Un piso disponible ahora mismo.' : 'Un piso que ya hemos alquilado; ahora mismo no hay ninguno libre.') + ' Antes de seguros e impuestos.')
+  var foto = (a.fotos || [])[0], img = document.getElementById('nm-foto')
+  if (img && foto) { img.src = foto; img.hidden = false; img.onerror = function(){ img.hidden = true } }
+  var b = document.getElementById('nm-ver')
+  if (b) {
+    if (libre) { b.textContent = 'Ver este piso'; b.onclick = function(){ abrirFicha(_activosMap[a.id]) } }
+    else { b.textContent = 'Avísame del próximo'; b.onclick = function(){ location.href = '/alertas?utm_source=web&utm_medium=nomina' } }
+  }
 }
 
 function renderActivos(activos) {
