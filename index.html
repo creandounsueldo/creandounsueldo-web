@@ -787,7 +787,7 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
     <div class="hero-inner">
       <div class="hero-texto">
         <h1>Pisos que pagan<br>cada mes.</h1>
-        <p class="hero-sub">Pisos por menos de 50.000&nbsp;€ que buscamos, compramos contigo y te entregamos alquilados. Tú solo cobras.</p>
+        <p class="hero-sub">Pisos por menos de 50.000&nbsp;€ para invertir. Te acompañamos en la compra, la reforma y el alquiler. Tú solo cobras.</p>
         <div class="hero-actions">
           <button class="btn-primary hero-cta" onclick="abrirTodas('disponible')">Ver pisos disponibles</button>
           <button class="btn-link" onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</button>
@@ -871,7 +871,7 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
     <div style="max-width:960px;margin:0 auto;display:flex;align-items:center;gap:48px;flex-wrap:wrap">
       <div style="flex:1;min-width:260px">
         <div class="section-eyebrow" style="margin-bottom:6px">Colabora con nosotros</div>
-        <h2 style="color:var(--dark);font-size:clamp(24px,3vw,36px);margin-bottom:10px;line-height:1.1">¿VENDES UN PISO CON INQUILINO?</h2>
+        <h2 style="color:var(--dark);font-size:clamp(24px,3vw,36px);margin-bottom:10px;line-height:1.1">¿TIENES UN PISO QUE ENCAJE CON UN INVERSOR?</h2>
         <p style="color:var(--gray);font-size:14px;line-height:1.65;margin-bottom:20px;max-width:420px">Lo enseñamos a nuestra comunidad de pequeños inversores y nos encargamos de todo hasta la firma. Un solo interlocutor, sin complicaciones.</p>
         <button onclick="abrirColabora()" class="btn-primary" style="font-size:13px;padding:12px 24px">Proponer un piso</button>
       </div>
@@ -3111,7 +3111,7 @@ function abrirFicha(a) {
     var _hab = a.habitaciones ? a.habitaciones + ' hab. ' : ''
     document.title = 'Piso ' + _hab + (_lugar ? 'en ' + _lugar : '') + (a.status === 'alquilado' ? ' (alquilado)' : '') + ' | CreandoUnSueldo'
     var _d = document.querySelector('meta[name="description"]')
-    if (_d) _d.setAttribute('content', 'Piso con inquilino ' + (_lugar ? 'en ' + _lugar : '') + (rb ? ': rentabilidad bruta del ' + String(rb).replace('.', ',') + ' %' : '') + '. Analizado por CreandoUnSueldo.')
+    if (_d) _d.setAttribute('content', 'Piso para invertir ' + (_lugar ? 'en ' + _lugar : '') + (rb ? ': rentabilidad bruta del ' + String(rb).replace('.', ',') + ' %' : '') + '. Analizado por CreandoUnSueldo.')
   } catch (e) {}
   var itp = +(a.itp || 8)
   var itpAmt  = Math.round(+a.precio * itp / 100)
@@ -4260,13 +4260,13 @@ async function submitLista() {
 // ═══ SEO POR RUTA ═══════════════════════════════════════════
 // Cada página interna tiene su título, descripción y canonical (antes todas decían ser la portada)
 var SEO_RUTAS = {
-  '/': ['CreandoUnSueldo — Pisos con inquilino por menos de 50.000 €', 'Pisos con alquiler por menos de 50.000 € en toda España para pequeños inversores. Analizamos cada piso, te acompañamos hasta el primer cobro y las oportunidades salen primero en nuestro canal de WhatsApp.'],
-  '/activos': ['Pisos con inquilino a la venta para invertir | CreandoUnSueldo', 'Pisos disponibles para invertir por menos de 50.000 €, con alquiler y rentabilidad bruta. Las oportunidades nuevas salen primero en nuestro canal de WhatsApp.'],
-  '/activos/reservados': ['Pisos reservados por nuestros inversores | CreandoUnSueldo', 'Pisos con inquilino que ya han reservado nuestros inversores: precio, alquiler y rentabilidad de cada operación.'],
-  '/activos/cerrados': ['Operaciones cerradas: pisos alquilados de nuestros inversores | CreandoUnSueldo', 'Más de 70 pisos comprados y alquilados por pequeños inversores con CreandoUnSueldo: precio, alquiler y rentabilidad bruta reales.'],
-  '/faq': ['Preguntas frecuentes sobre invertir en pisos con inquilino | CreandoUnSueldo', 'Cómo funciona invertir con CreandoUnSueldo: compra, reforma, inquilino, alquiler garantizado, gastos e impuestos. Respuestas claras.'],
+  '/': ['CreandoUnSueldo — Pisos para invertir por menos de 50.000 €', 'Pisos con alquiler por menos de 50.000 € en toda España para pequeños inversores. Analizamos cada piso, te acompañamos hasta el primer cobro y las oportunidades salen primero en nuestro canal de WhatsApp.'],
+  '/activos': ['Pisos a la venta para invertir y alquilar | CreandoUnSueldo', 'Pisos disponibles para invertir por menos de 50.000 €, con alquiler y rentabilidad bruta. Las oportunidades nuevas salen primero en nuestro canal de WhatsApp.'],
+  '/activos/reservados': ['Pisos reservados por nuestros inversores | CreandoUnSueldo', 'Pisos que ya han reservado nuestros inversores: precio, alquiler y rentabilidad de cada operación.'],
+  '/activos/cerrados': ['Operaciones cerradas: pisos alquilados de nuestros inversores | CreandoUnSueldo', 'Pisos comprados y alquilados por pequeños inversores con CreandoUnSueldo: precio, alquiler y rentabilidad bruta reales.'],
+  '/faq': ['Preguntas frecuentes sobre invertir en pisos para alquilar | CreandoUnSueldo', 'Cómo funciona invertir con CreandoUnSueldo: compra, reforma, inquilino, alquiler garantizado, gastos e impuestos. Respuestas claras.'],
   '/colabora': ['Colabora con CreandoUnSueldo', 'Trabaja con nosotros o tráenos pisos: cómo colaborar con CreandoUnSueldo.'],
-  '/lista': ['Recibe las oportunidades por email | CreandoUnSueldo', 'Apúntate y te avisamos por email de los nuevos pisos con inquilino por menos de 50.000 €.'],
+  '/lista': ['Recibe las oportunidades por email | CreandoUnSueldo', 'Apúntate y te avisamos por email de los nuevos pisos para invertir por menos de 50.000 €.'],
   '/privacidad': ['Política de privacidad | CreandoUnSueldo', 'Política de privacidad de CreandoUnSueldo (HOUSE NOGA, S.L.).'],
   '/aviso-legal': ['Aviso legal | CreandoUnSueldo', 'Aviso legal de CreandoUnSueldo (HOUSE NOGA, S.L.).'],
   '/cookies': ['Política de cookies | CreandoUnSueldo', 'Política de cookies de CreandoUnSueldo.']
