@@ -1377,6 +1377,13 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
         <!-- 2. KPIs 4 bullets -->
         <div id="ficha-kpis-main" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px"></div>
 
+        <!-- 2b. Vídeo análisis (si el piso lo tiene) -->
+        <div id="ficha-video-wrap" style="display:none;background:white;border:1px solid var(--gray3);border-radius:12px;padding:24px;margin-bottom:20px;scroll-margin-top:90px">
+          <div style="font-family:var(--font-display);font-size:15px;color:var(--dark);margin-bottom:6px;letter-spacing:.3px">VÍDEO ANÁLISIS</div>
+          <p style="font-size:14px;color:var(--gray);line-height:1.6;margin:0 0 16px">El piso, los números, la zona con datos y nuestra opinión, en unos minutos.</p>
+          <video id="ficha-video" controls playsinline preload="metadata" style="display:block;width:100%;max-width:380px;aspect-ratio:9/16;margin:0 auto;border-radius:12px;background:#111"></video>
+        </div>
+
         <!-- 3. Descripción -->
         <div style="background:white;border:1px solid var(--gray3);border-radius:12px;padding:24px;margin-bottom:20px">
           <div style="font-family:var(--font-display);font-size:15px;color:var(--dark);margin-bottom:10px;letter-spacing:.3px">DESCRIPCIÓN</div>
@@ -2578,7 +2585,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ═══ SUPABASE — ACTIVOS EN TIEMPO REAL ═══════════════════════════════════════
 var SUPA_URL  = 'https://vblyzzhixeoamcstnsqk.supabase.co'
 // Solo columnas públicas: los datos personales del CRM no son legibles con la clave pública
-var COLUMNAS_PUBLICAS = 'id,created_at,updated_at,titulo,ciudad,zona,direccion,provincia,comunidad,precio,honorarios,alquiler_estimado,itp,gastos_comunidad,ibi,rentabilidad_bruta,m2,habitaciones,banos,planta,ascensor,puesta_a_punto,status,descripcion,titulo_pagina,tagline,fotos,videos,puesta_a_punto_final,alquiler_conseguido,fecha_reserva,fecha_arras,fecha_compraventa,fecha_notaria,fecha_puesta_a_punto,fecha_busqueda_inquilino,fecha_alquilado,alquiler_final,estado_inmueble,analisis_zona'
+var COLUMNAS_PUBLICAS = 'id,created_at,updated_at,titulo,ciudad,zona,direccion,provincia,comunidad,precio,honorarios,alquiler_estimado,itp,gastos_comunidad,ibi,rentabilidad_bruta,m2,habitaciones,banos,planta,ascensor,puesta_a_punto,status,descripcion,titulo_pagina,tagline,fotos,videos,puesta_a_punto_final,alquiler_conseguido,fecha_reserva,fecha_arras,fecha_compraventa,fecha_notaria,fecha_puesta_a_punto,fecha_busqueda_inquilino,fecha_alquilado,alquiler_final,estado_inmueble,analisis_zona,video_analisis'
 var EDGE_URL  = SUPA_URL + '/functions/v1'
 var SUPA_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZibHl6emhpeGVvYW1jc3Ruc3FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NTk5MzUsImV4cCI6MjA5MTIzNTkzNX0.wRTF5dEeI2TkNfUm_xnWJCglE6SWfW_0kri0avfOVRI'
 
@@ -3792,6 +3799,19 @@ function fichaV2(a) {
       + '<div><dt>IBI, al mes</dt><dd>−' + e(ibi) + '</dd></div></dl>'
       + '<div class="fs-total"><span>Te queda</span><b>' + e(renta - com - ibi) + '</b></div>'
       + '<div class="fs-nota">Antes de seguros e impuestos.</div>'
+  }
+  var vw = document.getElementById('ficha-video-wrap'), vv = document.getElementById('ficha-video')
+  if (vw && vv) {
+    if (a.video_analisis) {
+      if (vv.getAttribute('src') !== a.video_analisis) {
+        vv.src = a.video_analisis
+        vv.poster = a.video_analisis.replace(/\/video_(\d+)\.mp4$/, '/portada_$1.jpg')
+      }
+      vw.style.display = ''
+      if (location.hash === '#video') setTimeout(function(){ vw.scrollIntoView({ behavior: 'smooth', block: 'start' }) }, 400)
+    } else {
+      vw.style.display = 'none'; vv.removeAttribute('src'); vv.load()
+    }
   }
   var b = document.getElementById('ficha-badges')
   if (b) {
