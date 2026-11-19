@@ -88,6 +88,24 @@
   } catch (e) {}
 
   var espera = (PIXELES.meta || PIXELES.tiktok || PIXELES.google || PIXELES.x) ? 1800 : 1200;
+  // Dentro de X, Instagram, TikTok o Facebook el navegador de la app no sabe pasar el enlace a WhatsApp y sale la
+  // página de «Descargar» de WhatsApp. Ahí abrimos la app de WhatsApp directamente con el código de invitación.
+  var ua = navigator.userAgent || '';
+  var enApp = /Twitter|TwitterAndroid|FBAN|FBAV|FB_IAB|Instagram|TikTok|musical_ly|Bytedance|LinkedInApp|Threads/i.test(ua);
+  var codigo = CANAL.split('/').pop();
+  var android = /Android/i.test(ua);
+  var APP = android
+    ? 'intent://chat?code=' + codigo + '#Intent;scheme=whatsapp;package=com.whatsapp;S.browser_fallback_url=' + encodeURIComponent(CANAL) + ';end'
+    : 'whatsapp://chat?code=' + codigo;
+  if (enApp) {
+    var boton = document.getElementById('ir');
+    boton.href = APP;
+    boton.textContent = 'Abrir WhatsApp y entrar';
+    document.querySelector('.nota').innerHTML = 'Se abre la app de WhatsApp con la invitación: pulsa «Unirme».<br>' +
+      '¿No se abre? <a href="' + CANAL + '" style="color:#9CA3AF">Pulsa aquí</a> o abre esta página en el navegador (menú ··· de arriba).';
+    setTimeout(function () { location.href = APP; }, espera);
+    return;
+  }
   setTimeout(function () { location.replace(CANAL); }, espera);
 })();
 </script>
