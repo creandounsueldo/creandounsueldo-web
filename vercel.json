@@ -9,6 +9,14 @@
       "destination": "/guia/gracias/index.html"
     },
     {
+      "source": "/servicios",
+      "destination": "/servicios/index.html"
+    },
+    {
+      "source": "/servicios/gracias",
+      "destination": "/servicios/gracias/index.html"
+    },
+    {
       "source": "/canal",
       "destination": "/canal/index.html"
     },

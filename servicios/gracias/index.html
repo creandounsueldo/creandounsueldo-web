@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hemos recibido tu piso | CreandoUnSueldo</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1664395115220620');fbq('track','PageView');
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#000;color:#fff;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+header{height:60px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #222}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:2px;text-decoration:none;color:#fff}.logo span{color:#E31E24}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.box{max-width:560px;width:100%;text-align:center}
+.check{width:64px;height:64px;border-radius:50%;background:#E31E24;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 22px}
+h1{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:52px;line-height:.95;letter-spacing:.5px;margin-bottom:14px}
+h1 span{color:#E31E24}
+p{color:#C9CDD3;font-size:16px;line-height:1.6}
+.anuncio{margin:18px 0;background:#111318;border:1px solid #2a2d35;border-radius:8px;padding:12px 14px;font-size:14px;word-break:break-all;text-align:left}
+.anuncio a{color:#fff}
+ol{text-align:left;margin:22px 0 0;padding:0;list-style:none;counter-reset:s}
+ol li{counter-increment:s;display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #222;font-size:15px;color:#D1D5DB}
+ol li::before{content:counter(s);flex:0 0 26px;height:26px;border-radius:50%;background:#fff;color:#000;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+.gift{margin-top:24px;border:1.5px solid #E31E24;border-radius:10px;padding:16px;text-align:left;font-size:14px;color:#E5E7EB;line-height:1.55}
+.gift b{color:#fff}
+.btn{display:inline-block;background:#E31E24;color:#fff;font-weight:700;font-size:16px;padding:15px 26px;border-radius:10px;margin-top:24px;text-decoration:none}
+.links{margin-top:20px;font-size:14px;color:#9CA3AF}.links a{color:#fff}
+.spin{width:34px;height:34px;border:3px solid #333;border-top-color:#E31E24;border-radius:50%;animation:s 1s linear infinite;margin:0 auto 18px}
+@keyframes s{to{transform:rotate(360deg)}}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+<header><a class="logo" href="/">CREANDO <span>UN SUELDO</span></a></header>
+<main>
+  <div class="box">
+    <div id="cargando"><div class="spin"></div><p>Confirmando tu pago…</p></div>
+    <div id="ok" style="display:none">
+      <div class="check">✓</div>
+      <h1>¡Gracias<span id="nombre"></span>! <span>Nos ponemos con tu piso</span></h1>
+      <p>Hemos recibido el pago y el anuncio. Te hemos enviado la confirmación a <b id="email" style="color:#fff"></b>.</p>
+      <div class="anuncio" id="anuncio"></div>
+      <ol>
+        <li>Revisamos el anuncio y, si nos falta algún dato, te escribimos o te llamamos.</li>
+        <li>En <b id="plazo" style="color:#fff">3 días laborables</b> te enviamos el informe con el veredicto y la oferta máxima.</li>
+        <li>Si tienes dudas sobre el informe, lo comentamos contigo.</li>
+      </ol>
+      <div class="gift"><b>Si el piso pasa el análisis</b> y quieres que gestionemos la compra (2.500 € + IVA), te descontamos lo que has pagado por el análisis.</div>
+      <div class="links">Mientras tanto: <a href="/?utm_source=web&utm_medium=servicios-gracias#activos">mira nuestros pisos</a> · <a href="/guia?utm_source=web&utm_medium=servicios-gracias">la Guía del inversor</a></div>
+    </div>
+    <div id="fallo" style="display:none">
+      <h1>No hemos podido <span>confirmar el pago</span></h1>
+      <p>Si se te ha cobrado, no te preocupes: escríbenos a <a href="mailto:info@creandounsueldo.com" style="color:#fff">info@creandounsueldo.com</a> con el enlace del piso y nos ponemos con él.</p>
+      <a class="btn" href="/servicios">Volver a servicios</a>
+    </div>
+  </div>
+</main>
+<script>
+var EDGE = 'https://vblyzzhixeoamcstnsqk.supabase.co/functions/v1/servicios';
+var sid = new URLSearchParams(location.search).get('session_id') || '';
+function show(id){ ['cargando','ok','fallo'].forEach(function(x){ document.getElementById(x).style.display = x === id ? '' : 'none' }) }
+var intentos = 0, contado = false;
+function confirmar(){
+  if (!sid) { show('fallo'); return }
+  fetch(EDGE, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({accion:'confirmar', session_id:sid})})
+    .then(function(r){ return r.json() }).then(function(d){
+      if (d && d.ok) {
+        if (d.nombre) document.getElementById('nombre').textContent = ', ' + String(d.nombre).split(' ')[0];
+        document.getElementById('email').textContent = d.email || 'tu email';
+        if (d.plazo) document.getElementById('plazo').textContent = d.plazo;
+        var a = document.getElementById('anuncio');
+        if (d.enlace_anuncio) { var l = document.createElement('a'); l.href = d.enlace_anuncio; l.target = '_blank'; l.rel = 'noopener'; l.textContent = d.enlace_anuncio; a.appendChild(l) } else a.style.display = 'none';
+        if (!contado) { contado = true; try { fbq('track', 'Purchase', { content_name: 'analisis', value: 302.5, currency: 'EUR' }) } catch(e) {} }
+        show('ok');
+      } else if (d && d.pendiente && intentos++ < 8) { setTimeout(confirmar, 2500) }
+      else show('fallo');
+    }).catch(function(){ if (intentos++ < 3) setTimeout(confirmar, 2500); else show('fallo') });
+}
+confirmar();
+</script>
+</body>
+</html>

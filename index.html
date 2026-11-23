@@ -748,13 +748,11 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
 
   <!-- Nav home -->
   <ul class="nav-links" id="navHome">
-    <li><a onclick="abrirTodas('disponible')">Activos</a></li>
     <li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li>
+    <li><a href="/servicios?utm_source=web&utm_medium=menu">Servicios</a></li>
     <li><a onclick="showView('home', true);scrollToSection('vendidos')">Resultados</a></li>
-    <li><a href="/calculadora?utm_source=web&utm_medium=menu">Calculadora</a></li>
     <li><a href="/guia?utm_source=web&utm_medium=menu" style="color:var(--red);font-weight:700">Guía</a></li>
     <li><a onclick="abrirBlog()">Blog</a></li>
-    <li><a onclick="abrirFaq()">FAQ</a></li>
   </ul>
 
   <!-- Nav ficha -->
@@ -775,6 +773,7 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
     <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('nosotros')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Quiénes somos</a></li>
     <li><a onclick="closeMobileMenu();abrirTodas('disponible')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Activos</a></li>
     <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('proceso')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Cómo funciona</a></li>
+    <li><a href="/servicios?utm_source=web&utm_medium=menu-movil" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Servicios</a></li>
     <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('vendidos')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Resultados</a></li>
     <li><a href="/calculadora?utm_source=web&utm_medium=menu" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">🧮 Calculadora de rentabilidad</a></li>
     <li><a href="/guia?utm_source=web&utm_medium=menu-movil" style="display:block;padding:16px 0;font-size:16px;font-weight:700;color:var(--red);border-bottom:1px solid var(--gray3);text-decoration:none">📘 Guía del inversor · 9,99 €</a></li>
@@ -917,6 +916,10 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
       <div class="proceso-card"><span class="proceso-num">3</span><div class="proceso-title">FIRMA ANTE NOTARIO</div><p class="proceso-desc">Escritura de compraventa. Podemos firmar en tu representación con poder notarial. Muchos inversores nunca han pisado el inmueble que compraron.</p></div>
       <div class="proceso-card"><span class="proceso-num">4</span><div class="proceso-title">ALQUILAMOS TU PISO</div><p class="proceso-desc">Gestionamos reforma si procede, puesta a punto, suministros, seguro de hogar y búsqueda de inquilino con análisis de solvencia y seguro de impago.</p></div>
       <div class="proceso-card"><span class="proceso-num">5</span><div class="proceso-title">EMPIEZA TU SUELDO</div><p class="proceso-desc">Inquilino dentro, contrato firmado. Cobras cada mes. Garantizamos el alquiler estimado: si se alquila por debajo, compensamos la diferencia.</p></div>
+    </div>
+    <div class="proceso-extra" style="margin-top:26px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;font-size:14px;color:rgba(255,255,255,.65)">
+      <span>¿Ya has encontrado un piso por tu cuenta? <a href="/servicios?utm_source=web&utm_medium=home-proceso#analisis" style="color:white;font-weight:700;text-decoration:underline;text-underline-offset:3px">Lo analizamos por 250&nbsp;€ + IVA →</a></span>
+      <span><a href="/servicios?utm_source=web&utm_medium=home-proceso" style="color:white;text-decoration:underline;text-underline-offset:3px">Todos los servicios</a> · <a onclick="abrirFaq()" style="color:white;text-decoration:underline;text-underline-offset:3px;cursor:pointer">Preguntas frecuentes</a></span>
     </div>
   </section>
 
@@ -1228,7 +1231,7 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
         </div>
         <p class="footer-tagline">Intermediación inmobiliaria para inversores que quieren resultados reales, no promesas.</p>
       </div>
-      <div class="footer-links-col"><h4>Navegar</h4><ul><li><a onclick="showView('home', true);scrollToSection('nosotros')">Quiénes somos</a></li><li><a onclick="showView('home', true);scrollToSection('activos')">Activos disponibles</a></li><li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li><li><a onclick="showView('home', true);scrollToSection('vendidos')">Track record</a></li><li><a onclick="abrirBlog()">Blog</a></li><li><a onclick="abrirFaq()">FAQ</a></li></ul></div>
+      <div class="footer-links-col"><h4>Navegar</h4><ul><li><a onclick="showView('home', true);scrollToSection('nosotros')">Quiénes somos</a></li><li><a onclick="showView('home', true);scrollToSection('activos')">Activos disponibles</a></li><li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li><li><a href="/servicios?utm_source=web&utm_medium=footer">Servicios</a></li><li><a href="/guia?utm_source=web&utm_medium=footer">Guía del inversor</a></li><li><a onclick="showView('home', true);scrollToSection('vendidos')">Track record</a></li><li><a onclick="abrirBlog()">Blog</a></li><li><a onclick="abrirFaq()">FAQ</a></li></ul></div>
       
       <div class="footer-links-col"><h4>Contacto</h4><ul><li><a href="mailto:info@creandounsueldo.com">info@creandounsueldo.com</a></li><li><a href="/calculadora">Calculadora de rentabilidad</a></li><li><a href="/pisos">Pisos por zona</a></li><li><a href="/alertas?utm_source=web&utm_medium=footer">Avísame de pisos</a></li><li><a href="https://t.me/creandounsueldo" target="_blank">Canal Telegram</a></li><li><a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank" rel="noopener">Canal de WhatsApp</a></li></ul></div>
     </div>
