@@ -1,6 +1,6 @@
 # CreandoUnSueldo
 
-> CreandoUnSueldo (HOUSE NOGA S.L.) es una agencia española de inversión inmobiliaria para pequeños inversores: encuentra pisos de menos de 50.000 € en toda España, los analiza con números reales, acompaña la compra y la puesta en alquiler, y garantiza el precio de alquiler del primer año. Más de 70 operaciones cerradas y una comunidad de más de 2.000 inversores.
+> CreandoUnSueldo (HOUSE NOGA S.L.) es una agencia española de inversión inmobiliaria para pequeños inversores: encuentra pisos de menos de 50.000 € en toda España, los analiza con números reales, acompaña la compra y la puesta en alquiler, y garantiza el precio de alquiler del primer año. Casi 100 operaciones cerradas y una comunidad de más de 2.000 inversores.
 
 ## Qué hace
 

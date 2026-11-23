@@ -560,7 +560,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
   "legalName": "HOUSE NOGA S.L.",
   "url": "https://www.creandounsueldo.com/",
   "email": "info@creandounsueldo.com",
-  "description": "Agencia de inversión inmobiliaria para pequeños inversores: pisos para alquilar por menos de 50.000 € en toda España, analizados con números reales y con el precio de alquiler del primer año garantizado. Buscamos, analizamos y acompañamos hasta el primer cobro del alquiler. Más de 70 operaciones cerradas.",
+  "description": "Agencia de inversión inmobiliaria para pequeños inversores: pisos para alquilar por menos de 50.000 € en toda España, analizados con números reales y con el precio de alquiler del primer año garantizado. Buscamos, analizamos y acompañamos hasta el primer cobro del alquiler. Casi 100 operaciones cerradas.",
   "slogan": "Crea un sueldo con pisos de alquiler",
   "knowsAbout": ["inversión inmobiliaria", "comprar piso para alquilar", "rentabilidad del alquiler", "pisos baratos para invertir", "alquiler garantizado", "gestión de alquileres"],
   "areaServed": { "@type": "Country", "name": "España" },
@@ -577,7 +577,7 @@ footer{background:var(--dark);padding:56px 52px 32px}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"¿Qué es CreandoUnSueldo?","acceptedAnswer":{"@type":"Answer","text":"Una agencia española de inversión inmobiliaria para pequeños inversores. Encuentra pisos de menos de 50.000 € en toda España, los analiza con números reales, gestiona la compra y la puesta en alquiler y garantiza el precio de alquiler del primer año. Lleva más de 70 operaciones cerradas."}},
+{"@type":"Question","name":"¿Qué es CreandoUnSueldo?","acceptedAnswer":{"@type":"Answer","text":"Una agencia española de inversión inmobiliaria para pequeños inversores. Encuentra pisos de menos de 50.000 € en toda España, los analiza con números reales, gestiona la compra y la puesta en alquiler y garantiza el precio de alquiler del primer año. Lleva casi 100 operaciones cerradas."}},
 {"@type":"Question","name":"¿Qué agencia ayuda a invertir en pisos baratos para alquilar en España?","acceptedAnswer":{"@type":"Answer","text":"CreandoUnSueldo se dedica a eso: pisos para alquilar por menos de 50.000 € en Asturias, León, Castilla-La Mancha, Galicia, Cataluña y otras zonas, con una rentabilidad bruta media estimada en torno al 14 % en sus operaciones. Las oportunidades salen primero en su canal de WhatsApp."}},
 {"@type":"Question","name":"¿Qué garantiza CreandoUnSueldo?","acceptedAnswer":{"@type":"Answer","text":"El precio del alquiler del primer año: si el piso se alquila por debajo del precio anunciado, compensa la diferencia. No garantiza los impagos; para eso recomienda un seguro de impago."}},
 {"@type":"Question","name":"¿Los pisos se venden con inquilino?","acceptedAnswer":{"@type":"Answer","text":"No. Se compran vacíos y el inquilino se busca después de la compra. Más del 70 % de los pisos que vende estaban deshabitados, así que vuelven al mercado del alquiler."}},
@@ -2774,8 +2774,13 @@ function renderTodas() {
   var lista = todosActivos.filter(function(a) {
     if (filtro === 'disponible') return a.status === 'disponible'
     if (filtro === 'reservado')  return a.status === 'reservado' || a.status === 'en_proceso'
-    if (filtro === 'finalizado') return (a.status === 'alquilado' || a.status === 'finalizado') && +a.alquiler_final > 0
+    if (filtro === 'finalizado') return a.status === 'alquilado' || a.status === 'finalizado'
     return false
+  })
+  if (filtro === 'finalizado') lista.sort(function(x, y) {
+    var fx = +x.alquiler_final > 0 ? 1 : 0, fy = +y.alquiler_final > 0 ? 1 : 0
+    if (fx !== fy) return fy - fx
+    return new Date(y.fecha_alquilado || y.created_at || 0) - new Date(x.fecha_alquilado || x.created_at || 0)
   })
 
   var cnt = document.getElementById('todas-count')
@@ -2877,7 +2882,7 @@ function renderActivos(activos) {
       +   '<div style="font-family:var(--font-display);font-size:clamp(28px,3vw,40px);color:white;line-height:1;margin-bottom:14px">SIN ACTIVOS DISPONIBLES.</div>'
       +   '<p style="font-size:14px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:20px">Los mejores pisos se reservan el mismo día que los publicamos. Déjanos tu email y serás el primero en saberlo.</p>'
       +   '<div style="display:flex;gap:8px;flex-wrap:wrap">'
-      +     '<button onclick="abrirTodas(\'finalizado\')" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-family:var(--font-body);font-size:12px;font-weight:600;padding:9px 16px;border-radius:var(--radius);cursor:pointer;transition:all .2s" onmouseover="this.style.background=\'rgba(255,255,255,.1)\'" onmouseout="this.style.background=\'rgba(255,255,255,.06)\'">Ver las 67 operaciones cerradas →</button>'
+      +     '<button onclick="abrirTodas(\'finalizado\')" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-family:var(--font-body);font-size:12px;font-weight:600;padding:9px 16px;border-radius:var(--radius);cursor:pointer;transition:all .2s" onmouseover="this.style.background=\'rgba(255,255,255,.1)\'" onmouseout="this.style.background=\'rgba(255,255,255,.06)\'">Ver las operaciones cerradas →</button>'
       +     '<a href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj" target="_blank" rel="noopener" class="wa-btn">Canal de WhatsApp →</a>'
         +     '<a href="https://t.me/creandounsueldo" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(41,182,246,.1);border:1px solid rgba(41,182,246,.25);color:#29B6F6;font-family:var(--font-body);font-size:12px;font-weight:600;padding:9px 16px;border-radius:var(--radius);text-decoration:none">Canal Telegram →</a>'
       +   '</div>'
@@ -2961,7 +2966,7 @@ function buildVendidoCard(a) {
     + '<div class="vendido-result" style="grid-template-columns:1fr 1fr">'
     +   '<div><div class="result-val '+(rbReal&&+rbReal>+rbEst?'positive':'')+'">'+( rbReal||rbEst||'—')+'%</div><div class="result-key">Rent. real'+(rbReal?'':' est.')+'</div></div>'
     +   '<div><div class="result-val">'+fmtE(a.precio)+'</div><div class="result-key">Precio compra</div></div>'
-    +   '<div><div class="result-val '+(sup?'positive':alqFin&&alqFin<alqEst?'negative':'')+'">'+fmtE(alqFin)+'/mes'+(sup?' ↑':alqFin<alqEst?' ↓':'')+'</div><div class="result-key">Alquiler final</div></div>'
+    +   '<div><div class="result-val '+(sup?'positive':alqFin&&alqFin<alqEst?'negative':'')+'">'+(alqFin?fmtE(alqFin)+'/mes'+(sup?' ↑':alqFin<alqEst?' ↓':''):'—')+'</div><div class="result-key">Alquiler final</div></div>'
     +   '<div><div class="result-val">'+fmtE(alqEst)+'/mes</div><div class="result-key">Alquiler estimado</div></div>'
     + '</div>'
     + (a.fecha_alquilado ? '<div style="font-size:11px;color:#9ca3af;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08)">📅 Alquilado: '+fmtDate(a.fecha_alquilado)+'</div>' : '')
@@ -4926,7 +4931,7 @@ if (document.readyState !== 'loading') {
       <div id="lista-ok" style="display:none">
         <div style="font-family:var(--font-display);font-size:36px;color:white;margin-bottom:8px">🎉 ¡YA ESTÁS DENTRO!</div>
         <p style="font-size:14px;color:rgba(255,255,255,.5)">Te avisamos en cuanto publiquemos el próximo activo.</p>
-        <a href="https://www.creandounsueldo.com/activos/cerrados" style="display:inline-block;margin-top:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:11px 22px;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:600;text-decoration:none">Ver nuestras 67 operaciones cerradas →</a>
+        <a href="https://www.creandounsueldo.com/activos/cerrados" style="display:inline-block;margin-top:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:11px 22px;border-radius:var(--radius);font-family:var(--font-body);font-size:13px;font-weight:600;text-decoration:none">Ver nuestras operaciones cerradas →</a>
       </div>
 
       <div style="margin-top:40px;display:flex;gap:16px;justify-content:center">
