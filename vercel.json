@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/interes",
+      "destination": "/interes/index.html"
+    },
+    {
       "source": "/guia",
       "destination": "/guia/index.html"
     },

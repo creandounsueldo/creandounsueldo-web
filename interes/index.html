@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Me interesa este piso — CreandoUnSueldo</title>
+<meta name="description" content="Déjanos tu nombre y teléfono y te llamamos con el precio, los números y cómo reservarlo.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;background:#111318;color:#fff;font-family:'DM Sans',sans-serif;padding:20px 16px 40px}
+  .caja{max-width:460px;margin:0 auto}
+  .foto{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;background:#1d2028;display:block}
+  .donde{margin-top:16px;font-size:13px;font-weight:700;color:#E31E24;letter-spacing:.3px}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:40px;line-height:1;letter-spacing:.5px;margin:4px 0 10px}
+  .datos{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .datos span{background:#1d2028;border-radius:8px;padding:6px 10px;font-size:14px;color:#d1d5db}
+  .datos b{color:#fff}
+  .gancho{color:#9CA3AF;font-size:15px;line-height:1.55;margin-bottom:20px}
+  form{background:#181b22;border:1px solid #262a33;border-radius:14px;padding:18px}
+  label{display:block;font-size:13px;font-weight:700;color:#d1d5db;margin:12px 0 6px}
+  label:first-child{margin-top:0}
+  input[type=text],input[type=tel],input[type=email]{width:100%;font:inherit;font-size:16px;color:#fff;background:#0f1115;
+    border:1.5px solid #2c313b;border-radius:10px;padding:13px 14px;outline:none}
+  input:focus{border-color:#E31E24}
+  .consent{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#9CA3AF;line-height:1.5;margin-top:14px;font-weight:400}
+  .consent input{margin-top:3px;accent-color:#E31E24;flex-shrink:0}
+  .consent a{color:#d1d5db}
+  button{width:100%;margin-top:16px;background:#E31E24;color:#fff;border:0;border-radius:10px;font:inherit;font-weight:700;
+    font-size:17px;padding:15px;cursor:pointer}
+  button:disabled{opacity:.6}
+  .error{display:none;margin-top:12px;color:#fca5a5;font-size:14px}
+  .ok{display:none;text-align:center;padding:24px 8px}
+  .ok h2{font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1;margin-bottom:10px}
+  .ok p{color:#9CA3AF;line-height:1.6}
+  .ok a{display:inline-block;margin-top:18px;color:#fff;font-weight:700}
+  .trampa{position:absolute;left:-9999px}
+  .pie{margin-top:22px;text-align:center;font-size:12px;color:#6B7280}
+  .pie a{color:#9CA3AF}
+</style>
+</head>
+<body>
+<div class="caja">
+  <img class="foto" id="foto" alt="" hidden>
+  <div class="donde" id="donde">Piso para invertir</div>
+  <h1 id="titulo">¿Te interesa este piso?</h1>
+  <div class="datos" id="datos"></div>
+  <p class="gancho">Déjanos tu nombre y tu teléfono y te llamamos con el precio, todos los números y cómo reservarlo. Estos pisos suelen reservarse en pocas horas.</p>
+
+  <form id="f" novalidate>
+    <label for="nombre">Nombre *</label>
+    <input type="text" id="nombre" autocomplete="name" required>
+    <label for="telefono">Teléfono *</label>
+    <input type="tel" id="telefono" autocomplete="tel" inputmode="tel" required>
+    <label for="email">Email</label>
+    <input type="email" id="email" autocomplete="email" inputmode="email">
+    <input type="text" id="web" class="trampa" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <label class="consent"><input type="checkbox" id="consent"> <span>Acepto que CreandoUnSueldo me llame o me escriba sobre este piso y otros parecidos. <a href="/privacidad" target="_blank">Política de privacidad</a>.</span></label>
+    <button type="submit" id="enviar">Quiero que me llaméis</button>
+    <div class="error" id="error"></div>
+  </form>
+
+  <div class="ok" id="ok">
+    <h2>¡Recibido!</h2>
+    <p>Te llamamos en cuanto podamos, normalmente el mismo día.</p>
+    <a id="ficha" href="/">Ver la ficha del piso</a>
+  </div>
+  <div class="pie">© HOUSE NOGA S.L. · <a href="/">Inicio</a> · <a href="/privacidad">Privacidad</a></div>
+</div>
+<script>
+(function () {
+  var SUPA_URL = 'https://vblyzzhixeoamcstnsqk.supabase.co';
+  var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZibHl6emhpeGVvYW1jc3Ruc3FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NTk5MzUsImV4cCI6MjA5MTIzNTkzNX0.wRTF5dEeI2TkNfUm_xnWJCglE6SWfW_0kri0avfOVRI';
+  var PIXELES = { meta: '1664395115220620', x: '' };
+  var q = new URLSearchParams(location.search);
+  var activo = (q.get('activo') || '').trim();
+  var visitante = '';
+  try {
+    visitante = localStorage.getItem('cus_v') || '';
+    if (!visitante) { visitante = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('cus_v', visitante); }
+  } catch (e) {}
+
+  // Píxel de Meta: PageView al entrar; «Lead» solo cuando se envía el formulario
+  try {
+    if (PIXELES.meta) {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', PIXELES.meta); fbq('track', 'PageView');
+    }
+  } catch (e) {}
+
+  function miles(n) { return new Intl.NumberFormat('es-ES').format(Math.round(Number(n) || 0)); }
+  if (/^A-[0-9a-f]{6}$/i.test(activo)) {
+    document.getElementById('ficha').href = '/activo/' + activo;
+    fetch(SUPA_URL + '/rest/v1/activos?id=eq.' + encodeURIComponent(activo) + '&select=ciudad,provincia,m2,habitaciones,planta,ascensor,alquiler_estimado,precio,puesta_a_punto,fotos', {
+      headers: { apikey: SUPA_KEY, Authorization: 'Bearer ' + SUPA_KEY }
+    }).then(function (r) { return r.json(); }).then(function (filas) {
+      var a = filas && filas[0]; if (!a) return;
+      document.getElementById('donde').textContent = [a.ciudad, a.provincia].filter(Boolean).join(' · ');
+      document.getElementById('titulo').textContent = 'Piso en ' + (a.ciudad || 'venta');
+      var foto = (a.fotos || [])[0];
+      if (foto) { var img = document.getElementById('foto'); img.src = foto; img.hidden = false; }
+      var d = [];
+      if (a.habitaciones) d.push('<b>' + a.habitaciones + '</b> hab.');
+      if (a.m2) d.push('<b>' + a.m2 + '</b> m²');
+      if (a.planta) d.push('Planta ' + String(a.planta).replace(/</g, ''));
+      if (a.ascensor === 'Sí') d.push('Ascensor');
+      if (a.alquiler_estimado) d.push('Alquiler <b>' + miles(a.alquiler_estimado) + ' €/mes</b>');
+      var inv = (Number(a.precio) || 0) + (Number(a.puesta_a_punto) || 0);
+      if (inv && a.alquiler_estimado) d.push('<b>' + (a.alquiler_estimado * 12 / inv * 100).toFixed(1).replace('.', ',') + ' %</b> bruto al año');
+      document.getElementById('datos').innerHTML = d.map(function (x) { return '<span>' + x + '</span>'; }).join('');
+    }).catch(function () {});
+  }
+
+  function error(t) { var e = document.getElementById('error'); e.textContent = t; e.style.display = t ? 'block' : 'none'; }
+  document.getElementById('f').addEventListener('submit', async function (ev) {
+    ev.preventDefault(); error('');
+    var nombre = document.getElementById('nombre').value.trim();
+    var telefono = document.getElementById('telefono').value.trim();
+    var email = document.getElementById('email').value.trim();
+    if (nombre.length < 2) return error('Pon tu nombre.');
+    if (telefono.replace(/\D/g, '').length < 9) return error('Pon un teléfono válido para poder llamarte.');
+    if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return error('El email no parece válido.');
+    if (!document.getElementById('consent').checked) return error('Marca la casilla para que podamos llamarte.');
+    var b = document.getElementById('enviar'); b.disabled = true; b.textContent = 'Enviando…';
+    try {
+      var r = await fetch(SUPA_URL + '/functions/v1/interesado', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          activo_id: activo, nombre: nombre, telefono: telefono, email: email, web: document.getElementById('web').value,
+          utm_source: q.get('utm_source'), utm_medium: q.get('utm_medium'), utm_campaign: q.get('utm_campaign'), utm_content: q.get('utm_content'),
+          visitante: visitante
+        })
+      });
+      var j = await r.json().catch(function () { return {}; });
+      if (!r.ok || j.error) throw new Error(j.error || r.status);
+      try { fbq('track', 'Lead', { content_name: activo || 'piso' }); } catch (e) {}
+      document.getElementById('f').style.display = 'none';
+      document.querySelector('.gancho').style.display = 'none';
+      document.getElementById('ok').style.display = 'block';
+    } catch (e) {
+      error('No se ha podido enviar. Vuelve a intentarlo en un momento.');
+      b.disabled = false; b.textContent = 'Quiero que me llaméis';
+    }
+  });
+})();
+</script>
+</body>
+</html>
