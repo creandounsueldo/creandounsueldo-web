@@ -116,6 +116,19 @@ label.f{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}
 .secure{font-size:12px;color:var(--gray);text-align:center;margin-top:10px}
 .hp{position:absolute;left:-5000px;width:1px;height:1px;overflow:hidden}
 .hint{font-size:12px;color:var(--gray);margin-top:4px}
+.modo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 4px}
+.modo button{border:1.5px solid var(--gray3);background:#fff;border-radius:9px;padding:11px 10px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;color:var(--gray);line-height:1.25}
+.modo button span{display:block;font-weight:400;font-size:12px;margin-top:2px}
+.modo button.on{border-color:var(--red);color:var(--dark);background:#FEF2F2}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.form select{width:100%;padding:12px 13px;border:1.5px solid var(--gray3);border-radius:8px;font-size:16px;font-family:inherit;background:#fff;color:var(--dark)}
+.bloque{border-top:1px solid var(--gray3);margin-top:16px;padding-top:4px}
+.bloque-t{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gray);font-weight:700;margin-top:12px}
+.drop{display:block;border:2px dashed var(--gray3);border-radius:10px;padding:16px;text-align:center;font-size:14px;color:var(--gray);cursor:pointer;margin-top:6px}
+.drop:hover{border-color:var(--red)}
+.drop b{color:var(--dark)}
+.thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.thumbs div{width:64px;height:64px;border-radius:6px;border:1px solid var(--gray3);background:var(--gray5) center/cover;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gray);text-align:center;overflow:hidden}
 /* guía */
 .guia{background:var(--dark);color:#fff;border-radius:16px;padding:30px 34px;display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center}
 .guia img{width:96px;border-radius:2px 6px 6px 2px;box-shadow:-4px 0 0 #000}
@@ -139,6 +152,7 @@ footer a{color:var(--gray)}
   .card .para,.card .pr2{min-height:0}
   .two{grid-template-columns:1fr;gap:28px}
   .inc,.row2{grid-template-columns:1fr}
+  .row3{grid-template-columns:1fr 1fr}
   section{padding:48px 0}
   .guia{grid-template-columns:1fr;text-align:left;padding:24px}
   .guia img{display:none}
@@ -263,7 +277,7 @@ footer a{color:var(--gray)}
     <div>
       <div class="eyebrow">Opción 2 · Análisis de un piso</div>
       <h2>¿Es buena inversión? <span>Te lo decimos claro</span></h2>
-      <p class="lead">Nos pasas el anuncio y lo miramos como si fuéramos a comprarlo nosotros. Descartamos casi la mitad de los pisos que analizamos: preferimos decirte que no a que pierdas dinero.</p>
+      <p class="lead">Nos pasas el anuncio (o los datos, si no está publicado) y lo miramos como si fuéramos a comprarlo nosotros. Descartamos casi la mitad de los pisos que analizamos: preferimos decirte que no a que pierdas dinero.</p>
       <div class="inc"><div class="y"><h4>Qué recibes</h4><ul>
         <li>La zona, pasada por nuestros 7 filtros</li>
         <li>El alquiler realista, con comparables</li>
@@ -272,7 +286,7 @@ footer a{color:var(--gray)}
         <li>Veredicto: sí, no, o sí a este precio</li>
         <li>La oferta máxima que haríamos nosotros</li>
       </ul></div><div class="y"><h4>Cómo funciona</h4><ul>
-        <li>Pegas el enlace del anuncio y pagas</li>
+        <li>Pegas el enlace del anuncio o, si no está publicado, nos das los datos y las fotos</li>
         <li>Si nos falta algo, te escribimos</li>
         <li>En 3 días laborables tienes el informe</li>
         <li>Lo comentamos contigo si tienes dudas</li>
@@ -281,9 +295,56 @@ footer a{color:var(--gray)}
     </div>
     <form class="form" id="fAnalisis" novalidate>
       <div class="fp"><b>250 €</b><span>+ IVA · 302,50 € en total</span></div>
-      <label class="f" for="a-enlace">Enlace del anuncio</label>
-      <input type="url" id="a-enlace" placeholder="https://www.idealista.com/inmueble/…" inputmode="url">
-      <div class="hint">Idealista, Fotocasa, Habitaclia o cualquier portal o agencia.</div>
+      <div class="bloque-t" style="margin-top:4px">¿El piso está publicado?</div>
+      <div class="modo" role="tablist">
+        <button type="button" class="on" id="m-enlace" onclick="modo('enlace')">Sí<span>Tengo el enlace del anuncio</span></button>
+        <button type="button" id="m-datos" onclick="modo('datos')">No<span>Os paso los datos yo</span></button>
+      </div>
+      <div id="b-enlace">
+        <label class="f" for="a-enlace">Enlace del anuncio</label>
+        <input type="url" id="a-enlace" placeholder="https://www.idealista.com/inmueble/…" inputmode="url">
+        <div class="hint">Idealista, Fotocasa, Habitaclia o cualquier portal o agencia.</div>
+      </div>
+      <div id="b-datos" style="display:none">
+        <div class="hint" style="margin-top:8px">Cuanta más información nos des, más fino será el análisis. Los campos con * son obligatorios.</div>
+        <div class="row2">
+          <div><label class="f" for="d-provincia">Provincia *</label><input type="text" id="d-provincia" placeholder="Asturias"></div>
+          <div><label class="f" for="d-municipio">Municipio *</label><input type="text" id="d-municipio" placeholder="Mieres"></div>
+        </div>
+        <div class="row2">
+          <div><label class="f" for="d-zona">Barrio / zona</label><input type="text" id="d-zona" placeholder="Centro"></div>
+          <div><label class="f" for="d-direccion">Dirección <span style="font-weight:400;color:var(--gray)">(si la sabes)</span></label><input type="text" id="d-direccion" placeholder="Calle y número"></div>
+        </div>
+        <div class="row2">
+          <div><label class="f" for="d-precio">Precio que piden (€) *</label><input type="number" id="d-precio" inputmode="numeric" placeholder="45000"></div>
+          <div><label class="f" for="d-vendedor">¿Quién lo vende?</label><select id="d-vendedor"><option value="">—</option><option>Particular</option><option>Agencia inmobiliaria</option><option>Banco o fondo</option><option>Herencia</option><option>No lo sé</option></select></div>
+        </div>
+        <div class="row3">
+          <div><label class="f" for="d-hab">Habitaciones *</label><input type="number" id="d-hab" inputmode="numeric" placeholder="3"></div>
+          <div><label class="f" for="d-banos">Baños</label><input type="number" id="d-banos" inputmode="numeric" placeholder="1"></div>
+          <div><label class="f" for="d-m2">m² útiles *</label><input type="number" id="d-m2" inputmode="numeric" placeholder="65"></div>
+        </div>
+        <div class="row3">
+          <div><label class="f" for="d-planta">Planta</label><input type="text" id="d-planta" placeholder="2ª"></div>
+          <div><label class="f" for="d-ascensor">Ascensor</label><select id="d-ascensor"><option value="">—</option><option>Sí</option><option>No</option></select></div>
+          <div><label class="f" for="d-alquilado">¿Alquilado?</label><select id="d-alquilado"><option value="">—</option><option>Sí</option><option>No</option><option>No lo sé</option></select></div>
+        </div>
+        <label class="f" for="d-estado">Estado</label>
+        <select id="d-estado"><option value="">—</option><option>Listo para entrar a vivir</option><option>Necesita pequeña reforma (pintura, limpieza)</option><option>Necesita reforma parcial</option><option>Necesita reforma integral</option><option>No lo sé</option></select>
+        <div class="row3">
+          <div><label class="f" for="d-alq">Alquiler (€/mes)</label><input type="number" id="d-alq" inputmode="numeric" placeholder="Si lo está"></div>
+          <div><label class="f" for="d-ibi">IBI (€/año)</label><input type="number" id="d-ibi" inputmode="numeric" placeholder="180"></div>
+          <div><label class="f" for="d-com">Comunidad (€/mes)</label><input type="number" id="d-com" inputmode="numeric" placeholder="35"></div>
+        </div>
+        <label class="f" for="d-catastro">Referencia catastral <span style="font-weight:400;color:var(--gray)">(opcional)</span></label>
+        <input type="text" id="d-catastro" placeholder="20 caracteres, aparece en el recibo del IBI">
+        <label class="f" for="d-desc">Descripción</label>
+        <textarea id="d-desc" placeholder="Cómo está, qué te han contado, por qué lo venden, si tiene calefacción, terraza, trastero…"></textarea>
+      </div>
+      <label class="f">Fotos o documentos <span style="font-weight:400;color:var(--gray)">(opcional, hasta 15)</span></label>
+      <label class="drop" for="a-fotos"><b>Toca para añadir fotos</b><br>del piso, la nota simple, recibos de IBI o comunidad…</label>
+      <input type="file" id="a-fotos" accept="image/*,application/pdf" multiple style="display:none">
+      <div class="thumbs" id="a-thumbs"></div>
       <div class="row2">
         <div><label class="f" for="a-nombre">Nombre</label><input type="text" id="a-nombre" autocomplete="name"></div>
         <div><label class="f" for="a-tel">Teléfono</label><input type="tel" id="a-tel" autocomplete="tel" placeholder="600 000 000"></div>
@@ -414,10 +475,10 @@ footer a{color:var(--gray)}
   <div class="wrap legal" style="max-width:780px">
     <h2 style="font-size:28px">Condiciones del servicio de análisis</h2>
     <h3>Prestador</h3><p>HOUSE NOGA S.L. (CreandoUnSueldo), CIF B75385070, con domicilio en Barcelona. Contacto: info@creandounsueldo.com.</p>
-    <h3>Servicio</h3><p>Análisis de un inmueble indicado por el cliente mediante el enlace a su anuncio: zona, alquiler estimado, cálculo de rentabilidad, riesgos detectados con la información disponible y valoración final con una oferta máxima orientativa. Se entrega por email en un informe, en un plazo de 3 días laborables desde el pago, ampliable si es necesario pedir información adicional al cliente o al anunciante.</p>
+    <h3>Servicio</h3><p>Análisis de un inmueble indicado por el cliente mediante el enlace a su anuncio o, si no está publicado, con los datos, fotos y documentos que aporte: zona, alquiler estimado, cálculo de rentabilidad, riesgos detectados con la información disponible y valoración final con una oferta máxima orientativa. Se entrega por email en un informe, en un plazo de 3 días laborables desde el pago, ampliable si es necesario pedir información adicional al cliente o al anunciante.</p>
     <h3>Precio y pago</h3><p>250 € más el 21 % de IVA (302,50 € en total), pagados con tarjeta a través de Stripe, que envía la factura al email del cliente. Si el inmueble resulta apto y el cliente contrata la gestión de la compra de ese inmueble, el importe del análisis se descuenta del precio de la gestión.</p>
     <h3>Desistimiento</h3><p>El cliente puede desistir en los 14 días naturales siguientes al pago escribiendo a info@creandounsueldo.com. Al solicitar que el análisis empiece de inmediato, acepta que, si desiste cuando el trabajo ya ha empezado, se le cobre la parte proporcional, y que una vez entregado el informe el servicio está completamente ejecutado y pierde el derecho de desistimiento (artículos 103.a y 108 del Real Decreto Legislativo 1/2007).</p>
-    <h3>Alcance</h3><p>El análisis se basa en la información pública del anuncio, en datos de mercado y en la que aporte el cliente. No incluye visita presencial, tasación oficial ni revisión jurídica completa. Tiene carácter orientativo y no constituye asesoramiento financiero, fiscal ni jurídico. La decisión de compra corresponde al cliente. HOUSE NOGA S.L. no es una entidad regulada por la CNMV.</p>
+    <h3>Alcance</h3><p>El análisis se basa en la información del anuncio o la aportada por el cliente, y en datos de mercado. No incluye visita presencial, tasación oficial ni revisión jurídica completa. Tiene carácter orientativo y no constituye asesoramiento financiero, fiscal ni jurídico. La decisión de compra corresponde al cliente. HOUSE NOGA S.L. no es una entidad regulada por la CNMV.</p>
     <h3>Gestión de la compra y del alquiler</h3><p>Se contratan aparte, con un encargo por escrito donde constan el precio, lo que incluyen y lo que no. La gestión de la compra solo se acepta para inmuebles que hayan superado el análisis.</p>
   </div>
 </section>
@@ -441,11 +502,49 @@ async function enviar(datos){
 }
 
 // Análisis (pago)
+var MODO = 'enlace', FOTOS = [];
+function modo(m){
+  MODO = m;
+  $('m-enlace').classList.toggle('on', m === 'enlace'); $('m-datos').classList.toggle('on', m === 'datos');
+  $('b-enlace').style.display = m === 'enlace' ? '' : 'none'; $('b-datos').style.display = m === 'datos' ? '' : 'none';
+}
+var EXT_TIPO = { jpg:'image/jpeg', jpeg:'image/jpeg', png:'image/png', webp:'image/webp', heic:'image/heic', heif:'image/heif', pdf:'application/pdf' };
+function extDe(f){ var e = (f.name.split('.').pop() || '').toLowerCase(); return EXT_TIPO[e] ? e : (f.type === 'application/pdf' ? 'pdf' : 'jpg') }
+$('a-fotos').addEventListener('change', function(){
+  var err = $('a-err'); err.style.display = 'none';
+  Array.from(this.files).forEach(function(f){
+    if (FOTOS.length >= 15) return fallo(err, 'Puedes añadir hasta 15 archivos.');
+    if (f.size > 15 * 1024 * 1024) return fallo(err, '"' + f.name + '" pesa más de 15 MB.');
+    if (!/^image\//.test(f.type) && f.type !== 'application/pdf' && !/\.(heic|heif)$/i.test(f.name)) return fallo(err, '"' + f.name + '" no es una foto ni un PDF.');
+    FOTOS.push(f);
+  });
+  this.value = ''; pintarFotos();
+});
+function pintarFotos(){
+  var t = $('a-thumbs'); t.innerHTML = '';
+  FOTOS.forEach(function(f, i){
+    var d = document.createElement('div'); d.title = f.name + ' (toca para quitar)'; d.style.cursor = 'pointer';
+    if (/^image\/(jpeg|png|webp|gif)/.test(f.type)) d.style.backgroundImage = 'url(' + URL.createObjectURL(f) + ')'; else d.textContent = extDe(f).toUpperCase();
+    d.onclick = function(){ FOTOS.splice(i, 1); pintarFotos() };
+    t.appendChild(d);
+  });
+}
+function v(id){ return $(id).value.trim() }
 $('fAnalisis').addEventListener('submit', async function(ev){
   ev.preventDefault();
   var err = $('a-err'), btn = $('a-btn'); err.style.display = 'none';
-  var enlace = $('a-enlace').value.trim(), nombre = $('a-nombre').value.trim(), tel = $('a-tel').value.trim(), email = $('a-email').value.trim();
-  if (!/^https?:\/\/\S+\.\S+/.test(enlace)) return fallo(err, 'Pega el enlace completo del anuncio (empieza por https://).');
+  var enlace = MODO === 'enlace' ? v('a-enlace') : '', nombre = $('a-nombre').value.trim(), tel = $('a-tel').value.trim(), email = $('a-email').value.trim();
+  var datos = null;
+  if (MODO === 'enlace') {
+    if (!/^https?:\/\/\S+\.\S+/.test(enlace)) return fallo(err, 'Pega el enlace completo del anuncio (empieza por https://). Si no está publicado, elige "No" y rellena los datos.');
+  } else {
+    datos = { provincia:v('d-provincia'), municipio:v('d-municipio'), zona:v('d-zona'), direccion:v('d-direccion'), precio:v('d-precio'),
+      vendedor:v('d-vendedor'), habitaciones:v('d-hab'), banos:v('d-banos'), m2:v('d-m2'), planta:v('d-planta'), ascensor:v('d-ascensor'),
+      alquilado:v('d-alquilado'), estado:v('d-estado'), alquiler_actual:v('d-alq'), ibi:v('d-ibi'), comunidad:v('d-com'), catastro:v('d-catastro'), descripcion:v('d-desc') };
+    if (!datos.provincia || !datos.municipio) return fallo(err, 'Indica la provincia y el municipio del piso.');
+    if (!datos.precio) return fallo(err, 'Indica el precio que piden.');
+    if (!datos.habitaciones || !datos.m2) return fallo(err, 'Indica las habitaciones y los m² útiles.');
+  }
   if (!nombre) return fallo(err, 'Dinos tu nombre.');
   if (!telOk(tel)) return fallo(err, 'Introduce un teléfono válido.');
   if (!emailOk(email)) return fallo(err, 'Introduce un email válido.');
@@ -453,9 +552,15 @@ $('fAnalisis').addEventListener('submit', async function(ev){
   var t = btn.innerHTML; btn.disabled = true; btn.textContent = 'Redirigiendo al pago seguro…';
   try {
     try { fbq('track', 'InitiateCheckout', { content_name: 'analisis', value: 302.5, currency: 'EUR' }) } catch(e) {}
-    var d = await enviar({ accion:'checkout_analisis', enlace_anuncio:enlace, nombre:nombre, telefono:tel, email:email,
+    var d = await enviar({ accion:'checkout_analisis', enlace_anuncio:enlace, datos_piso:datos, nombre:nombre, telefono:tel, email:email,
       mensaje:$('a-msg').value, interes_gestion:$('a-gestion').checked, acepta_condiciones:true, acepta_privacidad:true,
-      web:$('a-web').value, origen:ORIGEN });
+      fotos: FOTOS.map(extDe), web:$('a-web').value, origen:ORIGEN });
+    var subidas = d.subidas || [];
+    for (var i = 0; i < subidas.length && i < FOTOS.length; i++) {
+      btn.textContent = 'Subiendo archivos ' + (i + 1) + ' de ' + subidas.length + '…';
+      try { await fetch(subidas[i].url, { method:'PUT', headers:{ 'Content-Type': FOTOS[i].type || EXT_TIPO[extDe(FOTOS[i])] }, body: FOTOS[i] }) } catch(e) {}
+    }
+    btn.textContent = 'Redirigiendo al pago seguro…';
     if (d.url) { location.href = d.url; return }
     throw new Error('No se ha podido iniciar el pago.');
   } catch(e) { fallo(err, e.message); btn.disabled = false; btn.innerHTML = t }
