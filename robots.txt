@@ -2,7 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /canal
 Disallow: /unsubscribe
-Disallow: /interes
 
 # Buscadores y asistentes de IA: bienvenidos (queremos aparecer en sus respuestas)
 User-agent: GPTBot
