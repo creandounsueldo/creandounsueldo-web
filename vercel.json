@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/guia",
+      "destination": "/guia/index.html"
+    },
+    {
+      "source": "/guia/gracias",
+      "destination": "/guia/gracias/index.html"
+    },
+    {
       "source": "/canal",
       "destination": "/canal/index.html"
     },

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu Guía del inversor | CreandoUnSueldo</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#000;color:#fff;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+header{height:60px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #222}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:2px;text-decoration:none;color:#fff}.logo span{color:#E31E24}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.box{max-width:520px;width:100%;text-align:center}
+.box img{width:170px;margin:0 auto 26px;border-radius:3px 8px 8px 3px;box-shadow:0 20px 50px rgba(227,30,36,.25)}
+h1{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:52px;line-height:.95;letter-spacing:.5px;margin-bottom:12px}
+h1 span{color:#E31E24}
+p{color:#C9CDD3;font-size:16px;line-height:1.6}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#E31E24;color:#fff;font-weight:700;font-size:18px;padding:17px 28px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;margin-top:24px;width:100%;max-width:360px;text-decoration:none}
+.btn[disabled]{opacity:.6;cursor:wait}
+.gift{margin-top:28px;border:1.5px solid #E31E24;border-radius:10px;padding:16px;text-align:left;font-size:14px;color:#E5E7EB;line-height:1.55}
+.gift b{color:#fff}
+.links{margin-top:22px;font-size:14px;color:#9CA3AF}
+.links a{color:#fff}
+.err{display:none;margin-top:16px;background:rgba(227,30,36,.12);border:1px solid rgba(227,30,36,.4);border-radius:8px;padding:12px;font-size:14px;color:#FECACA}
+.spin{width:34px;height:34px;border:3px solid #333;border-top-color:#E31E24;border-radius:50%;animation:s 1s linear infinite;margin:0 auto 18px}
+@keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<header><a class="logo" href="/">CREANDO <span>UN SUELDO</span></a></header>
+<main>
+  <div class="box">
+    <div id="cargando"><div class="spin"></div><p>Confirmando tu pago…</p></div>
+    <div id="ok" style="display:none">
+      <img src="/guia/img/portada.webp" alt="Guía del inversor">
+      <h1>¡Gracias<span id="nombre"></span>! <span>Tu guía está lista</span></h1>
+      <p>Pulsa el botón para descargarla. También te la hemos enviado a <b id="email" style="color:#fff"></b> para que puedas volver a descargarla cuando quieras.</p>
+      <button class="btn" id="btnDescargar">⬇ Descargar la guía (PDF)</button>
+      <div class="err" id="err"></div>
+      <div class="gift">🎁 <b>Recuerda: te sale gratis.</b> Si compras un activo con nosotros en los próximos 12 meses, te descontamos de los honorarios lo que has pagado. Reserva con este mismo email.</div>
+      <div class="links">Mientras la lees, mira las oportunidades disponibles: <a href="/activos">ver activos</a> · <a href="/canal">únete al canal</a></div>
+    </div>
+    <div id="fallo" style="display:none">
+      <h1>No hemos podido <span>confirmar el pago</span></h1>
+      <p id="falloTxt">Si se te ha cobrado, no te preocupes: escríbenos a <a href="mailto:info@creandounsueldo.com" style="color:#fff">info@creandounsueldo.com</a> y te enviamos la guía enseguida.</p>
+      <a class="btn" href="/guia">Volver a la guía</a>
+    </div>
+  </div>
+</main>
+<script>
+var EDGE = 'https://vblyzzhixeoamcstnsqk.supabase.co/functions/v1/guia';
+var sid = new URLSearchParams(location.search).get('session_id') || '';
+function post(body){ return fetch(EDGE, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)}).then(function(r){ return r.json() }) }
+function show(id){ ['cargando','ok','fallo'].forEach(function(x){ document.getElementById(x).style.display = x === id ? '' : 'none' }) }
+var intentos = 0;
+function confirmar(){
+  if (!sid) { show('fallo'); return }
+  post({accion:'confirmar', session_id:sid}).then(function(d){
+    if (d && d.ok) {
+      if (d.nombre) document.getElementById('nombre').textContent = ', ' + String(d.nombre).split(' ')[0];
+      document.getElementById('email').textContent = d.email || 'tu email';
+      show('ok');
+    } else if (d && d.pendiente && intentos++ < 8) {
+      setTimeout(confirmar, 2500);
+    } else { show('fallo') }
+  }).catch(function(){ if (intentos++ < 3) setTimeout(confirmar, 2500); else show('fallo') });
+}
+document.getElementById('btnDescargar').addEventListener('click', function(){
+  var b = this, err = document.getElementById('err');
+  b.disabled = true; b.textContent = 'Preparando la descarga…'; err.style.display = 'none';
+  post({accion:'confirmar', session_id:sid, descargar:true}).then(function(d){
+    if (d && d.url) { window.location.href = d.url }
+    else { err.textContent = (d && d.error) || 'No se pudo generar la descarga.'; err.style.display = 'block' }
+  }).catch(function(){ err.textContent = 'No se pudo generar la descarga. Inténtalo de nuevo.'; err.style.display = 'block' })
+  .finally(function(){ setTimeout(function(){ b.disabled = false; b.textContent = '⬇ Descargar la guía (PDF)' }, 1500) });
+});
+confirmar();
+</script>
+</body>
+</html>

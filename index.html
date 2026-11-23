@@ -747,6 +747,7 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
     <li><a onclick="showView('home', true);scrollToSection('proceso')">Cómo funciona</a></li>
     <li><a onclick="showView('home', true);scrollToSection('vendidos')">Resultados</a></li>
     <li><a href="/calculadora?utm_source=web&utm_medium=menu">Calculadora</a></li>
+    <li><a href="/guia?utm_source=web&utm_medium=menu" style="color:var(--red);font-weight:700">Guía</a></li>
     <li><a onclick="abrirBlog()">Blog</a></li>
     <li><a onclick="abrirFaq()">FAQ</a></li>
   </ul>
@@ -771,6 +772,7 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
     <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('proceso')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Cómo funciona</a></li>
     <li><a onclick="closeMobileMenu();showView('home',true);scrollToSection('vendidos')" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Resultados</a></li>
     <li><a href="/calculadora?utm_source=web&utm_medium=menu" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">🧮 Calculadora de rentabilidad</a></li>
+    <li><a href="/guia?utm_source=web&utm_medium=menu-movil" style="display:block;padding:16px 0;font-size:16px;font-weight:700;color:var(--red);border-bottom:1px solid var(--gray3);text-decoration:none">📘 Guía del inversor · 9,99 €</a></li>
     <li><a onclick="closeMobileMenu();abrirBlog()" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">Blog</a></li>
     <li><a onclick="closeMobileMenu();abrirFaq()" style="display:block;padding:16px 0;font-size:16px;font-weight:600;color:var(--dark);border-bottom:1px solid var(--gray3);text-decoration:none">FAQ</a></li>
   </ul>
@@ -912,6 +914,23 @@ button:active,.btn-white:active,.btn-primary:active,.nav-cta:active,.cc-btn:acti
       <div class="proceso-card"><span class="proceso-num">5</span><div class="proceso-title">EMPIEZA TU SUELDO</div><p class="proceso-desc">Inquilino dentro, contrato firmado. Cobras cada mes. Garantizamos el alquiler estimado: si se alquila por debajo, compensamos la diferencia.</p></div>
     </div>
   </section>
+
+  <!-- GUÍA DEL INVERSOR -->
+  <section id="guia" style="padding:56px 52px;background:#000;color:white;position:relative;overflow:hidden">
+    <div style="position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--red)"></div>
+    <div class="guia-home" style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center">
+      <a href="/guia?utm_source=web&utm_medium=home" style="display:block;perspective:1200px"><img src="/guia/img/portada.webp" alt="Guía del inversor de CreandoUnSueldo" loading="lazy" style="width:220px;border-radius:3px 8px 8px 3px;transform:rotateY(-16deg);box-shadow:-6px 0 0 #0b0c0f,24px 30px 60px rgba(227,30,36,.25)"></a>
+      <div>
+        <div class="section-eyebrow" style="color:var(--red)">Nuevo · Guía del inversor</div>
+        <h2 style="color:white;margin-bottom:12px">CÓMO ENCONTRAR UNA BUENA INVERSIÓN INMOBILIARIA</h2>
+        <p style="color:rgba(255,255,255,.7);font-size:16px;line-height:1.6;max-width:620px;margin-bottom:18px">Nuestro método completo en 130 páginas: zona, números, financiación, negociación, reforma y alquiler, con los datos reales de nuestras operaciones.</p>
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:18px"><span style="color:#9CA3AF;text-decoration:line-through;font-size:18px">99,99 €</span><span style="font-family:var(--font-display);font-size:48px;line-height:1">9,99 €</span><span style="background:var(--red);color:white;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 9px;border-radius:6px">Lanzamiento</span></div>
+        <a href="/guia?utm_source=web&utm_medium=home" style="display:inline-block;background:var(--red);color:white;font-weight:700;font-size:15px;padding:14px 24px;border-radius:var(--radius);text-decoration:none">Ver la guía →</a>
+        <p style="color:rgba(255,255,255,.6);font-size:13px;margin-top:14px">🎁 Te sale gratis si compras un piso con nosotros: te descontamos su precio de los honorarios.</p>
+      </div>
+    </div>
+  </section>
+  <style>@media(max-width:768px){#guia{padding:40px 20px !important}.guia-home{grid-template-columns:1fr !important;gap:24px !important}.guia-home img{width:160px !important}}</style>
 
   <!-- VENDIDOS -->
   <section id="vendidos" style="padding:56px 52px;color:var(--dark)">
