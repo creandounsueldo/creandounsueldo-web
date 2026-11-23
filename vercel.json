@@ -40,5 +40,12 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/blog/pisos-con-inquilino-por-menos-de-50000-euros",
+      "destination": "/blog/pisos-para-alquilar-por-menos-de-50000-euros",
+      "permanent": true
+    }
   ]
 }

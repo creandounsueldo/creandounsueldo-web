@@ -2,6 +2,23 @@ User-agent: *
 Allow: /
 Disallow: /canal
 Disallow: /unsubscribe
+Disallow: /interes
+
+# Buscadores y asistentes de IA: bienvenidos (queremos aparecer en sus respuestas)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
 
 Sitemap: https://www.creandounsueldo.com/sitemap.xml
 Sitemap: https://www.creandounsueldo.com/sitemap-pisos.xml
