@@ -22,6 +22,13 @@
   a.boton{display:inline-block;background:#16A34A;color:#fff;text-decoration:none;font-weight:700;font-size:17px;
           padding:16px 28px;border-radius:10px}
   .nota{margin-top:18px;font-size:13px;color:#6B7280}
+  .plan-b{display:none;margin-top:26px;text-align:left;background:#1b1e26;border:1px solid #2a2e38;border-radius:12px;padding:18px}
+  .plan-b h2{font-size:16px;margin-bottom:10px;color:#fff}
+  .plan-b ol{padding-left:20px;color:#d1d5db;font-size:15px;line-height:1.6}
+  .plan-b li{margin-bottom:10px}
+  .plan-b b{color:#fff}
+  .plan-b button,.plan-b a.sec{display:inline-block;margin-top:6px;background:#2a2e38;color:#fff;border:0;border-radius:8px;
+    font:inherit;font-weight:700;font-size:14px;padding:10px 14px;text-decoration:none;cursor:pointer}
 </style>
 <!-- Píxeles de anuncios: se activan solos cuando tienen ID (PIXELES más abajo) -->
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -36,6 +43,16 @@
   <p>Pisos con alquiler por menos de 50.000 € en toda España.<br>Salen primero en nuestro canal de WhatsApp.</p>
   <a class="boton" id="ir" href="https://chat.whatsapp.com/HUe8BCEuOhf657vbt8dfOj">Entrar al canal de WhatsApp</a>
   <div class="nota">Al entrar verás el chat vacío: es normal, los pisos nuevos llegan en cuanto salen.<br>Si no se abre solo en un segundo, pulsa el botón.</div>
+  <div class="plan-b" id="planb">
+    <h2>¿No se abre WhatsApp?</h2>
+    <p style="margin-bottom:12px;font-size:14px">El navegador de esta app no deja abrir WhatsApp. Hazlo de una de estas formas:</p>
+    <ol>
+      <li>Toca <b>···</b> (arriba a la derecha) y elige <b>Abrir en Safari</b> o <b>Abrir en el navegador</b>.<br>
+        <a class="sec" id="safari" href="#">Abrir en Safari</a></li>
+      <li>O copia el enlace y pégalo en Safari o en un chat de WhatsApp:<br>
+        <button type="button" id="copiar">Copiar enlace del canal</button></li>
+    </ol>
+  </div>
 </div>
 <script>
 (function () {
@@ -103,11 +120,22 @@
     ? 'intent://chat?code=' + codigo + '#Intent;scheme=whatsapp;package=com.whatsapp;S.browser_fallback_url=' + encodeURIComponent(CANAL) + ';end'
     : 'whatsapp://chat?code=' + codigo;
   if (enApp) {
+    // X, Instagram, TikTok… en iPhone muchas veces bloquean abrir otras apps desde su navegador (David, 24/11:
+    // «he entrado desde Twitter y no funciona el botón»). Probamos y, si seguimos aquí, damos el plan B a la vista.
     var boton = document.getElementById('ir');
     boton.href = APP;
     boton.textContent = 'Abrir WhatsApp y entrar';
-    document.querySelector('.nota').innerHTML = 'Se abre la app de WhatsApp con la invitación: pulsa «Unirme».<br>' +
-      '¿No se abre? <a href="' + CANAL + '" style="color:#9CA3AF">Pulsa aquí</a> o abre esta página en el navegador (menú ··· de arriba).';
+    document.querySelector('.nota').innerHTML = 'Se abre la app de WhatsApp con la invitación: pulsa «Unirme».';
+    var planB = function () { if (!document.hidden) document.getElementById('planb').style.display = 'block'; };
+    boton.addEventListener('click', function () { setTimeout(planB, 1500); });
+    document.getElementById('safari').href = 'x-safari-' + location.href.replace(/^http:/, 'https:');
+    document.getElementById('copiar').addEventListener('click', function () {
+      var b = this;
+      var ok = function () { b.textContent = '✓ Copiado. Pégalo en Safari'; };
+      try { navigator.clipboard.writeText(CANAL).then(ok, function () { prompt('Copia este enlace:', CANAL); }); }
+      catch (e) { prompt('Copia este enlace:', CANAL); }
+    });
+    if (!android) setTimeout(planB, espera + 2500);    // iPhone: si a los ~4 s no se ha ido a WhatsApp, enseñamos el plan B
     setTimeout(function () { location.href = APP; }, espera);
     return;
   }
