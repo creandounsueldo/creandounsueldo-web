@@ -39,6 +39,18 @@
     {
       "source": "/(.*)",
       "destination": "/index.html"
+    },
+    {
+      "source": "/guia-gratis",
+      "destination": "/guia-gratis/index.html"
+    },
+    {
+      "source": "/guia-gratis/descargar",
+      "destination": "/guia-gratis/descargar/index.html"
+    },
+    {
+      "source": "/guia-gratis/baja",
+      "destination": "/guia-gratis/baja/index.html"
     }
   ],
   "redirects": [
