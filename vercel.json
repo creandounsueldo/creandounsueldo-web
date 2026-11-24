@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/wa-vincular",
+      "destination": "/wa-vincular/index.html"
+    },
+    {
       "source": "/interes",
       "destination": "/interes/index.html"
     },

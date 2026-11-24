@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Vincular WhatsApp — CreandoUnSueldo</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#111318;color:#fff;font-family:system-ui,sans-serif;padding:24px;text-align:center}
+  .caja{max-width:460px}
+  h1{font-size:26px;margin-bottom:10px}
+  p{color:#9CA3AF;line-height:1.55;margin-bottom:18px}
+  ol{text-align:left;color:#d1d5db;line-height:1.7;margin:0 auto 20px;max-width:380px;padding-left:20px}
+  .qr{background:#fff;border-radius:14px;padding:16px;display:inline-block;min-width:296px;min-height:296px}
+  .qr img{width:264px;height:264px;display:block}
+  .estado{margin-top:14px;font-size:14px;color:#9CA3AF}
+  .ok{font-size:60px}
+</style>
+</head>
+<body>
+<div class="caja" id="caja">
+  <h1>Vincular el WhatsApp de la comunidad</h1>
+  <ol>
+    <li>Abre WhatsApp en el móvil del número que administra la comunidad.</li>
+    <li>Ajustes → <b>Dispositivos vinculados</b> → <b>Vincular un dispositivo</b>.</li>
+    <li>Apunta al código de aquí abajo.</li>
+  </ol>
+  <div class="qr" id="qr"><p style="color:#333;padding-top:120px">Cargando…</p></div>
+  <div class="estado" id="estado">El código cambia solo cada pocos segundos.</div>
+</div>
+<script>
+(function () {
+  var k = new URLSearchParams(location.search).get('k') || '';
+  var API = 'https://vblyzzhixeoamcstnsqk.supabase.co/functions/v1/waha/qr?k=' + encodeURIComponent(k);
+  var TEXTOS = { SIN_SERVIDOR: 'El servidor aún no se ha registrado. Espera un par de minutos.', STARTING: 'Arrancando WhatsApp…',
+    ARRANCANDO: 'Arrancando WhatsApp…', SCAN_QR_CODE: 'Escanea el código con WhatsApp.' };
+  function pinta(d) {
+    if (d.error) { document.getElementById('estado').textContent = d.error; return; }
+    if (d.estado === 'WORKING') {
+      document.getElementById('caja').innerHTML = '<div class="ok">✅</div><h1>WhatsApp vinculado</h1><p>Ya podemos publicar los pisos en la comunidad. Puedes cerrar esta página.</p>';
+      return true;
+    }
+    document.getElementById('estado').textContent = TEXTOS[d.estado] || ('Estado: ' + d.estado);
+    if (d.qr) document.getElementById('qr').innerHTML = '<img alt="Código QR" src="' + d.qr + '">';
+  }
+  function tick() {
+    fetch(API).then(function (r) { return r.json(); }).then(function (d) { if (!pinta(d)) setTimeout(tick, 4000); })
+      .catch(function () { setTimeout(tick, 6000); });
+  }
+  tick();
+})();
+</script>
+</body>
+</html>

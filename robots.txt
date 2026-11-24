@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /canal
+Disallow: /wa-vincular
 Disallow: /unsubscribe
 
 # Buscadores y asistentes de IA: bienvenidos (queremos aparecer en sus respuestas)
