@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/correo-clave",
+      "destination": "/correo-clave/index.html"
+    },
+    {
       "source": "/wa-vincular",
       "destination": "/wa-vincular/index.html"
     },

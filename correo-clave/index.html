@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Claves del correo — CreandoUnSueldo</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#111318;color:#fff;font-family:system-ui,sans-serif;padding:24px 16px}
+  .caja{width:100%;max-width:440px}
+  h1{font-size:24px;margin-bottom:10px}
+  p{color:#9CA3AF;line-height:1.55;margin-bottom:18px;font-size:15px}
+  label{display:block;font-size:14px;color:#d1d5db;margin:14px 0 6px}
+  input,select{width:100%;padding:12px 14px;border-radius:8px;border:1px solid #2d3039;background:#1b1e25;color:#fff;font:15px ui-monospace,monospace}
+  input:focus,select:focus{outline:2px solid #E31E24;border-color:transparent}
+  button{margin-top:22px;width:100%;padding:14px;border:0;border-radius:8px;background:#E31E24;color:#fff;font:600 16px system-ui;cursor:pointer}
+  button:disabled{opacity:.6;cursor:wait}
+  .msg{margin-top:16px;font-size:14px;line-height:1.5;min-height:1em}
+  .err{color:#fca5a5}
+  .ok{font-size:56px;margin-bottom:8px}
+  small{display:block;color:#6b7280;margin-top:18px;font-size:12px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="caja" id="caja">
+  <h1>Claves de Amazon SES</h1>
+  <p>Pega aquí las dos claves del usuario de AWS. Se guardan directamente en el servidor; no pasan por ningún chat.</p>
+  <form id="f" autocomplete="off">
+    <label for="a">Access key ID</label>
+    <input id="a" name="a" placeholder="AKIA…" required spellcheck="false" autocapitalize="off">
+    <label for="s">Secret access key</label>
+    <input id="s" name="s" type="password" required spellcheck="false" autocapitalize="off">
+    <label for="r">Región</label>
+    <select id="r"><option value="eu-west-1" selected>Europa (Irlanda) · eu-west-1</option><option value="eu-west-3">Europa (París) · eu-west-3</option><option value="eu-central-1">Europa (Fráncfort) · eu-central-1</option><option value="eu-south-2">Europa (España) · eu-south-2</option></select>
+    <button id="b" type="submit">Guardar claves</button>
+    <div class="msg" id="m" role="status"></div>
+  </form>
+  <small>Este enlace solo sirve una vez y caduca en 48 horas.</small>
+</div>
+<script>
+(function () {
+  var t = new URLSearchParams(location.search).get('t') || '';
+  var f = document.getElementById('f'), b = document.getElementById('b'), m = document.getElementById('m');
+  if (!t) { m.className = 'msg err'; m.textContent = 'Falta el código del enlace. Ábrelo tal cual te lo mandaron.'; b.disabled = true; }
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    b.disabled = true; m.className = 'msg'; m.textContent = 'Comprobando las claves con AWS…';
+    fetch('https://vblyzzhixeoamcstnsqk.supabase.co/functions/v1/correo/clave', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ t: t, access_key_id: document.getElementById('a').value.trim(),
+        secret_access_key: document.getElementById('s').value.trim(), region: document.getElementById('r').value })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      if (d.ok) {
+        document.getElementById('caja').innerHTML = '<div class="ok">✅</div><h1>Claves guardadas</h1><p>AWS las ha aceptado. Claude sigue con el resto (dominio y salida del modo de pruebas). Ya puedes cerrar esta página.</p>';
+      } else { b.disabled = false; m.className = 'msg err'; m.textContent = d.error || 'No se han podido guardar.'; }
+    }).catch(function () { b.disabled = false; m.className = 'msg err'; m.textContent = 'No hay conexión con el servidor. Prueba otra vez.'; });
+  });
+})();
+</script>
+</body>
+</html>
