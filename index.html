@@ -2678,8 +2678,8 @@ function buildCard(a) {
   var rb    = calcRB(a.precio, alq)
   var cf    = calcCF(alq, com, ibi)
   var bloqueado = a.status !== 'disponible'
-  var badgeLabel = a.status === 'reservado' ? '◆ Reservado' : a.status === 'en_proceso' ? '◑ En proceso' : (a.status === 'alquilado' || a.status === 'finalizado') ? '✓ Cerrado' : '● Disponible'
-  var badgeClass = a.status === 'reservado' || a.status === 'en_proceso' ? 'badge-reservado' : (a.status === 'alquilado' || a.status === 'finalizado') ? 'badge-reservado' : 'badge-disponible'
+  var badgeLabel = (a.status === 'alquilado' || a.status === 'finalizado') ? '✓ Cerrado' : a.status === 'en_proceso' ? '◑ En proceso' : a.status !== 'disponible' ? '◆ Reservado' : '● Disponible'
+  var badgeClass = a.status === 'disponible' ? 'badge-disponible' : 'badge-reservado'
   var loc = [a.zona, a.ciudad, a.provincia].filter(Boolean).join(' · ')
   var titulo = a.titulo_pagina || ((a.habitaciones ? a.habitaciones+' HAB.' : '') + (a.zona ? '<br>'+a.zona.toUpperCase() : ''))
   var gastosAnual = (+com*12 + +ibi)
@@ -2713,7 +2713,7 @@ function buildCard(a) {
     +   '<div class="kpi-grid-cell"><div class="kpi-grid-val">'+(gastosAnual>0?fmtE(gastosAnual)+'/año':'—')+'</div><div class="kpi-grid-key">Gastos fijos</div></div>'
     + '</div>'
     + (bloqueado
-        ? '<div class="activo-cta disabled">'+(a.status==='reservado'?'◆ Ya reservado':'◑ En proceso')+'</div>'
+        ? '<div class="activo-cta disabled">'+((a.status==='alquilado'||a.status==='finalizado')?'✓ Cerrado':a.status==='en_proceso'?'◑ En proceso':'◆ Ya reservado')+'</div>'
         : '<button class="activo-cta" onclick="abrirFicha(_activosMap[\'' + a.id + '\'])">Ver el piso</button>')
     + '</div></div>'
 }

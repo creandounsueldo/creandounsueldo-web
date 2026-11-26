@@ -76,6 +76,7 @@
   var PIXELES = { meta: '1664395115220620', x: '' };
   var q = new URLSearchParams(location.search);
   var activo = (q.get('activo') || '').trim();
+  var cerrado = false;
   var visitante = '';
   try {
     visitante = localStorage.getItem('cus_v') || '';
@@ -95,7 +96,7 @@
   function miles(n) { return new Intl.NumberFormat('es-ES').format(Math.round(Number(n) || 0)); }
   if (/^A-[0-9a-f]{6}$/i.test(activo)) {
     document.getElementById('ficha').href = '/activo/' + activo;
-    fetch(SUPA_URL + '/rest/v1/activos?id=eq.' + encodeURIComponent(activo) + '&select=ciudad,provincia,m2,habitaciones,planta,ascensor,alquiler_estimado,precio,puesta_a_punto,fotos', {
+    fetch(SUPA_URL + '/rest/v1/activos?id=eq.' + encodeURIComponent(activo) + '&select=ciudad,provincia,m2,habitaciones,planta,ascensor,alquiler_estimado,precio,puesta_a_punto,fotos,status', {
       headers: { apikey: SUPA_KEY, Authorization: 'Bearer ' + SUPA_KEY }
     }).then(function (r) { return r.json(); }).then(function (filas) {
       var a = filas && filas[0]; if (!a) return;
@@ -112,6 +113,17 @@
       var inv = (Number(a.precio) || 0) + (Number(a.puesta_a_punto) || 0);
       if (inv && a.alquiler_estimado) d.push('<b>' + (a.alquiler_estimado * 12 / inv * 100).toFixed(1).replace('.', ',') + ' %</b> bruto al año');
       document.getElementById('datos').innerHTML = d.map(function (x) { return '<span>' + x + '</span>'; }).join('');
+      // piso ya reservado o vendido (enlace viejo de un anuncio o una publicación): no se vende como disponible,
+      // se ofrece avisar de pisos parecidos y el aviso al equipo lo marca (David, 26/11)
+      if (a.status && a.status !== 'disponible') {
+        cerrado = true;
+        document.getElementById('titulo').textContent = 'Este piso ya está reservado';
+        document.querySelector('.gancho').textContent = 'Lo ha reservado otro inversor. Déjanos tu nombre y tu teléfono y te llamamos para contarte los pisos parecidos que tenemos ahora o que entren en los próximos días.';
+        document.getElementById('enviar').textContent = 'Avisadme de pisos parecidos';
+        document.querySelector('.consent span').firstChild.textContent = 'Acepto que CreandoUnSueldo me llame o me escriba sobre pisos parecidos. ';
+        var ok = document.querySelector('#ok p'); if (ok) ok.textContent = 'Te llamamos en cuanto podamos con los pisos parecidos que tengamos.';
+        document.getElementById('ficha').textContent = 'Ver los pisos disponibles'; document.getElementById('ficha').href = '/';
+      }
     }).catch(function () {});
   }
 
